@@ -1,5 +1,5 @@
 <template>
-	<header class="header" :class="{ 'header-fixed' : headerFixed }">
+	<!-- <header class="header" :class="{ 'header-fixed' : headerFixed }"> -->
     <el-row>
         <el-col :span="6">
         <img src="../../assets/logo.png" style="padding:5px 5px 1px 100px" />
@@ -30,7 +30,7 @@
         </el-col>
 
     </el-row>
-    </header>
+    <!-- </header> -->
 </template>
 <script>
 	export default{

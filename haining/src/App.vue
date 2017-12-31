@@ -1,9 +1,14 @@
 <template>
-  <div id="app">
-    <!-- 头部导航 -->
-    <v-header></v-header>
-    <div v-show="headerFixed" style="position: relative;height: 60px;width: 100%;"></div>
-
+  <div id="app" style="background-color:#D3DCE8">
+  <el-container>
+  <el-header><v-header></v-header></el-header>
+  <!-- <div style="position: relative;height: 60px;width: 100%;"></div> -->
+  <el-main>
+  <transition name="fade">
+              <router-view class="view"></router-view>
+            </transition>
+</el-main>
+</el-container>
   </div>
 </template>
 
@@ -15,17 +20,17 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 import $ from 'jquery'
 Vue.use(Element)
-
 export default {
   name: 'app',
   data: function (){
     return {
       active:true,
-      headerFixed : true
+      headerFixed : true,
+      
     }
   },
   created: function(){
-    this.$router.push('/activePublic');
+    this.$router.push('/login');
   },
   methods: {
 
@@ -46,51 +51,14 @@ export default {
 </script>
 
 <style>
-
-body{margin: 0;}
-#app {
-  min-width: 1200px;
-  margin: 0 auto;
-  font-family: "Helvetica Neue","PingFang SC",Arial,sans-serif;
+.el-main{
+  background-color:#FFFFFF;
+  margin-top: 100px;
+    margin-right:100px;
+    margin-left: 280px;
+  
 }
-/* 头部导航 */
-header{z-index: 1000;min-width: 1200px;transition: all 0.5s ease;  border-top: solid 4px #3091F2;  background-color: #fff;  box-shadow: 0 2px 4px 0 rgba(0,0,0,.12),0 0 6px 0 rgba(0,0,0,.04);  }
-header.header-fixed{position: fixed;top: 0;left: 0;right: 0;}
-header .el-menu-demo{padding-left: 100px!important;}
-
-/* 主内容区 */
-main{display: -webkit-box;display: -ms-flexbox;display: flex;  min-height: 800px;  border: solid 40px #E9ECF1;  background-color: #FCFCFC;  }
-main .main-left{text-align: center;-webkit-box-flex: 0;-ms-flex: 0 0 200px;flex: 0 0 200px;}
-main .main-right{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 50px 70px; }
-main .el-menu{background-color: transparent!important;}
-/*  */
-.router-link{display:inline-block;width:100%;height:100%;text-align:center;color:#475669;text-decoration: none; }
-.is-active .router-link{color:#20a0ff; }
-
-/* 单选框 */
-  .el-form-item .el-radio+.el-radio {
-    margin-left: 30px!important;
-  }
-  /* 路由切换动效 */
-  .fade-enter-active, .fade-leave-active {
-    transition: all .5s;
-  }
-  .fade-enter, .fade-leave-active {
-    opacity: 0;
-  }
-
-  .list-enter-active, .list-leave-active {
-    transition: all 1s;
-  }
-  .list-enter, .list-leave-active {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-
-/* 导航栏菜单选中效果 */
-  .isActive{color: #20a0ff!important;}
-   #app main .aside .is-active{color: #475669;}
-
-  /* 卡片 */
-  .el-card{overflow: visible!important;}
+  .demo-ruleForm .el-form-item{margin-bottom: 5px;margin-right: 50px;}
+  
+  
 </style>
