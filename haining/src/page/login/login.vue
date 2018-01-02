@@ -1,24 +1,28 @@
 <template>
-
    <div class="login">
    <el-row>
   <el-col :span="12">
    <h3>密码登录</h3>
     <el-form :label-position="labelPosition" label-width="80px" :model="formLabelAlign">
-  <el-form-item label="手机号码">
-    <el-input v-model="formLabelAlign.phoneNumber" placeholder="请输入手机号码"style="width:240px"></el-input>
+  <el-form-item label="手机号码" style="padding:0 0 2">
+    <el-input v-model="formLabelAlign.phoneNumber" placeholder="请输入手机号码" style="width:240px"></el-input>
   </el-form-item>
   <el-form-item label="密码">
     <el-input v-model="formLabelAlign.password" placeholder="请输入密码" style="width:240px"></el-input>
   </el-form-item>
-
+  <el-form-item label="">
+    <el-button type="text" @click.native="phoneLogin"><u>手机号码验证</u></el-button>
+    <el-button type="text" @click.native="forgetPW"><u>忘记密码</u></el-button>
+  </el-form-item>
   <el-form-item>
     <el-button type="primary" @click="submitForm('numberValidateForm')" style="width:240px">登录</el-button>
   </el-form-item>
-
 </el-form>
+
   </el-col>
+  <!-- 分割线 -->
   <el-col class="line" :span="2">-</el-col>
+
   <el-col :span="10">
     <div><h3>注册账号</h3></div>
     <el-form :label-position="labelPosition"  class="demo-ruleForm" label-width="80px" :model="formRegister">
@@ -30,8 +34,9 @@
   </el-form-item>
   
   <el-form-item label="验证码">
-    <el-input v-model="formLabelAlign.password" placeholder="请输入收到的验证码" style="width:160px"></el-input>
-    <el-button type="primary" @click="submitForm('numberValidateForm')" style="width:100px">获取验证码</el-button>
+    <el-input  v-model="input3" style="width:240px" placeholder="请输入手机验证码">
+    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF">获取验证码</el-button></template>
+    </el-input>
   </el-form-item>
   <el-form-item label="代理商编号">
     <el-input v-model="formLabelAlign.password" placeholder="请输入代理商编号" style="width:240px"></el-input>
@@ -57,6 +62,7 @@
    export default {
     data() {
       return {
+        isShow:true,
         labelPosition: 'top',
         formLabelAlign: {
           phoneNumber: '',
@@ -68,6 +74,9 @@
       };
     },
     methods: {
+      phoneLogin(){
+        this.$router.push('/phoneLogin');
+      },
       submitForm(formName) {
         this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -83,10 +92,19 @@
 </script>
 <style>
   .login{
-    margin-top: 100px;
+    background-color:#FFFFFF;
+    margin-top: 60px;
     margin-right:100px;
     margin-left: 280px;
+    padding-left: 80px;
+    padding-top: 80px;
   }
+  .el-form--label-top .el-form-item__label {
+    float: none;
+    display: inline-block;
+    text-align: left;
+    padding: 0 0 0px;
+}
 </style>
 
 

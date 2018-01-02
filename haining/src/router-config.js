@@ -17,10 +17,14 @@
 
 import login from  './page/login/login.vue'
 import personinfo from './page/login/personinfo.vue'
+import main from './page/common/main.vue'
+import phoneLogin from './page/login/phoneLogin.vue'
 // import test from '/page/login/test.vue'
 export default [
       {path:'/login',component:login},
       {path:'/personinfo',component:personinfo},
+      {path:'/main',component:main},
+      {path:'/phoneLogin',component:phoneLogin}
       
   // {
   //   path: '/activeManage',component:totalpages,

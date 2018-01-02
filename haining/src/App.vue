@@ -9,7 +9,7 @@
             </transition>
 </el-main>
 </el-container>
-  </div>
+</div>
 </template>
 
 <script>
@@ -26,6 +26,7 @@ export default {
     return {
       active:true,
       headerFixed : true,
+      menushow:true
       
     }
   },
@@ -40,8 +41,8 @@ export default {
     },
   watch: {
      '$route': function (to,from) {
-         if(to.path == '/activePublic'){
-             this.active = true ;
+         if(to.path == '/login'){
+             this.isShow = true ;
          }else if(to.path == '/activeManage'){
              this.active = false ;
          }
@@ -51,14 +52,14 @@ export default {
 </script>
 
 <style>
-.el-main{
+ .el-main0{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 500px 70px; }
+.el-header{
   background-color:#FFFFFF;
-  margin-top: 100px;
+  /*margin-top: 100px;
     margin-right:100px;
-    margin-left: 280px;
+    margin-left: 280px;*/
   
 }
-  .demo-ruleForm .el-form-item{margin-bottom: 5px;margin-right: 50px;}
   
   
 </style>
