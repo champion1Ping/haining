@@ -1,0 +1,180 @@
+<template>
+	<div class="agencymanager">
+  <div class="btn">
+		<span style="color:#C9A44E;font-size:20px">代理商管理&nbsp;&nbsp;&nbsp;
+		<el-button type="primary">退出</el-button>
+		<el-button type="primary">添加</el-button>
+		<el-button type="primary">查询</el-button>
+		</span>
+    </div>
+
+    <div class="fm">
+      <el-row>
+  <el-col :span="6">
+    <el-button type="info"  class="left">代理商编号</el-button><el-input class="right" style="width:180px"></el-input>
+    
+  </el-col>
+  <el-col :span="6">
+        <el-button type="info"  class="left">代理商名称</el-button><el-input class="right" style="width:180px"></el-input>
+
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">法定代表人</el-button><el-input class="right" style="width:180px"></el-input>
+
+  </el-col>
+  <el-col :span="6">
+        <el-button type="info"  class="left">省份&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+    </el-input>
+  </el-col> 
+  </el-row>
+  <el-row style="padding-top:10px">
+  
+  <el-col :span="6">
+      <el-button type="info"  class="left">签约时间从</el-button><el-date-picker
+      v-model="value1"
+      type="date"
+      class="right"
+      style="width:180px"
+      >
+    </el-date-picker>
+  </el-col>
+  <el-col :span="6">
+    <el-button type="info"  class="left">签约时间到</el-button><el-date-picker
+      v-model="value1"
+      type="date"
+      class="right"
+      style="width:180px"
+      ></el-date-picker>
+    
+  </el-col> 
+
+  <el-col :span="6">
+      <el-button type="info"  class="left">到期时间从</el-button><el-date-picker
+      v-model="value1"
+      type="date"
+      class="right"
+      style="width:180px"
+      >
+    </el-date-picker>
+  </el-col>
+  <el-col :span="6">
+    <el-button type="info"  class="left">到期时间到</el-button><el-date-picker
+      v-model="value1"
+      type="date"
+      class="right"
+      style="width:180px"
+      ></el-date-picker>
+    
+  </el-col> 
+    
+    
+  </el-row>
+    </div>
+	<div class="tbl">
+    <el-table
+    :data="tableData"
+    border
+    style="width: 100%" header-align="center">
+    <el-table-column prop="date" label="代理商编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+  </el-table>
+  <el-pagination
+      @size-change="handleSizeChange"
+      @current-change="handleCurrentChange"
+      :current-page="currentPage4"
+      :page-sizes="[10, 50, 100]"
+      :page-size="10"
+      layout="total, sizes, prev, pager, next"
+      prev-text="<上一页"
+      next-text="下一页>"
+      :total="70">
+    </el-pagination>
+  </div>
+	
+	
+	<el-row></el-row>
+	</div>
+</template>
+<script>
+  export default{
+    data(){
+      return{
+        status: [{
+          value: '1',
+          label: '正常'
+        }, {
+          value: '2',
+          label: '结束'
+        }, {
+          value: '3',
+          label: '提前终止'
+        }, {
+          value: '4',
+          label: '未交易'
+        }, ],
+        value1:''
+      }
+    }
+  }
+</script>
+
+<style>
+  .btn{
+    /*margin-top: 1px;*/
+    background-color: #ffffff;
+    padding: 10px;
+  }
+  .fm{
+    background-color: #ffffff;
+    padding: 20px;
+  }
+  .left{
+    display:inline-block;
+    border-color: #DEDAD6;
+    border-top-right-radius:0px; 
+    border-bottom-right-radius:0px;
+    border-right-width: 0px;
+    color: #1e1c1c;
+    background-color: #E6E6E6; 
+
+  }
+  /*输入框*/
+  .right > .el-input__inner{
+      border-top-left-radius:0px; 
+      border-bottom-left-radius:0px; 
+      border-left-width: 0px;
+    
+  }
+  /*下拉框 + 日期选择框*/
+  .right > .el-input > .el-input__inner{
+      border-top-left-radius:0px; 
+      border-bottom-left-radius:0px; 
+      border-left-width: 0px;
+    
+  }
+  .el-input__prefix {
+    left: 155px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+}
+  /*.el-input__prefix{
+      right:0px;
+  }  */
+
+
+</style>

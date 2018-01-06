@@ -1,42 +1,43 @@
 <template>
-  <div class="login">
+  <div class="personInfo">
+  <div class="baseinfo">
   <el-row>
   <el-col :span="12"><div><h3>基本信息</h3></div></el-col>
-  <el-col :span="12">
+  <el-col :span="12" align="right">
   	<el-button type="primary">保存</el-button>
   </el-col>
   </el-row>
-  	<el-row :gutter="200">
+  	<el-row :gutter="20">
   	<el-col :span="12">
-  	 <el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-  	 	<el-form-item label="注册账号:  ">
+  	 <el-form :model="ruleForm" :rules="rules" label-position="left" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+  	 	<el-form-item label="注册账号:">
   	 		<el-input v-model="ruleForm.account" style="width:200px"></el-input>
   	 	</el-form-item>
-  	 	<el-form-item label="联系方式:  ">
+  	 	<el-form-item label="联系方式:">
   	 		<el-input v-model="ruleForm.phoneNumber" style="width:200px"></el-input>
   	 	</el-form-item> 
-  	 	<el-form-item label="是否入金:  ">
+  	 	<el-form-item label="是否入金:">
   	 		<el-select  v-model="ruleForm.nameVerified"  style="width:200px">
           <el-option label="是" value="1"></el-option>
           <el-option label="否" value="2"></el-option>
         </el-select>
   	 	</el-form-item>
-  	 	<el-form-item label="推荐人资质:  ">
+  	 	<el-form-item label="推荐人资质:">
   	 		<el-select  v-model="ruleForm.recommend"  style="width:200px">
           <el-option label="是" value="1"></el-option>
           <el-option label="否" value="2"></el-option>
         </el-select>
   	 	</el-form-item>
-  	 	<el-form-item label="我的邮箱:  ">
+  	 	<el-form-item label="我的邮箱:">
   	 		<el-input v-model="ruleForm.name" style="width:200px"></el-input>
   	 	</el-form-item>
-  	 	<el-form-item label="直接推荐人账号: ">
+  	 	<el-form-item label="直接推荐人账号:">
   	 		<el-input v-model="ruleForm.directRecommendAccount" style="width:200px"></el-input>
   	 	</el-form-item>
   	 </el-form>
   	 </el-col>
   	 <el-col :span="12">
-  	 	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
+  	 	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="120px" class="demo-ruleForm">
   	 	<el-form-item label="真实姓名: ">
   	 		<el-input v-model="ruleForm.name" style="width:200px"></el-input>
   	 	</el-form-item>
@@ -61,32 +62,35 @@
   	 </el-form>
   	 </el-col>
   	 </el-row>
-      
+     </div>
+
+     <div class="verifyname">
       <el-row>
       	<el-col :span="12"><div><h3>实名验证</h3></div></el-col>
-  	<el-col :span="12">
+  	<el-col :span="12" align="right">
   	<el-button type="primary">申请推荐人</el-button>
  	 </el-col>
       </el-row>
       <el-row>
-      	<el-form model="ruleForm" :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
-      		<el-form-item label="真实姓名:  ">
+      	<el-form model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" label-position="left" class="demo-ruleForm">
+      		<el-form-item label="真实姓名:">
   	 		<el-input v-model="ruleForm.account" style="width:200px"></el-input>
   	 	</el-form-item>
-      <el-form-item>
-      <el-form :inline="true">
-      <el-form-item label="证件类型: ">
+      <!-- <el-form-item> -->
+
+      <el-form :inline="true" label-width="120px"  >
+      <el-form-item label="证件类型:">
         <el-select  v-model="ruleForm.sex"  style="width:200px">
           <el-option label="身份证" value="1"></el-option>
           <el-option label="护照" value="2"></el-option>
         </el-select>
 
       </el-form-item>
-       <el-form-item label="证件号码:  ">
+       <el-form-item label="证件号码:">
         <el-input v-model="ruleForm.account" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
-        </el-form-item>
+        <!-- </el-form-item> -->
       	</el-form>
       </el-row>
       <el-row>
@@ -127,11 +131,39 @@
         </el-upload>
         </el-col>
       </el-row>
+      </div>
 
+    <div class="recommendinfo">
     <el-row>
         <el-col :span="12"><div><h3>我的推荐信息</h3></div></el-col>
       </el-row>
+      <el-row>
+      <el-form label-position="left">
+        <el-form :inline="true" label-width="120px"  >
+      <el-form-item label="我的会员星级:">
+       <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+      </el-form-item>
+       <el-form-item label="我的入金金额:">
+        <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+        </el-form-item>
+        </el-form>
 
+        <el-form :inline="true" label-width="120px"  >
+      <el-form-item label="我的直推奖利率:">
+       <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+      </el-form-item>
+       <el-form-item label="我的间推将利率:">
+        <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+        </el-form-item>
+        </el-form>
+      </el-form>
+      </el-row>
+
+      <el-row>
+        直推客户信息
+      </el-row>
+      
+     </div> 
   </div>
  
 </template>
@@ -260,6 +292,27 @@
   }
 </script>
 <style>
+.personInfo{
+    margin-top: 5px;
+    margin-right:20%;
+    margin-left: 30%;
+    
+}
+
+.baseinfo{
+  background-color:#FFFFFF;
+  padding: 10px;
+}
+.verifyname{
+  background-color:#FFFFFF;
+    margin-top: 6px;
+    padding: 10px;
+}
+.recommendinfo{
+  background-color:#FFFFFF;
+    margin-top: 6px;
+    padding: 10px;
+}
   .form-section {
     padding: 10px;
     width: 800px;

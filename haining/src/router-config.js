@@ -17,14 +17,31 @@
 
 import login from  './page/login/login.vue'
 import personinfo from './page/login/personinfo.vue'
-import main from './page/common/main.vue'
+import contractgain from './page/datakeeper/contractgain.vue'
 import phoneLogin from './page/login/phoneLogin.vue'
+import systemNotice from './page/systemmanager/systemNotice.vue'
+import agencymanager from './page/systemmanager/agencymanager.vue'
+import usermanager from './page/systemmanager/usermanager.vue'
+import productgain from './page/systemmanager/productgain.vue'  
+import customerIncomeRegister from './page/datakeeper/customerIncomeRegister.vue'
+import customerGain from './page/profitinquiry/customerGain.vue'
+import agencyprofit from './page/profitinquiry/agencyprofit.vue'
+import customerRecommend from './page/profitinquiry/customerRecommend.vue'
 // import test from '/page/login/test.vue'
 export default [
       {path:'/login',component:login},
       {path:'/personinfo',component:personinfo},
-      {path:'/main',component:main},
-      {path:'/phoneLogin',component:phoneLogin}
+      {path:'/contractgain',component:contractgain},
+      {path:'/phoneLogin',component:phoneLogin},
+      {path:'/systemNotice',component:systemNotice},
+      {path:'/agencymanager',component:agencymanager},
+      {path:'/usermanager',component:usermanager},
+      {path:'/productgain',component:productgain},
+      {path:'/customer', component:customerIncomeRegister},
+      {path:'/customergain',component:customerGain},
+      {path:'/agencyprofit',component:agencyprofit},
+      {path:'/customerRecommend',component:customerRecommend}
+
       
   // {
   //   path: '/activeManage',component:totalpages,
