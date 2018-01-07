@@ -1,10 +1,79 @@
 <template>
 	<div class="usermanager">
+
+<!-- 弹出框开始 -->
+  <el-dialog title="用户添加" :visible.sync="dialogAddUser" width="80%">
+    <div>用户信息</div>
+    <div style="border:1px solid;border-radius:4px;">
+                
+    <el-form :model="form" style="padding:10px">
+       <el-row>
+  <el-col :span="8">
+    <el-button type="info"  class="left">用户账号</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col>
+  <el-col :span="8">
+        <el-button type="info" class="left">用户名称</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col>
+  <el-col :span="8">
+       <el-button type="info"  class="left">联系方式</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col>
+  </el-row>
+<el-row style="margin-top:10px">
+    <el-col :span="8">
+       <el-button type="info"  class="left">用户性质</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col>
+  <el-col :span="8">
+       <el-button type="info"  class="left">代理商名称</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col>
+  </el-row>
+  <el-row style="margin-top:10px">
+    <el-col :span="8">
+        <el-button type="info"  class="left">是否冻结</el-button><el-select v-model="value" style="width:180px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in options"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </el-col> 
+  <el-col :span="16">
+       <el-button type="info"  class="left">冻结日期</el-button><el-date-picker
+      v-model="value1"
+      type="date"
+      class="right"
+      style="width:180px"
+      >
+    </el-date-picker>
+  </el-col>
+  </el-row>
+  
+ </el-form>
+    </div>
+    <div style="margin-top:10px;">密码信息</div>
+    <div style="border:1px solid;border-radius:4px;">
+    <el-row style="margin-top:10px;padding:10px;">
+    <el-col :span="8">
+      <el-button type="info"  class="left">新密码</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col>
+  <el-col :span="8">
+    <el-button type="info"  class="left">确认密码</el-button><el-input class="right" style="width:180px"></el-input>
+  </el-col> 
+  </el-row>
+    </div>
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="dialogAddUser = false">取 消</el-button>
+    <el-button type="primary" @click="dialogAddUser = false">确 定</el-button>
+  </div>
+</el-dialog>
+<!-- 弹出框结束-->
+
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">
 		合同收益分配表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
-		<el-button type="primary">添加</el-button>
+		<el-button type="primary" @click="addUser()">添加</el-button>
 		<el-button type="primary">查询</el-button>
 		</span>
     </div>
@@ -106,6 +175,7 @@
   export default{
     data(){
       return{
+        dialogAddUser:false,
         status: [{
           value: '1',
           label: '是'
@@ -114,6 +184,11 @@
           label: '否'
         },],
         value1:''
+      }
+    },
+    methods:{
+      addUser(){
+         this.dialogAddUser = true;
       }
     }
   }

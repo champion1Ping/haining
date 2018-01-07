@@ -83,6 +83,7 @@
     },
     methods: {
       phoneLogin(){
+        alert(this.$store.state.xialakuang.shengfen);
         this.$router.push('/phoneLogin');
       },
       forgetPW(){

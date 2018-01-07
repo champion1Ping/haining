@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App'
 import VueRouter from 'vue-router'
 import routeConfig from './router-config'
-
+import store from './store.js'
 
 //加载路由中间件
 Vue.use(VueRouter)
@@ -14,6 +14,7 @@ const router = new VueRouter({
 
 new Vue({
   router,
+  store,
   el: "#app",
   render: h => h(App)
 })
