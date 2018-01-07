@@ -33,9 +33,9 @@
         	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
 			    <template slot="title" ><span style="font-size:15px">真实姓名</span></template>
-			    <el-menu-item index="1-1">个人信息</el-menu-item>
-			    <el-menu-item index="1-2">修改密码</el-menu-item>
-			    <el-menu-item index="1-3">退出登录</el-menu-item>
+			    <el-menu-item index="/personinfo">个人信息</el-menu-item>
+			    <el-menu-item index="updatepw">修改密码</el-menu-item>
+			    <el-menu-item index="">退出登录</el-menu-item>
 			  </el-submenu>
 			  
 		  </el-menu>

@@ -1,11 +1,11 @@
 <template>
 <div class="notice">
-	<div class="tab">系统公告发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<el-button type="primary">退出</el-button></div>
+	<div class="tab"><span style="color:#C9A44E;font-size:20px;padding">系统公告发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><el-button type="primary">退出</el-button></div>
 
 	<div class="content">
 	<el-row>
 		<el-col :span="12">To: &nbsp;&nbsp;&nbsp;&nbsp;
-		<el-select v-model="value" placeholder="请选用户性质">
+		<el-select v-model="value" placeholder="请选择用户性质">
 			<el-option
 	      v-for="item in options"
 	      :key="item.value"
@@ -14,9 +14,9 @@
 	       </el-option>
 	     </el-select>
 		</el-col>
-		<el-col :span="12">
-			<el-radio v-model="radio" label="1">系统内通知</el-radio>
-            <el-radio v-model="radio" label="2">短信通知</el-radio>
+		<el-col :span="12" style="padding-top:10px;">
+			<el-checkbox v-model="system" label="1" >系统内通知</el-checkbox>
+            <el-checkbox v-model="message" label="2">短信通知</el-checkbox>
 		</el-col>
 	</el-row>
 	<el-row>
@@ -39,7 +39,8 @@
 	export default{
 		data(){
 			return {
-				radio:'1',
+				system:false,
+				message:false,
 				options:[
    				   {
    				   	label:"全部",
@@ -59,6 +60,11 @@
    				   }
 
 				]
+			}
+		},
+		methods:{
+			change(){
+				alert(this.system);
 			}
 		}
 	}

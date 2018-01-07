@@ -27,9 +27,13 @@ import customerIncomeRegister from './page/datakeeper/customerIncomeRegister.vue
 import customerGain from './page/profitinquiry/customerGain.vue'
 import agencyprofit from './page/profitinquiry/agencyprofit.vue'
 import customerRecommend from './page/profitinquiry/customerRecommend.vue'
+import resetpw from './page/login/resetpassword.vue'
+import updatepw from './page/login/updatepassword.vue'
 // import test from '/page/login/test.vue'
 export default [
       {path:'/login',component:login},
+      {path:'/reset',component:resetpw},
+      {path:'/updatepw',component:updatepw},
       {path:'/personinfo',component:personinfo},
       {path:'/contractgain',component:contractgain},
       {path:'/phoneLogin',component:phoneLogin},
