@@ -50,11 +50,19 @@ const xialakuang = {
  * */
 const state = {
     xialakuang:xialakuang,
+    userid:'11',
+    roleId:1,
     
+}
+const mutations = {
+    saveRoleId(state,id) {
+        state.roleId = id;
+    }
 }
 
 
 
 export default  new Vuex.Store({
     state,
+    mutations,
 })

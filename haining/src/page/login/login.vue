@@ -93,7 +93,7 @@
       }else {
           callback()
       }
-  }
+     };
       return {
         buttonName:'获取验证码',
         time:'120',
@@ -127,7 +127,7 @@
 
       };
     },
-    methods: {
+    methods:{
       phoneLogin(){
         this.$router.push('/phoneLogin');
       },
@@ -185,6 +185,8 @@
         });
       },
       submitForm(formName) {
+        var router = this.$router;
+        var store = this.$store;
         this.$refs[formName].validate((valid)=>{
           if(valid) {
             this.$http.post('/account/login',
@@ -194,6 +196,9 @@
                 'loginType':2
               }))
             .then(function(res){
+              var id = 2;
+               store.commit('saveRoleId', id);
+              // alert(this.$router);
                var result = JSON.stringify(res);
                alert(result);
                var info = res['data'];
@@ -202,11 +207,11 @@
                var data = info['data'];
                let token = data['token'];
                let sysUserRoleList = data['sysUserRoleList'];
-               let id = sysUserRoleList['id'];
-               let userId=sysUserRoleList['userId'];
-               let roleId = sysUserRoleList['roleId'];
-               alert(id+','+userId+','+roleId);
-
+               router.push('/reset');
+               // let id = sysUserRoleList['id'];
+               // let userId=sysUserRoleList['userId'];
+               // let roleId = sysUserRoleList['roleId'];
+               
             })
             .catch(function(err){
 
