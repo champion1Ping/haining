@@ -20,7 +20,14 @@
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">投资金额&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="value" style="width:180px" class="right">
+    <el-option
+      v-for="item in this.$store.state.xialakuang.investMoney"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
 
   </el-col>
   <el-col :span="6">
@@ -32,7 +39,7 @@
   <el-col :span="6">
     <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="value" style="width:180px" class="right">
     <el-option
-      v-for="item in status"
+      v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -107,19 +114,7 @@
   export default{
     data(){
       return{
-        status: [{
-          value: '1',
-          label: '正常'
-        }, {
-          value: '2',
-          label: '结束'
-        }, {
-          value: '3',
-          label: '提前终止'
-        }, {
-          value: '4',
-          label: '未交易'
-        }, ],
+        
         value1:''
       }
     }

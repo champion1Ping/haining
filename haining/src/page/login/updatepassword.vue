@@ -17,6 +17,7 @@
 	</div>
 </template>
 <script>
+    import qs from 'qs';
 	export default{
 		data(){
 			var validatePass = (rule, value, callback) => {
@@ -56,14 +57,16 @@
 		},
 		methods:{
 			submitForm(formName){
+				alert(this.$store.state.token);
 				this.$refs[formName].validate((valid)=>{
 					if(valid) {
 						this.$http.post('/account/loginResetPwd',
 							qs.stringify({
-
+								'pwd':this.updateForm.checkpass,
+								'token':this.$store.state.token
 							}))
 						.then(function(res){
-
+							alert(JSON.stringify(res));
 						})
 						.catch(function(err){
 

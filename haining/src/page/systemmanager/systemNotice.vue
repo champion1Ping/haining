@@ -7,17 +7,17 @@
 		<el-col :span="12">To: &nbsp;&nbsp;&nbsp;&nbsp;
 		<el-select v-model="value" placeholder="请选择用户性质">
 			<el-option
-	      v-for="item in options"
+	      v-for="item in this.$store.state.usertype.notice"
 	      :key="item.value"
 	      :label="item.label"
 	      :value="item.value">
 	       </el-option>
 	     </el-select>
 		</el-col>
-		<el-col :span="12" style="padding-top:10px;">
+		<!-- <el-col :span="12" style="padding-top:10px;">
 			<el-checkbox v-model="system" label="1" >系统内通知</el-checkbox>
             <el-checkbox v-model="message" label="2">短信通知</el-checkbox>
-		</el-col>
+		</el-col> -->
 	</el-row>
 	<el-row>
 	<el-input
@@ -41,25 +41,7 @@
 			return {
 				system:false,
 				message:false,
-				options:[
-   				   {
-   				   	label:"全部",
-   				   	value:'1'
-   				   },
-   				   {
-   				   	label:"客户",
-   				   	value:'2'
-   				   },
-   				   {
-   				   	label:"代理商",
-   				   	value:'3'
-   				   },
-   				   {
-   				   	label:"管理员",
-   				   	value:'4'
-   				   }
-
-				]
+				
 			}
 		},
 		methods:{

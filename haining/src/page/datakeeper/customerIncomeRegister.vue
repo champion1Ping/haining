@@ -141,7 +141,14 @@
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="ifregister" style="width:180px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in this.$store.state.xialakuang.yesorno"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
 
   </el-col>
   <el-col :span="6">
@@ -261,6 +268,9 @@
   .fm{
     background-color: #ffffff;
     padding: 20px;
+  }
+  .left{
+    width: 120px;
   }
   .left{
     display:inline-block;

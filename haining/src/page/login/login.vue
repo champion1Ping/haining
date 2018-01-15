@@ -196,8 +196,9 @@
                 'loginType':2
               }))
             .then(function(res){
-              var id = 2;
+              var id = 1;
                store.commit('saveRoleId', id);
+
               // alert(this.$router);
                var result = JSON.stringify(res);
                alert(result);
@@ -206,8 +207,9 @@
                var message = info['message'];
                var data = info['data'];
                let token = data['token'];
+               store.commit('saveToken', token);
                let sysUserRoleList = data['sysUserRoleList'];
-               router.push('/reset');
+               router.push('/systemNotice');
                // let id = sysUserRoleList['id'];
                // let userId=sysUserRoleList['userId'];
                // let roleId = sysUserRoleList['roleId'];

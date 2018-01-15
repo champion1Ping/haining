@@ -31,7 +31,7 @@
   <el-col :span="6">
     <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="value" style="width:180px" class="right">
     <el-option
-      v-for="item in status"
+      v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -136,6 +136,7 @@
     padding: 20px;
   }
   .left{
+    width: 120px;
     display:inline-block;
     border-color: #DEDAD6;
     border-top-right-radius:0px; 

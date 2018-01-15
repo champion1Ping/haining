@@ -9,6 +9,7 @@ import qs from 'qs'
 Vue.use(VueRouter)
 axios.defaults.baseURL = 'http://111.230.221.41:8080'
 Vue.prototype.$http = axios
+Vue.prototype.qs = qs
 //定义路由
 const router = new VueRouter({
   routes: routeConfig

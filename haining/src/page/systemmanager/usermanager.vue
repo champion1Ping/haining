@@ -9,28 +9,45 @@
     <el-form :model="form" style="padding:10px">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left">用户账号</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">用户账号</el-button><el-input v-model="userAccount"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-        <el-button type="info" class="left">用户名称</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info" class="left">用户名称</el-button><el-input v-model="userName" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">联系方式</el-button><el-input class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">联系方式</el-button><el-input v-model="contactPhone" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="8">
-       <el-button type="info"  class="left">用户性质</el-button><el-input class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">用户性质</el-button><el-select v-model="userType" style="width:180px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in this.$store.state.usertype.usermanager"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">代理商名称</el-button><el-input class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">代理商编码</el-button><el-select v-model="agentCode" style="width:180px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in this.$store.state.usertype.usermanager"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </el-col>
+  <el-col :span="8">
+       <el-button type="info"  class="left">代理商名称</el-button><el-input v-model="agentName" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left">是否冻结</el-button><el-select v-model="value" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left">是否冻结</el-button><el-select v-model="freeze" style="width:180px" class="right" placeholder="请选择">
     <el-option
-      v-for="item in options"
+      v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -39,8 +56,10 @@
   </el-col> 
   <el-col :span="16">
        <el-button type="info"  class="left">冻结日期</el-button><el-date-picker
-      v-model="value1"
+      v-model="freezeDate"
       type="date"
+      format="yyyy-MM-dd"
+      value-format="yyyy-MM-dd"
       class="right"
       style="width:180px"
       >
@@ -54,10 +73,10 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-row style="margin-top:10px;padding:10px;">
     <el-col :span="8">
-      <el-button type="info"  class="left">新密码</el-button><el-input class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">新密码</el-button><el-input v-model="pass"  class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-    <el-button type="info"  class="left">确认密码</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">确认密码</el-button><el-input v-model="checkpass" class="right" style="width:180px"></el-input>
   </el-col> 
   </el-row>
     </div>
@@ -71,7 +90,7 @@
 
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">
-		合同收益分配表&nbsp;&nbsp;&nbsp;
+		用户管理&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
 		<el-button type="primary" @click="addUser()">添加</el-button>
 		<el-button type="primary">查询</el-button>
@@ -89,13 +108,19 @@
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">用户性质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
-
+       <el-button type="info"  class="left">用户性质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="userType" style="width:180px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in this.$store.state.usertype.usermanager"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
   </el-col>
   <el-col :span="6">
         <el-button type="info"  class="left">是否冻结&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="value" style="width:180px" class="right">
     <el-option
-      v-for="item in status"
+      v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -133,26 +158,20 @@
     </div>
 	<div class="tbl">
     <el-table
-    :data="tableData"
+    :data="userTable"
     border
     style="width: 100%" header-align="center">
-    <el-table-column prop="date" label="用户账号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="userAccount" label="用户账号" align="center" width="180"></el-table-column>
+    <el-table-column prop="userName" label="用户名称" align="center" width="180"></el-table-column>
+    <el-table-column prop="userType" label="用户性质" align="center" width="180"></el-table-column>
+    <el-table-column prop="agentName" label="代理商名称" align="center" width="180"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系方式" align="center" width="180"></el-table-column>
+    <el-table-column prop="createTime" label="创建时间" align="center" width="180"></el-table-column>
+    <el-table-column prop="freeze" label="是否冻结" align="center" width="180"></el-table-column>
+    <el-table-column prop="freezeDate" label="冻结时间" align="center" width="180"></el-table-column>
+    <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="用户信息明细" align="center" width="180"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
@@ -176,15 +195,21 @@
     data(){
       return{
         dialogAddUser:false,
-        status: [{
-          value: '1',
-          label: '是'
-        }, {
-          value: '2',
-          label: '否'
-        },],
+        userAccount:'',
+        userName:'',
+        contactPhone:'',
+        userType:'',
+        agentCode:'',
+        agentName:'',
+        freeze:'',
+        freezeDate:'',
+        pass:'',
+        checkpass:'',
         value1:''
       }
+    },
+    created:function(){
+       alert("a");
     },
     methods:{
       addUser(){
