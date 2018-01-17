@@ -58,14 +58,14 @@ const xialakuang = {
 }
 const usertype={
     usermanager:[
-      {label:'管理员',value:'1'},
-      {label:'代理商',value:'2'}
+      {label:'管理员',value:'3'},
+      {label:'代理商',value:'1'}
     ],
     notice:[
-       {label:'全部', value:'0'},
-       {label:'管理员',value:'1'},
-       {label:'代理商',value:'2'},
-       {label:'客户',value:'3'}
+       {label:'全部', value:'4'},
+       {label:'管理员',value:'3'},
+       {label:'代理商',value:'1'},
+       {label:'客户',value:'2'}
     ]
 }
 /* 活动管理测试数据 */

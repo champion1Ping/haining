@@ -1,26 +1,47 @@
 <template>
 	<div class="usermanager">
-
-<!-- 弹出框开始 -->
+<el-dialog title="选择代理商" :visible.sync="dialogChooseAgent" width="75%">
+  <el-form :model="chooseAgentForm">
+      <el-button type="info"  class="left">代理商编码</el-button><el-input v-model="chooseAgentForm.agentCode"class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">代理商名称</el-button><el-input v-model="chooseAgentForm.agentName"class="right" style="width:180px"></el-input>
+      <el-button type="primary" @click="searchAgentList">查询</el-button>
+  </el-form>
+   <el-table
+    :data="agentTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+    border
+    style="width: 100%" header-align="center">
+    <el-table-column prop="agentCode" label="代理商编码" align="center" ></el-table-column>
+    <el-table-column prop="agentName" label="代理商名称" align="center"></el-table-column>
+    <el-table-column
+      fixed="right"
+      label="操作"
+      width="100">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" type="text" size="small">选定</el-button>
+      </template>
+    </el-table-column>
+  </el-table>
+</el-dialog>
+<!-- 用户添加弹出框开始 -->
   <el-dialog title="用户添加" :visible.sync="dialogAddUser" width="80%">
     <div>用户信息</div>
     <div style="border:1px solid;border-radius:4px;">
                 
-    <el-form :model="form" style="padding:10px">
+    <el-form :model="addUserForm" style="padding:10px">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left">用户账号</el-button><el-input v-model="userAccount"class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">用户账号</el-button><el-input v-model="addUserForm.userAccount"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-        <el-button type="info" class="left">用户名称</el-button><el-input v-model="userName" class="right" style="width:180px"></el-input>
+        <el-button type="info" class="left">用户名称</el-button><el-input v-model="addUserForm.userName" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">联系方式</el-button><el-input v-model="contactPhone" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">联系方式</el-button><el-input v-model="addUserForm.contactPhone" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="8">
-       <el-button type="info"  class="left">用户性质</el-button><el-select v-model="userType" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">用户性质</el-button><el-select v-model="addUserForm.userType" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.usertype.usermanager"
       :key="item.value"
@@ -30,9 +51,9 @@
   </el-select>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">代理商编码</el-button><el-select v-model="agentCode" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">代理商编码</el-button><el-select @focus="chooseAgent"v-model="addUserForm.agentCode" style="width:180px" class="right" placeholder="请选择">
     <el-option
-      v-for="item in this.$store.state.usertype.usermanager"
+      v-for="item in empty"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -40,12 +61,12 @@
   </el-select>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">代理商名称</el-button><el-input v-model="agentName" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">代理商名称</el-button><el-input v-model="addUserForm.agentName" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left">是否冻结</el-button><el-select v-model="freeze" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left">是否冻结</el-button><el-select v-model="addUserForm.ifFrozen" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -56,7 +77,7 @@
   </el-col> 
   <el-col :span="16">
        <el-button type="info"  class="left">冻结日期</el-button><el-date-picker
-      v-model="freezeDate"
+      v-model="addUserForm.freezeDate"
       type="date"
       format="yyyy-MM-dd"
       value-format="yyyy-MM-dd"
@@ -73,17 +94,16 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-row style="margin-top:10px;padding:10px;">
     <el-col :span="8">
-      <el-button type="info"  class="left">新密码</el-button><el-input v-model="pass"  class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">新密码</el-button><el-input v-model="addUserForm.pass"  class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-    <el-button type="info"  class="left">确认密码</el-button><el-input v-model="checkpass" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">确认密码</el-button><el-input v-model="addUserForm.checkpass" class="right" style="width:180px"></el-input>
   </el-col> 
   </el-row>
     </div>
 
   <div slot="footer" class="dialog-footer">
-    <el-button @click="dialogAddUser = false">取 消</el-button>
-    <el-button type="primary" @click="dialogAddUser = false">确 定</el-button>
+    <el-button type="primary" @click="addUser()">保存</el-button>
   </div>
 </el-dialog>
 <!-- 弹出框结束-->
@@ -92,19 +112,19 @@
 		<span style="color:#C9A44E;font-size:20px">
 		用户管理&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
-		<el-button type="primary" @click="addUser()">添加</el-button>
-		<el-button type="primary">查询</el-button>
+		<el-button type="primary" @click="dialogAddUser = true">添加</el-button>
+		<el-button type="primary" @click="getUserList">查询</el-button>
 		</span>
     </div>
 
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">用户账号</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">用户账号</el-button><el-input v-model="userAccount"class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">用户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">用户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="userName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
@@ -118,7 +138,7 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">是否冻结&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="value" style="width:180px" class="right">
+        <el-button type="info"  class="left">是否冻结&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="ifFrozen" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -130,14 +150,14 @@
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">联系方式</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">联系方式</el-button><el-input class="right"v-model="contactPhone" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">直推人号码</el-button><el-input class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">直推人号码</el-button><el-input v-model="directRecommendationAccount" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">创建时间从</el-button><el-date-picker
-      v-model="value1"
+      v-model="createTimeFrom"
       type="date"
       class="right"
       style="width:180px"
@@ -146,7 +166,7 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">创建时间到</el-button><el-date-picker
-      v-model="value1"
+      v-model="createTimeTo"
       type="date"
       class="right"
       style="width:180px"
@@ -158,31 +178,39 @@
     </div>
 	<div class="systemUserManager">
     <el-table
-    :data="userTable"
+    :data="userTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
-    <el-table-column prop="userAccount" label="用户账号" align="center" width="180"></el-table-column>
+    <el-table-column prop="account" label="用户账号" align="center" width="180"></el-table-column>
     <el-table-column prop="userName" label="用户名称" align="center" width="180"></el-table-column>
-    <el-table-column prop="userType" label="用户性质" align="center" width="180"></el-table-column>
+    <el-table-column prop="userTypeName" label="用户性质" align="center" width="180"></el-table-column>
     <el-table-column prop="agentName" label="代理商名称" align="center" width="180"></el-table-column>
     <el-table-column prop="contactPhone" label="联系方式" align="center" width="180"></el-table-column>
-    <el-table-column prop="createTime" label="创建时间" align="center" width="180"></el-table-column>
-    <el-table-column prop="freeze" label="是否冻结" align="center" width="180"></el-table-column>
+    <el-table-column prop="gmtCreate" label="创建时间" align="center" width="180"></el-table-column>
+    <el-table-column prop="whetherFreezeName" label="是否冻结" align="center" width="180"></el-table-column>
     <el-table-column prop="freezeDate" label="冻结时间" align="center" width="180"></el-table-column>
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
     <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="用户信息明细" align="center" width="180"></el-table-column>
+    <el-table-column
+      fixed="right"
+      label="用户信息明细"
+      alien="center"
+      width="120px">
+      <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" type="text" size="small">明细</el-button>
+      </template>
+    </el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 50, 100]"
-      :page-size="10"
+      :page-size="pageSize"
       layout="total, sizes, prev, pager, next"
       prev-text="<上一页"
       next-text="下一页>"
-      :total="70">
+      :total="userTable.length">
     </el-pagination>
   </div>
 	
@@ -194,69 +222,145 @@
   export default{
     data(){
       return{
+        userTable:[],
+        agentTable:[],
+        chooseAgentForm:{
+          agentName:'',
+          agentCode:''
+        },
+        empty:[],
+        currentPage:1,
+        pageSize:100,
         dialogAddUser:false,
+        dialogChooseAgent:false,
         userAccount:'',
         userName:'',
         contactPhone:'',
         userType:'',
         agentCode:'',
         agentName:'',
-        freeze:'',
-        freezeDate:'',
-        pass:'',
-        checkpass:'',
-        value1:''
+        ifFrozen:'',
+        directRecommendationAccount:'',
+        createTimeFrom:'',
+        createTimeTo:'',
+        addUserForm:{
+          userAccount:'',
+          userName:'',
+          contactPhone:'',
+          userType:'',
+          agentCode:'',
+          agentName:'',
+          ifFrozen:'',
+          pass:'',
+          checkpass:'',
+          freezeDate:'',
+        }
       }
     },
     created:function(){
-       alert("a");
+
     },
     methods:{
-      
+      handleSizeChange(size){
+        this.pageSize = size;
+      },
+      handleCurrentChange(page){
+        this.currentPage= page;
+      },
       addUser(){
           this.dialogAddUser = true;
+          var me = this;
+          this.$http.post('/user/addUser',
           this.qs.stringify({
-                'account':this.$store.state.token,
-                'userName':this.$store.state.token,
-                'contactPhone':this.$store.state.token,
-                'userType':this.$store.state.token,
-                'whetherFreeze':this.$store.state.token,
-                'freezeDate':this.$store.state.token,
-                'agentName':this.$store.state.token,
-                'agentCode':this.$store.state.token,
-                'pwd':this.$store.state.token,
+                'account':this.addUserForm.userAccount,
+                'userName':this.addUserForm.userName,
+                'contactPhone':this.addUserForm.contactPhone,
+                'userType':this.addUserForm.userType,
+                'whetherFreeze':this.addUserForm.ifFrozen,
+                'freezeDate':this.addUserForm.freezeDate,
+                'agentName':this.addUserForm.agentName,
+                'agentCode':this.addUserForm.agentCode,
+                'pwd':this.addUserForm.checkpass,
              })
              )
              .then(function(res){
+              alert(JSON.stringify(res));
+              var info = res['data'];
+              var code = info['code'];
+              var message = info['message'];
+              if(code == 1){
+                  me.$message("添加成功");
+                  me.dialogAddUser = false;
+              }
+             })
+             .catch(function(err){
+
+             })
+      },
+      chooseAgent(event){
+         this.dialogChooseAgent = true;
+
+      },
+      //选择代理商列表查询
+      searchAgentList(){
+        let me = this;
+        this.$http.post('/agent/searchAgentList',
+         this.qs.stringify({
+            'agentCode':'',
+            'agentName':'',
+            'pageNum':'',
+            'pageSize':''
+
+         })
+         )
+         .then(function(res){
+            alert(JSON.stringify(res));
+                var info = res['data'];
+              var code = info['code'];
+              var message = info['message'];
+              var data = info['data'];
+              me.agentTable = data['list'];
+         })
+         .catch(function(err){
+
+         })
+      },
+      getUserList(){
+          let me = this;
+          this.$http.post('/user/getUserList',
+          this.qs.stringify({
+                'account':this.userAccount,
+                'userName':this.userName,
+                'contactPhone':this.contactPhone,
+                'userType':this.userType,
+                'whetherFreeze':this.ifFrozen,
+                'freezeDate':'',
+                'agentName':this.agentName,
+                'agentCode':this.agentCode,
+                'directRecommendationAccount':this.directRecommendationAccount,
+                'gmtCreateBegin':this.createTimeFrom,
+                'gmtCreateEnd':this.createTimeTo,
+                'pageNum':'',
+                'pageSize':'',
+             })
+             )
+             .then(function(res){
+                alert(JSON.stringify(res));
+                var info = res['data'];
+              var code = info['code'];
+              var message = info['message'];
+              var data = info['data'];
+              me.userTable = data['list'];
 
              })
              .catch(function(err){
 
              })
       },
-      getUserList(){
-          this.qs.stringify({
-                'account':this.$store.state.token,
-                'userName':this.$store.state.token,
-                'contactPhone':this.$store.state.token,
-                'userType':this.$store.state.token,
-                'whetherFreeze':this.$store.state.token,
-                'freezeDate':this.$store.state.token,
-                'agentName':this.$store.state.token,
-                'agentCode':this.$store.state.token,
-                'directRecommendationAccount':this.$store.state.token,
-                'gmtCreateBegin':this.$store.state.token,
-                'gmtCreateEnd':this.$store.state.token,
-                'pageNum':this.$store.state.token,
-                'pageSize':this.$store.state.token,
-             })
-             )
-             .then(function(res){
-
-             })
-             .catch(function(err){
-
-             })
+      handleClick(row){
+         this.addUserForm.agentCode = row.agentCode;
+         this.addUserForm.agentName = row.agentName;
+         this.dialogChooseAgent = false;
       }
     }
   }

@@ -5,7 +5,7 @@
 	<div class="content">
 	<el-row>
 		<el-col :span="12">To: &nbsp;&nbsp;&nbsp;&nbsp;
-		<el-select v-model="value" placeholder="请选择用户性质">
+		<el-select v-model="toType" placeholder="请选择用户性质">
 			<el-option
 	      v-for="item in this.$store.state.usertype.notice"
 	      :key="item.value"
@@ -24,12 +24,12 @@
 	  type="textarea"
 	  :rows="10"
 	  placeholder="请输入内容"
-	  v-model="textarea">
+	  v-model="noticeContent">
 	</el-input>
 		
 	</el-row>	
     <el-row>
-    <el-col align="right"><el-button type="primary">发布</el-button></el-col>
+    <el-col align="right"><el-button type="primary" @click="sendNotice()">发布</el-button></el-col>
     </el-row>
   
 	</div>
@@ -39,41 +39,37 @@
 	export default{
 		data(){
 			return {
-				system:false,
-				message:false,
+				toType:'',
+				noticeContent:'',
 				
 			}
 		},
 		methods:{
 			change(){
-				alert(this.system);
+				
 			},
-			getMyNoticeCount(){
-				 this.$http.post('/notice/getMyNoticeCount',
-		         this.sq.stringify({
-		            'token':this.$store.state.token
-		         })
-		         )
-		         .then(function(res){
+			sendNotice(){
+				let me = this;
+				this.$http.post('/sysNotice/sendNotice',
+							this.qs.stringify({
+								'toType':this.toType,
+								'sysType':1,
+								'noticeContent':this.noticeContent
+							}))
+						.then(function(res){
+							var info = res['data'];
+				            var code = info['code'];
+				            if (code == 1) {
+				            	me.$message('发布成功');
+				            }
+				          var message = info['message'];
+				          var data = info['data'];
+						})
+						.catch(function(err){
 
-		         })
-		         .catch(function(err){
-
-		         })
-			},
-			getNoticeList(){
-				 this.$http.post('/notice/getNoticeList',
-		         this.sq.stringify({
-		            'token':this.$store.state.token
-		         })
-		         )
-		         .then(function(res){
-
-		         })
-		         .catch(function(err){
-
-		         })
-			},
+						})
+			}
+			
 
 
 		}

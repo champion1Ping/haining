@@ -8,7 +8,7 @@
     <el-form :model="form" style="padding:10px" :models="addAgencyForm" ref="addAgencyForm">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left">代理商编号</el-button><el-input  v-model="addAgencyForm.agencyNum" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">代理商编号</el-button><el-input  :disabled="true" v-model="addAgencyForm.agencyCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
         <el-button type="info" class="left">代理商名称</el-button><el-input class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
@@ -27,7 +27,7 @@
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left">省份</el-button><el-select v-model="addAgencyForm.province" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left">省份</el-button><el-select v-model="addAgencyForm.province"  @change="getMaxProvinceIndex"style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.shengfen"
       :key="item.value"
@@ -110,7 +110,7 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info" class="left" v-model="agentCode">代理商编号</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info" class="left" v-model="agentCode">代理商编号</el-button><el-input  class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
@@ -178,9 +178,9 @@
     </div>
 	<div class="tbl1">
     <el-table
-    :data="agentData"
+    :data="agentData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
-    style="width:100%" header-align="center">
+    style="width:100%;height:30%" header-align="center">
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
     <el-table-column prop="agentName" label="代理商名称" align="center" width="180"></el-table-column>
     <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="180"></el-table-column>
@@ -197,13 +197,13 @@
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 50, 100]"
-      :page-size="100"
+      :page-size="pageSize"
       layout="total, sizes, prev, pager, next"
       prev-text="<上一页"
       next-text="下一页>"
-      :total="70">
+      :total="agentData.length">
     </el-pagination>
   </footer>
   
@@ -217,6 +217,9 @@
     data(){
 
       return{
+        total:0,
+        currentPage:1,
+        pageSize:100,
         agentData:[{},{},{},{}],
         dialogAddAgency:false,
         agentCode:'',
@@ -228,7 +231,7 @@
         contractEndTime:'',
         contractStartTime:'',
         addAgencyForm:{
-          agencyNum:'',
+          agencyCode:'',
           agencyName:'',
           socialNum:'',
           loyalPerson:'',
@@ -260,48 +263,40 @@
     },
     methods:{
       handleSizeChange(size){
-        alert(size);
+        this.pageSize = size;
+      },
+      handleCurrentChange(page){
+        this.currentPage= page;
       },
       addAgency(){
           //
           this.dialogAddAgency = true;
       },
       getMaxProvinceIndex(provinceId){
+        var me = this;
          this.$http.post('/agent/getMaxProvinceIndex',
          this.qs.stringify({
             'provinceId':provinceId
          })
          )
          .then(function(res){
-
+            var info = res['data'];
+            var code = info['code'];
+            var message = info['message'];
+            var data = info['data'];
+            alert(data);
+            me.addAgencyForm.agencyCode = data;
          })
          .catch(function(err){
 
          })
       },
-      //选择代理商列表查询
-      searchAgentList(){
-        this.$http.post('/agent/getMaxProvinceIndex',
-         this.qs.stringify({
-            'agentCode':'',
-            'agentName':'',
-            'pageNum':'',
-            'pageSize':''
-
-         })
-         )
-         .then(function(res){
-
-         })
-         .catch(function(err){
-
-         })
-      },
+      
       query(){
         var t = this;
         this.$http.post('/agent/getAgentList',
           this.qs.stringify({
-            'agentCode':this.agencyCode,
+            'agentCode':this.agentCode,
             'agentName':this.agencyName,
             'legalRepresentative':this.legalRepresentative,
             'provinceId':this.provinceId,
@@ -327,10 +322,16 @@
 
       },
       submitForm(formName){
-        alert(this.addAgencyForm.province);
+        var me = this;
+        for(var field in this.addAgencyForm){
+          if(this.addAgencyForm[field] == ""){
+            this.$message(field);
+            return;
+          }
+        }
         this.$http.post('/agent/addAgentInfo',
           this.qs.stringify({
-            'agentCode':this.addAgencyForm.agencyNum,
+            'agentCode':this.addAgencyForm.agencyCode,
             'agentName':this.addAgencyForm.agencyName,
             'unifiedSocialCreditCode':this.addAgencyForm.socialNum,
             'legalRepresentative':this.addAgencyForm.loyalPerson,
@@ -344,10 +345,18 @@
             'contractEndTime':this.addAgencyForm.signEndTime
           }))
         .then(function(res){
-           alert(JSON.stringify(res));
+           var info = res['data'];
+           var code = info['code'];
+           var message =info['message'];
+           if (code == 1) {
+              me.$message("添加成功");
+           } else {
+              me.$message(message);
+           }
+
         })
         .catch(function(err){
-
+             me.$message(err);
         })
       }
     }
@@ -402,6 +411,6 @@
   /*.el-input__prefix{
       right:0px;
   }  */
-footer{position:absolute;bottom:0;width:100%;height:100px;}
+/*footer{position:absolute;bottom:0;width:100%;height:100px;}*/
 
 </style>
