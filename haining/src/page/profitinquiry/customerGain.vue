@@ -67,23 +67,23 @@
     :data="tableData"
     border
     style="width: 100%" header-align="center">
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="customerName" label="客户名称" align="center" width="180"></el-table-column>
+    <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="contractIncome" label="合同收益" align="center" width="180"></el-table-column>
+    <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="180"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="180"></el-table-column>
+    <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="tradeStatus" label="交易状态" align="center" width="180"></el-table-column>
+    <el-table-column prop="productRate" label="产品收益率" align="center" width="180"></el-table-column>
+    <el-table-column prop="derectRecomandPersonName" label="直推人" align="center" width="180"></el-table-column>
+    <el-table-column prop="derectRecomandRate" label="直推奖励率" align="center" width="180"></el-table-column>
+    <el-table-column prop="inderectRecomandPersonName" label="间推人" align="center" width="180"></el-table-column>
+    <el-table-column prop="inderectRecomandRate" label="间推奖励率" align="center" width="180"></el-table-column>
+    <el-table-column prop="agentCode" label="代理商编号biao" align="center" width="180"></el-table-column>
+    <el-table-column prop="customerIncome" label="客户收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="derectIncome" label="直推人收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="inderectIncome" label="间推人收益($)" align="center" width="180"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
