@@ -13,27 +13,39 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="fileNum" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">客户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">客户名称</el-button><el-input v-model="coustomerName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
-
+       <el-button type="info"  class="left">投资金额</el-button><el-select v-model="investMoney" style="width:180px" class="right">
+    <el-option
+      v-for="item in this.$store.state.xialakuang.investMoney"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">产品类型&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
-    </el-input>
+        <el-button type="info"  class="left">产品类型</el-button><el-select v-model="productType" style="width:180px" class="right">
+    <el-option
+      v-for="item in productTypes"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
   </el-col> 
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="value" style="width:180px" class="right">
+    <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="dealStatus" style="width:180px" class="right">
     <el-option
-      v-for="item in status"
+      v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -41,11 +53,11 @@
   </el-select><!-- <el-input class="right" style="width:180px"></el-input> -->
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">产品收益率</el-button><el-input class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">产品收益率</el-button><el-input v-model="productProfit" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">截止日期从</el-button><el-date-picker
-      v-model="value1"
+      v-model="startDate"
       type="date"
       class="right"
       style="width:180px"
@@ -54,12 +66,11 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">截止日期到</el-button><el-date-picker
-      v-model="value1"
+      v-model="endDate"
       type="date"
       class="right"
       style="width:180px"
       ></el-date-picker>
-    
   </el-col> 
     
   </el-row>
@@ -70,22 +81,25 @@
     border
     style="width: 100%" header-align="center">
     <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="客户名称" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="投资金额($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="合同收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="首交易日" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="产品类型" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="截止日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="交易状态" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="产品收益率" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="直推人" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="直推收益率" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="间推人" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="间推收益率" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="代理商编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="代理收益率" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="客户收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="直推人收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="间推人收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="代理商收益($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="公司收益($)" align="center" width="180"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"

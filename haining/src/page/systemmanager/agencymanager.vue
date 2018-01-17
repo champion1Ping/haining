@@ -176,11 +176,11 @@
     
   </el-row>
     </div>
-	<div class="tbl">
+	<div class="tbl1">
     <el-table
     :data="agentData"
     border
-    style="width: 100%" header-align="center">
+    style="width:100%" header-align="center">
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
     <el-table-column prop="agentName" label="代理商名称" align="center" width="180"></el-table-column>
     <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="180"></el-table-column>
@@ -193,8 +193,7 @@
     <el-table-column prop="bussinessStartTime" label="营业开始日期" align="center" width="180"></el-table-column>
     <el-table-column prop="bussinessEndTime" label="营业截止日期" align="center" width="180"></el-table-column>
   </el-table>
-  </div>
-	<footer>
+  <footer>
     <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
@@ -207,6 +206,8 @@
       :total="70">
     </el-pagination>
   </footer>
+  
+  </div>
 	
 	
 	</div>
@@ -216,7 +217,7 @@
     data(){
 
       return{
-        agentData:[],
+        agentData:[{},{},{},{}],
         dialogAddAgency:false,
         agentCode:'',
         agentName:'',
@@ -324,6 +325,7 @@
 </script>
 
 <style>
+  
   .btn{
     /*margin-top: 1px;*/
     background-color: #ffffff;
@@ -365,9 +367,10 @@
     -webkit-transition: all .3s;
     transition: all .3s;
   }
+  .el-pagination{flex:1;}
   /*.el-input__prefix{
       right:0px;
   }  */
-
+footer{position:absolute;bottom:0;width:100%;height:100px;}
 
 </style>

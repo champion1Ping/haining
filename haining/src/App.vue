@@ -1,5 +1,5 @@
 <template>
-  <div id="app" style="background-color:#D3DCE8">
+  <div id="app" class="parent" style="background-color:#D3DCE8">
   <el-container>
   <el-header><v-header></v-header></el-header>
   <!-- <div style="position: relative;height: 60px;width: 100%;"></div> -->
@@ -52,9 +52,15 @@ export default {
 </script>
 
 <style>
- .el-main0{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 500px 70px; }
+html, body{ margin:0; height:100%; }
+ .parent{
+  flex-flow: column;
+  display:flex;
+ }
+ /*.el-main0{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 500px 70px; }*/
  .el-main{
-    padding: 10px 0px 10px 0px;
+    padding: 10px 0px 0px 0px;
+    flex:1;
  }
 .el-header{
   background-color:#FFFFFF;

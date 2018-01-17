@@ -156,7 +156,7 @@
     
   </el-row>
     </div>
-	<div class="tbl">
+	<div class="systemUserManager">
     <el-table
     :data="userTable"
     border

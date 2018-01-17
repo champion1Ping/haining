@@ -112,7 +112,7 @@ import {isvalidPhone} from '../common/utils.js'
     margin-bottom: 200px;
     padding-top: 50px;
     padding-left: 200px;
-    padding-bottom: 160px;
+    padding-bottom: 30px;
   }
 
 

@@ -133,15 +133,13 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input class="right" style="width:180px"></el-input>
-    
+    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="fileNum" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">交易平台</el-button><el-input class="right" style="width:180px"></el-input>
-
+        <el-button type="info"  class="left">交易平台</el-button><el-input  v-model="dealPlatform"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="ifregister" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">是否入金</el-button><el-select v-model="ifIncome" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -152,26 +150,29 @@
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">产品类型&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
-    </el-input>
+        <el-button type="info"  class="left">产品类型</el-button><el-select v-model="ifIncome" style="width:180px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in productTypes"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+
   </el-col> 
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">注册邮箱</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">注册邮箱</el-button><el-input  v-model="registerEmail"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">入金日期从</el-button><el-date-picker
-      v-model="value1"
-      type="date"
-      class="right"
-      style="width:180px"
-      >
+      <el-button type="info"  class="left">份数</el-button><el-input  v-model="nums"class="right" style="width:180px"></el-input>
+
     </el-date-picker>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">签约日期从</el-button><el-date-picker
-      v-model="value1"
+      v-model="signStartDate"
       type="date"
       class="right"
       style="width:180px"
@@ -180,7 +181,7 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">签约日期到</el-button><el-date-picker
-      v-model="value1"
+      v-model="signEndDate"
       type="date"
       class="right"
       style="width:180px"
@@ -196,22 +197,19 @@
     border
     style="width: 100%" header-align="center">
     <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="date" label="档案编号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="交易平台" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="交易账户号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="是否入金" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="入金日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="注册邮箱" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="证件类型" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="证件号" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="联系电话" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="签约日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="产品类型" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="收益率($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="投资金额($)" align="center" width="180"></el-table-column>
+    <el-table-column prop="date" label="预估收益" align="center" width="180"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
@@ -235,6 +233,14 @@
     data(){
       return{
         dialogAddFile:false,
+        fileNum:'',
+        dealPlatform:'',
+        ifIncome:'',
+        productTypes:[],
+        registerEmail:'',
+        nums:'',
+        signStartDate:'',
+        signEndDate:'',
         status: [{
           value: '1',
           label: '正常'

@@ -9,7 +9,7 @@
     </div>
 
     
-	<div class="tbl">
+	<div class="product">
     <el-table
     :data="tableData"
     border
@@ -40,7 +40,7 @@
     background-color: #ffffff;
     padding: 10px;
   }
-  .tbl{
+  .product{
     background-color:#FFFFFF;
     margin-top: 10px;
     margin-right:200px;

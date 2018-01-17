@@ -230,11 +230,11 @@
 <style>
   .login{
     background-color:#FFFFFF;
-    margin-top: 50px;
+    margin-top: 30px;
     margin-right:300px;
     margin-left: 180px;
     padding-left: 40px;
-    padding-top: 40px;
+    padding-top: 20px;
   }
   .el-form--label-top .el-form-item__label {
     line-height: 20px;

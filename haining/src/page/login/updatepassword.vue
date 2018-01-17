@@ -84,6 +84,7 @@
 		 background-color:#FFFFFF;
 	    margin-top: 50px;
 	    margin-right:20%;
+	    margin-bottom: 100px;
 	    margin-left: 20%;
 	    padding-left: 240px;
 	    padding-top: 40px;

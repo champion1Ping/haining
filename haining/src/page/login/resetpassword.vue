@@ -1,3 +1,4 @@
+
 <template>
 	<div class="resetpw">
 		<span style="color:#C9A44E;font-size:20px;">重置密码</span>
@@ -140,6 +141,7 @@
 	    margin-top: 50px;
 	    margin-right:20%;
 	    margin-left: 20%;
+	    margin-bottom: 100px;
 	    padding-left: 240px;
 	    padding-top: 40px;
 	    padding-bottom: 40px;
