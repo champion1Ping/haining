@@ -234,6 +234,73 @@
         let date = new Date(b[0], b[1] - 1, b[2]);
         return date;
       },
+      getUserBaseInfo(){
+          this.$http.post('/user/getUserBaseInfo',
+             this.qs.stringify({
+                'token':this.$store.state.token
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
+      },
+      updateUserBaseInfo(){
+          this.$http.post('/user/getUserBaseInfo',
+             this.qs.stringify({
+                'account':this.$store.state.token,
+                'realName':this.$store.state.token,
+                'sex':this.$store.state.token,
+                'contactPhone':this.$store.state.token,
+                'whetherRealName':this.$store.state.token,
+                'wheatherGetMoney':this.$store.state.token,
+                'refereeQualification':this.$store.state.token,
+                'directRecommendationAccount':this.$store.state.token,
+                'agentCode':this.$store.state.token,
+                'indirectRecommendationAccount':this.$store.state.token,
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
+      },
+      uploadPic(){
+         this.$http.post('/user/uploadPic',
+          this.qs.stringify({
+                'account':this.$store.state.token,
+                'file':this.$store.state.token,
+                'picType':this.$store.state.token,
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
+      },
+       checkRealName(){
+         this.$http.post('/user/checkRealName',
+          this.qs.stringify({
+                'account':this.$store.state.token,
+                'realName':this.$store.state.token,
+                'certificateType':this.$store.state.token,
+                'certificateNumber':this.$store.state.token,
+                'file':this.$store.state.token
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })  
+       },
       // 开始时间禁止晚于结束时间；
       starTimeChang (val) {
         const starTime = this.getDate(val);

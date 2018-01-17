@@ -212,8 +212,51 @@
        alert("a");
     },
     methods:{
+      
       addUser(){
-         this.dialogAddUser = true;
+          this.dialogAddUser = true;
+          this.qs.stringify({
+                'account':this.$store.state.token,
+                'userName':this.$store.state.token,
+                'contactPhone':this.$store.state.token,
+                'userType':this.$store.state.token,
+                'whetherFreeze':this.$store.state.token,
+                'freezeDate':this.$store.state.token,
+                'agentName':this.$store.state.token,
+                'agentCode':this.$store.state.token,
+                'pwd':this.$store.state.token,
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
+      },
+      getUserList(){
+          this.qs.stringify({
+                'account':this.$store.state.token,
+                'userName':this.$store.state.token,
+                'contactPhone':this.$store.state.token,
+                'userType':this.$store.state.token,
+                'whetherFreeze':this.$store.state.token,
+                'freezeDate':this.$store.state.token,
+                'agentName':this.$store.state.token,
+                'agentCode':this.$store.state.token,
+                'directRecommendationAccount':this.$store.state.token,
+                'gmtCreateBegin':this.$store.state.token,
+                'gmtCreateEnd':this.$store.state.token,
+                'pageNum':this.$store.state.token,
+                'pageSize':this.$store.state.token,
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
       }
     }
   }

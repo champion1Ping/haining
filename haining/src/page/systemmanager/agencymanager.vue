@@ -266,6 +266,37 @@
           //
           this.dialogAddAgency = true;
       },
+      getMaxProvinceIndex(provinceId){
+         this.$http.post('/agent/getMaxProvinceIndex',
+         this.qs.stringify({
+            'provinceId':provinceId
+         })
+         )
+         .then(function(res){
+
+         })
+         .catch(function(err){
+
+         })
+      },
+      //选择代理商列表查询
+      searchAgentList(){
+        this.$http.post('/agent/getMaxProvinceIndex',
+         this.qs.stringify({
+            'agentCode':'',
+            'agentName':'',
+            'pageNum':'',
+            'pageSize':''
+
+         })
+         )
+         .then(function(res){
+
+         })
+         .catch(function(err){
+
+         })
+      },
       query(){
         var t = this;
         this.$http.post('/agent/getAgentList',

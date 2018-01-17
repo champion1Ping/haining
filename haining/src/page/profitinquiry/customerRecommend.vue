@@ -113,6 +113,52 @@
         }, ],
         value1:''
       }
+    },
+    methods:{
+      getCustomerRecommandVOList(){
+          this.$http.post('/user/checkRegetCustomerRecommandVOListExcel',
+          this.qs.stringify({
+                'account':this.$store.state.token,
+                'realName':this.$store.state.token,
+                'whetherGetMoney':this.$store.state.token,
+                'refereeQualification':this.$store.state.token,
+                'directRecommendationAccount':this.$store.state.token,
+                'indirectRecommendationAccount':this.$store.state.token,
+                'gmtCreateBegin':this.$store.state.token,
+                'gmtCreateEnd':this.$store.state.token,
+                'pageNum':this.$store.state.token,
+                'pageSize':this.$store.state.token,
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
+      },
+      getCustomerRecommandVOListExcel(){
+          this.$http.post('/user/checkRegetCustomerRecommandVOListExcel',
+          this.qs.stringify({
+                'account':this.$store.state.token,
+                'realName':this.$store.state.token,
+                'whetherGetMoney':this.$store.state.token,
+                'refereeQualification':this.$store.state.token,
+                'directRecommendationAccount':this.$store.state.token,
+                'indirectRecommendationAccount':this.$store.state.token,
+                'gmtCreateBegin':this.$store.state.token,
+                'gmtCreateEnd':this.$store.state.token,
+                'pageNum':this.$store.state.token,
+                'pageSize':this.$store.state.token,
+             })
+             )
+             .then(function(res){
+
+             })
+             .catch(function(err){
+
+             })
+      }
     }
   }
 </script>
