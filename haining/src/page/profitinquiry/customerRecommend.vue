@@ -66,7 +66,7 @@
     </div>
 	<div class="tbl">
     <el-table
-    :data="tableData"
+    :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
     <el-table-column prop="account" label="注册账号" align="center" width="180"></el-table-column>
@@ -86,13 +86,13 @@
   <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 50, 100]"
-      :page-size="10"
+      :page-size="pageSize"
       layout="total, sizes, prev, pager, next"
       prev-text="<上一页"
       next-text="下一页>"
-      :total="70">
+      :total="tableData.length">
     </el-pagination>
   </div>
 	
@@ -104,17 +104,20 @@
   export default{
     data(){
       return{
-        status: [{
-          value: '1',
-          label: '是'
-        }, {
-          value: '2',
-          label: '否'
-        }, ],
+        currentPage:1,
+        pageSize:100,
+        
         value1:''
       }
     },
+     
     methods:{
+       handleSizeChange(size){
+        this.pageSize = size;
+        },
+        handleCurrentChange(page){
+         this.currentPage= page;
+        },
       getCustomerRecommandVOList(){
           this.$http.post('/user/checkRegetCustomerRecommandVOListExcel',
           this.qs.stringify({

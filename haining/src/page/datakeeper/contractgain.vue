@@ -5,7 +5,7 @@
 		合同收益分配表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
 		<el-button type="primary">保存</el-button>
-		<el-button type="primary">查询</el-button>
+		<el-button type="primary" @click="getContractDitrubuteIncomeList()">查询</el-button>
 		<el-button type="primary">导出表格</el-button>
 		</span>
     </div>
@@ -13,7 +13,7 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="fileNum" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
@@ -21,7 +21,7 @@
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额</el-button><el-select v-model="investMoney" style="width:180px" class="right">
+       <el-button type="info"  class="left">投资金额</el-button><el-select v-model="amountType" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.investMoney"
       :key="item.value"
@@ -53,11 +53,11 @@
   </el-select><!-- <el-input class="right" style="width:180px"></el-input> -->
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">产品收益率</el-button><el-input v-model="productProfit" class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">产品收益率</el-button><el-input v-model="productRate" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">截止日期从</el-button><el-date-picker
-      v-model="startDate"
+      v-model="tradeEndDateBegin"
       type="date"
       class="right"
       style="width:180px"
@@ -66,7 +66,7 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">截止日期到</el-button><el-date-picker
-      v-model="endDate"
+      v-model="tradeEndDateEnd"
       type="date"
       class="right"
       style="width:180px"
@@ -77,7 +77,7 @@
     </div>
 	<div class="tbl">
     <el-table
-    :data="tableData"
+    :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
     <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
@@ -104,9 +104,9 @@
   <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 50, 100]"
-      :page-size="10"
+      :page-size="pageSize"
       layout="total, sizes, prev, pager, next"
       prev-text="<上一页"
       next-text="下一页>"
@@ -122,20 +122,44 @@
   export default{
     data(){
       return{
-        status: [{
-          value: '1',
-          label: '正常'
-        }, {
-          value: '2',
-          label: '结束'
-        }, {
-          value: '3',
-          label: '提前终止'
-        }, {
-          value: '4',
-          label: '未交易'
-        }, ],
+        pageSize:100,
+        currentPage:1,
+        
         value1:''
+      }
+    },
+    methods:{
+      handleSizeChange(size){
+        this.pageSize = size;
+      },
+      handleCurrentChange(page){
+        this.currentPage= page;
+      },
+      getContractDitrubuteIncomeList(){
+        var me = this;
+        this.$http.post('/personDocument/getContractDitrubuteIncomeList',
+              this.qs.stringify({
+                'pageNum':'',
+                'pageSize':'',
+                'documentCode':this.documentCode,
+                'amountType':this.tradePlatform,
+                'tradeStatus':this.tradeStatus,
+                'productType':this.productType,
+                'productRate':this.productRate,
+                'customerName':this.customerName,
+                'tradeEndDateBegin':this.tradeEndDateBegin,
+                'tradeEndDateEnd':this.tradeEndDateEnd,
+              }))
+            .then(function(res){
+                    var info = res['data'];
+                    var code = info['code'];
+                    var message = info['message'];
+                    var data = info['data'];
+                    me.tableData = data['list'];
+            })
+            .catch(function(err){
+
+            })
       }
     }
   }

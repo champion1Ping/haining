@@ -42,7 +42,7 @@
 
         </el-col>
        	<el-col :span="1" v-if="this.$store.state.roleId > 0">
-       	<el-button type="text"><span style="font-size:15px;color:#FF0047">通知</span></el-button>
+       	<el-button type="text" @click="getNotice()"><span style="font-size:15px;color:#FF0047">通知</span></el-button>
        	</el-col>
     </el-row>
   </div>  
@@ -53,7 +53,6 @@
 		data(){
 			return {
 				
-
 				isShow:false
 			}
 		},
@@ -68,6 +67,9 @@
 				}
 				// alert(to);
 				this.$router.push(to);
+			},
+			getNotice(){
+				this.$router.push('/notices');
 			}
 		}
 		

@@ -5,26 +5,26 @@
     <div>档案添加</div>
     <div style="border:1px solid;border-radius:4px;">
                 
-    <el-form :model="form" style="padding:10px">
+    <el-form :model="addDocumentForm" style="padding:10px">
        <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input class="right" style="width:150px"></el-input>
+    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="addDocumentForm.documentCode"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left">客户名称</el-button><el-input class="right" style="width:150px"></el-input>
+        <el-button type="info" class="left">客户名称</el-button><el-input  v-model="addDocumentForm.customerName"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">交易平台</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">交易平台</el-button><el-input v-model="addDocumentForm.tradePlatform"class="right" style="width:150px"></el-input>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left">交易账户号</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">交易账户号</el-button><el-input v-model="addDocumentForm.tradeAccount"class="right" style="width:150px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="6">
-    <el-button type="info"  class="left">是否入金</el-button><el-select v-model="value" style="width:150px" class="right" placeholder="请选择">
+    <el-button type="info"  class="left">是否入金</el-button><el-select v-model="addDocumentForm.wheatherGetMoney" style="width:150px" class="right" placeholder="请选择">
     <el-option
-      v-for="item in options"
+      v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -32,15 +32,15 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left">入金如期</el-button><el-date-picker
-      v-model="value1"
+        <el-button type="info" class="left">入金日期</el-button><el-date-picker
+      v-model="addDocumentForm.getMoneyDate"
       type="date"
       class="right"
       style="width:150px"
       ></el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">证件类型</el-button><el-select v-model="value" style="width:150px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">证件类型</el-button><el-select v-model="addDocumentForm.certificateType" style="width:150px" class="right" placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -50,13 +50,13 @@
   </el-select>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left">证件号码</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">证件号码</el-button><el-input v-model="addDocumentForm.certificateNumber"class="right" style="width:150px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="6">
       <el-button type="info"  class="left">签约日期</el-button><el-date-picker
-      v-model="value1"
+      v-model="contractDate"
       type="date"
       class="right"
       style="width:150px"
@@ -64,7 +64,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">产品类型</el-button><el-select v-model="value" style="width:150px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">产品类型</el-button><el-select v-model="addDocumentForm.productType" style="width:150px" class="right" placeholder="请选择">
     <el-option
       v-for="item in options"
       :key="item.value"
@@ -74,40 +74,40 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">产品收益率</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">产品收益率</el-button><el-input  v-model="addDocumentForm.productRate"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">服务期限</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">服务期限</el-button><el-input v-model="addDocumentForm.serviceDate"class="right" style="width:150px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left">购买份数</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">购买份数</el-button><el-input v-model="addDocumentForm.boughtNum"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额/</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">投资金额/</el-button><el-input v-model="addDocumentForm.investmentAmount" class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">预估收益</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">预估收益</el-button><el-input v-model="addDocumentForm.estimatedEarnings"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">联系方式</el-button><el-input class="right"  style="width:150px"></el-input>
+      <el-button type="info"  class="left">联系方式</el-button><el-input v-model="addDocumentForm.contactPhone"class="right"  style="width:150px"></el-input>
   </el-col>
   </el-row>
 
   <el-row style="margin-top:10px">
     <el-col :span="6">
-      <el-button type="info"  class="left">注册邮箱号</el-button><el-input class="right" style="width:150px"></el-input>
+      <el-button type="info"  class="left">注册邮箱号</el-button><el-input v-model="addDocumentForm.registerEmail" class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">代理商编号</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">代理商编号</el-button><el-input v-model="addDocumentForm.agentCode"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">直推人</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">直推人</el-button><el-input v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:150px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">间推人</el-button><el-input class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">间推人</el-button><el-input v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:150px"></el-input>
   </el-col>
   </el-row>
 
@@ -116,7 +116,7 @@
 
   <div slot="footer" class="dialog-footer">
     <el-button @click="dialogAddFile = false">取 消</el-button>
-    <el-button type="primary" @click="dialogAddFile = false">确 定</el-button>
+    <el-button type="primary" @click="addPersonDocument()">保存</el-button>
   </div>
 </el-dialog>
 <!-- 弹出框结束-->
@@ -126,20 +126,20 @@
 		<el-button type="primary">退出</el-button>
 		<el-button type="primary" @click="addDangAn()">添加</el-button>
 		<el-button type="primary">保存</el-button>
-		<el-button type="primary">查询</el-button>
+		<el-button type="primary" @click="searchRecords">查询</el-button>
 		</span>
     </div>
 
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="fileNum" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">交易平台</el-button><el-input  v-model="dealPlatform"class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">交易平台</el-button><el-input  v-model="tradePlatform"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">是否入金</el-button><el-select v-model="ifIncome" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">是否入金</el-button><el-select v-model="wheatherGetMoney" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -150,7 +150,7 @@
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">产品类型</el-button><el-select v-model="ifIncome" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left">产品类型</el-button><el-select v-model="productType" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.value"
@@ -166,13 +166,13 @@
     <el-button type="info"  class="left">注册邮箱</el-button><el-input  v-model="registerEmail"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">份数</el-button><el-input  v-model="nums"class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">份数</el-button><el-input  v-model="buyNum"class="right" style="width:180px"></el-input>
 
     </el-date-picker>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">签约日期从</el-button><el-date-picker
-      v-model="signStartDate"
+      v-model="contractDateBegin"
       type="date"
       class="right"
       style="width:180px"
@@ -181,7 +181,7 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">签约日期到</el-button><el-date-picker
-      v-model="signEndDate"
+      v-model="contractDateEnd"
       type="date"
       class="right"
       style="width:180px"
@@ -193,7 +193,7 @@
     </div>
 	<div class="tbl">
     <el-table
-    :data="tableData"
+    :data="customerIncomeTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
     <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
@@ -214,13 +214,13 @@
   <el-pagination
       @size-change="handleSizeChange"
       @current-change="handleCurrentChange"
-      :current-page="currentPage4"
+      :current-page="currentPage"
       :page-sizes="[10, 50, 100]"
-      :page-size="10"
+      :page-size="pageSize"
       layout="total, sizes, prev, pager, next"
       prev-text="<上一页"
       next-text="下一页>"
-      :total="70">
+      :total="customerIncomeTable.length">
     </el-pagination>
   </div>
 	
@@ -232,6 +232,9 @@
   export default{
     data(){
       return{
+        customerIncomeTable:[],
+        currentPage:1,
+        pageSize:100,
         dialogAddFile:false,
         fileNum:'',
         dealPlatform:'',
@@ -241,25 +244,130 @@
         nums:'',
         signStartDate:'',
         signEndDate:'',
-        status: [{
-          value: '1',
-          label: '正常'
-        }, {
-          value: '2',
-          label: '结束'
-        }, {
-          value: '3',
-          label: '提前终止'
-        }, {
-          value: '4',
-          label: '未交易'
-        }, ],
-        value1:''
+        value1:'',
+        productType:'',
+        documentCode:'',
+        tradePlatform:'',
+        wheatherGetMoney:'',
+        buyNum:'',
+        contractDateEnd:'',
+        contractDateBegin:'',
+        registerEmail:'',
+        addDocumentForm:{
+          documentCode:'',
+          customerName:'',
+          tradePlatform:'',
+          tradeAccount:'',
+          wheatherGetMoney:'',
+          getMoneyDate:'',
+          certificateType:'',
+          certificateNumber:'',
+          contractDate:'',
+          productType:'',
+          productRate:'',
+          serviceDate:'',
+          investmentAmount:'',
+          contactPhone:'',
+          registerEmail:'',
+          agentCode:'',
+          derectRecomandPersonId:'',
+          inderectRecomandPersonId:'',
+          estimatedEarnings:'',
+          boughtNum:'',
+        }
       }
     },
     methods:{
+      handleSizeChange(size){
+        this.pageSize = size;
+      },
+      handleCurrentChange(page){
+        this.currentPage= page;
+      },
       addDangAn(){
           this.dialogAddFile = true;
+      },
+      getProductTypeList(){
+        this.$http.post('product/getProductVOList',
+              this.qs.stringify({
+                'token':this.$store.state.token
+              }))
+            .then(function(res){
+              var info = res['data'];
+                    var code = info['code'];
+                    if (code == 1) {
+                      me.$message('发布成功');
+                    }
+                  var message = info['message'];
+                  var data = info['data'];
+            })
+            .catch(function(err){
+
+            })
+      },
+      searchRecords(){
+        this.$http.post('/personDocument/getPersonDocumentList',
+              this.qs.stringify({
+                'pageNum':'',
+                'pageSize':'',
+                'documentCode':this.documentCode,
+                'tradePlatform':this.tradePlatform,
+                'wheatherGetMoney':this.wheatherGetMoney,
+                'productType':this.productType,
+                'registerEmail':this.registerEmail,
+                'buyNum':this.buyNum,
+                'contractDateBegin':this.contractDateBegin,
+                'contractDateEnd':this.contractDateEnd,
+              }))
+            .then(function(res){
+              var info = res['data'];
+                    var code = info['code'];
+                    if (code == 1) {
+                      me.$message('发布成功');
+                    }
+                  var message = info['message'];
+                  var data = info['data'];
+            })
+            .catch(function(err){
+
+            })
+      },
+      addPersonDocument(){
+        this.$http.post('/personDocument/addPersonDocument',
+              this.qs.stringify({
+                'documentCode':this.addDocumentForm.documentCode,
+                'customerName':this.addDocumentForm.customerName,
+                'tradePlatform':this.addDocumentForm.tradePlatform,
+                'tradeAccount':this.addDocumentForm.tradeAccount,
+                'wheatherGetMoney':this.addDocumentForm.wheatherGetMoney,
+                'getMoneyDate':this.addDocumentForm.getMoneyDate,
+                'certificateType':this.addDocumentForm.certificateType,
+                'certificateNumber':this.addDocumentForm.certificateNumber,
+                'contractDate':this.addDocumentForm.contractDate,
+                'productType':this.addDocumentForm.productType,
+                'productRate':this.addDocumentForm.productRate,
+                'serviceDate':this.addDocumentForm.serviceDate,
+                'investmentAmount':this.addDocumentForm.investmentAmount,
+                'contactPhone':this.addDocumentForm.contactPhone,
+                'registerEmail':this.addDocumentForm.registerEmail,
+                'agentCode':this.addDocumentForm.agentCode,
+                'derectRecomandPersonId':this.addDocumentForm.derectRecomandPersonId,
+                'inderectRecomandPersonIdk':this.addDocumentForm.inderectRecomandPersonId,
+                'estimatedEarnings':this.addDocumentForm.estimatedEarnings,
+                'boughtNum':this.addDocumentForm.boughtNum
+              }))
+            .then(function(res){
+              var info = res['data'];
+                    var code = info['code'];
+                    if (code == 1) {
+                      me.$message('发布成功');
+                    }
+                  var message = info['message'];
+                  var data = info['data'];
+            })
+            .catch(function(err){
+
+            })
       }
     }
   }

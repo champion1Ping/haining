@@ -54,7 +54,11 @@ const xialakuang = {
     investMoney:[
         {label:'小于100000',value:'0'},
         {label:'大于100000',value:'1'},
-    ]
+    ],
+    sex:[
+        {label:'男',value:'1'},
+        {label:'女',value:'2'},
+    ],
 }
 const usertype={
     usermanager:[

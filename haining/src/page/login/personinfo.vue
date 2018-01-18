@@ -4,60 +4,76 @@
   <el-row>
   <el-col :span="12"><div><h3>基本信息</h3></div></el-col>
   <el-col :span="12" align="right">
-  	<el-button type="primary">保存</el-button>
+  	<el-button type="primary" @click="updateUserBaseInfo()">保存</el-button>
   </el-col>
   </el-row>
   	<el-row :gutter="20">
   	<el-col :span="12">
-  	 <el-form :model="ruleForm" :rules="rules" label-position="left" ref="ruleForm" label-width="120px" class="demo-ruleForm">
+  	 <el-form :model="baseinfo" label-position="left" ref="baseinfo" label-width="120px" class="demo-ruleForm">
   	 	<el-form-item label="注册账号:">
-  	 		<el-input v-model="ruleForm.account" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.account" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="联系方式:">
-  	 		<el-input v-model="ruleForm.phoneNumber" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.phoneNumber" style="width:200px"></el-input>
   	 	</el-form-item> 
   	 	<el-form-item label="是否入金:">
-  	 		<el-select  v-model="ruleForm.nameVerified"  style="width:200px">
-          <el-option label="是" value="1"></el-option>
-          <el-option label="否" value="2"></el-option>
+  	 		<el-select  v-model="baseinfo.ifCharged"  style="width:200px">
+          <el-option
+            v-for="item in this.$store.state.xialakuang.yesorno"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+    </el-option>
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="推荐人资质:">
-  	 		<el-select  v-model="ruleForm.recommend"  style="width:200px">
-          <el-option label="是" value="1"></el-option>
-          <el-option label="否" value="2"></el-option>
+  	 		<el-select  v-model="baseinfo.recommendPersonQualification"  style="width:200px">
+          <el-option
+            v-for="item in this.$store.state.xialakuang.yesorno"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+    </el-option>
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="我的邮箱:">
-  	 		<el-input v-model="ruleForm.name" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.email" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="直接推荐人账号:">
-  	 		<el-input v-model="ruleForm.directRecommendAccount" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.directRecommendationAccount" style="width:200px"></el-input>
   	 	</el-form-item>
   	 </el-form>
   	 </el-col>
   	 <el-col :span="12">
-  	 	<el-form :model="ruleForm" :rules="rules" ref="ruleForm" label-position="left" label-width="120px" class="demo-ruleForm">
+  	 	<el-form :model="baseinfo" ref="baseinfo" label-position="left" label-width="120px" class="demo-ruleForm">
   	 	<el-form-item label="真实姓名: ">
-  	 		<el-input v-model="ruleForm.name" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.realName" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="性别: ">
-  	 		<el-select  v-model="ruleForm.sex"  style="width:200px">
-          <el-option label="男" value="1"></el-option>
-          <el-option label="女" value="2"></el-option>
+  	 		<el-select  v-model="baseinfo.sex"  style="width:200px">
+          <el-option
+            v-for="item in this.$store.state.xialakuang.sex"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+    </el-option>
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="是否实名: ">
-  	 		<el-select  v-model="ruleForm.nameVerified"  style="width:200px">
-          <el-option label="是" value="1"></el-option>
-          <el-option label="否" value="2"></el-option>
+  	 		<el-select  v-model="baseinfo.nameVerified"  style="width:200px">
+          <el-option
+            v-for="item in this.$store.state.xialakuang.yesorno"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+    </el-option>
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="负责代理商编号: ">
-  	 		<el-input v-model="ruleForm.proxyNumber" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.agentCode" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="间接推荐人账号: ">
-  	 		<el-input v-model="ruleForm.indirectRecommendAccount" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.indirectRecommendAccount" style="width:200px"></el-input>
   	 	</el-form-item>
   	 </el-form>
   	 </el-col>
@@ -72,22 +88,22 @@
  	 </el-col>
       </el-row>
       <el-row>
-      	<el-form model="ruleForm" :rules="rules" ref="ruleForm" label-width="120px" label-position="left" class="demo-ruleForm">
+      	<el-form model="realNameVerify" :rules="rules" ref="realNameVerify" label-width="120px" label-position="left" class="demo-ruleForm">
       		<el-form-item label="真实姓名:">
-  	 		<el-input v-model="ruleForm.account" style="width:200px"></el-input>
+  	 		<el-input v-model="realNameVerify.realName" style="width:200px"></el-input>
   	 	</el-form-item>
       <!-- <el-form-item> -->
 
-      <el-form :inline="true" label-width="120px"  >
+      <el-form :inline="true" label-width="120px"  model="realNameVerify">
       <el-form-item label="证件类型:">
-        <el-select  v-model="ruleForm.sex"  style="width:200px">
+        <el-select  v-model="realNameVerify.certificateType"  style="width:200px">
           <el-option label="身份证" value="1"></el-option>
           <el-option label="护照" value="2"></el-option>
         </el-select>
 
       </el-form-item>
        <el-form-item label="证件号码:">
-        <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+        <el-input v-model="realNameVerify.certificateNumber" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
         <!-- </el-form-item> -->
@@ -102,7 +118,7 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <img v-if="credentialsFront" :src="credentialsFront" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         </el-col>
@@ -114,7 +130,7 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <img v-if="credentialsBack" :src="credentialsBack" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         </el-col>
@@ -126,7 +142,7 @@
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
-          <img v-if="imageUrl" :src="imageUrl" class="avatar">
+          <img v-if="liveAddressCredential" :src="liveAddressCredential" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
         </el-upload>
         </el-col>
@@ -141,19 +157,19 @@
       <el-form label-position="left">
         <el-form :inline="true" label-width="120px"  >
       <el-form-item label="我的会员星级:">
-       <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+       <el-input v-model="vipStarLevel" style="width:200px"></el-input>
       </el-form-item>
        <el-form-item label="我的入金金额:">
-        <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+        <el-input v-model="chargedMoney" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
 
         <el-form :inline="true" label-width="120px"  >
       <el-form-item label="我的直推奖利率:">
-       <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+       <el-input v-model="directRecommendRate" style="width:200px"></el-input>
       </el-form-item>
-       <el-form-item label="我的间推将利率:">
-        <el-input v-model="ruleForm.account" style="width:200px"></el-input>
+       <el-form-item label="我的间推奖利率:">
+        <el-input v-model="indirectRecommendRate" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
       </el-form>
@@ -171,62 +187,72 @@
   export default {
     data() {
       return {
-        period: [
-          {required: true, message: '请选择重复周期', trigger: 'change'}
-        ],
-        starDate: [
-          {type: 'date', required: true, message: '请选择开始日期', trigger: 'change'}
-        ],
-        endDate: [
-          {type: 'date', required: true, message: '请选择结束日期', trigger: 'change'}
-        ],
-        pickerOptionsStart: {
-          disabledDate (time) {
-            return time.getTime() < 1488297600000 || time.getTime() >= Date.now();
-          }
+        credentialsFront:'',
+        credentialsBack:'',
+        liveAddressCredential:'',
+        vipStarLevel:'',
+        chargedMoney:'',
+        directRecommendRate:'',
+        indirectRecommendRate:'',
+        baseinfo:{
+            account:'',
+            phoneNumber:'',
+            ifCharged:'',
+            recommendPersonQualification:'',
+            email:'',
+            directRecommendationAccount:'',
+            realName:'',
+            sex:'',
+            nameVerified:'',
+            agentCode:'',
+            indirectRecommendationAccount:''
+
         },
-        pickerOptionsOver: {
-          disabledDate (time) {
-            return time.getTime() < 1488297600000 || time.getTime() >= Date.now();
-          }
+        realNameVerify:{
+           realName:'',
+           certificateNumber:'',
+           certificateType:''
         },
-        forbidden: true,
-        redStar: false,
-        ruleForm: {
-          name: '',
-          type: '',
-          way: [],
-          date: '',
-          period: '',
-          starDate: '',
-          endDate: '',
-          delivery: false,
-          other: '',
-        },
-        rules: {
-          name: [
-            {required: true, message: '请输入待办事项名称', trigger: 'blur'},
-            {min: 3, max: 20, message: '长度在 3 到 20 个字符', trigger: 'blur'}
-          ],
-          type: [
-            {required: true, message: '请选择待办事项类型', trigger: 'change'}
-          ],
-          way: [
-            {type: 'array', required: true, message: '请至少选择一个提醒方式', trigger: 'change'}
-          ],
-          date: [
-            {type: 'date', required: true, message: '请选择提醒时间', trigger: 'change'}
-          ],
-          period: [],
-          starDate: [],
-          endDate: [],
-          other: [
-            {required: true, message: '请填写其他信息', trigger: 'blur'}
-          ]
-        }
+       
+        
       };
     },
+    created:function(){
+      var me = this;
+      this.$http.post('/user/getUserBaseInfo',
+             this.qs.stringify({
+                'token':this.$store.state.token
+             })
+             )
+             .then(function(res){
+                var info = res['data'];
+                var code = info['code'];
+                var message = info['message'];
+                var data = info['data'];
+                alert(JSON.stringify(data));
+                me.baseinfo.account = data['account'];
+                me.baseinfo.realName = data['realName'];
+                me.realNameVerify.realName = data['realName'];
+                me.baseinfo.phoneNumber = data['contactPhone'];
+                me.baseinfo.recommendPersonQualification=(data['refereeQualification']==1?'是':'否');
+                me.baseinfo.ifCharged = (data['wheatherGetMoney']==1?'是':'否');
+                me.baseinfo.sex= (data['sex']==1?'男':'女');
+                me.baseinfo.email = data['email'];
+                me.baseinfo.nameVerified =(data['wheatherRealName']==1?'是':'否');
+                me.baseinfo.directRecommendationAccount=data['directRecommendationAccount'];
+                me.baseinfo.agentCode = data['agentCode'];
+                me.baseinfo.indirectRecommendAccount=data['indirectRecommendationAccount'];
+                me.realNameVerify.certificateType = data['certificateType'];
+                me.realNameVerify.certificateNumber=data['certificateNumber'];
+             })
+             .catch(function(err){
+
+             })
+    },
     methods: {
+      handleAvatarSuccess(){
+
+      },
       getDate (strDate) {
         let st = strDate;
         let a = st.split(" ");
@@ -234,36 +260,27 @@
         let date = new Date(b[0], b[1] - 1, b[2]);
         return date;
       },
-      getUserBaseInfo(){
-          this.$http.post('/user/getUserBaseInfo',
-             this.qs.stringify({
-                'token':this.$store.state.token
-             })
-             )
-             .then(function(res){
-
-             })
-             .catch(function(err){
-
-             })
-      },
+      
       updateUserBaseInfo(){
+        alert(this.baseinfo.realName+","+this.baseinfo.phoneNumber+","+this.baseinfo.email);
           this.$http.post('/user/getUserBaseInfo',
              this.qs.stringify({
-                'account':this.$store.state.token,
-                'realName':this.$store.state.token,
-                'sex':this.$store.state.token,
-                'contactPhone':this.$store.state.token,
-                'whetherRealName':this.$store.state.token,
-                'wheatherGetMoney':this.$store.state.token,
-                'refereeQualification':this.$store.state.token,
-                'directRecommendationAccount':this.$store.state.token,
-                'agentCode':this.$store.state.token,
-                'indirectRecommendationAccount':this.$store.state.token,
+                'token':this.$store.state.token,
+                'account':this.baseinfo.account,
+                'realName':this.baseinfo.realName,
+                'sex':this.baseinfo.sex,
+                'email':this.baseinfo.email,
+                'contactPhone':this.baseinfo.phoneNumber,
+                'whetherRealName':this.baseinfo.nameVerified,
+                'wheatherGetMoney':this.baseinfo.ifCharged,
+                'refereeQualification':this.baseinfo.recommendPersonQualification,
+                'directRecommendationAccount':this.baseinfo.directRecommendationAccount,
+                'agentCode':this.baseinfo.agentCode,
+                'indirectRecommendationAccount':this.baseinfo.indirectRecommendationAccount
              })
              )
              .then(function(res){
-
+                alert(JSON.stringify(res));
              })
              .catch(function(err){
 

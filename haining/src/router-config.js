@@ -29,6 +29,7 @@ import agencyprofit from './page/profitinquiry/agencyprofit.vue'
 import customerRecommend from './page/profitinquiry/customerRecommend.vue'
 import resetpw from './page/login/resetpassword.vue'
 import updatepw from './page/login/updatepassword.vue'
+import notices from './page/login/notices.vue'
 // import test from '/page/login/test.vue'
 export default [
       {path:'/login',component:login},
@@ -44,8 +45,8 @@ export default [
       {path:'/customer', component:customerIncomeRegister},
       {path:'/customergain',component:customerGain},
       {path:'/agencyprofit',component:agencyprofit},
-      {path:'/customerRecommend',component:customerRecommend}
-
+      {path:'/customerRecommend',component:customerRecommend},
+      {path:'/notices',component:notices}
       
   // {
   //   path: '/activeManage',component:totalpages,

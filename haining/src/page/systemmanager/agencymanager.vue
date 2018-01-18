@@ -27,7 +27,7 @@
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left">省份</el-button><el-select v-model="addAgencyForm.province"  @change="getMaxProvinceIndex"style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left">省份</el-button><el-select v-model="addAgencyForm.province"  @change="getMaxProvinceIndex()"style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.shengfen"
       :key="item.value"
@@ -245,19 +245,6 @@
         },
         
         value:'',
-        status: [{
-          value: '1',
-          label: '正常'
-        }, {
-          value: '2',
-          label: '结束'
-        }, {
-          value: '3',
-          label: '提前终止'
-        }, {
-          value: '4',
-          label: '未交易'
-        }, ],
         value1:''
       }
     },
@@ -272,14 +259,14 @@
           //
           this.dialogAddAgency = true;
       },
-      getMaxProvinceIndex(provinceId){
-        var me = this;
+      getMaxProvinceIndex(){
          this.$http.post('/agent/getMaxProvinceIndex',
          this.qs.stringify({
-            'provinceId':provinceId
+            'provinceId':this.addAgencyForm.province
          })
          )
          .then(function(res){
+            alert(JSON.stringify(res));
             var info = res['data'];
             var code = info['code'];
             var message = info['message'];
