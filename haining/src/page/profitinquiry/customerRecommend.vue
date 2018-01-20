@@ -4,25 +4,25 @@
 		<span style="color:#C9A44E;font-size:20px">
 		客户推荐表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
-		<el-button type="primary">查询</el-button>
-		<el-button type="primary">导出表格</el-button>
+		<el-button type="primary" @click="recommendCustomerQuery()">查询</el-button>
+		<el-button type="primary" >导出表格</el-button>
 		</span>
     </div>
 
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">注册账号</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">注册账号</el-button><el-input v-model="account" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">真实姓名&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">真实姓名&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="realName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="value" style="width:180px" class="right">
+       <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="wheatherGetMoney" style="width:180px" class="right">
     <el-option
-      v-for="item in status"
+      v-for="item in this.$store.state.yesorno"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -31,21 +31,21 @@
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">推荐人资质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">推荐人资质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="refereeQualification" class="right" style="width:180px"></el-input>
     </el-input>
   </el-col> 
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">直推人账号 </el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">直推人账号 </el-button><el-input v-model="directRecommendationAccount"vclass="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">间推人账号</el-button><el-input class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">间推人账号</el-button><el-input class="right" v-model="indirectRecommendationAccount" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">注册日期从</el-button><el-date-picker
-      v-model="value1"
+      v-model="gmtCreateStart"
       type="date"
       class="right"
       style="width:180px"
@@ -54,7 +54,7 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">注册日期到</el-button><el-date-picker
-      v-model="value1"
+      v-model="gmtCreateEnd"
       type="date"
       class="right"
       style="width:180px"
@@ -107,8 +107,15 @@
         currentPage:1,
         pageSize:100,
         tableData:[],
+        account:'',
+        realName:'',
+        wheatherGetMoney:'',
+        refereeQualification:'',
+        directRecommendationAccount:'',
+        indirectRecommendationAccount:'',
+        gmtCreateStart:'',
+        gmtCreateEnd:'',
         
-        value1:''
       }
     },
      
@@ -119,45 +126,34 @@
         handleCurrentChange(page){
          this.currentPage= page;
         },
-      getCustomerRecommandVOList(){
-          this.$http.post('/user/checkRegetCustomerRecommandVOListExcel',
+      recommendCustomerQuery(){
+          let me = this;
+          this.$http.post('/user/getCustomerRecommandVOList',
           this.qs.stringify({
-                'account':this.$store.state.token,
-                'realName':this.$store.state.token,
-                'whetherGetMoney':this.$store.state.token,
-                'refereeQualification':this.$store.state.token,
-                'directRecommendationAccount':this.$store.state.token,
-                'indirectRecommendationAccount':this.$store.state.token,
-                'gmtCreateBegin':this.$store.state.token,
-                'gmtCreateEnd':this.$store.state.token,
-                'pageNum':this.$store.state.token,
-                'pageSize':this.$store.state.token,
+                'token':this.$store.state.token,
+                'account':this.account,
+                'realName':this.realName,
+                'whetherGetMoney':this.wheatherGetMoney,
+                'refereeQualification':this.refereeQualification,
+                'directRecommendationAccount':this.directRecommendationAccount,
+                'indirectRecommendationAccount':this.indirectRecommendationAccount,
+                'gmtCreateBegin':this.gmtCreateStart,
+                'gmtCreateEnd':this.gmtCreateEnd,
+                'pageNum':this.currentPage,
+                'pageSize':this.pageSize,
              })
              )
              .then(function(res){
-
-             })
-             .catch(function(err){
-
-             })
-      },
-      getCustomerRecommandVOListExcel(){
-          this.$http.post('/user/checkRegetCustomerRecommandVOListExcel',
-          this.qs.stringify({
-                'account':this.$store.state.token,
-                'realName':this.$store.state.token,
-                'whetherGetMoney':this.$store.state.token,
-                'refereeQualification':this.$store.state.token,
-                'directRecommendationAccount':this.$store.state.token,
-                'indirectRecommendationAccount':this.$store.state.token,
-                'gmtCreateBegin':this.$store.state.token,
-                'gmtCreateEnd':this.$store.state.token,
-                'pageNum':this.$store.state.token,
-                'pageSize':this.$store.state.token,
-             })
-             )
-             .then(function(res){
-
+              alert(JSON.stringify(res));
+              var info = res['data'];
+              var code = info['code'];
+              if (code == 1) {
+                var data = info['data'];
+                me.tableData = data['list'];
+              } else {
+                var message = info['message'];
+                me.$message(message);
+              }
              })
              .catch(function(err){
 

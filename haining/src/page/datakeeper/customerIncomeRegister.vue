@@ -67,7 +67,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">产品类型</el-button><el-select v-model="addDocumentForm.productType" style="width:177px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">产品类型</el-button><el-select @change="productChanged()"v-model="addDocumentForm.productType" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -77,10 +77,10 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">产品收益率</el-button><el-input  v-model="addDocumentForm.productRate"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left">产品收益率</el-button><el-input disabled v-model="addDocumentForm.productRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">服务期限</el-button><el-input v-model="addDocumentForm.serviceDate"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left">服务期限</el-button><el-input  disabled v-model="addDocumentForm.serviceDate"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
@@ -89,7 +89,7 @@
        <el-button type="info"  class="left">投资金额/</el-button><el-input v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">预估收益</el-button><el-input v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left">预估收益</el-button><el-input disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">联系方式</el-button><el-input v-model="addDocumentForm.contactPhone"class="right"  style="width:177px"></el-input>
@@ -307,6 +307,11 @@
       handleCurrentChange(page){
         this.currentPage= page;
       },
+      productChanged(){
+         let index = this.addDocumentForm.productType;
+         this.addDocumentForm.serviceDate = this.productTypes[index-1]['serviceTime'];
+         this.addDocumentForm.productRate = this.productTypes[index-1]['monthRate'];
+      },
       addDangAn(){
           this.dialogAddFile = true;
           let me = this;
@@ -347,8 +352,10 @@
             })
       },
       searchRecords(){
+        let me = this;
         this.$http.post('/personDocument/getPersonDocumentList',
               this.qs.stringify({
+                'token':this.$store.state.token,
                 'pageNum':'',
                 'pageSize':'',
                 'documentCode':this.documentCode,
@@ -362,12 +369,14 @@
               }))
             .then(function(res){
               var info = res['data'];
+              // alert(JSON.stringify(res));
                     var code = info['code'];
                     if (code == 1) {
-                      me.$message('发布成功');
+                      var data = info['data'];
+                      me.customerIncomeTable = data['list'];
                     }
-                  var message = info['message'];
-                  var data = info['data'];
+                  
+                  
             })
             .catch(function(err){
 
@@ -379,6 +388,7 @@
       addPersonDocument(){
         this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
+                'token':this.$store.state.token,
                 'documentCode':this.addDocumentForm.documentCode,
                 'customerName':this.addDocumentForm.customerName,
                 'tradePlatform':this.addDocumentForm.tradePlatform,

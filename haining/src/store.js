@@ -52,8 +52,8 @@ const xialakuang = {
     ],
     //投资金额
     investMoney:[
-        {label:'小于100000',value:'0'},
-        {label:'大于100000',value:'1'},
+        {label:'小于100000',value:'1'},
+        {label:'大于100000',value:'2'},
     ],
     sex:[
         {label:'男',value:1},

@@ -5,7 +5,7 @@
 		合同收益分配表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
 		<el-button type="primary" @click="getContractDitrubuteIncomeList()">查询</el-button>
-		<el-button type="primary">导出表格</el-button>
+		<el-button type="primary" @click="exportToExcel()">导出表格</el-button>
 		</span>
     </div>
 
@@ -146,10 +146,11 @@
         var me = this;
         this.$http.post('/personDocument/getContractDitrubuteIncomeList',
               this.qs.stringify({
+                'token':this.$store.state.token,
                 'pageNum':'',
                 'pageSize':'',
                 'documentCode':this.documentCode,
-                'amountType':this.tradePlatform,
+                'amountType':this.amountType,
                 'tradeStatus':this.tradeStatus,
                 'productType':this.productType,
                 'productRate':this.productRate,
@@ -158,11 +159,12 @@
                 'tradeEndDateEnd':this.tradeEndDateEnd,
               }))
             .then(function(res){
+                    // alert(JSON.stringify(res));
                     var info = res['data'];
                     var code = info['code'];
                     var message = info['message'];
                     var data = info['data'];
-                    me.tableData = data['list'];
+                    me.tableData = data['page']['list'];
             })
             .catch(function(err){
 

@@ -4,7 +4,7 @@
     <span style="color:#C9A44E;font-size:20px">
     客户收益表&nbsp;&nbsp;&nbsp;
     <el-button type="primary">退出</el-button>
-    <el-button type="primary">查询</el-button>
+    <el-button type="primary" @click="customerProfitQuery()">查询</el-button>
     </span>
     </div>
 
@@ -132,6 +132,26 @@
       handleCurrentChange(page){
         this.currentPage= page;
       },
+      customerProfitQuery(){
+        let me = this;
+        this.$http.post('/personDocument/getContractDitrubuteIncomeList',
+              this.qs.stringify({
+                'token':this.$store.state.token,
+                'pageNum':'',
+                'pageSize':'',
+
+              }))
+            .then(function(res){
+              alert(JSON.stringify(res));
+              var info = res['data'];
+              var code = info['code'];
+              var data = info['data'];
+              me.tableData = data['page']['list'];
+            })
+            .catch(function(err){
+
+            })
+      }
     }
   }
 </script>
