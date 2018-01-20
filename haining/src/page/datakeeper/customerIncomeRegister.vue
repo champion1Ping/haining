@@ -1,28 +1,28 @@
 <template>
 	<div class="customerregister">
   <!-- 弹出框开始 -->
-  <el-dialog title="档案添加" :visible.sync="dialogAddFile" width="90%">
+  <el-dialog title="档案添加" :visible.sync="dialogAddFile" width="95%">
     <div>档案添加</div>
     <div style="border:1px solid;border-radius:4px;">
                 
-    <el-form :model="addDocumentForm" style="padding:10px">
+    <el-form :model="addDocumentForm" style="padding:5px">
        <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="addDocumentForm.documentCode"class="right" style="width:150px"></el-input>
+    <el-button type="info"  class="left">档案编号</el-button><el-input disabled v-model="addDocumentForm.documentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left">客户名称</el-button><el-input  v-model="addDocumentForm.customerName"class="right" style="width:150px"></el-input>
+        <el-button type="info" class="left">客户名称</el-button><el-input disabled v-model="addDocumentForm.customerName"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">交易平台</el-button><el-input v-model="addDocumentForm.tradePlatform"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">交易平台</el-button><el-input v-model="addDocumentForm.tradePlatform"class="right" style="width:177px"></el-input>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left">交易账户号</el-button><el-input v-model="addDocumentForm.tradeAccount"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">交易账户号</el-button><el-input v-model="addDocumentForm.tradeAccount"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="6">
-    <el-button type="info"  class="left">是否入金</el-button><el-select v-model="addDocumentForm.wheatherGetMoney" style="width:150px" class="right" placeholder="请选择">
+    <el-button type="info"  class="left">是否入金</el-button><el-select v-model="addDocumentForm.wheatherGetMoney" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -33,16 +33,18 @@
   </el-col>
   <el-col :span="6">
         <el-button type="info" class="left">入金日期</el-button><el-date-picker
+       @change="generateDocumentCode()" 
       v-model="addDocumentForm.getMoneyDate"
       type="date"
       class="right"
-      style="width:150px"
+      value-format="yyyy-MM-dd"
+      style="width:177px"
       ></el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">证件类型</el-button><el-select v-model="addDocumentForm.certificateType" style="width:150px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">证件类型</el-button><el-select v-model="addDocumentForm.certificateType" style="width:177px" class="right" placeholder="请选择">
     <el-option
-      v-for="item in options"
+      v-for="item in this.$store.state.xialakuang.certificateType"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -50,64 +52,63 @@
   </el-select>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left">证件号码</el-button><el-input v-model="addDocumentForm.certificateNumber"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">证件号码</el-button><el-input v-model="addDocumentForm.certificateNumber"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="6">
       <el-button type="info"  class="left">签约日期</el-button><el-date-picker
-      v-model="contractDate"
+      v-model="addDocumentForm.contractDate"
       type="date"
+      value-format="yyyyMMdd"
       class="right"
-      style="width:150px"
+      style="width:177px"
       >
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">产品类型</el-button><el-select v-model="addDocumentForm.productType" style="width:150px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left">产品类型</el-button><el-select v-model="addDocumentForm.productType" style="width:177px" class="right" placeholder="请选择">
     <el-option
-      v-for="item in options"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
+      v-for="item in productTypes"
+      :key="item.id"
+      :label="item.productTypeName"
+      :value="item.id">
     </el-option>
   </el-select>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">产品收益率</el-button><el-input  v-model="addDocumentForm.productRate"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">产品收益率</el-button><el-input  v-model="addDocumentForm.productRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">服务期限</el-button><el-input v-model="addDocumentForm.serviceDate"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">服务期限</el-button><el-input v-model="addDocumentForm.serviceDate"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left">购买份数</el-button><el-input v-model="addDocumentForm.boughtNum"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">投资金额/</el-button><el-input v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额/</el-button><el-input v-model="addDocumentForm.investmentAmount" class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">预估收益</el-button><el-input v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">预估收益</el-button><el-input v-model="addDocumentForm.estimatedEarnings"class="right" style="width:150px"></el-input>
+      <el-button type="info"  class="left">联系方式</el-button><el-input v-model="addDocumentForm.contactPhone"class="right"  style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">联系方式</el-button><el-input v-model="addDocumentForm.contactPhone"class="right"  style="width:150px"></el-input>
+      <el-button type="info"  class="left">注册邮箱号</el-button><el-input v-model="addDocumentForm.registerEmail" class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
   <el-row style="margin-top:10px">
-    <el-col :span="6">
-      <el-button type="info"  class="left">注册邮箱号</el-button><el-input v-model="addDocumentForm.registerEmail" class="right" style="width:150px"></el-input>
+    
+  <el-col :span="6">
+       <el-button type="info"  class="left">代理商编号</el-button><el-input disabled v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">代理商编号</el-button><el-input v-model="addDocumentForm.agentCode"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">直推人</el-button><el-input disabled v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">直推人</el-button><el-input v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:150px"></el-input>
-  </el-col>
-  <el-col :span="6">
-       <el-button type="info"  class="left">间推人</el-button><el-input v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:150px"></el-input>
+       <el-button type="info"  class="left">间推人</el-button><el-input disabled v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
@@ -125,7 +126,6 @@
 		客户入金登记表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
 		<el-button type="primary" @click="addDangAn()">添加</el-button>
-		<el-button type="primary">保存</el-button>
 		<el-button type="primary" @click="searchRecords">查询</el-button>
 		</span>
     </div>
@@ -153,9 +153,9 @@
         <el-button type="info"  class="left">产品类型</el-button><el-select v-model="productType" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
+      :key="item.id"
+      :label="item.productTypeName"
+      :value="item.id">
     </el-option>
   </el-select>
 
@@ -233,6 +233,7 @@
     data(){
       return{
         customerIncomeTable:[],
+        productTypes:[],
         currentPage:1,
         pageSize:100,
         dialogAddFile:false,
@@ -277,6 +278,28 @@
         }
       }
     },
+    created:function(){
+      let me = this;
+      this.$http.post('/product/getProductVOList',
+              this.qs.stringify({
+                'token':this.$store.state.token
+              }))
+            .then(function(res){
+                  var info = res['data'];
+                  var code = info['code'];
+                  var message = info['message'];
+                  var data = info['data'];
+                  me.productTypes = data;
+
+            })
+            .catch(function(err){
+
+            });
+        this.addDocumentForm.agentCode = this.$store.state.agentCode;
+        this.addDocumentForm.inderectRecomandPersonId = this.$store.state.inderectRecomandPersonId;
+        this.addDocumentForm.derectRecomandPersonId = this.$store.state.derectRecomandPersonId;
+        this.addDocumentForm.customerName = this.$store.state.realName;
+    },
     methods:{
       handleSizeChange(size){
         this.pageSize = size;
@@ -286,6 +309,24 @@
       },
       addDangAn(){
           this.dialogAddFile = true;
+          let me = this;
+            this.$http.post('/personDocument/getNextDocumentIndex',
+              this.qs.stringify({
+                'token':this.$store.state.token
+              }))
+            .then(function(res){
+                  var info = res['data'];
+                  var code = info['code'];
+                  var message = info['message'];
+                  var data = info['data'];
+                  this.$store.commit('saveDocumentCode',data);
+                 
+            })
+            .catch(function(err){
+
+            });
+
+
       },
       getProductTypeList(){
         this.$http.post('product/getProductVOList',
@@ -332,8 +373,11 @@
 
             })
       },
+      generateDocumentCode(){
+          this.addDocumentForm.documentCode = this.$store.state.agentCode+this.$store.state.nextDocumentNum;
+      },
       addPersonDocument(){
-        this.$http.post('/personDocument/addPersonDocument',
+        this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
                 'documentCode':this.addDocumentForm.documentCode,
                 'customerName':this.addDocumentForm.customerName,
@@ -344,7 +388,7 @@
                 'certificateType':this.addDocumentForm.certificateType,
                 'certificateNumber':this.addDocumentForm.certificateNumber,
                 'contractDate':this.addDocumentForm.contractDate,
-                'productType':this.addDocumentForm.productType,
+                'productTypeName':this.addDocumentForm.productType,
                 'productRate':this.addDocumentForm.productRate,
                 'serviceDate':this.addDocumentForm.serviceDate,
                 'investmentAmount':this.addDocumentForm.investmentAmount,
@@ -352,11 +396,13 @@
                 'registerEmail':this.addDocumentForm.registerEmail,
                 'agentCode':this.addDocumentForm.agentCode,
                 'derectRecomandPersonId':this.addDocumentForm.derectRecomandPersonId,
-                'inderectRecomandPersonIdk':this.addDocumentForm.inderectRecomandPersonId,
+                'inderectRecomandPersonId':this.addDocumentForm.inderectRecomandPersonId,
                 'estimatedEarnings':this.addDocumentForm.estimatedEarnings,
-                'boughtNum':this.addDocumentForm.boughtNum
+                'productId':this.addDocumentForm.productType,
+                'maxIndex':this.$store.state.nextDocumentNum
               }))
             .then(function(res){
+              alert(JSON.stringify(res));
               var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {

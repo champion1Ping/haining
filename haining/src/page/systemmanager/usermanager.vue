@@ -94,10 +94,10 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-row style="margin-top:10px;padding:10px;">
     <el-col :span="8">
-      <el-button type="info"  class="left">新密码</el-button><el-input v-model="addUserForm.pass"  class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">新密码</el-button><el-input v-model="addUserForm.pass"  type="password"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-    <el-button type="info"  class="left">确认密码</el-button><el-input v-model="addUserForm.checkpass" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">确认密码</el-button><el-input v-model="addUserForm.checkpass" type="password" class="right" style="width:180px"></el-input>
   </el-col> 
   </el-row>
     </div>

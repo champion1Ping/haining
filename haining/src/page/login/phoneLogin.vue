@@ -7,11 +7,11 @@
   </el-form-item>
   <el-form-item label="手机验证码" prop="verifyCode">
     <el-input  v-model="verifyCodeLogin.verifyCode" style="width:280px" placeholder="请输入手机验证码">
-    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
+    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
     </el-input>
   </el-form-item>
   <el-form-item label="">
-    <el-button type="text" @click.native="secretLogin"><u>密码登录</u></el-button>
+    <el-button type="text" @click.native="secretLogin"><u>密码登录</u></el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
     <el-button type="text" @click.native="forgetPW"><u>我要注册</u></el-button>
   </el-form-item>
   <el-form-item>
@@ -54,13 +54,22 @@ import {isvalidPhone} from '../common/utils.js'
     methods:{
         gainVerifyCode(){
         let mobilePhone = this.verifyCodeLogin.phoneNumber;
+        if(mobilePhone == "") {
+           this.$message("请先输入手机号");
+           return;
+        } else {
+          if(!isvalidPhone(mobilePhone)) {
+              this.$message("请输入正确的11位手机号码");
+              return;
+          }
+        }
         let me = this;  
         me.isDisabled = true;  
          let interval = window.setInterval(function() {  
-               me.buttonName = '（' + me.time + '秒）后重新发送';  
+               me.buttonName = '剩余' + me.time + '秒';  
                --me.time;  
               if(me.time < 0) {  
-                me.buttonName = "重新发送";  
+                me.buttonName = "获取验证码";  
                 me.time = 120;  
                 me.isDisabled = false;  
                 window.clearInterval(interval);  
@@ -68,10 +77,14 @@ import {isvalidPhone} from '../common/utils.js'
              }, 1000);  
         this.$http.post('/account/sendMsg', qs.stringify({ 'phone': mobilePhone,'type':1}))
         .then(function(res){
-            alert(JSON.stringify(res));
             var info = res['data'];
             var code = info['code'];
             var message = info['message'];
+            if (code == 1){
+              me.$message("发送成功，请查收");
+            } else {
+              me.$message(message);
+            }
              
         })
         .catch(function(err){
@@ -79,6 +92,7 @@ import {isvalidPhone} from '../common/utils.js'
         })
       },
         submitForm(formName) {
+          let me = this;
           this.$refs[formName].validate(valid=>{
             if(valid){
                 this.$http.post('/account/login',
@@ -88,8 +102,16 @@ import {isvalidPhone} from '../common/utils.js'
                     'loginType':'1'
                     }))
                 .then(function(res){
-                  alert(JSON.stringify(res));
-                  this.$refs[formName].resetFields();//重置字段
+                    var info = res['data'];
+                    var code = info['code'];
+                    if (code == 1) {
+                       this.$router.push('/notices');
+                    } else {
+                      let message = info['message'];
+                      me.$message(message);
+                    }
+                  
+                 
                 })
                 .catch(function(err){
 

@@ -179,6 +179,7 @@
 	<div class="tbl1">
     <el-table
     :data="agentData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+    :header-row-class-name="headerRowClassName"
     border
     style="width:100%;height:30%" header-align="center">
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
@@ -249,6 +250,10 @@
       }
     },
     methods:{
+      headerRowClassName({row, rowIndex}){
+          return 'header-row';
+      },
+
       handleSizeChange(size){
         this.pageSize = size;
       },
@@ -260,18 +265,17 @@
           this.dialogAddAgency = true;
       },
       getMaxProvinceIndex(){
-         this.$http.post('/agent/getMaxProvinceIndex',
+         let me = this;
+         this.$http.post('/agent/getNextAgentCodeByProvinceId',
          this.qs.stringify({
             'provinceId':this.addAgencyForm.province
          })
          )
          .then(function(res){
-            alert(JSON.stringify(res));
             var info = res['data'];
             var code = info['code'];
             var message = info['message'];
             var data = info['data'];
-            alert(data);
             me.addAgencyForm.agencyCode = data;
          })
          .catch(function(err){
@@ -299,7 +303,6 @@
           var code = info['code'];
           var message = info['message'];
           var data = info['data'];
-          alert(JSON.stringify(data['list']));
           t.agentData = data['list'];
 
          })
@@ -352,6 +355,9 @@
 </script>
 
 <style>
+  .el-table .header-row {
+    background-color:#f0f8eb;
+  }
   
   .btn{
     /*margin-top: 1px;*/

@@ -39,8 +39,8 @@ const xialakuang = {
           { label:'新疆',value:'31'},
     ],
     yesorno:[
-      {label:'是',value:'1'},
-      {label:'否',value:'0'}
+      {label:'是',value:1},
+      {label:'否',value:0}
     ],
     //交易状态
     dealStatus:[
@@ -56,9 +56,16 @@ const xialakuang = {
         {label:'大于100000',value:'1'},
     ],
     sex:[
-        {label:'男',value:'1'},
-        {label:'女',value:'2'},
+        {label:'男',value:1},
+        {label:'女',value:2},
     ],
+    certificateType:[
+        {label:'身份证',value:'1'},
+        {label:'护照',value:'2'},
+        {label:'港澳通行证',value:'3'},
+        {label:'其他',value:'4'},
+
+    ]
 }
 const usertype={
     usermanager:[
@@ -66,10 +73,10 @@ const usertype={
       {label:'代理商',value:'1'}
     ],
     notice:[
-       {label:'全部', value:'4'},
-       {label:'管理员',value:'3'},
-       {label:'代理商',value:'1'},
-       {label:'客户',value:'2'}
+       {label:'全部', value:4},
+       {label:'管理员',value:3},
+       {label:'代理商',value:1},
+       {label:'客户',value:2}
     ]
 }
 /* 活动管理测试数据 */
@@ -83,8 +90,13 @@ const usertype={
 const state = {
     xialakuang:xialakuang,
     userid:'11',
-    roleId:1,
+    roleId:0,
     token:'',
+    agentCode:'',
+    realName:'',
+    nextDocumentNum:'',
+    directRecommendationAccount:'',
+    indirectRecommendationAccount:'',
     usertype:usertype,
     
 }
@@ -94,6 +106,21 @@ const mutations = {
     },
     saveToken(state,token){
         state.token = token;
+    },
+    saveAgentCode(state,agentCode){
+      state.agentCode = agentCode;
+    },
+    saveDirect(state, directRecommendationAccount){
+      state.directRecommendationAccount = directRecommendationAccount;
+    },
+    saveInDirect(state,indirectRecommendationAccount){
+      state.indirectRecommendationAccount = indirectRecommendationAccount;
+    },
+    saveRealName(state, realName){
+      state.realName = realName;
+    },
+    saveNextDocumentCode(state,documentCode){
+      state.documentCode = documentCode;
     }
 }
 

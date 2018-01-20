@@ -111,6 +111,7 @@
       return{
         pageSize:100,
         currentPage:1,
+        tableData:[],
         value1:''
       }
     },

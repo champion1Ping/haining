@@ -2,20 +2,21 @@
    <div class="login">
    <el-row>
   <el-col :span="11">
+
    <span style="color:#C9A44E;font-size:20px;padding">密码登录</span>
     <el-form :label-position="labelPosition" label-width="80px" :model="secretLogin" ref="secretLogin" style="margin-top:20px">
   <el-form-item label="手机号码" style="padding:0 0 2" prop="phoneNumber">
-    <el-input v-model="secretLogin.phoneNumber" placeholder="请输入手机号码" style="width:240px"></el-input>
+    <el-input v-model="secretLogin.phoneNumber" placeholder="请输入手机号码" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="密码" required>
-    <el-input v-model="secretLogin.password" type="password" placeholder="请输入密码" style="width:240px"></el-input>
+    <el-input v-model="secretLogin.password" type="password" placeholder="请输入密码" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="">
-    <el-button type="text" @click.native="phoneLogin"><u>手机号码验证</u></el-button>
-    <el-button type="text" @click.native="forgetPW" ><u>忘记密码</u></el-button>
+    <el-button type="text" @click.native="phoneLogin"><u>手机号码验证</u></el-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <el-button type="text"  @click.native="forgetPW" ><u>忘记密码</u></el-button>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="submitForm('secretLogin')" style="width:240px">登录</el-button>
+    <el-button type="primary" @click="loginForm('secretLogin')" style="width:280px">登录</el-button>
   </el-form-item>
 </el-form>
   </el-col>
@@ -28,30 +29,30 @@
      <span style="color:#C9A44E;font-size:20px;padding">注册账号</span>
     <el-form  label-position="top"  class="demo-ruleForm" label-width="80px" :rules="rules"  ref="accountReg" :model="accountReg" style="margin-top:20px">
   <el-form-item label="姓名" required prop="name">
-    <el-input v-model="accountReg.name" placeholder="请输入真实姓名"style="width:240px"></el-input>
+    <el-input v-model="accountReg.name" placeholder="请输入真实姓名"style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="手机号码"  prop="phoneNumber">
-    <el-input v-model="accountReg.phoneNumber" placeholder="请输入手机号码" style="width:240px"></el-input>
+    <el-input v-model="accountReg.phoneNumber" placeholder="请输入手机号码" style="width:280px"></el-input>
   </el-form-item>
   
   <el-form-item label="验证码" required>
-    <el-input  v-model="accountReg.verifyCode" style="width:240px" placeholder="请输入手机验证码">
-    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
+    <el-input  v-model="accountReg.verifyCode" style="width:280px" placeholder="请输入手机验证码">
+    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
     </el-input>
   </el-form-item>
   <el-form-item label="代理商编号" required>
-    <el-input v-model="accountReg.agencyNo" placeholder="请输入代理商编号" style="width:240px"></el-input>
+    <el-input v-model="accountReg.agencyNo" placeholder="请输入代理商编号" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="登陆密码设置"  prop="pass">
-    <el-input v-model="accountReg.pass" type="password" placeholder="请设置密码" style="width:240px"></el-input><br/>
+    <el-input v-model="accountReg.pass" type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
   </el-form-item>
   <el-form-item label="登陆密码确认"  prop="checkPass">
-     <el-input v-model="accountReg.checkPass"  type="password" placeholder="请确定密码" style="width:240px"></el-input>
+     <el-input v-model="accountReg.checkPass"  type="password" placeholder="请确定密码" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="推荐人手机号码">
-    <el-input v-model="accountReg.recommendPhoneNum" placeholder="请输入推荐人手机号码" style="width:240px"></el-input>
+    <el-input v-model="accountReg.recommendPhoneNum" placeholder="请输入推荐人手机号码" style="width:280px"></el-input>
   </el-form-item>
-  <el-form-item>
+  <el-form-item prop="checked">
   <el-checkbox v-model="accountReg.agreement">同意并接受《服务条款》</el-checkbox><el-button type="primary" @click="submitForm('accountReg')" style="width:100px">注册</el-button>
   </el-form-item>
   
@@ -111,7 +112,7 @@
           pass:'',
           checkPass:'',
           recommendPhoneNum:'',
-          agreement:''
+          agreement:false
         },
         rules:{
           pass: [
@@ -140,10 +141,10 @@
         let me = this;  
         me.isDisabled = true;  
         let interval = window.setInterval(function() {  
-            me.buttonName = '（' + me.time + '秒）后重新发送';  
+            me.buttonName = '剩余' + me.time + '秒';  
             --me.time;  
             if(me.time < 0) {  
-                me.buttonName = "重新发送";  
+                me.buttonName = "获取验证码";  
                 me.time = 120;  
                 me.isDisabled = false;  
                 window.clearInterval(interval);  
@@ -152,14 +153,24 @@
         
         this.$http.post('/account/sendMsg', qs.stringify({ 'phone': mobilePhone,'type':2}))
         .then(function(res){
-            var json = JSON.stringify(res);
-            alert(typeof(json));
+            var info = res['data'];
+            var code = info['code'];
+            if (code == 1) {
+              me.$t
+            }
+          var message = info['message'];
+          var data = info['data'];
         })
         .catch(function(err){
-            alert(err);
+            
         })
       },
       submitForm(formName) {
+        if(!this.accountReg.agreement){
+            this.$message("请勾选同意协议!!!");
+            return;
+        }
+        return;
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$http.post('/account/register',
@@ -184,9 +195,8 @@
           }
         });
       },
-      submitForm(formName) {
-        var router = this.$router;
-        var store = this.$store;
+      loginForm(formName) {
+        let me = this;
         this.$refs[formName].validate((valid)=>{
           if(valid) {
             this.$http.post('/account/login',
@@ -196,23 +206,29 @@
                 'loginType':2
               }))
             .then(function(res){
-              var id = 1;
-               store.commit('saveRoleId', id);
-
-              // alert(this.$router);
-               var result = JSON.stringify(res);
-               alert(result);
+               // alert(JSON.stringify(res));
                var info = res['data'];
                var code = info['code'];
-               var message = info['message'];
-               var data = info['data'];
+               if (code == 1) {
+                var data = info['data'];
                let token = data['token'];
-               store.commit('saveToken', token);
+               me.$store.commit('saveToken', token);
                let sysUserRoleList = data['sysUserRoleList'];
-               router.push('/systemNotice');
-               // let id = sysUserRoleList['id'];
-               // let userId=sysUserRoleList['userId'];
-               // let roleId = sysUserRoleList['roleId'];
+               let id = sysUserRoleList[0]['id'];
+               let userId=sysUserRoleList[0]['userId'];
+               let roleId = sysUserRoleList[0]['roleId'];
+               me.$store.commit('saveRoleId', roleId);
+               me.$router.push('/notices');
+               let baseInfo = data['userBaseInfoVO'];
+               me.$store.commit('saveAgentCode',baseInfo['agentCode']);
+               me.$store.commit('saveDirect',baseInfo['directRecommendationAccount']);
+               me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccont']);
+               me.$store.commit('saveRealName',baseInfo['realName']);
+
+               } else {
+                var message = info['message'];
+                me.$message(message);
+               }  
                
             })
             .catch(function(err){
@@ -230,7 +246,7 @@
 <style>
   .login{
     background-color:#FFFFFF;
-    margin-top: 30px;
+    margin-top: 10px;
     margin-right:300px;
     margin-left: 180px;
     padding-left: 40px;

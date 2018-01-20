@@ -4,7 +4,6 @@
 		<span style="color:#C9A44E;font-size:20px">
 		合同收益分配表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary">退出</el-button>
-		<el-button type="primary">保存</el-button>
 		<el-button type="primary" @click="getContractDitrubuteIncomeList()">查询</el-button>
 		<el-button type="primary">导出表格</el-button>
 		</span>
@@ -110,7 +109,7 @@
       layout="total, sizes, prev, pager, next"
       prev-text="<上一页"
       next-text="下一页>"
-      :total="70">
+      :total="tableData.length">
     </el-pagination>
   </div>
 	
@@ -124,9 +123,17 @@
       return{
         pageSize:100,
         currentPage:1,
-        
-        value1:''
-      }
+        tableData:[],
+        documentCode:'',
+        customerName:'',
+        amountType:'',
+        productType:'',
+        dealStatus:'',
+        productRate:'',
+        tradeEndDateBegin:'',
+        tradeEndDateEnd:'',
+        value1:'',
+        }
     },
     methods:{
       handleSizeChange(size){

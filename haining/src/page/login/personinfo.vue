@@ -234,11 +234,15 @@
                 me.baseinfo.realName = data['realName'];
                 me.realNameVerify.realName = data['realName'];
                 me.baseinfo.phoneNumber = data['contactPhone'];
-                me.baseinfo.recommendPersonQualification=(data['refereeQualification']==1?'是':'否');
-                me.baseinfo.ifCharged = (data['wheatherGetMoney']==1?'是':'否');
-                me.baseinfo.sex= (data['sex']==1?'男':'女');
+                // me.baseinfo.recommendPersonQualification=(data['refereeQualification']==1?'是':'否');
+                me.baseinfo.recommendPersonQualification=data['refereeQualification'];
+                // me.baseinfo.ifCharged = (data['wheatherGetMoney']==1?'是':'否');
+                me.baseinfo.ifCharged=data['wheatherGetMoney'];
+                // me.baseinfo.sex= (data['sex']==1?'男':'女');
+                me.baseinfo.sex=data['sex'];
                 me.baseinfo.email = data['email'];
-                me.baseinfo.nameVerified =(data['wheatherRealName']==1?'是':'否');
+                // me.baseinfo.nameVerified =(data['wheatherRealName']==1?'是':'否');
+                me.baseinfo.nameVerified=data['whetherRealName'];
                 me.baseinfo.directRecommendationAccount=data['directRecommendationAccount'];
                 me.baseinfo.agentCode = data['agentCode'];
                 me.baseinfo.indirectRecommendAccount=data['indirectRecommendationAccount'];
@@ -262,8 +266,9 @@
       },
       
       updateUserBaseInfo(){
-        alert(this.baseinfo.realName+","+this.baseinfo.phoneNumber+","+this.baseinfo.email);
-          this.$http.post('/user/getUserBaseInfo',
+        alert(this.baseinfo.sex);
+          let sexId = this.baseinfo.sex==''
+          this.$http.post('/user/updateUserBaseInfo',
              this.qs.stringify({
                 'token':this.$store.state.token,
                 'account':this.baseinfo.account,
@@ -281,6 +286,15 @@
              )
              .then(function(res){
                 alert(JSON.stringify(res));
+                var info = res['data'];
+                    var code = info['code'];
+                    if (code == 1) {
+                      me.$message('更新成功');
+                    } else {
+                      var message = info['message'];
+                      $.message(message);
+                    }
+                  
              })
              .catch(function(err){
 

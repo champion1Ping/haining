@@ -108,6 +108,7 @@
       return{
         pageSize:'100',
         currentPage:'1',
+        tableData:[],
         status: [{
           value: '1',
           label: '正常'
