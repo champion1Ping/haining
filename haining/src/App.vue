@@ -53,13 +53,15 @@ export default {
 
 <style>
 html, body{ margin:0; height:100%; }
+#app { margin:0; height:100%; }
  .parent{
   flex-flow: column;
   display:flex;
  }
  /*.el-main0{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 500px 70px; }*/
  .el-main{
-    padding: 10px 0px 0px 0px;
+    background-color: #EEEEEE;
+    padding-top: 10px;
     flex:1;
  }
 .el-header{

@@ -111,7 +111,7 @@
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">
 		用户管理&nbsp;&nbsp;&nbsp;
-		<el-button type="primary">退出</el-button>
+		<el-button type="primary" @click="quit()">退出</el-button>
 		<el-button type="primary" @click="dialogAddUser = true">添加</el-button>
 		<el-button type="primary" @click="getUserList">查询</el-button>
 		</span>
@@ -261,6 +261,9 @@
 
     },
     methods:{
+      quit(){
+        this.$router.push('/notices');
+      },
       handleSizeChange(size){
         this.pageSize = size;
       },

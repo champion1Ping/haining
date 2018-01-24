@@ -1,6 +1,7 @@
 <template>
 	<div class="notices">
 	<span style="color:#C9A44E;font-size:20px;">系统通知</span>
+
 	</div>
 </template>
 <script>
@@ -11,12 +12,13 @@
 			}
 		},
 		created:function(){
-			this.$http.post('/notice/getNoticeList',
+			this.$http.post('/sysNotice/getSysNoticeList',
 		         this.sq.stringify({
 		            'token':this.$store.state.token
 		         })
 		         )
 		         .then(function(res){
+		         	alert(JSON.stringify(res));
 
 		         })
 		         .catch(function(err){
@@ -47,9 +49,9 @@
 		background-color:#FFFFFF;
 	    margin-top: 50px;
 	    margin-right:20%;
-	    margin-bottom: 100px;
+	    margin-bottom:'auto';
 	    margin-left: 20%;
-	    padding-left: 240px;
+	    padding-left: 40px;
 	    padding-top: 40px;
 	    padding-bottom: 40px;
 	}

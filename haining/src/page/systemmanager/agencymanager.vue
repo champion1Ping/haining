@@ -101,7 +101,7 @@
 
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">代理商管理&nbsp;&nbsp;&nbsp;
-		<el-button type="primary">退出</el-button>
+		<el-button type="primary" @click="quit()">退出</el-button>
 		<el-button type="primary" @click="addAgency()">添加</el-button>
 		<el-button type="primary" @click="query()">查询</el-button>
 		</span>
@@ -250,6 +250,9 @@
       }
     },
     methods:{
+      quit(){
+        this.$router.push('/notices');
+      },
       headerRowClassName({row, rowIndex}){
           return 'header-row';
       },

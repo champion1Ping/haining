@@ -1,9 +1,44 @@
 <template>
 	<div class="productgain">
+  <!-- 弹出框开始 -->
+  <el-dialog title="产品信息" :visible.sync="addProductDialog" width="60%">
+    <div>产品收益维护</div>
+    <div style="border:1px solid;border-radius:4px;">
+    <el-form :model="form" style="padding:10px" :models="addProduct" ref="addProduct">
+    <el-row>
+      <el-button type="info" style="margin-bottom:10px;" class="left">序号</el-button><el-input  v-model="addProduct.num" class="right" style="width:200px"></el-input>
+    </el-row>
+     <el-row> 
+    <el-button type="info" style="margin-bottom:10px;" class="left">产品类型</el-button><el-input   v-model="addProduct.productType" class="right" style="width:200px"></el-input>
+    </el-row>
+    <el-row>
+        <el-button type="info"  style="margin-bottom:10px;" class="left">服务期限(月）</el-button><el-input class="right" v-model="addProduct.serviceTime" style="width:200px"></el-input>
+        </el-row>
+      <el-row>
+       <el-button type="info" style="margin-bottom:10px;" class="left">产品收益率(%）</el-button><el-input  v-model="addProduct.monthRate" class="right" style="width:200px"></el-input>
+       </el-row>
+        <el-row>
+       <el-button type="info" style="margin-bottom:10px;" class="left">是否启用</el-button><el-select v-model="addProduct.enableFlag"  style="width:200px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in this.$store.state.xialakuang.yesorno"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+       </el-row>
+  </el-form>
+    </div>
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="addProductDialog = false">取 消</el-button>
+    <el-button type="primary" @click="submitForm('addProductForm')">确 定</el-button>
+  </div>
+</el-dialog>
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">产品收益维护&nbsp;&nbsp;&nbsp;
-		<el-button type="primary">退出</el-button>
-		<el-button type="primary" @click="addProduct()">添加</el-button>
+		<el-button type="primary" @click="quit()">退出</el-button>
+		<el-button type="primary" @click="openAddDialog()">添加</el-button>
 		<el-button type="primary" @click="saveProduct()">保存</el-button>
 		</span>
     </div>
@@ -15,29 +50,19 @@
     border
     style="width: 100%;" header-align="center">
     <el-table-column prop="id" label="序号" align="center" width="180">
-      <template slot-scope="scope">
-           <el-input v-model="scope.row.id"></el-input>
-       </template>
+           <el-input v-model="id"></el-input>
     </el-table-column>
     <el-table-column prop="productTypeName" label="产品类型" align="center" width="180">
-      <template slot-scope="scope">
-           <el-input v-model="scope.row.productTypeName" id="productTypeName"></el-input>
-       </template>
+           <el-input v-model="productTypeName" id="productTypeName"></el-input>
     </el-table-column>
     <el-table-column prop="serviceTime" label="服务期限（月）" align="center" width="180">
-      <template slot-scope="scope">
-           <el-input v-model="scope.row.serviceTime"></el-input>
-       </template>
+           <el-input v-model="serviceTime"></el-input>
     </el-table-column>
     <el-table-column prop="monthRate" label="月收益率" align="center" width="180">
-      <template slot-scope="scope">
-           <el-input v-model="scope.row.monthRate"></el-input>
-       </template>
+           <el-input v-model="monthRate"></el-input>
     </el-table-column>
     <el-table-column prop="enableFlag" label="启用" align="center" width="180">
-      <template slot-scope="scope">
-           <el-checkbox  v-model="scope.row.enableFlag"></el-checkbox>
-       </template>
+           <el-checkbox  v-model="enableFlag"></el-checkbox>
     </el-table-column>
   </el-table>
  
@@ -48,12 +73,15 @@
   export default{
     data(){
       return{
-        tableData:[],
-        num:'',
-        productType:'',
-        serviceTime:'',
-        monthRate:'',
-        start:false,
+         tableData:[],
+        addProduct:{
+          num:'',
+          productType:'',
+          serviceTime:'',
+          monthRate:'',
+          enableFlag:'',
+        }
+       
       }
     },
     created:function(){
@@ -67,16 +95,27 @@
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
-                  var data = info['data'];
-                  me.tableData = data['list'];
+                  if(code == 1){
+                    var data = info['data'];
+                    me.tableData = data['list'];
+                  } else {
+                    me.$message.error(message);
+                  }
+                  
             })
             .catch(function(err){
 
             })
     },
     methods:{
+      openAddDialog(){
+          this.addProductDialog = true;
+      },
+      quit(){
+        this.$router.push('/notices');
+      },
       addProduct(){
-        this.tableData.push('{}');
+        
       },
       saveProduct(){
         let productTyeName = document.getElementById('productTypeName');
@@ -112,6 +151,7 @@
 </script>
 
 <style>
+
   .btn{
     /*margin-top: 1px;*/
     background-color: #ffffff;
@@ -122,11 +162,9 @@
     margin-top: 10px;
     margin-right:200px;
     margin-left: 280px;
-    margin-bottom: 200px;
     padding-top: 50px;
     padding-left: 10px;
     padding-right: 10px;
-    padding-bottom: 160px;
   }
   
 

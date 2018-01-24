@@ -8,7 +8,7 @@
 	      </el-form-item>
 		  <el-form-item label="验证码" prop="verifyCode">
 		    <el-input  v-model="resetForm.verifyCode" style="width:280px" placeholder="请输入手机验证码">
-		    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
+		    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" :disabled="isDisabled" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
 		    </el-input>
 		  </el-form-item>
 
@@ -90,7 +90,7 @@
 		        let me = this;  
 		        me.isDisabled = true;  
 		         let interval = window.setInterval(function() {  
-		               me.buttonName = '（' + me.time + '秒）后重新发送';  
+		               me.buttonName = '剩余' + me.time + '秒';  
 		               --me.time;  
 		              if(me.time < 0) {  
 		                me.buttonName = "重新发送";  
@@ -101,15 +101,23 @@
 		             }, 1000);  
 		        this.$http.post('/account/sendMsg', qs.stringify({ 'phone': mobilePhone,'type':1}))
 		        .then(function(res){
-		            alert(JSON.stringify(res));
+		            // alert(JSON.stringify(res));
 		            var info = res['data'];
 		            var code = info['code'];
-		            var message = info['message'];
+		            
+		            if (code == 1){
+		            	me.$message("发送成功，请查收");
+		            } else {
+		            	let message = info['message'];
+		            	me.$message(message);
+		            }
+
 		             
 		        })
 		        .catch(function(err){
 		            console.log(err);
 		        })
+		            
 			},
 			submitForm(formName){
 				this.$refs[formName].validate((valid)=>{

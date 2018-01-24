@@ -37,7 +37,7 @@
   
   <el-form-item label="验证码" required>
     <el-input  v-model="accountReg.verifyCode" style="width:280px" placeholder="请输入手机验证码">
-    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
+    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" :disabled="isDisabled" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
     </el-input>
   </el-form-item>
   <el-form-item label="代理商编号" required>
@@ -45,10 +45,12 @@
   </el-form-item>
   <el-form-item label="登陆密码设置"  prop="pass">
     <el-input v-model="accountReg.pass" type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
+         <el-input v-model="accountReg.checkPass"  type="password" placeholder="请确定密码" style="width:280px"></el-input>
+
   </el-form-item>
-  <el-form-item label="登陆密码确认"  prop="checkPass">
+ <!--  <el-form-item label="登陆密码确认"  prop="checkPass">
      <el-input v-model="accountReg.checkPass"  type="password" placeholder="请确定密码" style="width:280px"></el-input>
-  </el-form-item>
+  </el-form-item> -->
   <el-form-item label="推荐人手机号码">
     <el-input v-model="accountReg.recommendPhoneNum" placeholder="请输入推荐人手机号码" style="width:280px"></el-input>
   </el-form-item>
@@ -100,6 +102,7 @@
         time:'120',
         isShow:true,
         labelPosition: 'top',
+        isDisabled:false,
         secretLogin: {
           phoneNumber: '',
           password: ''
@@ -138,6 +141,14 @@
       gainVerifyCode(){
 
         let mobilePhone = this.accountReg.phoneNumber;
+        if (mobilePhone == '') {
+            this.$message.error("手机号不能为空");
+            return;
+        } else if(!isvalidPhone(mobilePhone)){
+            this.$message.error("请输入正确的手机号");
+            return;
+        }
+        
         let me = this;  
         me.isDisabled = true;  
         let interval = window.setInterval(function() {  
@@ -156,7 +167,7 @@
             var info = res['data'];
             var code = info['code'];
             if (code == 1) {
-              me.$t
+              me.$message.success("获取验证码成功，请查收!");
             }
           var message = info['message'];
           var data = info['data'];
@@ -166,11 +177,20 @@
         })
       },
       submitForm(formName) {
+        if(this.accountReg.checkPass =="") {
+          this.$message.error("请确认密码");
+          return;
+        } else {
+          if(this.accountReg.pass !=this.accountReg.checkPass){
+            this.$message.error("2次输入密码不一致");
+            return;
+          }
+        }
         if(!this.accountReg.agreement){
             this.$message("请勾选同意协议!!!");
             return;
         }
-        return;
+        let me = this;
         this.$refs[formName].validate((valid) => {
           if (valid) {
             this.$http.post('/account/register',
@@ -184,8 +204,15 @@
 
               }))
             .then(function(response){
-              var json = JSON.stringify(response);
-
+                    var info = response['data'];
+                    var code = response['code'];
+                    if (code == 1) {
+                      me.$router.push('/notices');
+                    } else {
+                      var message = info['message'];
+                      me.$message(message);
+                    }
+                  
             }).catch(function(error){
 
             })
@@ -247,6 +274,7 @@
   .login{
     background-color:#FFFFFF;
     margin-top: 10px;
+    /*margin-bottom: 10px;*/
     margin-right:300px;
     margin-left: 180px;
     padding-left: 40px;

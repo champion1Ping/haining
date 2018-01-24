@@ -1,6 +1,6 @@
 <template>
 <div class="notice">
-	<div class="tab"><span style="color:#C9A44E;font-size:20px;padding">系统公告发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><el-button type="primary">退出</el-button></div>
+	<div class="tab"><span style="color:#C9A44E;font-size:20px;padding">系统公告发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><el-button type="primary" @click="quit()">退出</el-button></div>
 
 	<div class="content">
 	<el-row>
@@ -45,10 +45,21 @@
 			}
 		},
 		methods:{
+			quit(){
+				this.$router.push('/notices');
+			},
 			change(){
 				
 			},
 			sendNotice(){
+				if(this.toType== ""){
+					this.$message.error("请选择发送对象");
+					return;
+				}
+				if(this.noticeContent==""){
+					this.$message.error("请输入公告内容");
+					return;
+				}
 				let me = this;
 				this.$http.post('/sysNotice/sendNotice',
 							this.qs.stringify({

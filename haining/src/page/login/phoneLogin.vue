@@ -52,6 +52,12 @@ import {isvalidPhone} from '../common/utils.js'
 			}
 		},
     methods:{
+      secretLogin(){
+        this.$router.push('/login');
+      },
+      forgetPW(){
+        this.$router.push('/login');
+      },
         gainVerifyCode(){
         let mobilePhone = this.verifyCodeLogin.phoneNumber;
         if(mobilePhone == "") {

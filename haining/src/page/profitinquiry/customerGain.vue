@@ -3,7 +3,7 @@
   <div class="btn">
     <span style="color:#C9A44E;font-size:20px">
     客户收益表&nbsp;&nbsp;&nbsp;
-    <el-button type="primary">退出</el-button>
+    <el-button type="primary" @click="quit()">退出</el-button>
     <el-button type="primary" @click="customerProfitQuery()">查询</el-button>
     </span>
     </div>
@@ -126,6 +126,9 @@
       }
     },
     methods:{
+      quit(){
+        this.$router.push('/notices');
+      },
       handleSizeChange(size){
         this.pageSize = size;
       },
