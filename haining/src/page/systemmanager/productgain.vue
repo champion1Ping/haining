@@ -74,6 +74,12 @@
     data(){
       return{
          tableData:[],
+         id:'',
+         productTypeName:'',
+         serviceTime:'',
+         monthRate:'',
+         enableFlag:'',
+         addProductDialog:false,
         addProduct:{
           num:'',
           productType:'',
