@@ -66,7 +66,15 @@
 								'token':this.$store.state.token
 							}))
 						.then(function(res){
-							alert(JSON.stringify(res));
+							var info = res['data'];
+				            var code = info['code'];
+				            if (code == 1) {
+				            	me.$message('修改成功');
+				            } else {
+				            	let message = info['message'];
+				            	me.$messaage.error(messaage);
+
+				            }
 						})
 						.catch(function(err){
 

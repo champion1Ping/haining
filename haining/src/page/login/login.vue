@@ -5,8 +5,8 @@
 
    <span style="color:#C9A44E;font-size:20px;padding">密码登录</span>
     <el-form :label-position="labelPosition" label-width="80px" :model="secretLogin" ref="secretLogin" style="margin-top:20px">
-  <el-form-item label="手机号码" style="padding:0 0 2" prop="phoneNumber">
-    <el-input v-model="secretLogin.phoneNumber" placeholder="请输入手机号码" style="width:280px"></el-input>
+  <el-form-item label="手机号码/用户账号" style="padding:0 0 2" prop="phoneNumber">
+    <el-input v-model="secretLogin.phoneNumber" placeholder="请输入手机号码/用户账号" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="密码" required>
     <el-input v-model="secretLogin.password" type="password" placeholder="请输入密码" style="width:280px"></el-input>
@@ -43,7 +43,7 @@
   <el-form-item label="代理商编号" required>
     <el-input v-model="accountReg.agencyNo" placeholder="请输入代理商编号" style="width:280px"></el-input>
   </el-form-item>
-  <el-form-item label="登陆密码设置"  prop="pass">
+  <el-form-item label="登陆密码设置">
     <el-input v-model="accountReg.pass" type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
          <el-input v-model="accountReg.checkPass"  type="password" placeholder="请确定密码" style="width:280px"></el-input>
 
@@ -79,15 +79,15 @@
           callback();
         }
       };
-      var validatePass2 = (rule, value, callback) => {
-        if (value === '') {
-          callback(new Error('请再次输入密码'));
-        } else if (value !== this.accountReg.pass) {
-          callback(new Error('两次输入密码不一致!'));
-        } else {
-          callback();
-        }
-      };
+      // var validatePass2 = (rule, value, callback) => {
+      //   if (value === '') {
+      //     callback(new Error('请再次输入密码'));
+      //   } else if (value !== this.accountReg.pass) {
+      //     callback(new Error('两次输入密码不一致!'));
+      //   } else {
+      //     callback();
+      //   }
+      // };
       var validPhone=(rule, value,callback)=>{
       if (!value){
           callback(new Error('请输入手机号码'))
@@ -121,9 +121,9 @@
           pass: [
             { validator: validatePass, trigger: 'blur' }
           ],
-          checkPass: [
-            { validator: validatePass2, trigger: 'blur' }
-          ],
+          // checkPass: [
+          //   { validator: validatePass2, trigger: 'blur' }
+          // ],
           phoneNumber:[
             {validator:validPhone, trigger:'blur'}
           ]
@@ -177,8 +177,8 @@
         })
       },
       submitForm(formName) {
-        if(this.accountReg.checkPass =="") {
-          this.$message.error("请确认密码");
+        if(this.accountReg.checkPass =="" || this.accountReg.pass =="") {
+          this.$message.error("密码不能为空");
           return;
         } else {
           if(this.accountReg.pass !=this.accountReg.checkPass){
@@ -204,6 +204,7 @@
 
               }))
             .then(function(response){
+                    alert(JSON.stringify(response));
                     var info = response['data'];
                     var code = response['code'];
                     if (code == 1) {
@@ -233,7 +234,7 @@
                 'loginType':2
               }))
             .then(function(res){
-               // alert(JSON.stringify(res));
+               alert(JSON.stringify(res));
                var info = res['data'];
                var code = info['code'];
                if (code == 1) {

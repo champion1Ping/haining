@@ -1,14 +1,35 @@
 <template>
 	<div class="notices">
 	<span style="color:#C9A44E;font-size:20px;">系统通知</span>
-
+		<div>
+        <template v-for="notice in notices">
+        <el-row>
+        	{{notice.content}}
+        </el-row>
+        <el-row>
+        	
+        	{{notice.time}}
+        </el-row>
+        <el-row><hr/></el-row>
+           
+        </template>
+       </div>
 	</div>
 </template>
 <script>
 	export default{
 		data(){
 			return {
-
+				notices:[
+				{
+					content:'aaaaa',
+					time:'2018-09-09'
+				},
+				{
+					content:'bbbbb',
+					time:'2018-09-10'
+				},
+				]
 			}
 		},
 		created:function(){

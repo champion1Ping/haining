@@ -114,9 +114,10 @@
           <div>证件正面照</div>
           <el-upload
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          :action="importcredentialsFront"
+          
           :show-file-list="false"
-          :on-success="handleAvatarSuccess"
+          :on-success="uploadFrontSuccess"
           :before-upload="beforeAvatarUpload">
           <img v-if="credentialsFront" :src="credentialsFront" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -187,6 +188,7 @@
   export default {
     data() {
       return {
+        
         credentialsFront:'',
         credentialsBack:'',
         liveAddressCredential:'',
@@ -257,6 +259,9 @@
       handleAvatarSuccess(){
 
       },
+      uploadFrontSuccess (response, file, fileList) {
+      alert(response);
+    },
       getDate (strDate) {
         let st = strDate;
         let a = st.split(" ");
@@ -303,9 +308,9 @@
       uploadPic(){
          this.$http.post('/user/uploadPic',
           this.qs.stringify({
-                'account':this.$store.state.token,
+                'account':this.$store.state.realName,
                 'file':this.$store.state.token,
-                'picType':this.$store.state.token,
+                'picType':1,
              })
              )
              .then(function(res){

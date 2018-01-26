@@ -120,6 +120,7 @@
 		            
 			},
 			submitForm(formName){
+				let me = this;
 				this.$refs[formName].validate((valid)=>{
 					if(valid) {
 						this.$http.post('/account/resetPwd',
@@ -129,7 +130,16 @@
 								'pwd':this.resetForm.checkpass
 							}))
 						.then(function(res){
+							var info = res['data'];
+				            var code = info['code'];
+				            if (code == 1) {
+				            	me.$message('重置成功');
+				            	me.$router.push('/login');
+				            } else {
+				            	let message = info['message'];
+				            	me.$messaage.error(messaage);
 
+				            }
 						})
 						.catch(function(err){
 
