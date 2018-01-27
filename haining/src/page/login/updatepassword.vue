@@ -3,11 +3,11 @@
 		<span style="color:#C9A44E;font-size:20px;">修改密码</span>
 		<el-form label-position="top" :model="updateForm" ref="updateForm" :rules="rules" style="margin-top:20px">
 		   <el-form-item label="新密码设置" prop="pass">
-		    <el-input v-model="updateForm.pass" type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
+		    <el-input clearable v-model="updateForm.pass" type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
 		  </el-form-item>
 
 		  <el-form-item label="新密码确认" prop="checkpass">
-		     <el-input v-model="updateForm.checkpass" type="password" placeholder="请确认密码" style="width:280px"></el-input>
+		     <el-input clearable v-model="updateForm.checkpass" type="password" placeholder="请确认密码" style="width:280px"></el-input>
 		  </el-form-item>
 		  <el-form-item>
 		    <el-button type="primary" @click="submitForm('updateForm')" style="width:280px">确认</el-button>

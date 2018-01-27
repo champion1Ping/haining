@@ -4,19 +4,19 @@
 		<span style="color:#C9A44E;font-size:20px;">重置密码</span>
 		<el-form label-position="top" :model="resetForm" style="margin-top:20px" :rules="rules" ref="resetForm">
 			<el-form-item label="手机号码" style="padding:0 0 2" prop="phoneNumber">
-            <el-input v-model="resetForm.phoneNumber" placeholder="请输入手机号码" style="width:280px"></el-input>
+            <el-input clearable v-model="resetForm.phoneNumber" placeholder="请输入手机号码" style="width:280px"></el-input>
 	      </el-form-item>
 		  <el-form-item label="验证码" prop="verifyCode">
-		    <el-input  v-model="resetForm.verifyCode" style="width:280px" placeholder="请输入手机验证码">
+		    <el-input clearable  v-model="resetForm.verifyCode" style="width:280px" placeholder="请输入手机验证码">
 		    <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" :disabled="isDisabled" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
 		    </el-input>
 		  </el-form-item>
 
 		   <el-form-item label="新密码设置" prop="pass">
-		    <el-input v-model="resetForm.pass"  type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
+		    <el-input clearable v-model="resetForm.pass"  type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
 		  </el-form-item>
 		   <el-form-item label="新密码设置" prop="checkpass">
-		     <el-input v-model="resetForm.checkpass" type="password" placeholder="请确定密码" style="width:280px"></el-input>
+		     <el-input clearable v-model="resetForm.checkpass" type="password" placeholder="请确定密码" style="width:280px"></el-input>
 		  </el-form-item>
 		  <el-form-item>
 		    <el-button type="primary" @click="submitForm('resetForm')" style="width:280px">确认重置</el-button>

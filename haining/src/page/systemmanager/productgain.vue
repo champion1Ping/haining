@@ -6,19 +6,19 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-form :model="form" style="padding:10px" :models="addProduct" ref="addProduct">
     <el-row>
-      <el-button type="info" style="margin-bottom:10px;" class="left" disabled>序号</el-button><el-input  v-model="addProduct.num" class="right" style="width:200px"></el-input>
+      <el-button type="info" style="margin-bottom:10px;" class="left" disabled>序号</el-button><el-input clearable  v-model="addProduct.num" class="right" style="width:200px"></el-input>
     </el-row>
      <el-row> 
-    <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品类型</el-button><el-input   v-model="addProduct.productType" class="right" style="width:200px"></el-input>
+    <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品类型</el-button><el-input clearable   v-model="addProduct.productType" class="right" style="width:200px"></el-input>
     </el-row>
     <el-row>
-        <el-button type="info"  style="margin-bottom:10px;" class="left" disabled>服务期限(月）</el-button><el-input class="right" v-model="addProduct.serviceTime" style="width:200px"></el-input>
+        <el-button type="info"  style="margin-bottom:10px;" class="left" disabled>服务期限(月）</el-button><el-input clearable class="right" v-model="addProduct.serviceTime" style="width:200px"></el-input>
         </el-row>
       <el-row>
-       <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品收益率(%）</el-button><el-input  v-model="addProduct.monthRate" class="right" style="width:200px"></el-input>
+       <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品收益率(%）</el-button><el-input clearable  v-model="addProduct.monthRate" class="right" style="width:200px"></el-input>
        </el-row>
         <el-row>
-       <el-button type="info" style="margin-bottom:10px;" class="left" disabled>是否启用</el-button><el-select v-model="addProduct.enableFlag"  style="width:200px" class="right" placeholder="请选择">
+       <el-button type="info" style="margin-bottom:10px;" class="left" disabled>是否启用</el-button><el-select clearable v-model="addProduct.enableFlag"  style="width:200px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -50,16 +50,16 @@
     border
     style="width: 100%;" header-align="center">
     <el-table-column prop="id" label="序号" align="center" width="180">
-           <el-input v-model="id"></el-input>
+           <el-input clearable v-model="id"></el-input>
     </el-table-column>
     <el-table-column prop="productTypeName" label="产品类型" align="center" width="180">
-           <el-input v-model="productTypeName" id="productTypeName"></el-input>
+           <el-input clearable v-model="productTypeName" id="productTypeName"></el-input>
     </el-table-column>
     <el-table-column prop="serviceTime" label="服务期限（月）" align="center" width="180">
-           <el-input v-model="serviceTime"></el-input>
+           <el-input clearable v-model="serviceTime"></el-input>
     </el-table-column>
     <el-table-column prop="monthRate" label="月收益率" align="center" width="180">
-           <el-input v-model="monthRate"></el-input>
+           <el-input clearable v-model="monthRate"></el-input>
     </el-table-column>
     <el-table-column prop="enableFlag" label="操作" align="center" width="180">
            <template slot-scope="scope">

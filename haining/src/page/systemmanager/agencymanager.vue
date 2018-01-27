@@ -8,26 +8,26 @@
     <el-form :model="form" style="padding:10px" :models="addAgencyForm" ref="addAgencyForm">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left" disabled >代理商编号</el-button><el-input  :disabled="true" v-model="addAgencyForm.agencyCode" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled >代理商编号</el-button><el-input clearable  :disabled="true" v-model="addAgencyForm.agencyCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-        <el-button type="info" class="left" disabled >代理商名称</el-button><el-input class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
+        <el-button type="info" class="left" disabled >代理商名称</el-button><el-input clearable class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left" disabled>统一社会信用代码</el-button><el-input  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>统一社会信用代码</el-button><el-input clearable  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="8">
-       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input class="right" v-model="addAgencyForm.loyalPerson"style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input clearable class="right" v-model="addAgencyForm.loyalPerson"style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left" disabled>联系方式</el-button><el-input class="right" v-model="addAgencyForm.contact" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>联系方式</el-button><el-input clearable class="right" v-model="addAgencyForm.contact" style="width:180px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left" disabled>省份</el-button><el-select v-model="addAgencyForm.province"  @change="getMaxProvinceIndex()"style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>省份</el-button><el-select clearable clearable v-model="addAgencyForm.province"  @change="getMaxProvinceIndex()"style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.shengfen"
       :key="item.value"
@@ -37,7 +37,7 @@
   </el-select>
   </el-col> 
   <el-col :span="16">
-       <el-button type="info"  class="left" disabled>营业地址</el-button><el-input v-model="addAgencyForm.businessAddress"class="right" style="width:563px"></el-input>
+       <el-button type="info"  class="left" disabled>营业地址</el-button><el-input clearable v-model="addAgencyForm.businessAddress"class="right" style="width:563px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
@@ -110,19 +110,19 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info" class="left" disabled >代理商编号</el-button><el-input v-model="agentCode" class="right" style="width:180px"></el-input>
+    <el-button type="info" class="left" disabled >代理商编号</el-button><el-input clearable v-model="agentCode" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left" disabled >代理商名称</el-button><el-input class="right"  v-model="agentName"style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled >代理商名称</el-button><el-input clearable class="right"  v-model="agentName"style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input v-model="legalRepresentative" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input clearable v-model="legalRepresentative" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left" disabled>省份</el-button><el-select v-model="provinceId" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>省份</el-button><el-select clearable v-model="provinceId" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.shengfen"
       :key="item.value"

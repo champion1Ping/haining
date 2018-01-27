@@ -8,21 +8,21 @@
     <el-form :model="addDocumentForm" style="padding:5px">
        <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input disabled v-model="addDocumentForm.documentCode"class="right" style="width:177px"></el-input>
+    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input clearable disabled v-model="addDocumentForm.documentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left" disabled>客户名称</el-button><el-input disabled v-model="addDocumentForm.customerName"class="right" style="width:177px"></el-input>
+        <el-button type="info" class="left" disabled>客户名称</el-button><el-input clearable disabled v-model="addDocumentForm.customerName"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>交易平台</el-button><el-input v-model="addDocumentForm.tradePlatform"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>交易平台</el-button><el-input clearable v-model="addDocumentForm.tradePlatform"class="right" style="width:177px"></el-input>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left" disabled>交易账户号</el-button><el-input v-model="addDocumentForm.tradeAccount"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>交易账户号</el-button><el-input clearable v-model="addDocumentForm.tradeAccount"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="6">
-    <el-button type="info"  class="left" disabled>是否入金</el-button><el-select v-model="addDocumentForm.wheatherGetMoney" style="width:177px" class="right" placeholder="请选择">
+    <el-button type="info"  class="left" disabled>是否入金</el-button><el-select clearable v-model="addDocumentForm.wheatherGetMoney" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -42,7 +42,7 @@
       ></el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>证件类型</el-button><el-select v-model="addDocumentForm.certificateType" style="width:177px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left" disabled>证件类型</el-button><el-select clearable v-model="addDocumentForm.certificateType" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.certificateType"
       :key="item.value"
@@ -52,7 +52,7 @@
   </el-select>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left" disabled>证件号码</el-button><el-input v-model="addDocumentForm.certificateNumber"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>证件号码</el-button><el-input clearable v-model="addDocumentForm.certificateNumber"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
@@ -67,7 +67,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>产品类型</el-button><el-select @change="productChanged()"v-model="addDocumentForm.productType" style="width:177px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left" disabled>产品类型</el-button><el-select clearable @change="productChanged()"v-model="addDocumentForm.productType" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -77,38 +77,38 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input disabled v-model="addDocumentForm.productRate"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input clearable disabled v-model="addDocumentForm.productRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>服务期限</el-button><el-input  disabled v-model="addDocumentForm.serviceDate"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>服务期限</el-button><el-input clearable  disabled v-model="addDocumentForm.serviceDate"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>投资金额</el-button><el-input @change="caculateEarning()" v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>投资金额</el-button><el-input clearable @change="caculateEarning()" v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>预估收益</el-button><el-input disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>预估收益</el-button><el-input clearable disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left" disabled>联系方式</el-button><el-input v-model="addDocumentForm.contactPhone"class="right"  style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>联系方式</el-button><el-input clearable v-model="addDocumentForm.contactPhone"class="right"  style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left" disabled>注册邮箱号</el-button><el-input v-model="addDocumentForm.registerEmail" class="right" style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>注册邮箱号</el-button><el-input clearable v-model="addDocumentForm.registerEmail" class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
   <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input disabled v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input clearable disabled v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>直推人</el-button><el-input disabled v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推人</el-button><el-input clearable disabled v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>间推人</el-button><el-input disabled v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推人</el-button><el-input clearable disabled v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
@@ -133,13 +133,13 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info" class="left" disabled>档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
+    <el-button type="info" class="left" disabled>档案编号</el-button><el-input clearable v-model="documentCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left" disabled>交易平台</el-button><el-input  v-model="tradePlatform"class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled>交易平台</el-button><el-input clearable  v-model="tradePlatform"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>是否入金</el-button><el-select v-model="wheatherGetMoney" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left" disabled>是否入金</el-button><el-select clearable v-model="wheatherGetMoney" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -150,7 +150,7 @@
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left" disabled>产品类型</el-button><el-select v-model="productType" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>产品类型</el-button><el-select clearable v-model="productType" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -163,10 +163,10 @@
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left" disabled>注册邮箱</el-button><el-input  v-model="registerEmail"class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>注册邮箱</el-button><el-input clearable  v-model="registerEmail"class="right" style="width:180px"></el-input>
   </el-col>
   <!-- <el-col :span="6">
-      <el-button type="info"  class="left" disabled>份数</el-button><el-input  v-model="buyNum"class="right"  style="width:180px"></el-input>-->
+      <el-button type="info"  class="left" disabled>份数</el-button><el-input clearable  v-model="buyNum"class="right"  style="width:180px"></el-input>-->
 
     </el-date-picker>
   </el-col>

@@ -3,10 +3,10 @@
 		<h3>手机验证登录</h3>
 		<el-form  label-position='top' label-width="80px" :model="verifyCodeLogin" ref="verifyCodeLogin" :rules="rules">
   <el-form-item label="手机号码" prop="phoneNumber">
-    <el-input v-model="verifyCodeLogin.phoneNumber" placeholder="请输入手机号码"style="width:280px"></el-input>
+    <el-input clearable v-model="verifyCodeLogin.phoneNumber" placeholder="请输入手机号码"style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="手机验证码" prop="verifyCode">
-    <el-input  v-model="verifyCodeLogin.verifyCode" style="width:280px" placeholder="请输入手机验证码">
+    <el-input clearable  v-model="verifyCodeLogin.verifyCode" style="width:280px" placeholder="请输入手机验证码">
     <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
     </el-input>
   </el-form-item>
