@@ -32,20 +32,22 @@ import updatepw from './page/login/updatepassword.vue'
 import notices from './page/login/notices.vue'
 // import test from '/page/login/test.vue'
 export default [
-      {path:'/login',component:login},
-      {path:'/reset',component:resetpw},
-      {path:'/updatepw',component:updatepw},
-      {path:'/personinfo',component:personinfo},
-      {path:'/contractgain',component:contractgain},
-      {path:'/phoneLogin',component:phoneLogin},
-      {path:'/systemNotice',component:systemNotice},
-      {path:'/agencymanager',component:agencymanager},
-      {path:'/usermanager',component:usermanager},
-      {path:'/productgain',component:productgain},
-      {path:'/customer', component:customerIncomeRegister},
-      {path:'/customergain',component:customerGain},
-      {path:'/agencyprofit',component:agencyprofit},
-      {path:'/customerRecommend',component:customerRecommend},
+      {path:'/login',component:login,meta:{  requiresAuth: false    }},
+      {path:'/reset',component:resetpw,meta:{  requiresAuth: false    }},
+      {path:'/updatepw',component:updatepw,meta:{  requiresAuth: true    }},
+      {path:'/personinfo',component:personinfo,meta:{  requiresAuth: true    }},
+      {path:'/contractgain',component:contractgain,meta:{  requiresAuth: true    }},
+      {path:'/phoneLogin',component:phoneLogin,
+             meta:{  requiresAuth: false    } 
+      },
+      {path:'/systemNotice',component:systemNotice,meta:{  requiresAuth: true    }},
+      {path:'/agencymanager',component:agencymanager,meta:{  requiresAuth: true    }},
+      {path:'/usermanager',component:usermanager,meta:{  requiresAuth: true    }},
+      {path:'/productgain',component:productgain,meta:{  requiresAuth: true    }},
+      {path:'/customer', component:customerIncomeRegister,meta:{  requiresAuth: true    }},
+      {path:'/customergain',component:customerGain,meta:{  requiresAuth: true    }},
+      {path:'/agencyprofit',component:agencyprofit,meta:{  requiresAuth: true    }},
+      {path:'/customerRecommend',component:customerRecommend,meta:{  requiresAuth: true    }},
       {path:'/notices',component:notices,
               meta:{  requiresAuth: true    }
                             
