@@ -139,6 +139,19 @@
        this.getContractDitrubuteIncomeList();
     },
     methods:{
+      formatJson(filterVal, jsonData) {
+　　　　　　return jsonData.map(v => filterVal.map(j => v[j]))
+　　　　},
+      exportToExcel(){
+        require.ensure([], () => {
+　　　　　　　　const { export_json_to_excel } = require('../../vendor/Export2Excel');
+　　　　　　　　const tHeader = ['档案编号', '客户名称', '投资金额($)', '合同收益($)', '首交易日','产品类型','截止日期','交易状态','产品收益率','直推人','直推收益率','间推人','间推收益率','代理商编号','代理收益率','客户收益($)','直推人收益($)','间推人收益($)','代理商收益($)','公司收益($)']; //对应表格输出的title
+　　　　　　　　const filterVal = ['documentCode', 'customerName', 'investmentAmount', 'contractIncome', 'firstTradeDate','productTypeName','tradeEndDate','tradeStatus','productRate','derectRecomandPersonName','derectRecomandRate','inderectRecomandPersonName','inderectRecomandRate','agentCode','agentRate','customerIncome','derectIncome','inderectIncome','agentIncome','companyIncome'];
+　　　　　　　　const list = this.tableData;
+　　　　　　　　const data = this.formatJson(filterVal, list);
+　　　　　　　　export_json_to_excel(tHeader, data, '客户推荐表'); //对应下载文件的名字
+　　　　　　})
+      },
       quit(){
         this.$router.push('/notices');
       },
@@ -152,7 +165,7 @@
         var me = this;
         this.$http.post('/personDocument/getContractDitrubuteIncomeList',
               this.qs.stringify({
-                'token':this.$store.state.token,
+                'token':sessionStorage.getItem("token"),
                 'pageNum':'',
                 'pageSize':'',
                 'documentCode':this.documentCode,
@@ -165,7 +178,7 @@
                 'tradeEndDateEnd':this.tradeEndDateEnd,
               }))
             .then(function(res){
-                    // alert(JSON.stringify(res));
+                    alert(JSON.stringify(res));
                     var info = res['data'];
                     var code = info['code'];
                     var message = info['message'];

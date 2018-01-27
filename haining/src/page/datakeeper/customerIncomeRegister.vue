@@ -277,7 +277,7 @@
         }
       }
     },
-    created:function(){
+    created(){
       this.searchRecords();
       let me = this;
       this.$http.post('/product/getProductVOList',

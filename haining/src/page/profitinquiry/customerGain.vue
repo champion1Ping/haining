@@ -11,25 +11,25 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left">档案编号</el-button><el-input class="right" v-model="documentCode" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">客户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">客户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="customerName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">直推人&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left">直推人&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" v-model="derectPersonName" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">间推人&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left">间推人&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input class="right"  v-model="inderectPersonName" style="width:180px"></el-input>
     </el-input>
   </el-col> 
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="value" style="width:180px" class="right">
+    <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="tradeStatus" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
@@ -39,11 +39,11 @@
   </el-select><!-- <el-input class="right" style="width:180px"></el-input> -->
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">产品类型</el-button><el-input class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left">产品类型</el-button><el-input v-model="productId" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left">截止日期从</el-button><el-date-picker
-      v-model="value1"
+      v-model="tradeEndDateBegin"
       type="date"
       class="right"
       style="width:180px"
@@ -52,7 +52,7 @@
   </el-col>
   <el-col :span="6">
     <el-button type="info"  class="left">截止日期到</el-button><el-date-picker
-      v-model="value1"
+      v-model="tradeEndDateEnd"
       type="date"
       class="right"
       style="width:180px"
@@ -74,13 +74,13 @@
     <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="180"></el-table-column>
     <el-table-column prop="productTypeName" label="产品类型" align="center" width="180"></el-table-column>
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="180"></el-table-column>
-    <el-table-column prop="tradeStatus" label="交易状态" align="center" width="180"></el-table-column>
+    <el-table-column prop="tradeStatusName" label="交易状态" align="center" width="180"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="180"></el-table-column>
     <el-table-column prop="derectRecomandPersonName" label="直推人" align="center" width="180"></el-table-column>
     <el-table-column prop="derectRecomandRate" label="直推奖励率" align="center" width="180"></el-table-column>
     <el-table-column prop="inderectRecomandPersonName" label="间推人" align="center" width="180"></el-table-column>
     <el-table-column prop="inderectRecomandRate" label="间推奖励率" align="center" width="180"></el-table-column>
-    <el-table-column prop="agentCode" label="代理商编号biao" align="center" width="180"></el-table-column>
+    <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
     <el-table-column prop="customerIncome" label="客户收益($)" align="center" width="180"></el-table-column>
     <el-table-column prop="derectIncome" label="直推人收益($)" align="center" width="180"></el-table-column>
     <el-table-column prop="inderectIncome" label="间推人收益($)" align="center" width="180"></el-table-column>
@@ -109,6 +109,15 @@
         pageSize:'100',
         currentPage:'1',
         tableData:[],
+        documentCode:'',
+        customerName:'',
+        derectPersonName:'',
+        inderectPersonName:'',
+        tradeStatus:'',
+        productId:'',
+        tradeEndDateBegin:'',
+        tradeEndDateEnd:'',
+
         status: [{
           value: '1',
           label: '正常'
@@ -125,6 +134,9 @@
         value1:''
       }
     },
+    created(){
+        this.customerProfitQuery();
+    },
     methods:{
       quit(){
         this.$router.push('/notices');
@@ -139,9 +151,17 @@
         let me = this;
         this.$http.post('/personDocument/getContractDitrubuteIncomeList',
               this.qs.stringify({
-                'token':this.$store.state.token,
-                'pageNum':'',
-                'pageSize':'',
+                'token':sessionStorage.getItem("token"),
+                 'documentCode':this.documentCode,
+                 'customerName':this.customerName,
+                 'derectPersonName':this.derectPersonName,
+                 'inderectPersonName':this.inderectPersonName,
+                 'tradeStatus':this.tradeStatus,
+                 'productId':this.productId,
+                 'tradeEndDateBegin':this.tradeEndDateBegin,
+                 'tradeEndDateEnd':this.tradeEndDateEnd, 
+                  'pageNum':'',
+                  'pageSize':'',
 
               }))
             .then(function(res){

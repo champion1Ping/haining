@@ -5,7 +5,7 @@
 		客户推荐表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary" @click="quit()">退出</el-button>
 		<el-button type="primary" @click="recommendCustomerQuery()">查询</el-button>
-		<el-button type="primary" >导出表格</el-button>
+		<el-button type="primary" @click="exportToExcel()">导出表格</el-button>
 		</span>
     </div>
 
@@ -22,7 +22,7 @@
   <el-col :span="6">
        <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="wheatherGetMoney" style="width:180px" class="right">
     <el-option
-      v-for="item in this.$store.state.yesorno"
+      v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
       :label="item.label"
       :value="item.value">
@@ -118,7 +118,9 @@
         
       }
     },
-     
+    created(){
+      this.recommendCustomerQuery();
+    },
     methods:{
       quit(){
         this.$router.push('/notices');
@@ -161,6 +163,19 @@
              .catch(function(err){
 
              })
+      },
+      formatJson(filterVal, jsonData) {
+　　　　　　return jsonData.map(v => filterVal.map(j => v[j]))
+　　　　},
+      exportToExcel(){
+        require.ensure([], () => {
+　　　　　　　　const { export_json_to_excel } = require('../../vendor/Export2Excel');
+　　　　　　　　const tHeader = ['注册账号', '真实姓名', '联系方式', '性别', '注册日期','是否实名','是否入金','入金金额','推荐人资质','邮箱地址','负责代理商','直推人账号','间推人账号']; //对应表格输出的title
+　　　　　　　　const filterVal = ['account', 'realName', 'contactPhone', 'sexName', 'gmtCreate','whetherRealName','whetherGetMoney','sumMoney','refereeQualification','email','agentName','directRecommendationAccount','indirectRecommendationAccount'];
+　　　　　　　　const list = this.tableData;
+　　　　　　　　const data = this.formatJson(filterVal, list);
+　　　　　　　　export_json_to_excel(tHeader, data, '客户推荐表'); //对应下载文件的名字
+　　　　　　})
       }
     }
   }

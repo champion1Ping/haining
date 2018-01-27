@@ -221,7 +221,7 @@
         total:0,
         currentPage:1,
         pageSize:100,
-        agentData:[{},{},{},{}],
+        agentData:[],
         dialogAddAgency:false,
         agentCode:'',
         agentName:'',
@@ -305,6 +305,7 @@
             'pageSize':'100'
           }))
          .then(function(res){
+          alert(JSON.stringify(res));
           var info = res['data'];
           var code = info['code'];
           var message = info['message'];
