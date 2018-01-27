@@ -80,6 +80,14 @@
     border
     style="width: 100%" header-align="center">
     <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
+     <el-table-column
+      label="操作"
+      align="center"
+      width="120px">
+      <template slot-scope="scope">
+        <el-button @click="update(scope.row)" type="text" size="small">修改</el-button>
+      </template>
+    </el-table-column>
     <el-table-column prop="customerName" label="客户名称" align="center" width="180"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="180"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益($)" align="center" width="180"></el-table-column>
@@ -139,6 +147,9 @@
        this.getContractDitrubuteIncomeList();
     },
     methods:{
+      update(row){
+
+      },
       formatJson(filterVal, jsonData) {
 　　　　　　return jsonData.map(v => filterVal.map(j => v[j]))
 　　　　},
@@ -181,9 +192,15 @@
                     alert(JSON.stringify(res));
                     var info = res['data'];
                     var code = info['code'];
-                    var message = info['message'];
-                    var data = info['data'];
-                    me.tableData = data['page']['list'];
+                    if(code == 1) {
+                      var data = info['data'];
+                      me.tableData = data['page']['list'];
+                    } else {
+                      var message = info['message'];
+                      me.$message.error(message);
+                    }
+                    
+                    
             })
             .catch(function(err){
 

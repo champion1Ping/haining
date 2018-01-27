@@ -105,6 +105,12 @@
 	.el-menu--horizontal .el-submenu {
     float: center;
     position: relative;
-}
+  }
+    .el-submenu .el-menu-item{
+    	min-width: 90px;
+    }
+
+
+
 
 </style>

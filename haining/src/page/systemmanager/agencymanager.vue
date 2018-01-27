@@ -417,6 +417,11 @@
     transition: all .3s;
   }
   .el-pagination{flex:1;}
+
+  //表格高度控制
+  .el-table td, .el-table th{
+    padding: 0px;
+  }
   /*.el-input__prefix{
       right:0px;
   }  */

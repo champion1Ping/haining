@@ -133,7 +133,7 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <span type="info" class="left">档案编号</span><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
+    <el-button type="info" class="left">档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
         <span type="info"  class="left">交易平台</span><el-input  v-model="tradePlatform"class="right" style="width:180px"></el-input>
@@ -499,19 +499,13 @@
     padding: 20px;
   }
   .left{
-    width: 120px;
-    border-radius: 4px;
-    border: 1px solid;
-    box-sizing: border-box;
-    padding:7.75px 0 7.75px 0;
-    display:inline-block;
+   display:inline-block;
     border-color: #DEDAD6;
     border-top-right-radius:0px; 
     border-bottom-right-radius:0px;
     border-right-width: 0px;
-    color: #1e1c1c;
+    color: #292323;;
     background-color: #E6E6E6; 
-    text-align:center;
 
   }
   
