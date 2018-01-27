@@ -37,7 +37,7 @@
       v-model="addDocumentForm.getMoneyDate"
       type="date"
       class="right"
-      value-format="yyyy-MM-dd"
+      value-format="yyyyMMdd"
       style="width:177px"
       ></el-date-picker>
   </el-col>
@@ -86,7 +86,7 @@
 <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额/</el-button><el-input v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left">投资金额</el-button><el-input @change="caculateEarning()" v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left">预估收益</el-button><el-input disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
@@ -165,8 +165,8 @@
   <el-col :span="6">
     <el-button type="info"  class="left">注册邮箱</el-button><el-input  v-model="registerEmail"class="right" style="width:180px"></el-input>
   </el-col>
-  <el-col :span="6">
-      <el-button type="info"  class="left">份数</el-button><el-input  v-model="buyNum"class="right" style="width:180px"></el-input>
+  <!-- <el-col :span="6">
+      <el-button type="info"  class="left">份数</el-button><el-input  v-model="buyNum"class="right"  style="width:180px"></el-input>-->
 
     </el-date-picker>
   </el-col>
@@ -274,15 +274,15 @@
           derectRecomandPersonId:'',
           inderectRecomandPersonId:'',
           estimatedEarnings:'',
-          boughtNum:'',
         }
       }
     },
     created:function(){
+      this.searchRecords();
       let me = this;
       this.$http.post('/product/getProductVOList',
               this.qs.stringify({
-                'token':this.$store.state.token
+                'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
                   var info = res['data'];
@@ -295,12 +295,22 @@
             .catch(function(err){
 
             });
-        this.addDocumentForm.agentCode = this.$store.state.agentCode;
-        this.addDocumentForm.inderectRecomandPersonId = this.$store.state.inderectRecomandPersonId;
-        this.addDocumentForm.derectRecomandPersonId = this.$store.state.derectRecomandPersonId;
-        this.addDocumentForm.customerName = this.$store.state.realName;
+        
     },
     methods:{
+      caculateEarning(){
+            if (this.addDocumentForm.investmentAmount % 1000 != 0) {
+               this.$message.error("投资金额必须为1000整数倍");
+               this.addDocumentForm.investmentAmount ="";
+               return;
+           }
+            if (this.addDocumentForm.productType != "") {
+                alert(this.addDocumentForm.investmentAmount +","+this.addDocumentForm.serviceDate+","+this.addDocumentForm.productRate);
+                this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate);
+
+            }
+
+      },
       quit(){
         this.$router.push('/notices');
       },
@@ -314,20 +324,40 @@
          let index = this.addDocumentForm.productType;
          this.addDocumentForm.serviceDate = this.productTypes[index-1]['serviceTime'];
          this.addDocumentForm.productRate = this.productTypes[index-1]['monthRate'];
+         if (this.addDocumentForm.investmentAmount !="") {
+          this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate);
+         }
       },
       addDangAn(){
+
           this.dialogAddFile = true;
+          this.addDocumentForm.agentCode = sessionStorage.getItem("agentCode");
+        this.addDocumentForm.inderectRecomandPersonId = sessionStorage.getItem("indirectRecommendationAccont");
+        this.addDocumentForm.derectRecomandPersonId = sessionStorage.getItem("directRecommendationAccount");
+        this.addDocumentForm.customerName = sessionStorage.getItem("userName");
           let me = this;
             this.$http.post('/personDocument/getNextDocumentIndex',
               this.qs.stringify({
-                'token':this.$store.state.token
+                'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
+                  // alert(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
-                  var data = info['data'];
-                  this.$store.commit('saveDocumentCode',data);
+                  if (code == 1) {
+                    var data = parseInt(info['data']);
+                    let nextNum = 0;
+                    if (data >= 0 && data < 10) {
+                      nextNum = "00"+data;
+                    } else if(data > 9 && data < 100) {
+                      nextNum ="0"+data;
+                    }
+                    me.$store.commit('saveNextDocumentCode',nextNum);
+                  } else {
+                     me.$message.error(message);
+                  }
+                  
                  
             })
             .catch(function(err){
@@ -339,7 +369,7 @@
       getProductTypeList(){
         this.$http.post('product/getProductVOList',
               this.qs.stringify({
-                'token':this.$store.state.token
+                'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
               var info = res['data'];
@@ -358,7 +388,7 @@
         let me = this;
         this.$http.post('/personDocument/getPersonDocumentList',
               this.qs.stringify({
-                'token':this.$store.state.token,
+                'token':sessionStorage.getItem("token"),
                 'pageNum':'',
                 'pageSize':'',
                 'documentCode':this.documentCode,
@@ -386,9 +416,24 @@
             })
       },
       generateDocumentCode(){
-          this.addDocumentForm.documentCode = this.$store.state.agentCode+this.$store.state.nextDocumentNum;
+          this.addDocumentForm.documentCode = sessionStorage.getItem("agentCode")+this.addDocumentForm.getMoneyDate + 
+          this.$store.state.nextDocumentNum;
       },
       addPersonDocument(){
+        //检验条件
+        for(var field in this.addDocumentForm){
+          if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId") {
+            if(this.addDocumentForm[field] == ""){
+            this.$message.error(field + "必填字段不能为空");
+            return;
+          }
+          }
+        }
+
+        if (this.addDocumentForm.investmentAmount % 1000 != 0) {
+          this.$message.error("投资金额必须为1000整数倍");
+            return;
+        }
         this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
                 'token':this.$store.state.token,
@@ -419,7 +464,7 @@
               var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
-                      me.$message('发布成功');
+                      me.$message.success('添加成功');
                     }
                   var message = info['message'];
                   var data = info['data'];

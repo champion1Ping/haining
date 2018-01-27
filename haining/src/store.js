@@ -120,7 +120,7 @@ const mutations = {
       state.realName = realName;
     },
     saveNextDocumentCode(state,documentCode){
-      state.documentCode = documentCode;
+      state.nextDocumentNum = documentCode;
     }
 }
 

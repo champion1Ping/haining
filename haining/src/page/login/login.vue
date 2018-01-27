@@ -240,19 +240,25 @@
                if (code == 1) {
                 var data = info['data'];
                let token = data['token'];
+               sessionStorage.setItem('token', token);//token保存
                me.$store.commit('saveToken', token);
                let sysUserRoleList = data['sysUserRoleList'];
                let id = sysUserRoleList[0]['id'];
                let userId=sysUserRoleList[0]['userId'];
                let roleId = sysUserRoleList[0]['roleId'];
+               sessionStorage.setItem('roleId',roleId);
                me.$store.commit('saveRoleId', roleId);
-               me.$router.push('/notices');
+               
                let baseInfo = data['userBaseInfoVO'];
+               sessionStorage.setItem("userName",baseInfo['realName']);
                me.$store.commit('saveAgentCode',baseInfo['agentCode']);
+               sessionStorage.setItem("agentCode",baseInfo['agentCode']);
                me.$store.commit('saveDirect',baseInfo['directRecommendationAccount']);
+               sessionStorage.setItem("directRecommendationAccount",baseInfo['directRecommendationAccount']);
                me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccont']);
+               sessionStorage.setItem("indirectRecommendationAccount",baseInfo['indirectRecommendationAccont']);
                me.$store.commit('saveRealName',baseInfo['realName']);
-
+               me.$router.push('/notices');
                } else {
                 var message = info['message'];
                 me.$message(message);

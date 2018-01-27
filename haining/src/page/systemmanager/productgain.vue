@@ -61,8 +61,10 @@
     <el-table-column prop="monthRate" label="月收益率" align="center" width="180">
            <el-input v-model="monthRate"></el-input>
     </el-table-column>
-    <el-table-column prop="enableFlag" label="启用" align="center" width="180">
-           <el-checkbox  v-model="enableFlag"></el-checkbox>
+    <el-table-column prop="enableFlag" label="操作" align="center" width="180">
+           <template slot-scope="scope">
+        <el-button @click="handleClick(scope.row)" type="text" size="small">{{enableFlag==0 ? "启用":"停用" }}</el-button>
+      </template>
     </el-table-column>
   </el-table>
  

@@ -5,8 +5,11 @@
   <!-- <div style="position: relative;height: 60px;width: 100%;"></div> -->
   <el-main>
   <transition name="fade">
+     <keep-alive>
               <router-view class="view"></router-view>
-            </transition>
+     </keep-alive>         
+  </transition>
+
 </el-main>
 </el-container>
 </div>
@@ -30,22 +33,18 @@ export default {
       
     }
   },
-  created: function(){
-    this.$router.push('/login');
+  created(){
+ 
   },
   methods: {
-
+    
   },
   components: {
       'v-header': header
     },
   watch: {
      '$route': function (to,from) {
-         if(to.path == '/login'){
-             this.isShow = true ;
-         }else if(to.path == '/activeManage'){
-             this.active = false ;
-         }
+         
      }
   }
 }
@@ -62,6 +61,7 @@ html, body{ margin:0; height:100%; }
  .el-main{
     background-color: #EEEEEE;
     padding-top: 5px;
+
     padding-left: 0px;
     padding-right: 0px;
     flex:1;

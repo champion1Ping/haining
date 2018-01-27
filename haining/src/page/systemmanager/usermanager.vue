@@ -220,6 +220,7 @@
 </template>
 <script>
   export default{
+
     data(){
       return{
         userTable:[],
@@ -258,7 +259,7 @@
       }
     },
     created:function(){
-
+      this.getUserList();
     },
     methods:{
       quit(){
@@ -271,6 +272,12 @@
         this.currentPage= page;
       },
       addUser(){
+           for(var field in this.addUserForm){
+          if(this.addUserForm[field] == ""){
+            this.$message.error("必填字段不能为空");
+            return;
+          }
+        }
           this.dialogAddUser = true;
           var me = this;
           this.$http.post('/user/addUser',
@@ -361,6 +368,7 @@
              })
       },
       handleClick(row){
+         this.$router.push('/personinfo');
          this.addUserForm.agentCode = row.agentCode;
          this.addUserForm.agentName = row.agentName;
          this.dialogChooseAgent = false;

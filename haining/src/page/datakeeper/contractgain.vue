@@ -135,6 +135,9 @@
         value1:'',
         }
     },
+    created:function(){
+       this.getContractDitrubuteIncomeList();
+    },
     methods:{
       quit(){
         this.$router.push('/notices');
