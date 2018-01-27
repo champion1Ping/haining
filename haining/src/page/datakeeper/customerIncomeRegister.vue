@@ -122,7 +122,7 @@
 </el-dialog>
 <!-- 弹出框结束-->
   <div class="btn">
-		<span style="color:#C9A44E;font-size:20px">
+		<span style="color:#C9A44E;font-size:20px;" >
 		客户入金登记表&nbsp;&nbsp;&nbsp;
 		<el-button type="primary" @click="quit()">退出</el-button>
 		<el-button type="primary" @click="addDangAn()">添加</el-button>
@@ -133,10 +133,10 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
+    <span type="info" class="left">档案编号</span><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">交易平台</el-button><el-input  v-model="tradePlatform"class="right" style="width:180px"></el-input>
+        <span type="info"  class="left">交易平台</span><el-input  v-model="tradePlatform"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left">是否入金</el-button><el-select v-model="wheatherGetMoney" style="width:180px" class="right" placeholder="请选择">
@@ -199,7 +199,7 @@
     <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
     <el-table-column prop="tradePlatform" label="交易平台" align="center" width="180"></el-table-column>
     <el-table-column prop="tradeAccount" label="交易账户号" align="center" width="180"></el-table-column>
-    <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="180"></el-table-column>
+    <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="180" :formatter="formatter1"></el-table-column>
     <el-table-column prop="wheatherGetMoneyName" label="入金日期" align="center" width="180"></el-table-column>
     <el-table-column prop="registerEmail" label="注册邮箱" align="center" width="180"></el-table-column>
     <el-table-column prop="certificateTypeName" label="证件类型" align="center" width="180"></el-table-column>
@@ -299,6 +299,13 @@
         
     },
     methods:{
+      formatter1(row,columb,cellValue){
+          if (cellValue == 1) {
+            return "是";
+          } else {
+            return "否";
+          }
+      },
       addPersonDocument(){
         //检验条件
         for(var field in this.addDocumentForm){
@@ -493,8 +500,10 @@
   }
   .left{
     width: 120px;
-  }
-  .left{
+    border-radius: 4px;
+    border: 1px solid;
+    box-sizing: border-box;
+    padding:7.75px 0 7.75px 0;
     display:inline-block;
     border-color: #DEDAD6;
     border-top-right-radius:0px; 
@@ -502,8 +511,10 @@
     border-right-width: 0px;
     color: #1e1c1c;
     background-color: #E6E6E6; 
+    text-align:center;
 
   }
+  
   /*输入框*/
   .right > .el-input__inner{
       border-top-left-radius:0px; 
