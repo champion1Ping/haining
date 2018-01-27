@@ -249,6 +249,9 @@
         value1:''
       }
     },
+    created:function(){
+        this.query();
+    },
     methods:{
       quit(){
         this.$router.push('/notices');
@@ -294,8 +297,8 @@
             'agentName':this.agencyName,
             'legalRepresentative':this.legalRepresentative,
             'provinceId':this.provinceId,
-            'bussinessStartTime':this.bussinessStartTime,
-            'bussinessEndTime':this.bussinessEndTime,
+            'businessStartTime':this.bussinessStartTime,
+            'businessEndTime':this.bussinessEndTime,
             'contractStartTime':this.contractStartTime,
             'contractEndTime':this.contractEndTime,
             'pageNum':'',
@@ -315,13 +318,19 @@
 
       },
       submitForm(formName){
+         let obj = {};
+          obj = this.$store.state.xialakuang.shengfen.find((item)=>{
+              return item.value === this.addAgencyForm.province;
+          });
+          let provinceName = obj.label;
         var me = this;
         for(var field in this.addAgencyForm){
           if(this.addAgencyForm[field] == ""){
-            this.$message(field);
+            this.$message.error("必填字段不能为空");
             return;
           }
         }
+        alert(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
         this.$http.post('/agent/addAgentInfo',
           this.qs.stringify({
             'agentCode':this.addAgencyForm.agencyCode,
@@ -329,11 +338,11 @@
             'unifiedSocialCreditCode':this.addAgencyForm.socialNum,
             'legalRepresentative':this.addAgencyForm.loyalPerson,
             'provinceId':this.addAgencyForm.province,
-            'provinceName':this.addAgencyForm.province,
+            'provinceName':provinceName,
             'contactPhone':this.addAgencyForm.contact,
             'businessAddress':this.addAgencyForm.businessAddress,
-            'bussinessStartTime':this.addAgencyForm.bussinessStartTime,
-            'bussinessEndTime':this.addAgencyForm.bussinessEndTime,
+            'businessStartTime':this.addAgencyForm.bussinessStartTime,
+            'businessEndTime':this.addAgencyForm.bussinessEndTime,
             'contractStartTime':this.addAgencyForm.signStartTime,
             'contractEndTime':this.addAgencyForm.signEndTime
           }))
@@ -343,6 +352,8 @@
            var message =info['message'];
            if (code == 1) {
               me.$message("添加成功");
+              //字段清空
+              me.$refs[me.addAgencyForm].resetFields();
            } else {
               me.$message(message);
            }

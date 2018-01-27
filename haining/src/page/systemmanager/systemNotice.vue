@@ -44,6 +44,7 @@
 				
 			}
 		},
+		
 		methods:{
 			quit(){
 				this.$router.push('/notices');

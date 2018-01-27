@@ -4,11 +4,11 @@
 		<div>
         <template v-for="notice in notices">
         <el-row>
-        	{{notice.content}}
+        	{{notice.noticeContent}}
         </el-row>
         <el-row>
         	
-        	{{notice.time}}
+        	{{notice.gmtCreate}}
         </el-row>
         <el-row><hr/></el-row>
            
@@ -33,13 +33,24 @@
 			}
 		},
 		created:function(){
+			let me = this;
 			this.$http.post('/sysNotice/getSysNoticeList',
-		         this.sq.stringify({
+		         this.qs.stringify({
 		            'token':this.$store.state.token
 		         })
 		         )
 		         .then(function(res){
-		         	alert(JSON.stringify(res));
+		         	var info = res['data'];
+		            var code = info['code'];
+		            if (code == 1) {
+		            	var data = info['data'];
+		            	me.notices = data
+		            } else {
+		            	 var message = info['message'];
+		            	 me.$message.error(message);
+		            }
+		         
+		          
 
 		         })
 		         .catch(function(err){

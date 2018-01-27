@@ -46,7 +46,10 @@ export default [
       {path:'/customergain',component:customerGain},
       {path:'/agencyprofit',component:agencyprofit},
       {path:'/customerRecommend',component:customerRecommend},
-      {path:'/notices',component:notices}
+      {path:'/notices',component:notices,
+              meta:{  requiresAuth: true    }
+                            
+      }
       
   // {
   //   path: '/activeManage',component:totalpages,
