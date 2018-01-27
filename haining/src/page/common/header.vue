@@ -9,7 +9,7 @@
         <div v-if="this.$store.state.roleId > 0 || id > 0 ">
           <el-menu :default-active="activeIndex"  class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1" v-if="this.$store.state.roleId==3 ||id ==3">
-			    <template slot="title"><span style="font-size:20px;color:#333333">系统管理</span></template>
+			    <template slot="title"><span style="font-size:20px;color:#333333;">系统管理</span></template>
 			    <el-menu-item index="/systemNotice">系统公告发布</el-menu-item>
 			    <el-menu-item index="/agencymanager">代理商创建</el-menu-item>
 			    <el-menu-item index="/usermanager">系统用户管理</el-menu-item>
@@ -126,6 +126,10 @@
 	/*子菜单文字居中*/
 	.el-menu-item{
 		text-align:center;
+	}
+	.el-submenu .el-menu-item:hover{
+		color: #FFF;
+		background-color: #409EFF;
 	}
 	/* 头部导航 */
 	.el-menu--horizontal .el-submenu {
