@@ -4,7 +4,7 @@
   <el-col :span="11">
 
    <span style="color:#C9A44E;font-size:20px;padding">密码登录</span>
-    <el-form :label-position="labelPosition" label-width="80px" :model="secretLogin" ref="secretLogin" style="margin-top:20px">
+    <el-form :label-position="labelPosition" label-width="80px" :model="secretLogin" ref="secretLogin" style="margin-top:10px">
   <el-form-item label="手机号码/用户账号" style="padding:0 0 2" prop="phoneNumber">
     <el-input v-model="secretLogin.phoneNumber" placeholder="请输入手机号码/用户账号" style="width:280px"></el-input>
   </el-form-item>
@@ -27,7 +27,7 @@
 
   <el-col :span="11">
      <span style="color:#C9A44E;font-size:20px;padding">注册账号</span>
-    <el-form  label-position="top"  class="demo-ruleForm" label-width="80px" :rules="rules"  ref="accountReg" :model="accountReg" style="margin-top:20px">
+    <el-form  label-position="top"  class="demo-ruleForm" label-width="80px" :rules="rules"  ref="accountReg" :model="accountReg" style="margin-top:10px">
   <el-form-item label="姓名" required prop="name">
     <el-input v-model="accountReg.name" placeholder="请输入真实姓名"style="width:280px"></el-input>
   </el-form-item>
@@ -274,15 +274,15 @@
 <style>
   .login{
     background-color:#FFFFFF;
-    margin-top: 10px;
+    margin-top: 0px;
     /*margin-bottom: 10px;*/
-    margin-right:300px;
-    margin-left: 180px;
+    margin-right:360px;
+    margin-left: 360px;
     padding-left: 40px;
-    padding-top: 20px;
+    padding-top: 10px;
   }
   .el-form--label-top .el-form-item__label {
-    line-height: 20px;
+    line-height: 10px;
     float: none;
     display: inline-block;
     text-align: left;

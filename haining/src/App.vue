@@ -61,7 +61,9 @@ html, body{ margin:0; height:100%; }
  /*.el-main0{-webkit-box-flex:1;-ms-flex:1;flex:1; background-color: #fff; padding: 500px 70px; }*/
  .el-main{
     background-color: #EEEEEE;
-    padding-top: 10px;
+    padding-top: 5px;
+    padding-left: 0px;
+    padding-right: 0px;
     flex:1;
  }
 .el-header{
@@ -69,6 +71,7 @@ html, body{ margin:0; height:100%; }
   /*margin-top: 100px;
     margin-right:100px;
     margin-left: 280px;*/
+
   
 }
   
