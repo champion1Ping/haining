@@ -33,7 +33,7 @@
         	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
 
-			    <template slot="title" ><span style="font-size:14px">{{userName}}</span></template>
+			    <template slot="title" ><span style="font-size:14px">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
 
 
 			    <el-menu-item index="/personinfo" v-if="roleId==2 || id == 2">个人信息</el-menu-item>
@@ -46,7 +46,7 @@
         </el-col>
 
        	<el-col :span="1" v-if="this.$store.state.roleId > 0 || id > 0 ">
-       	<el-button type="text" @click="getNotice()"><span style="line-height:3;font-size:14px;color:#333333">通知</span></el-button>
+       	<el-button type="text" @click="getNotice()"><span style="line-height:3;font-size:14px;color:#FF6240;padding-bottom:10px;">通知</span></el-button>
 
       
 
