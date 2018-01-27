@@ -12,55 +12,14 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">注册账号</el-button><el-input v-model="account" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>注册账号</el-button><el-input v-model="account" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">真实姓名&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="realName" class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled>真实姓名&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="realName" class="right" style="width:180px"></el-input>
 
   </el-col>
-  <el-col :span="6">
-       <el-button type="info"  class="left">是否入金&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="wheatherGetMoney" style="width:180px" class="right">
-    <el-option
-      v-for="item in this.$store.state.xialakuang.yesorno"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
-    </el-option>
-  </el-select>
-
-  </el-col>
-  <el-col :span="6">
-        <el-button type="info"  class="left">推荐人资质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="refereeQualification" class="right" style="width:180px"></el-input>
-    </el-input>
-  </el-col> 
-  </el-row>
-  <el-row style="padding-top:10px">
-  <el-col :span="6">
-    <el-button type="info"  class="left">直推人账号 </el-button><el-input v-model="directRecommendationAccount"vclass="right" style="width:180px"></el-input>
-
-  </el-col>
-  <el-col :span="6">
-      <el-button type="info"  class="left">间推人账号</el-button><el-input class="right" v-model="indirectRecommendationAccount" style="width:180px"></el-input>
-  </el-col>
-  <el-col :span="6">
-      <el-button type="info"  class="left">注册日期从</el-button><el-date-picker
-      v-model="gmtCreateStart"
-      type="date"
-      class="right"
-      style="width:180px"
-      >
-    </el-date-picker>
-  </el-col>
-  <el-col :span="6">
-    <el-button type="info"  class="left">注册日期到</el-button><el-date-picker
-      v-model="gmtCreateEnd"
-      type="date"
-      class="right"
-      style="width:180px"
-      ></el-date-picker>
-    
-  </el-col> 
+  
     
   </el-row>
     </div>
@@ -191,13 +150,19 @@
     background-color: #ffffff;
     padding: 20px;
   }
+  /*.el-button--info.is-disabled{
+    color: #2a2626;
+  }*/
+  button.el-button.left.el-button--info.is-disabled{
+    color: #2a2626;
+  }
   .left{
     display:inline-block;
     border-color: #DEDAD6;
     border-top-right-radius:0px; 
     border-bottom-right-radius:0px;
     border-right-width: 0px;
-    color: #1e1c1c;
+    color: #292323;;
     background-color: #E6E6E6; 
 
   }

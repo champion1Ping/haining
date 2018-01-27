@@ -25,7 +25,7 @@ router.beforeEach((to, from, next) => {
       }  // 如果即将进入登录路由，则直接放行
      else {     //进入的不是登录路由
 
-          if(to.meta.requiresAuth && !sessionStorage.getItem('token')) {
+          if(/*to.meta.requiresAuth && */!sessionStorage.getItem('token')) {
           	next({ path: '/login' })} 
 
           //下一跳路由需要登录验证，并且还未登录，则路由定向到  登录路由
