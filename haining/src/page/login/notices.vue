@@ -1,7 +1,7 @@
 <template>
 	<div class="notices">
 	<span style="color:#C9A44E;font-size:20px;">系统通知</span>
-		<div>
+		<div style="margin-top:10px">
         <template v-for="notice in notices">
         <el-row>
         	{{notice.noticeContent}}
@@ -79,12 +79,12 @@
 <style>
 	.notices{
 		background-color:#FFFFFF;
-	    margin-top: 50px;
-	    margin-right:20%;
+	    margin-top: 0px;
+	    margin-right:25%;
 	    margin-bottom:'auto';
-	    margin-left: 20%;
+	    margin-left: 25%;
 	    padding-left: 40px;
-	    padding-top: 40px;
+	    padding-top: 30px;
 	    padding-bottom: 40px;
 	}
 	    

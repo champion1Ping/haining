@@ -1,10 +1,10 @@
 <template>
 <div class="notice">
-	<div class="tab"><span style="color:#C9A44E;font-size:20px;padding">系统公告发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><el-button type="primary" @click="quit()">退出</el-button></div>
+	<div class="tab"><span style="margin-left:10px;color:#C9A44E;font-size:20px;padding">&nbsp;&nbsp;系统公告发布&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span><el-button type="primary" @click="quit()">退出</el-button></div>
 
 	<div class="content">
 	<el-row>
-		<el-col :span="12">To: &nbsp;&nbsp;&nbsp;&nbsp;
+		<el-col :span="12">&nbsp;&nbsp;&nbsp;To:&nbsp;&nbsp;&nbsp;
 		<el-select v-model="toType" placeholder="请选择用户性质">
 			<el-option
 	      v-for="item in this.$store.state.usertype.notice"
@@ -92,13 +92,13 @@
 		background-color:#FFFFFF;
 		margin-top: 1px;
 		padding-top: 10px;
-		padding-bottom: 30px;
+		padding-bottom: 10px;
 	}
 	.content{
 		background-color:#FFFFFF;
-		margin-top: 4px;
-		margin-left: 400px;
-		margin-right: 300px;
+		margin-top: 10px;
+		margin-left: 360px;
+		margin-right: 360px;
 		margin-bottom: 20%;
 	}
 </style>

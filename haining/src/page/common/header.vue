@@ -3,7 +3,7 @@
 	<div class="header">
     <el-row>
         <el-col :span="6">
-        <img src="../../assets/logo.png" style="padding:5px 5px 1px 100px" />
+        <img src="../../assets/logo.png" style="padding:10px 10px 5px 80px" />
         </el-col>
         <el-col :span="14">
         <div v-if="this.$store.state.roleId > 0 || id > 0 ">
@@ -32,7 +32,10 @@
         <el-col :span="3" v-if="this.$store.state.roleId > 0||id > 0">
         	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
-			    <template slot="title" ><span style="font-size:15px">{{userName}}</span></template>
+
+			    <template slot="title" ><span style="font-size:14px">{{realName}}</span></template>
+
+
 			    <el-menu-item index="/personinfo">个人信息</el-menu-item>
 			    <el-menu-item index="/updatepw" v-if="roleId  !==2 || id !==2">修改密码</el-menu-item>
 			    <el-menu-item index="/login" @click="loginout()">退出登录</el-menu-item>
@@ -41,8 +44,12 @@
 		  </el-menu>
 
         </el-col>
+
        	<el-col :span="1" v-if="this.$store.state.roleId > 0 || id > 0 ">
-       	<el-button type="text" @click="getNotice()"><span style="font-size:15px;color:#333333">通知</span></el-button>
+       	<el-button type="text" @click="getNotice()"><span style="line-height:3;font-size:14px;color:#333333">通知</span></el-button>
+
+      
+
        	</el-col>
     </el-row>
   </div>  

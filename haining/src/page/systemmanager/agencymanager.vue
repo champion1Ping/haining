@@ -37,7 +37,7 @@
   </el-select>
   </el-col> 
   <el-col :span="16">
-       <el-button type="info"  class="left">营业地址</el-button><el-input v-model="addAgencyForm.businessAddress"class="right" style="width:360px"></el-input>
+       <el-button type="info"  class="left">营业地址</el-button><el-input v-model="addAgencyForm.businessAddress"class="right" style="width:563px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
@@ -46,7 +46,7 @@
       v-model="addAgencyForm.bussinessStartTime"
       type="date"
       class="right"
-      format="yyyy 年 MM 月 dd 日"
+      format="yyyy - MM - dd "
       value-format="yyyy-MM-dd"
       style="width:180px"
       >
@@ -56,7 +56,7 @@
     <el-button type="info"  class="left">营业结束时间</el-button><el-date-picker
       v-model="addAgencyForm.bussinessEndTime"
       type="date"
-      format="yyyy 年 MM 月 dd 日"
+      format="yyyy - MM - dd "
       value-format="yyyy-MM-dd"
       class="right"
       style="width:180px"
@@ -72,7 +72,7 @@
       <el-button type="info"  class="left">签约时间</el-button><el-date-picker
       v-model="addAgencyForm.signStartTime"
       type="date"
-      format="yyyy 年 MM 月 dd 日"
+      format="yyyy - MM - dd "
       value-format="yyyy-MM-dd"
       class="right"
       style="width:180px"
@@ -84,7 +84,7 @@
       v-model="addAgencyForm.signEndTime"
       type="date"
       class="right"
-      format="yyyy 年 MM 月 dd 日"
+      format="yyyy - MM - dd "
       value-format="yyyy-MM-dd"
       style="width:180px"
       ></el-date-picker>
@@ -101,7 +101,7 @@
 
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">代理商管理&nbsp;&nbsp;&nbsp;
-		<el-button type="primary" @click="quit()">退出</el-button>
+		<el-button  type="primary" @click="quit()">退出</el-button>
 		<el-button type="primary" @click="addAgency()">添加</el-button>
 		<el-button type="primary" @click="query()">查询</el-button>
 		</span>
@@ -182,17 +182,17 @@
     :header-row-class-name="headerRowClassName"
     border
     style="width:100%;height:30%" header-align="center">
-    <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="agentName" label="代理商名称" align="center" width="180"></el-table-column>
+    <el-table-column prop="agentCode" label="代理商编号" align="center" width="100"></el-table-column>
+    <el-table-column prop="agentName" label="代理商名称" align="center" width="220"></el-table-column>
     <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="180"></el-table-column>
-    <el-table-column prop="legalRepresentative" label="法定代表人" align="center" width="180"></el-table-column>
-    <el-table-column prop="contactPhone" label="联系方式" align="center" width="180"></el-table-column>
-    <el-table-column prop="contractStartTime" label="签约开始日期" align="center" width="180"></el-table-column>
-    <el-table-column prop="contractEndTime" label="截止日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="legalRepresentative" label="法定代表人" align="center" width="100"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系方式" align="center" width="120"></el-table-column>
+    <el-table-column prop="contractStartTime" label="签约开始日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="contractEndTime" label="截止日期" align="center" width="120"></el-table-column>
     <el-table-column prop="provinceName" label="省份" align="center" width="180"></el-table-column>
-    <el-table-column prop="businessAddress" label="营业地址" align="center" width="180"></el-table-column>
-    <el-table-column prop="bussinessStartTime" label="营业开始日期" align="center" width="180"></el-table-column>
-    <el-table-column prop="bussinessEndTime" label="营业截止日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="businessAddress" label="营业地址" align="center" width="90"></el-table-column>
+    <el-table-column prop="bussinessStartTime" label="营业开始日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="bussinessEndTime" label="营业截止日期" align="center" width="120"></el-table-column>
   </el-table>
   <footer>
     <el-pagination
