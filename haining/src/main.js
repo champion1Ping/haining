@@ -18,8 +18,8 @@ router.beforeEach((to, from, next) => {
      //to即将进入的目标路由对象，from当前导航正要离开的路由， next  :  下一步执行的函数钩子
      if(to.path === '/login')  { 
      	sessionStorage.removeItem("token");
-		sessionStorage.removeItem("roleId");
-		sessionStorage.removeItem("userName");
+		  sessionStorage.removeItem("roleId");
+		  sessionStorage.removeItem("userName");
      	next()
         
       }  // 如果即将进入登录路由，则直接放行

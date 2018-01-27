@@ -110,11 +110,11 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info" class="left" v-model="agentCode">代理商编号</el-button><el-input  class="right" style="width:180px"></el-input>
+    <el-button type="info" class="left" >代理商编号</el-button><el-input v-model="agentCode" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left" v-model="agentName">代理商名称</el-button><el-input class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left" >代理商名称</el-button><el-input class="right"  v-model="agentName"style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
@@ -291,10 +291,11 @@
       
       query(){
         var t = this;
+        alert(this.agentCode+","+this.agentName);
         this.$http.post('/agent/getAgentList',
           this.qs.stringify({
             'agentCode':this.agentCode,
-            'agentName':this.agencyName,
+            'agentName':this.agentName,
             'legalRepresentative':this.legalRepresentative,
             'provinceId':this.provinceId,
             'businessStartTime':this.bussinessStartTime,

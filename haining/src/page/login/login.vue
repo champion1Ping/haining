@@ -250,13 +250,14 @@
                me.$store.commit('saveRoleId', roleId);
                
                let baseInfo = data['userBaseInfoVO'];
+               sessionStorage.setItem("account",baseInfo['account']);
                sessionStorage.setItem("userName",baseInfo['realName']);
                me.$store.commit('saveAgentCode',baseInfo['agentCode']);
                sessionStorage.setItem("agentCode",baseInfo['agentCode']);
                me.$store.commit('saveDirect',baseInfo['directRecommendationAccount']);
                sessionStorage.setItem("directRecommendationAccount",baseInfo['directRecommendationAccount']);
-               me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccont']);
-               sessionStorage.setItem("indirectRecommendationAccount",baseInfo['indirectRecommendationAccont']);
+               me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccount']);
+               sessionStorage.setItem("indirectRecommendationAccount",baseInfo['indirectRecommendationAccount']);
                me.$store.commit('saveRealName',baseInfo['realName']);
                me.$router.push('/notices');
                } else {

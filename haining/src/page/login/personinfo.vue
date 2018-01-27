@@ -113,39 +113,49 @@
         <el-col :span="8">
           <div>证件正面照</div>
           <el-upload
-          class="avatar-uploader"
-          :action="importcredentialsFront"
-          
-          :show-file-list="false"
-          :on-success="uploadFrontSuccess"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="credentialsFront" :src="credentialsFront" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+  action="http://111.230.221.41:8080/user/uploadPic"
+  list-type="picture-card"
+  limit="1"
+  :data="certificateFrontData"
+  :on-preview="handlePictureCardPreview0"
+  :on-success="handleFrontSuccess"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible" size="tiny">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
         </el-col>
         <el-col :span="8">
           <div>证件反面照</div>
            <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="credentialsBack" :src="credentialsBack" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+  action="http://111.230.221.41:8080/user/uploadPic"
+  :data="certificateBackData"
+  list-type="picture-card"
+  :on-preview="handlePictureCardPreview1"
+  :on-success="handleBackSuccess"
+  :on-remove="handleRemove">
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible" size="tiny">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
         </el-col>
         <el-col :span="8">
           <div>居住地址证明</div>
            <el-upload
-          class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
-          :show-file-list="false"
-          :on-success="handleAvatarSuccess"
-          :before-upload="beforeAvatarUpload">
-          <img v-if="liveAddressCredential" :src="liveAddressCredential" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
-        </el-upload>
+           :data="liveAddressData"
+  action="http://111.230.221.41:8080/user/uploadPic"
+  list-type="picture-card"
+  :on-success="handleAddressSuccess"
+  :on-preview="handlePictureCardPreview2"
+  :on-remove="handleRemove">
+
+  <i class="el-icon-plus"></i>
+</el-upload>
+<el-dialog :visible.sync="dialogVisible" size="tiny">
+  <img width="100%" :src="dialogImageUrl" alt="">
+</el-dialog>
         </el-col>
       </el-row>
       </div>
@@ -196,6 +206,21 @@
         chargedMoney:'',
         directRecommendRate:'',
         indirectRecommendRate:'',
+        certificateFrontData:{
+          picType:'1',
+            account:sessionStorage.getItem("account"),
+            file:""
+        },
+        certificateBackData:{
+            picType:'2',
+            account:sessionStorage.getItem("account"),
+            file:""
+        },
+        liveAddressData:{
+            picType:'3',
+            account:sessionStorage.getItem("account"),
+            file:""
+        },
         baseinfo:{
             account:'',
             phoneNumber:'',
@@ -223,10 +248,11 @@
       var me = this;
       this.$http.post('/user/getUserBaseInfo',
              this.qs.stringify({
-                'token':this.$store.state.token
+                'token':sessionStorage.getItem("token")
              })
              )
              .then(function(res){
+                alert(JSON.stringify(res));
                 var info = res['data'];
                 var code = info['code'];
                 var message = info['message'];
@@ -256,12 +282,16 @@
              })
     },
     methods: {
-      handleAvatarSuccess(){
+      
+      handleFrontSuccess(response, file, fileList){
+        alert(response);
+      },
+      handleBackSuccess(response,file,fileList){
+        alert(JSON.stringify(response));
+      },
+      handleAddressSuccess(response, file, fileList){
 
       },
-      uploadFrontSuccess (response, file, fileList) {
-      alert(response);
-    },
       getDate (strDate) {
         let st = strDate;
         let a = st.split(" ");

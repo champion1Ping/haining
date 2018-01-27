@@ -33,10 +33,10 @@
         	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
 
-			    <template slot="title" ><span style="font-size:14px">{{realName}}</span></template>
+			    <template slot="title" ><span style="font-size:14px">{{userName}}</span></template>
 
 
-			    <el-menu-item index="/personinfo">个人信息</el-menu-item>
+			    <el-menu-item index="/personinfo" v-if="roleId==2 || id == 2">个人信息</el-menu-item>
 			    <el-menu-item index="/updatepw" v-if="roleId  !==2 || id !==2">修改密码</el-menu-item>
 			    <el-menu-item index="/login" @click="loginout()">退出登录</el-menu-item>
 			  </el-submenu>

@@ -204,8 +204,8 @@
     <el-table-column prop="registerEmail" label="注册邮箱" align="center" width="180"></el-table-column>
     <el-table-column prop="certificateTypeName" label="证件类型" align="center" width="180"></el-table-column>
     <el-table-column prop="certificateNumber" label="证件号" align="center" width="180"></el-table-column>
-    <el-table-column prop="contractPhone" label="联系电话" align="center" width="180"></el-table-column>
-    <el-table-column prop="contractType" label="签约日期" align="center" width="180"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系电话" align="center" width="180"></el-table-column>
+    <el-table-column prop="contractDate" label="签约日期" align="center" width="180"></el-table-column>
     <el-table-column prop="productType" label="产品类型" align="center" width="180"></el-table-column>
     <el-table-column prop="productRate" label="收益率($)" align="center" width="180"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="180"></el-table-column>
@@ -233,7 +233,7 @@
     data(){
       return{
         customerIncomeTable:[],
-        productTypes:[],
+
         currentPage:1,
         pageSize:100,
         dialogAddFile:false,
@@ -265,6 +265,7 @@
           certificateNumber:'',
           contractDate:'',
           productType:'',
+          productTypeName:'',
           productRate:'',
           serviceDate:'',
           investmentAmount:'',
@@ -298,6 +299,61 @@
         
     },
     methods:{
+      addPersonDocument(){
+        //检验条件
+        for(var field in this.addDocumentForm){
+          if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId") {
+            if(this.addDocumentForm[field] == ""){
+            this.$message.error(field + "必填字段不能为空");
+            return;
+          }
+          }
+        }
+
+        if (this.addDocumentForm.investmentAmount % 1000 != 0) {
+          this.$message.error("投资金额必须为1000整数倍");
+            return;
+        }
+        alert(this.addDocumentForm.productType+","+this.addDocumentForm.productTypeName+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
+        this.$http.post('/personDocument/addpersonDocument',
+              this.qs.stringify({
+                'token':sessionStorage.getItem("token"),
+                'documentCode':this.addDocumentForm.documentCode,
+                'customerName':this.addDocumentForm.customerName,
+                'tradePlatform':this.addDocumentForm.tradePlatform,
+                'tradeAccount':this.addDocumentForm.tradeAccount,
+                'wheatherGetMoney':this.addDocumentForm.wheatherGetMoney,
+                'getMoneyDate':this.addDocumentForm.getMoneyDate,
+                'certificateType':this.addDocumentForm.certificateType,
+                'certificateNumber':this.addDocumentForm.certificateNumber,
+                'contractDate':this.addDocumentForm.contractDate,
+                'productTypeName':this.addDocumentForm.productType,
+                'productRate':this.addDocumentForm.productRate,
+                'serviceDate':this.addDocumentForm.serviceDate,
+                'investmentAmount':this.addDocumentForm.investmentAmount,
+                'contactPhone':this.addDocumentForm.contactPhone,
+                'registerEmail':this.addDocumentForm.registerEmail,
+                'agentCode':this.addDocumentForm.agentCode,
+                'derectRecomandPersonId':this.addDocumentForm.derectRecomandPersonId,
+                'inderectRecomandPersonId':this.addDocumentForm.inderectRecomandPersonId,
+                'estimatedEarnings':this.addDocumentForm.estimatedEarnings,
+                'productId':this.addDocumentForm.productType,
+                'maxIndex':this.$store.state.nextDocumentNum
+              }))
+            .then(function(res){
+              alert(JSON.stringify(res));
+              var info = res['data'];
+                    var code = info['code'];
+                    if (code == 1) {
+                      me.$message.success('添加成功');
+                    }
+                  var message = info['message'];
+                  var data = info['data'];
+            })
+            .catch(function(err){
+
+            })
+      },
       caculateEarning(){
             if (this.addDocumentForm.investmentAmount % 1000 != 0) {
                this.$message.error("投资金额必须为1000整数倍");
@@ -324,6 +380,7 @@
          let index = this.addDocumentForm.productType;
          this.addDocumentForm.serviceDate = this.productTypes[index-1]['serviceTime'];
          this.addDocumentForm.productRate = this.productTypes[index-1]['monthRate'];
+         this.addDocumentForm.productTypeName=this.productTypes[index-1]['productTypeName'];
          if (this.addDocumentForm.investmentAmount !="") {
           this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate);
          }
@@ -332,7 +389,7 @@
 
           this.dialogAddFile = true;
           this.addDocumentForm.agentCode = sessionStorage.getItem("agentCode");
-        this.addDocumentForm.inderectRecomandPersonId = sessionStorage.getItem("indirectRecommendationAccont");
+        this.addDocumentForm.inderectRecomandPersonId = sessionStorage.getItem("indirectRecommendationAccount");
         this.addDocumentForm.derectRecomandPersonId = sessionStorage.getItem("directRecommendationAccount");
         this.addDocumentForm.customerName = sessionStorage.getItem("userName");
           let me = this;
@@ -419,60 +476,7 @@
           this.addDocumentForm.documentCode = sessionStorage.getItem("agentCode")+this.addDocumentForm.getMoneyDate + 
           this.$store.state.nextDocumentNum;
       },
-      addPersonDocument(){
-        //检验条件
-        for(var field in this.addDocumentForm){
-          if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId") {
-            if(this.addDocumentForm[field] == ""){
-            this.$message.error(field + "必填字段不能为空");
-            return;
-          }
-          }
-        }
-
-        if (this.addDocumentForm.investmentAmount % 1000 != 0) {
-          this.$message.error("投资金额必须为1000整数倍");
-            return;
-        }
-        this.$http.post('/personDocument/addpersonDocument',
-              this.qs.stringify({
-                'token':this.$store.state.token,
-                'documentCode':this.addDocumentForm.documentCode,
-                'customerName':this.addDocumentForm.customerName,
-                'tradePlatform':this.addDocumentForm.tradePlatform,
-                'tradeAccount':this.addDocumentForm.tradeAccount,
-                'wheatherGetMoney':this.addDocumentForm.wheatherGetMoney,
-                'getMoneyDate':this.addDocumentForm.getMoneyDate,
-                'certificateType':this.addDocumentForm.certificateType,
-                'certificateNumber':this.addDocumentForm.certificateNumber,
-                'contractDate':this.addDocumentForm.contractDate,
-                'productTypeName':this.addDocumentForm.productType,
-                'productRate':this.addDocumentForm.productRate,
-                'serviceDate':this.addDocumentForm.serviceDate,
-                'investmentAmount':this.addDocumentForm.investmentAmount,
-                'contactPhone':this.addDocumentForm.contactPhone,
-                'registerEmail':this.addDocumentForm.registerEmail,
-                'agentCode':this.addDocumentForm.agentCode,
-                'derectRecomandPersonId':this.addDocumentForm.derectRecomandPersonId,
-                'inderectRecomandPersonId':this.addDocumentForm.inderectRecomandPersonId,
-                'estimatedEarnings':this.addDocumentForm.estimatedEarnings,
-                'productId':this.addDocumentForm.productType,
-                'maxIndex':this.$store.state.nextDocumentNum
-              }))
-            .then(function(res){
-              alert(JSON.stringify(res));
-              var info = res['data'];
-                    var code = info['code'];
-                    if (code == 1) {
-                      me.$message.success('添加成功');
-                    }
-                  var message = info['message'];
-                  var data = info['data'];
-            })
-            .catch(function(err){
-
-            })
-      }
+      
     }
   }
 </script>

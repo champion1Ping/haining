@@ -149,7 +149,7 @@
 　　　　　　　　const filterVal = ['documentCode', 'customerName', 'investmentAmount', 'contractIncome', 'firstTradeDate','productTypeName','tradeEndDate','tradeStatus','productRate','derectRecomandPersonName','derectRecomandRate','inderectRecomandPersonName','inderectRecomandRate','agentCode','agentRate','customerIncome','derectIncome','inderectIncome','agentIncome','companyIncome'];
 　　　　　　　　const list = this.tableData;
 　　　　　　　　const data = this.formatJson(filterVal, list);
-　　　　　　　　export_json_to_excel(tHeader, data, '客户推荐表'); //对应下载文件的名字
+　　　　　　　　export_json_to_excel(tHeader, data, '合同收益分配表'); //对应下载文件的名字
 　　　　　　})
       },
       quit(){
