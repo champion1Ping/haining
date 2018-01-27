@@ -176,13 +176,13 @@
     
   </el-row>
     </div>
-	<div class="tbl1">
+	<div class="tbl1" style="margin:10px;">
     <el-table
     :data="agentData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     :header-row-class-name="headerRowClassName"
     border
-    style="width:100%;height:30%" header-align="center">
-    <el-table-column prop="agentCode" label="代理商编号" align="center" width="100"></el-table-column>
+    style="width:100%;" header-align="center">
+    <el-table-column prop="agentCode" label="代理商编号"  align="center" width="100"></el-table-column>
     <el-table-column prop="agentName" label="代理商名称" align="center" width="220"></el-table-column>
     <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="180"></el-table-column>
     <el-table-column prop="legalRepresentative" label="法定代表人" align="center" width="100"></el-table-column>
@@ -422,6 +422,12 @@
   .el-table td, .el-table th{
     padding: 0px;
   }
+  .el-table th{
+    background-color: #D7D7D7;
+    color: #333333;
+
+  }
+  
   /*.el-input__prefix{
       right:0px;
   }  */

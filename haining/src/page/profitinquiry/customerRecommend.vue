@@ -23,7 +23,7 @@
     
   </el-row>
     </div>
-	<div class="tbl">
+	<div class="tbl" style="margin:10px;">
     <el-table
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border

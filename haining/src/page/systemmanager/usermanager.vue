@@ -176,7 +176,7 @@
     
   </el-row>
     </div>
-	<div class="systemUserManager">
+	<div class="systemUserManager" style="margin:10px;">
     <el-table
     :data="userTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border

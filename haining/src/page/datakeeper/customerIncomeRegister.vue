@@ -191,7 +191,7 @@
     
   </el-row>
     </div>
-	<div class="tbl">
+	<div class="tbl" style="margin:10px;">
     <el-table
     :data="customerIncomeTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
@@ -278,7 +278,7 @@
         }
       }
     },
-    created(){
+    created:function(){
       this.searchRecords();
       let me = this;
       this.$http.post('/product/getProductVOList',
