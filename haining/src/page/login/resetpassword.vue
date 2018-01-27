@@ -13,10 +13,10 @@
 		  </el-form-item>
 
 		   <el-form-item label="新密码设置" prop="pass">
-		    <el-input v-model="resetForm.pass" placeholder="请设置密码" style="width:280px"></el-input><br/>
+		    <el-input v-model="resetForm.pass"  type="password" placeholder="请设置密码" style="width:280px"></el-input><br/>
 		  </el-form-item>
 		   <el-form-item label="新密码设置" prop="checkpass">
-		     <el-input v-model="resetForm.checkpass" placeholder="请确定密码" style="width:280px"></el-input>
+		     <el-input v-model="resetForm.checkpass" type="password" placeholder="请确定密码" style="width:280px"></el-input>
 		  </el-form-item>
 		  <el-form-item>
 		    <el-button type="primary" @click="submitForm('resetForm')" style="width:280px">确认重置</el-button>
@@ -124,7 +124,7 @@
 				this.$refs[formName].validate((valid)=>{
 					if(valid) {
 						this.$http.post('/account/resetPwd',
-							qs.stringify({
+							this.qs.stringify({
 								'phone':this.resetForm.phoneNumber,
 								'verifyCode':this.resetForm.verifyCode,
 								'pwd':this.resetForm.checkpass
@@ -145,7 +145,7 @@
 
 						})
 					} else {
-
+						//me.$message("检验失败");
 					}
 				})
 			}

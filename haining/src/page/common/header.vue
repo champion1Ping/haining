@@ -7,7 +7,7 @@
         </el-col>
         <el-col :span="14">
         <div v-if="this.$store.state.roleId > 0 || id > 0 ">
-          <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-menu :default-active="activeIndex"  class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1" v-if="this.$store.state.roleId==3 ||id ==3">
 			    <template slot="title"><span style="font-size:20px;color:#333333">系统管理</span></template>
 			    <el-menu-item index="/systemNotice">系统公告发布</el-menu-item>
@@ -22,18 +22,19 @@
 			  </el-submenu>
 			  <el-submenu index="3">
 			    <template slot="title"><span style="font-size:20px;color:#333333">收益查询</span></template>
-			    <el-menu-item index="/customerGain" v-if="this.$store.state.roleId !==1 || id !==1">客户收益表</el-menu-item>
+			    <el-menu-item index="/customerGain" style="text-align:center" v-if="this.$store.state.roleId !==1 || id !==1">客户收益表</el-menu-item>
 			    <el-menu-item index="/agencyprofit" v-if="this.$store.state.roleId!==2 || id !==2">代理商收益表</el-menu-item>
 			    <el-menu-item index="/customerRecommend" v-if="this.$store.state.roleId==3 || id ==3">推荐客户表</el-menu-item>
 			  </el-submenu>
 		  </el-menu>
 		  </div>
         </el-col>
-        <el-col :span="3" v-if="this.$store.state.roleId > 0||id > 0">
+        <el-col :span="2" v-if="this.$store.state.roleId > 0||id > 0">
+        	
         	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
 
-			    <template slot="title" ><span style="font-size:14px">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
+			    <template slot="title" ><span style="font-size:14px;color:#333333">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
 
 
 			    <el-menu-item index="/personinfo" v-if="roleId==2 || id == 2">个人信息</el-menu-item>
@@ -42,13 +43,10 @@
 			  </el-submenu>
 			  
 		  </el-menu>
-
         </el-col>
 
-       	<el-col :span="1" v-if="this.$store.state.roleId > 0 || id > 0 ">
-       	<el-button type="text" @click="getNotice()"><span style="line-height:3;font-size:14px;color:#FF6240;padding-bottom:10px;">通知</span></el-button>
-
-      
+       	<el-col :span="2" v-if="this.$store.state.roleId > 0 || id > 0 ">
+       	<el-button type="text" @click="getNotice()" style="padding-top:8px;"><span style="line-height:3;font-size:14px;color:#FF6240;">通知&nbsp;&nbsp;&nbsp; (<span>{{this.$store.state.noticeCount?this.$store.state.noticeCount:count}}</span><span>)</span></span></el-button>
 
        	</el-col>
     </el-row>
@@ -61,14 +59,38 @@
 			return {
 				roleId:this.$store.state.roleId,
 				id:'',
-				userName:this.$store.state.realName,
-				isShow:false
+				userName:sessionStorage.getItem("userName"),
+				isShow:false,
+				count:sessionStorage.getItem("noticesNum"),
 			}
 		},
 		created:function(){
 			this.id = sessionStorage.getItem("roleId");
 			this.userName = sessionStorage.getItem("userName");
-			
+			let me = this;
+				this.$http.post('/notice/getMyNoticeCount',
+							this.qs.stringify({
+								'token':sessionStorage.getItem("token")
+							}))
+						.then(function(res){
+							var info = res['data'];
+				            var code = info['code'];
+				            if (code == 1) {
+				            	var data = info['data'];
+				            	me.$store.commit('saveNoticesCount', data);
+				            	sessionStorage.setItem("noticesNum", data);
+				            	me.count = data;
+				            } else {
+				            	var message = info['message'];
+				            	me.$message.error(message);
+
+				            }
+				          
+				          
+						})
+						.catch(function(err){
+
+						})
 		},
 		
 		methods:{
@@ -101,13 +123,17 @@
 	}
 </script>
 <style>
+	/*子菜单文字居中*/
+	.el-menu-item{
+		text-align:center;
+	}
 	/* 头部导航 */
 	.el-menu--horizontal .el-submenu {
     float: center;
     position: relative;
   }
     .el-submenu .el-menu-item{
-    	min-width: 90px;
+    	min-width: 60px;
     }
 
 

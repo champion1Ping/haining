@@ -1,5 +1,126 @@
 <template>
 	<div class="contractgain">
+    <!-- 弹出框开始 -->
+  <el-dialog title="合同收益修改" :visible.sync="updateContractDialog" width="95%">
+    <div>收益修改</div>
+    <div style="border:1px solid;border-radius:4px;">
+                
+    <el-form :model="updateContract" style="padding:5px">
+       <el-row>
+  <el-col :span="6">
+    <el-button type="info"  class="left">档案编号</el-button><el-input  v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+        <el-button type="info" class="left">客户名称</el-button><el-input  v-model="updateContract.customerName"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">投资金额</el-button><el-input v-model="updateContract.investmentAmount"class="right" style="width:177px"></el-input>
+  </el-col>
+   <el-col :span="6">
+       <el-button type="info"  class="left">合同收益</el-button><el-input v-model="updateContract.contractIncome"class="right" style="width:177px"></el-input>
+  </el-col>
+  </el-row>
+
+
+<el-row style="margin-top:10px">
+    <el-col :span="6">
+    <el-button type="info"  class="left">产品类型</el-button><el-select v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
+    <el-option
+      v-for="item in productTypes"
+      :key="item.id"
+      :label="item.productTypeName"
+      :value="item.id">
+    </el-option>
+  </el-select>
+  </el-col>
+  <el-col :span="6">
+        <el-button type="info" class="left">首交易日</el-button><el-date-picker
+      v-model="updateContract.firstTradeDate"
+      type="date"
+      class="right"
+      value-format="yyyyMMdd"
+      style="width:177px"
+      ></el-date-picker>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">期限截止日</el-button>
+    <el-date-picker
+      v-model="updateContract.tradeEndDate"
+      type="date"
+      class="right"
+      value-format="yyyyMMdd"
+      style="width:177px"
+      ></el-date-picker>
+  </el-select>
+  </el-col>
+   <el-col :span="6">
+       <el-button type="info"  class="left">交易状态</el-button><el-select v-model="updateContract.tradeStatus" style="width:180px" class="right">
+    <el-option
+      v-for="item in this.$store.state.xialakuang.dealStatus"
+      :key="item.value"
+      :label="item.label"
+      :value="item.value">
+    </el-option>
+  </el-select>
+  </el-col>
+  </el-row>
+
+  <el-row style="margin-top:10px">
+    <el-col :span="6">
+      <el-button type="info"  class="left">产品收益率</el-button><el-input v-model="updateContract.productRate"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">客户收益额</el-button><el-input v-model="updateContract.customerIncome"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">直推收益率</el-button><el-input  v-model="updateContract.derectRecomandRate"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">直推收益额</el-button><el-input   v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
+  </el-col>
+  </el-row>
+
+
+<el-row style="margin-top:10px">
+    
+  <el-col :span="6">
+       <el-button type="info"  class="left">间推收益率</el-button><el-input v-model="updateContract.inderectRecomandRate" class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">间推收益额</el-button><el-input  v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+      <el-button type="info"  class="left">代理商收益率</el-button><el-input v-model="updateContract.agentRate"class="right"  style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+      <el-button type="info"  class="left">代理商收益额</el-button><el-input v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
+  </el-col>
+  </el-row>
+
+  <el-row style="margin-top:10px">
+    
+  <el-col :span="6">
+       <el-button type="info"  class="left">公司收益额</el-button><el-input  v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">直推人</el-button><el-input  v-model="updateContract.derectRecomandPersonId"class="right" style="width:177px"></el-input>
+  </el-col>
+  <el-col :span="6">
+       <el-button type="info"  class="left">间推人</el-button><el-input  v-model="updateContract.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
+  </el-col>
+  </el-row>
+
+ </el-form>
+  </div> 
+
+  <div slot="footer" class="dialog-footer">
+    <el-button @click="updateContractDialog = false">取 消</el-button>
+    <el-button type="primary" @click="updateContract()">修改</el-button>
+  </div>
+</el-dialog>
+<!-- 弹出框结束-->
+
+
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">
 		合同收益分配表&nbsp;&nbsp;&nbsp;
@@ -33,9 +154,9 @@
         <el-button type="info"  class="left">产品类型</el-button><el-select v-model="productType" style="width:180px" class="right">
     <el-option
       v-for="item in productTypes"
-      :key="item.value"
-      :label="item.label"
-      :value="item.value">
+      :key="item.id"
+      :label="item.productTypeName"
+      :value="item.id">
     </el-option>
   </el-select>
   </el-col> 
@@ -129,9 +250,11 @@
   export default{
     data(){
       return{
+        updateContractDialog:false,
         pageSize:100,
         currentPage:1,
         tableData:[],
+        productTypes:[],
         documentCode:'',
         customerName:'',
         amountType:'',
@@ -140,15 +263,71 @@
         productRate:'',
         tradeEndDateBegin:'',
         tradeEndDateEnd:'',
-        value1:'',
+        updateContract:{
+          documentCode:'',
+          customerName:'',
+          tradePlatform:'',
+          tradeAccount:'',
+          wheatherGetMoney:'',
+          getMoneyDate:'',
+          certificateType:'',
+          certificateNumber:'',
+          contractDate:'',
+          productType:'',
+          productTypeName:'',
+          productRate:'',
+          serviceDate:'',
+          investmentAmount:'',
+          contactPhone:'',
+          registerEmail:'',
+          agentCode:'',
+          derectRecomandPersonId:'',
+          inderectRecomandPersonId:'',
+          estimatedEarnings:'',
         }
+      }
     },
     created:function(){
        this.getContractDitrubuteIncomeList();
+       let me = this;
+      this.$http.post('/product/getProductVOList',
+              this.qs.stringify({
+                'token':sessionStorage.getItem("token")
+              }))
+            .then(function(res){
+                  var info = res['data'];
+                  var code = info['code'];
+                  var message = info['message'];
+                  var data = info['data'];
+                  me.productTypes = data;
+
+            })
+            .catch(function(err){
+
+            });
     },
     methods:{
       update(row){
-
+         this.updateContract.documentCode = row.documentCode;
+         this.updateContract.customerName = row.customerName;
+         this.updateContract.investmentAmount = row.investmentAmount;
+         this.updateContract.contractIncome = row.contractIncome;
+         this.updateContract.productType = row.productTypeName;
+         this.updateContract.firstTradeDate = row.firstTradeDate;
+         this.updateContract.tradeEndDate = row.tradeEndDate;
+         this.updateContract.tradeStatus = row.tradeStatus;
+         this.updateContract.productRate = row.productRate;
+         this.updateContract.customerIncome = row.customerIncome;
+         this.updateContract.derectRecomandRate = row.derectRecomandRate;
+         this.updateContract.derectIncome = row.derectIncome;
+         this.updateContract.inderectRecomandRate = row.inderectRecomandRate;
+         this.updateContract.inderectIncome = row.inderectIncome;
+         this.updateContract.agentRate = row.agentRate;
+         this.updateContract.agentIncome = row.agentIncome;
+         this.updateContract.companyIncome = row.companyIncome;
+         this.updateContract.derectRecomandPersonId = row.derectRecomandPersonId;
+         this.updateContract.inderectRecomandPersonId = row.inderectRecomandPersonId;
+         this.updateContractDialog = true;
       },
       formatJson(filterVal, jsonData) {
 　　　　　　return jsonData.map(v => filterVal.map(j => v[j]))
@@ -189,7 +368,7 @@
                 'tradeEndDateEnd':this.tradeEndDateEnd,
               }))
             .then(function(res){
-                    alert(JSON.stringify(res));
+                    // alert(JSON.stringify(res));
                     var info = res['data'];
                     var code = info['code'];
                     if(code == 1) {

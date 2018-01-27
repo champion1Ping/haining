@@ -98,6 +98,7 @@ const state = {
     directRecommendationAccount:'',
     indirectRecommendationAccount:'',
     usertype:usertype,
+    noticeCount:''
     
 }
 const mutations = {
@@ -121,6 +122,9 @@ const mutations = {
     },
     saveNextDocumentCode(state,documentCode){
       state.nextDocumentNum = documentCode;
+    },
+    saveNoticesCount(state,count){
+      state.noticeCount = count;
     }
 }
 

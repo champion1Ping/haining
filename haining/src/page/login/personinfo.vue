@@ -112,7 +112,7 @@
       <el-row>
         <el-col :span="8">
           <div>证件正面照</div>
-          <el-upload
+          <el-upload v-if="frontUploader"
   action="http://111.230.221.41:8080/user/uploadPic"
   list-type="picture-card"
   limit="1"
@@ -128,7 +128,7 @@
         </el-col>
         <el-col :span="8">
           <div>证件反面照</div>
-           <el-upload
+           <el-upload v-if="backUploaded"
   action="http://111.230.221.41:8080/user/uploadPic"
   :data="certificateBackData"
   list-type="picture-card"
@@ -143,7 +143,7 @@
         </el-col>
         <el-col :span="8">
           <div>居住地址证明</div>
-           <el-upload
+           <el-upload v-if="liveAddressUploaded"
            :data="liveAddressData"
   action="http://111.230.221.41:8080/user/uploadPic"
   list-type="picture-card"
@@ -187,7 +187,29 @@
       </el-row>
 
       <el-row>
+        <el-col :span="12" style="padding:5px">
         直推客户信息
+        <el-table
+        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        border
+        style="width: 100%" header-align="center">
+        <el-table-column prop="account" label="序号" align="center" width="80"></el-table-column>
+        <el-table-column prop="realName" label="名称" align="center" width="80"></el-table-column>
+        <el-table-column prop="contactPhone" label="在线合同数" align="center" width="150px"></el-table-column>
+      </el-table>
+        </el-col>
+        <el-col :span="12" style="padding:5px;">
+        间推客户信息
+        <el-table
+        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        border
+        style="width: 100%" header-align="center">
+        <el-table-column prop="account" label="序号" align="center" width="80"></el-table-column>
+        <el-table-column prop="realName" label="名称" align="center" width="80"></el-table-column>
+        <el-table-column prop="contactPhone" label="在线合同数" align="center" width="150px"></el-table-column>
+      </el-table>
+        </el-col>
+        
       </el-row>
       
      </div> 
@@ -198,11 +220,14 @@
   export default {
     data() {
       return {
-        
+        tableData:[],
         credentialsFront:'',
         credentialsBack:'',
         liveAddressCredential:'',
         vipStarLevel:'',
+        frontUploader:true,
+        backUploaded:true,
+        liveAddressUploaded:true,
         chargedMoney:'',
         directRecommendRate:'',
         indirectRecommendRate:'',
@@ -288,6 +313,7 @@
       },
       handleBackSuccess(response,file,fileList){
         alert(JSON.stringify(response));
+        // this.backUploaded = false;
       },
       handleAddressSuccess(response, file, fileList){
 
