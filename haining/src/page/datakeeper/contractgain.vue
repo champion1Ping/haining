@@ -8,23 +8,23 @@
     <el-form :model="updateContract" style="padding:5px">
        <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input  v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
+    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input  v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left">客户名称</el-button><el-input  v-model="updateContract.customerName"class="right" style="width:177px"></el-input>
+        <el-button type="info" class="left" disabled>客户名称</el-button><el-input  v-model="updateContract.customerName"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额</el-button><el-input v-model="updateContract.investmentAmount"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>投资金额</el-button><el-input v-model="updateContract.investmentAmount"class="right" style="width:177px"></el-input>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left">合同收益</el-button><el-input v-model="updateContract.contractIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>合同收益</el-button><el-input v-model="updateContract.contractIncome"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
 
 <el-row style="margin-top:10px">
     <el-col :span="6">
-    <el-button type="info"  class="left">产品类型</el-button><el-select v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
+    <el-button type="info"  class="left" disabled>产品类型</el-button><el-select v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -34,7 +34,7 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left">首交易日</el-button><el-date-picker
+        <el-button type="info" class="left" disabled>首交易日</el-button><el-date-picker
       v-model="updateContract.firstTradeDate"
       type="date"
       class="right"
@@ -43,7 +43,7 @@
       ></el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">期限截止日</el-button>
+       <el-button type="info"  class="left" disabled>期限截止日</el-button>
     <el-date-picker
       v-model="updateContract.tradeEndDate"
       type="date"
@@ -54,7 +54,7 @@
   </el-select>
   </el-col>
    <el-col :span="6">
-       <el-button type="info"  class="left">交易状态</el-button><el-select v-model="updateContract.tradeStatus" style="width:180px" class="right">
+       <el-button type="info"  class="left" disabled>交易状态</el-button><el-select v-model="updateContract.tradeStatus" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
@@ -67,16 +67,16 @@
 
   <el-row style="margin-top:10px">
     <el-col :span="6">
-      <el-button type="info"  class="left">产品收益率</el-button><el-input v-model="updateContract.productRate"class="right" style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input v-model="updateContract.productRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">客户收益额</el-button><el-input v-model="updateContract.customerIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>客户收益额</el-button><el-input v-model="updateContract.customerIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">直推收益率</el-button><el-input  v-model="updateContract.derectRecomandRate"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推收益率</el-button><el-input  v-model="updateContract.derectRecomandRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">直推收益额</el-button><el-input   v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推收益额</el-button><el-input   v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
@@ -84,29 +84,29 @@
 <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left">间推收益率</el-button><el-input v-model="updateContract.inderectRecomandRate" class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推收益率</el-button><el-input v-model="updateContract.inderectRecomandRate" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">间推收益额</el-button><el-input  v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推收益额</el-button><el-input  v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">代理商收益率</el-button><el-input v-model="updateContract.agentRate"class="right"  style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商收益率</el-button><el-input v-model="updateContract.agentRate"class="right"  style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">代理商收益额</el-button><el-input v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商收益额</el-button><el-input v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
   <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left">公司收益额</el-button><el-input  v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>公司收益额</el-button><el-input  v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">直推人</el-button><el-input  v-model="updateContract.derectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推人</el-button><el-input  v-model="updateContract.derectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">间推人</el-button><el-input  v-model="updateContract.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推人</el-button><el-input  v-model="updateContract.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
@@ -133,15 +133,15 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input v-model="documentCode" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">客户名称</el-button><el-input v-model="coustomerName" class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled>客户名称</el-button><el-input v-model="coustomerName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额</el-button><el-select v-model="amountType" style="width:180px" class="right">
+       <el-button type="info"  class="left" disabled>投资金额</el-button><el-select v-model="amountType" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.investMoney"
       :key="item.value"
@@ -151,7 +151,7 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">产品类型</el-button><el-select v-model="productType" style="width:180px" class="right">
+        <el-button type="info"  class="left" disabled>产品类型</el-button><el-select v-model="productType" style="width:180px" class="right">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -163,7 +163,7 @@
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">交易状态 </el-button><el-select v-model="dealStatus" style="width:180px" class="right">
+    <el-button type="info"  class="left" disabled>交易状态 </el-button><el-select v-model="dealStatus" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
@@ -173,10 +173,10 @@
   </el-select><!-- <el-input class="right" style="width:180px"></el-input> -->
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">产品收益率</el-button><el-input v-model="productRate" class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input v-model="productRate" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">截止日期从</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>截止日期从</el-button><el-date-picker
       v-model="tradeEndDateBegin"
       type="date"
       class="right"
@@ -185,7 +185,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-    <el-button type="info"  class="left">截止日期到</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>截止日期到</el-button><el-date-picker
       v-model="tradeEndDateEnd"
       type="date"
       class="right"

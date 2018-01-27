@@ -2,8 +2,8 @@
 	<div class="usermanager">
 <el-dialog title="选择代理商" :visible.sync="dialogChooseAgent" width="75%">
   <el-form :model="chooseAgentForm">
-      <el-button type="info"  class="left">代理商编码</el-button><el-input v-model="chooseAgentForm.agentCode"class="right" style="width:180px"></el-input>
-      <el-button type="info"  class="left">代理商名称</el-button><el-input v-model="chooseAgentForm.agentName"class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商编码</el-button><el-input v-model="chooseAgentForm.agentCode"class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商名称</el-button><el-input v-model="chooseAgentForm.agentName"class="right" style="width:180px"></el-input>
       <el-button type="primary" @click="searchAgentList">查询</el-button>
   </el-form>
    <el-table
@@ -30,18 +30,18 @@
     <el-form :model="addUserForm" style="padding:10px">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left">用户账号</el-button><el-input v-model="addUserForm.userAccount"class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>用户账号</el-button><el-input v-model="addUserForm.userAccount"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-        <el-button type="info" class="left">用户名称</el-button><el-input v-model="addUserForm.userName" class="right" style="width:180px"></el-input>
+        <el-button type="info" class="left" disabled>用户名称</el-button><el-input v-model="addUserForm.userName" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">联系方式</el-button><el-input v-model="addUserForm.contactPhone" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>联系方式</el-button><el-input v-model="addUserForm.contactPhone" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="8">
-       <el-button type="info"  class="left">用户性质</el-button><el-select v-model="addUserForm.userType" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left" disabled>用户性质</el-button><el-select v-model="addUserForm.userType" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.usertype.usermanager"
       :key="item.value"
@@ -51,7 +51,7 @@
   </el-select>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">代理商编码</el-button><el-select @focus="chooseAgent"v-model="addUserForm.agentCode" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left" disabled>代理商编码</el-button><el-select @focus="chooseAgent"v-model="addUserForm.agentCode" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in empty"
       :key="item.value"
@@ -61,12 +61,12 @@
   </el-select>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">代理商名称</el-button><el-input v-model="addUserForm.agentName" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>代理商名称</el-button><el-input v-model="addUserForm.agentName" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left">是否冻结</el-button><el-select v-model="addUserForm.ifFrozen" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>是否冻结</el-button><el-select v-model="addUserForm.ifFrozen" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -76,7 +76,7 @@
   </el-select>
   </el-col> 
   <el-col :span="16">
-       <el-button type="info"  class="left">冻结日期</el-button><el-date-picker
+       <el-button type="info"  class="left" disabled>冻结日期</el-button><el-date-picker
       v-model="addUserForm.freezeDate"
       type="date"
       format="yyyy-MM-dd"
@@ -94,10 +94,10 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-row style="margin-top:10px;padding:10px;">
     <el-col :span="8">
-      <el-button type="info"  class="left">新密码</el-button><el-input v-model="addUserForm.pass"  type="password"class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left" disabled>新密码</el-button><el-input v-model="addUserForm.pass"  type="password"class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-    <el-button type="info"  class="left">确认密码</el-button><el-input v-model="addUserForm.checkpass" type="password" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>确认密码</el-button><el-input v-model="addUserForm.checkpass" type="password" class="right" style="width:180px"></el-input>
   </el-col> 
   </el-row>
     </div>
@@ -120,15 +120,15 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">用户账号</el-button><el-input v-model="userAccount"class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>用户账号</el-button><el-input v-model="userAccount"class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">用户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="userName" class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled>用户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input v-model="userName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">用户性质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="userType" style="width:180px" class="right" placeholder="请选择">
+       <el-button type="info"  class="left" disabled>用户性质&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="userType" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.usertype.usermanager"
       :key="item.value"
@@ -138,7 +138,7 @@
   </el-select>
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">是否冻结&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="ifFrozen" style="width:180px" class="right">
+        <el-button type="info"  class="left" disabled>是否冻结&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="ifFrozen" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"
@@ -150,13 +150,13 @@
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">联系方式</el-button><el-input class="right"v-model="contactPhone" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>联系方式</el-button><el-input class="right"v-model="contactPhone" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">直推人号码</el-button><el-input v-model="directRecommendationAccount" class="right" style="width:180px"></el-input>
+      <el-button type="info"  class="left" disabled>直推人号码</el-button><el-input v-model="directRecommendationAccount" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">创建时间从</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>创建时间从</el-button><el-date-picker
       v-model="createTimeFrom"
       type="date"
       class="right"
@@ -165,7 +165,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-    <el-button type="info"  class="left">创建时间到</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>创建时间到</el-button><el-date-picker
       v-model="createTimeTo"
       type="date"
       class="right"

@@ -8,26 +8,26 @@
     <el-form :model="form" style="padding:10px" :models="addAgencyForm" ref="addAgencyForm">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left">代理商编号</el-button><el-input  :disabled="true" v-model="addAgencyForm.agencyCode" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled >代理商编号</el-button><el-input  :disabled="true" v-model="addAgencyForm.agencyCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-        <el-button type="info" class="left">代理商名称</el-button><el-input class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
+        <el-button type="info" class="left" disabled >代理商名称</el-button><el-input class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">统一社会信用代码</el-button><el-input  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>统一社会信用代码</el-button><el-input  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="8">
-       <el-button type="info"  class="left">法定代表人</el-button><el-input class="right" v-model="addAgencyForm.loyalPerson"style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input class="right" v-model="addAgencyForm.loyalPerson"style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left">联系方式</el-button><el-input class="right" v-model="addAgencyForm.contact" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>联系方式</el-button><el-input class="right" v-model="addAgencyForm.contact" style="width:180px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-        <el-button type="info"  class="left">省份</el-button><el-select v-model="addAgencyForm.province"  @change="getMaxProvinceIndex()"style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>省份</el-button><el-select v-model="addAgencyForm.province"  @change="getMaxProvinceIndex()"style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.shengfen"
       :key="item.value"
@@ -37,12 +37,12 @@
   </el-select>
   </el-col> 
   <el-col :span="16">
-       <el-button type="info"  class="left">营业地址</el-button><el-input v-model="addAgencyForm.businessAddress"class="right" style="width:563px"></el-input>
+       <el-button type="info"  class="left" disabled>营业地址</el-button><el-input v-model="addAgencyForm.businessAddress"class="right" style="width:563px"></el-input>
   </el-col>
   </el-row>
   <el-row style="margin-top:10px">
     <el-col :span="8">
-      <el-button type="info"  class="left">营业开始时间</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>营业开始时间</el-button><el-date-picker
       v-model="addAgencyForm.bussinessStartTime"
       type="date"
       class="right"
@@ -53,7 +53,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="8">
-    <el-button type="info"  class="left">营业结束时间</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>营业结束时间</el-button><el-date-picker
       v-model="addAgencyForm.bussinessEndTime"
       type="date"
       format="yyyy - MM - dd "
@@ -69,7 +69,7 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-row style="margin-top:10px;padding:10px;">
     <el-col :span="8">
-      <el-button type="info"  class="left">签约时间</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>签约时间</el-button><el-date-picker
       v-model="addAgencyForm.signStartTime"
       type="date"
       format="yyyy - MM - dd "
@@ -80,7 +80,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="8">
-    <el-button type="info"  class="left">到期时间</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>到期时间</el-button><el-date-picker
       v-model="addAgencyForm.signEndTime"
       type="date"
       class="right"
@@ -110,19 +110,19 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info" class="left" >代理商编号</el-button><el-input v-model="agentCode" class="right" style="width:180px"></el-input>
+    <el-button type="info" class="left" disabled >代理商编号</el-button><el-input v-model="agentCode" class="right" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left" >代理商名称</el-button><el-input class="right"  v-model="agentName"style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled >代理商名称</el-button><el-input class="right"  v-model="agentName"style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">法定代表人</el-button><el-input v-model="legalRepresentative" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input v-model="legalRepresentative" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">省份</el-button><el-select v-model="provinceId" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>省份</el-button><el-select v-model="provinceId" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.shengfen"
       :key="item.value"
@@ -135,7 +135,7 @@
   <el-row style="padding-top:10px">
   
   <el-col :span="6">
-      <el-button type="info"  class="left">签约时间从</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>签约时间从</el-button><el-date-picker
       v-model="bussinessStartTime"
       type="date"
       class="right"
@@ -144,7 +144,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-    <el-button type="info"  class="left">签约时间到</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>签约时间到</el-button><el-date-picker
       v-model="bussinessEndTime"
       type="date"
       class="right"
@@ -154,8 +154,8 @@
   </el-col> 
 
   <el-col :span="6">
-      <el-button type="info"  class="left">到期时间从</el-button><el-date-picker
-      <el-button type="info"  class="left"</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>到期时间从</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled</el-button><el-date-picker
       v-model="contractStartTime"
       type="date"
       class="right"
@@ -164,7 +164,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-    <el-button type="info"  class="left">到期时间到</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>到期时间到</el-button><el-date-picker
       v-model="contractEndTime"
       type="date"
       class="right"

@@ -74,6 +74,8 @@ html, body{ margin:0; height:100%; }
 
   
 }
-  
+  button.el-button.left.el-button--info.is-disabled{
+    color: #2a2626;
+  } 
   
 </style>

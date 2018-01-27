@@ -6,19 +6,19 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-form :model="form" style="padding:10px" :models="addProduct" ref="addProduct">
     <el-row>
-      <el-button type="info" style="margin-bottom:10px;" class="left">序号</el-button><el-input  v-model="addProduct.num" class="right" style="width:200px"></el-input>
+      <el-button type="info" style="margin-bottom:10px;" class="left" disabled>序号</el-button><el-input  v-model="addProduct.num" class="right" style="width:200px"></el-input>
     </el-row>
      <el-row> 
-    <el-button type="info" style="margin-bottom:10px;" class="left">产品类型</el-button><el-input   v-model="addProduct.productType" class="right" style="width:200px"></el-input>
+    <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品类型</el-button><el-input   v-model="addProduct.productType" class="right" style="width:200px"></el-input>
     </el-row>
     <el-row>
-        <el-button type="info"  style="margin-bottom:10px;" class="left">服务期限(月）</el-button><el-input class="right" v-model="addProduct.serviceTime" style="width:200px"></el-input>
+        <el-button type="info"  style="margin-bottom:10px;" class="left" disabled>服务期限(月）</el-button><el-input class="right" v-model="addProduct.serviceTime" style="width:200px"></el-input>
         </el-row>
       <el-row>
-       <el-button type="info" style="margin-bottom:10px;" class="left">产品收益率(%）</el-button><el-input  v-model="addProduct.monthRate" class="right" style="width:200px"></el-input>
+       <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品收益率(%）</el-button><el-input  v-model="addProduct.monthRate" class="right" style="width:200px"></el-input>
        </el-row>
         <el-row>
-       <el-button type="info" style="margin-bottom:10px;" class="left">是否启用</el-button><el-select v-model="addProduct.enableFlag"  style="width:200px" class="right" placeholder="请选择">
+       <el-button type="info" style="margin-bottom:10px;" class="left" disabled>是否启用</el-button><el-select v-model="addProduct.enableFlag"  style="width:200px" class="right" placeholder="请选择">
     <el-option
       v-for="item in this.$store.state.xialakuang.yesorno"
       :key="item.value"

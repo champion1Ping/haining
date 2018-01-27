@@ -12,15 +12,15 @@
     <div class="fm">
       <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left">档案编号</el-button><el-input class="right" v-model="documentCode" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input class="right" v-model="documentCode" style="width:180px"></el-input>
     
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">客户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input  v-model="customerName" class="right" style="width:180px"></el-input>
+        <el-button type="info"  class="left" disabled>客户名称&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input  v-model="customerName" class="right" style="width:180px"></el-input>
 
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left">投资金额&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="investmentAmount" style="width:180px" class="right">
+       <el-button type="info"  class="left" disabled>投资金额&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="investmentAmount" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.investMoney"
       :key="item.value"
@@ -31,7 +31,7 @@
 
   </el-col>
   <el-col :span="6">
-        <el-button type="info"  class="left">产品类型&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="productId" style="width:180px" class="right" placeholder="请选择">
+        <el-button type="info"  class="left" disabled>产品类型&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-select v-model="productId" style="width:180px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -44,7 +44,7 @@
   </el-row>
   <el-row style="padding-top:10px">
   <el-col :span="6">
-    <el-button type="info"  class="left">交易状态 </el-button><el-select  v-model="tradeStatus" style="width:180px" class="right">
+    <el-button type="info"  class="left" disabled>交易状态 </el-button><el-select  v-model="tradeStatus" style="width:180px" class="right">
     <el-option
       v-for="item in this.$store.state.xialakuang.dealStatus"
       :key="item.value"
@@ -54,10 +54,10 @@
   </el-select><!-- <el-input class="right" style="width:180px"></el-input> -->
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">产品收益率</el-button><el-input class="right"  v-model="productRate" style="width:180px"></el-input>
+      <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input class="right"  v-model="productRate" style="width:180px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left">截止日期从</el-button><el-date-picker
+      <el-button type="info"  class="left" disabled>截止日期从</el-button><el-date-picker
       v-model="startDate"
       type="date"
       class="right"
@@ -66,7 +66,7 @@
     </el-date-picker>
   </el-col>
   <el-col :span="6">
-    <el-button type="info"  class="left">截止日期到</el-button><el-date-picker
+    <el-button type="info"  class="left" disabled>截止日期到</el-button><el-date-picker
       v-model="endDate"
       type="date"
       class="right"
