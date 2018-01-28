@@ -362,6 +362,11 @@
                     if (code == 1) {
                       me.$message.success('添加成功');
                       me.getPersonDocumentList();
+                      //清空数据
+                      for(var field in me.addDocumentForm){
+                        me.addDocumentForm[field] = "";
+                      
+                      }
                       me.dialogAddFile = false;
                     }else {
                       var message = info['message'];
@@ -443,6 +448,7 @@
 
       },
       getProductTypeList(){
+        let me = this;
         this.$http.post('product/getProductVOList',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token")

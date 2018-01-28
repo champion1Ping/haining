@@ -218,7 +218,7 @@
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="100"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益($)" align="center" width="100"></el-table-column>
     <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="100"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80" :formatter="showProductName"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80" ></el-table-column>
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="100"></el-table-column>
     <el-table-column prop="tradeStatus" label="交易状态" align="center" width="90"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="90"></el-table-column>
@@ -388,9 +388,9 @@
          deep:true//对象内部的属性监听，也叫深度监听
       }
     },
+   
     created:function(){
-       this.getContractDitrubuteIncomeList();
-       let me = this;
+      let me = this;
        this.$http.post('/product/getProductVOList',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token")
@@ -398,20 +398,29 @@
             .then(function(res){
                   var info = res['data'];
                   var code = info['code'];
-                  var message = info['message'];
-                  var data = info['data'];
-                  me.productTypes = data;
+                  if (code ==1){
+                     var message = info['message'];
+                     var data = info['data'];
+                     me.productTypes = data;
+                     me.getContractDitrubuteIncomeList();
+                  }
+                 
 
             })
             .catch(function(err){
 
             });
+       
+       
+            
     },
     methods:{
 
-      showProductName(row,column,cellValue){
-         return  this.productTypes[cellValue-1].productTypeName;
-      },
+      // showProductName(row,column,cellValue){
+        
+      //    return  this.productTypes[cellValue-1].productTypeName;
+        
+      // },
       modify(){
           let me = this;
           let obj = new Object();
@@ -513,7 +522,7 @@
         this.currentPage= page;
       },
       getContractDitrubuteIncomeList(){
-        var me = this;
+        let me = this;
         this.$http.post('/personDocument/getContractDitrubuteIncomeList',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
