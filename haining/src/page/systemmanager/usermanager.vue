@@ -273,15 +273,19 @@
       },
       addUser(){
            for(var field in this.addUserForm){
-          if(this.addUserForm[field] == ""){
-            this.$message.error("必填字段不能为空");
-            return;
-          }
+            if (field !="freezeDate" && field !="agentName" &&field !="agentCode") {
+              if(this.addUserForm[field] === ""){
+              this.$message.error("必填字段不能为空");
+              return;
+             }
+            }
+            
         }
           this.dialogAddUser = true;
           var me = this;
           this.$http.post('/user/addUser',
           this.qs.stringify({
+                'token':sessionStorage.getItem("token"),
                 'account':this.addUserForm.userAccount,
                 'userName':this.addUserForm.userName,
                 'contactPhone':this.addUserForm.contactPhone,
@@ -294,13 +298,17 @@
              })
              )
              .then(function(res){
-              alert(JSON.stringify(res));
               var info = res['data'];
               var code = info['code'];
               var message = info['message'];
               if(code == 1){
-                  me.$message("添加成功");
+                  me.$message(message);
+                  for(var field in me.addUserForm){
+                    me.addUserForm[field] ="";
+                  }
                   me.dialogAddUser = false;
+              } else {
+                  me.$message.error(message);
               }
              })
              .catch(function(err){
@@ -339,6 +347,7 @@
           let me = this;
           this.$http.post('/user/getUserList',
           this.qs.stringify({
+                'token':sessionStorage.getItem("token"),
                 'account':this.userAccount,
                 'userName':this.userName,
                 'contactPhone':this.contactPhone,
