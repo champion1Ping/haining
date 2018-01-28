@@ -56,7 +56,7 @@
 			getMyNoticeCount(){
 				 this.$http.post('/notice/getMyNoticeCount',
 		         this.sq.stringify({
-		            'token':this.$store.state.token
+		            'token':sessionStorage.getItem("token"),
 		         })
 		         )
 		         .then(function(res){

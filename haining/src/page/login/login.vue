@@ -258,6 +258,8 @@
                sessionStorage.setItem("directRecommendationAccount",baseInfo['directRecommendationAccount']);
                me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccount']);
                sessionStorage.setItem("indirectRecommendationAccount",baseInfo['indirectRecommendationAccount']);
+               sessionStorage.setItem("derectRecomandPersonId",baseInfo['derectRecomandPersonId']);
+               sessionStorage.setItem("inderectRecomandPersonId",baseInfo['inderectRecomandPersonId']);
                me.$store.commit('saveRealName',baseInfo['realName']);
                me.$router.push('/notices');
                } else {

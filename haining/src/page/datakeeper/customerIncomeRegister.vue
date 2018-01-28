@@ -207,7 +207,7 @@
     <el-table-column prop="certificateNumber" label="证件号" align="center" width="180"></el-table-column>
     <el-table-column prop="contactPhone" label="联系电话" align="center" width="120"></el-table-column>
     <el-table-column prop="contractDate" label="签约日期" align="center" width="120"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="120"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="120" :formatter="showProductName"></el-table-column>
     <el-table-column prop="productRate" label="收益率($)" align="center" width="100"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="120"></el-table-column>
     <el-table-column prop="estimatedEarnings" label="预估收益" align="center" width="120"></el-table-column>
@@ -300,6 +300,10 @@
         
     },
     methods:{
+      
+      showProductName(row,column,cellValue){
+         return  this.productTypes[cellValue-1].productTypeName;
+      },
       formatter1(row,columb,cellValue){
           if (cellValue == 1) {
             return "是";
@@ -342,8 +346,8 @@
                 'contactPhone':this.addDocumentForm.contactPhone,
                 'registerEmail':this.addDocumentForm.registerEmail,
                 'agentCode':this.addDocumentForm.agentCode,
-                'derectRecomandPersonId':this.addDocumentForm.derectRecomandPersonId,
-                'inderectRecomandPersonId':this.addDocumentForm.inderectRecomandPersonId,
+                'derectRecomandPersonId':sessionStorage.getItem("derectRecomandPersonId"),
+                'inderectRecomandPersonId':sessionStorage.getItem("inderectRecomandPersonId"),
                 'estimatedEarnings':this.addDocumentForm.estimatedEarnings,
                 'productId':this.addDocumentForm.productType,
                 'maxIndex':this.$store.state.nextDocumentNum
@@ -369,8 +373,8 @@
                return;
            }
             if (this.addDocumentForm.productType != "") {
-                alert(this.addDocumentForm.investmentAmount +","+this.addDocumentForm.serviceDate+","+this.addDocumentForm.productRate);
-                this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate);
+                
+                this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate) * 0.01;
 
             }
 

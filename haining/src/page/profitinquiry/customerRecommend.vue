@@ -15,10 +15,10 @@
     <el-button type="info"  class="left" disabled>注册账号</el-button><el-input clearable v-model="account" class="right" style="width:180px"></el-input>
     
   </el-col>
-  <el-col :span="6">
+  <!-- <el-col :span="6">
         <el-button type="info"  class="left" disabled>真实姓名&nbsp;&nbsp;&nbsp;&nbsp;</el-button><el-input clearable v-model="realName" class="right" style="width:180px"></el-input>
 
-  </el-col>
+  </el-col> -->
   
     
   </el-row>

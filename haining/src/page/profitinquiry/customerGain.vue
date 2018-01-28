@@ -67,13 +67,13 @@
     size="mini"
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
-    style="width: 100%" header-align="center">
+    style="width: 100%"  height="412" header-align="center">
     <el-table-column prop="documentCode" label="档案编号" align="center" width="140"></el-table-column>
     <el-table-column prop="customerName" label="客户名称" align="center" width="90"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="100"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益" align="center" width="100"></el-table-column>
     <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="100"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="90"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="90" :formatter="showProductName"></el-table-column>
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="100"></el-table-column>
     <el-table-column prop="tradeStatusName" label="交易状态" align="center" width="90"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="90"></el-table-column>
@@ -111,6 +111,7 @@
         currentPage:'1',
         tableData:[],
         documentCode:'',
+        productTypes:[],
         customerName:'',
         derectPersonName:'',
         inderectPersonName:'',
@@ -137,8 +138,27 @@
     },
     created(){
         this.customerProfitQuery();
+        let me = this;
+      this.$http.post('/product/getProductVOList',
+              this.qs.stringify({
+                'token':sessionStorage.getItem("token")
+              }))
+            .then(function(res){
+                  var info = res['data'];
+                  var code = info['code'];
+                  var message = info['message'];
+                  var data = info['data'];
+                  me.productTypes = data;
+
+            })
+            .catch(function(err){
+
+            });
     },
     methods:{
+      showProductName(row,column,cellValue){
+         return  this.productTypes[cellValue-1].productTypeName;
+      },
       quit(){
         this.$router.push('/notices');
       },

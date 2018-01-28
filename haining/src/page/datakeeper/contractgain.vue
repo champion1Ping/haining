@@ -202,10 +202,9 @@
     size="mini"
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
-    style="width: 100%" height="412" header-align="center">
-    <el-table-column fixed prop="documentCode" label="档案编号" align="center" width="160"></el-table-column>
+    style="width: 100%" header-align="center">
+    <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
      <el-table-column
-      fixed
       label="操作"
       align="center"
       width="120px">
@@ -219,7 +218,7 @@
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="100"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益($)" align="center" width="100"></el-table-column>
     <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="100"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80" :formatter="showProductName"></el-table-column>
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="100"></el-table-column>
     <el-table-column prop="tradeStatus" label="交易状态" align="center" width="90"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="90"></el-table-column>
@@ -325,6 +324,10 @@
             });
     },
     methods:{
+
+      showProductName(row,column,cellValue){
+         return  this.productTypes[cellValue-1].productTypeName;
+      },
       modify(){
           let me = this;
       this.$http.post('/personDocument/updateContractDitrubuteIncome',
@@ -396,8 +399,7 @@
 
       firstTradeDateChanged(){
         let startDate = this.updateContract.firstTradeDate;
-        alert(typeof(startDate));
-        alert(this.addmulMonth("2019-09-09",9));
+        
         // this.updateContract.tradeEndDate = ;
       },
 

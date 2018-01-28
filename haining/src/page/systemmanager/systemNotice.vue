@@ -64,6 +64,7 @@
 				let me = this;
 				this.$http.post('/sysNotice/sendNotice',
 							this.qs.stringify({
+								 'token':sessionStorage.getItem("token"),
 								'toType':this.toType,
 								'sysType':1,
 								'noticeContent':this.noticeContent
@@ -73,8 +74,13 @@
 				            var code = info['code'];
 				            if (code == 1) {
 				            	me.$message('发布成功');
+				            	this.toType = "";
+				            	this.noticeContent = "";
+				            } else {
+				            	var message = info['message'];
+				            	me.$message.error(message);
 				            }
-				          var message = info['message'];
+				          
 				          var data = info['data'];
 						})
 						.catch(function(err){
