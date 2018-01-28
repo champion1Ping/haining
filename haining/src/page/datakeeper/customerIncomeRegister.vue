@@ -11,7 +11,7 @@
     <el-button type="info"  class="left" disabled>档案编号</el-button><el-input clearable disabled v-model="addDocumentForm.documentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left" disabled>客户名称</el-button><el-input clearable disabled v-model="addDocumentForm.customerName"class="right" style="width:177px"></el-input>
+        <el-button type="info" class="left" disabled>客户名称</el-button><el-input clearable  v-model="addDocumentForm.customerName"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>交易平台</el-button><el-input clearable v-model="addDocumentForm.tradePlatform"class="right" style="width:177px"></el-input>
@@ -102,13 +102,13 @@
   <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input clearable disabled v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input clearable v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>直推人</el-button><el-input clearable disabled v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推人</el-button><el-input clearable  v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>间推人</el-button><el-input clearable disabled v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推人</el-button><el-input clearable  v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
