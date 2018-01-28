@@ -77,5 +77,36 @@ html, body{ margin:0; height:100%; }
   button.el-button.left.el-button--info.is-disabled{
     color: #2a2626;
   } 
+
+  .left{
+    width: 120px;
+    display:inline-block;
+    border-color: #DEDAD6;
+    border-top-right-radius:0px; 
+    border-bottom-right-radius:0px;
+    border-right-width: 0px;
+    color: #1e1c1c;
+    background-color: #E6E6E6; 
+
+  }
+   /*输入框*/
+  .right > .el-input__inner{
+      border-top-left-radius:0px; 
+      border-bottom-left-radius:0px; 
+      border-left-width: 0px;
+    
+  }
+  /*下拉框 + 日期选择框*/
+  .right > .el-input > .el-input__inner{
+      border-top-left-radius:0px; 
+      border-bottom-left-radius:0px; 
+      border-left-width: 0px;
+    
+  }
+  .el-input__prefix {
+    left: 155px;
+    -webkit-transition: all .3s;
+    transition: all .3s;
+  }
   
 </style>

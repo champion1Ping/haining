@@ -164,7 +164,8 @@
         let me = this;
         this.$http.post('/personDocument/getContractDitrubuteIncomeList',
               this.qs.stringify({
-                'token':this.$store.state.token,
+                'token':sessionStorage.getItem("token"),
+
                 'documentCode':this.documentCode,
                 'customerName':this.customerName,
                 'investmentAmount':this.investmentAmount,

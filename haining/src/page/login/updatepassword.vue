@@ -57,13 +57,13 @@
 		},
 		methods:{
 			submitForm(formName){
-				alert(this.$store.state.token);
 				this.$refs[formName].validate((valid)=>{
 					if(valid) {
 						this.$http.post('/account/loginResetPwd',
 							qs.stringify({
 								'pwd':this.updateForm.checkpass,
-								'token':this.$store.state.token
+							    'token':sessionStorage.getItem("token"),
+
 							}))
 						.then(function(res){
 							var info = res['data'];

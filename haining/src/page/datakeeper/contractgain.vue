@@ -8,13 +8,13 @@
     <el-form :model="updateContract" style="padding:5px">
        <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input clearable  v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
+    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input clearable disabled v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
         <el-button type="info" class="left" disabled>客户名称</el-button><el-input clearable  v-model="updateContract.customerName"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>投资金额</el-button><el-input clearable v-model="updateContract.investmentAmount"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>投资金额</el-button><el-input clearable disabled v-model="updateContract.investmentAmount"class="right" style="width:177px"></el-input>
   </el-col>
    <el-col :span="6">
        <el-button type="info"  class="left" disabled>合同收益</el-button><el-input clearable v-model="updateContract.contractIncome"class="right" style="width:177px"></el-input>
@@ -76,7 +76,7 @@
        <el-button type="info"  class="left" disabled>直推收益率</el-button><el-input clearable  v-model="updateContract.derectRecomandRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>直推收益额</el-button><el-input clearable   v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推收益额</el-button><el-input clearable  disabled  v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
@@ -87,26 +87,26 @@
        <el-button type="info"  class="left" disabled>间推收益率</el-button><el-input clearable v-model="updateContract.inderectRecomandRate" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>间推收益额</el-button><el-input clearable  v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推收益额</el-button><el-input clearable  disabled v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left" disabled>代理商收益率</el-button><el-input clearable v-model="updateContract.agentRate"class="right"  style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left" disabled>代理商收益额</el-button><el-input clearable v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商收益额</el-button><el-input clearable  disabled v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
   <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>公司收益额</el-button><el-input clearable  v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>公司收益额</el-button><el-input clearable disabled v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>直推人</el-button><el-input clearable  v-model="updateContract.derectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>交易平台</el-button><el-input clearable  v-model="updateContract.derectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>间推人</el-button><el-input clearable  v-model="updateContract.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>交易账号</el-button><el-input clearable  v-model="updateContract.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
