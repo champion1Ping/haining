@@ -35,7 +35,7 @@ export default [
       {path:'/login',component:login,meta:{  requiresAuth: false    }},
       {path:'/reset',component:resetpw,meta:{  requiresAuth: false    }},
       {path:'/updatepw',component:updatepw,meta:{  requiresAuth: true    }},
-      {path:'/personinfo',component:personinfo,meta:{  requiresAuth: true    }},
+      {name:"person", path:'/personinfo',component:personinfo,meta:{  requiresAuth: true    }},
       {path:'/contractgain',component:contractgain,meta:{  requiresAuth: true    }},
       {path:'/phoneLogin',component:phoneLogin,
              meta:{  requiresAuth: false    } 

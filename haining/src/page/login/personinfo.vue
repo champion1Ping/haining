@@ -220,6 +220,7 @@
   export default {
     data() {
       return {
+        userId:"",
         tableData:[],
         credentialsFront:'',
         credentialsBack:'',
@@ -270,10 +271,11 @@
       };
     },
     created:function(){
+      this.userId = this.$route.params.userId;
       var me = this;
-      this.$http.post('/user/getUserBaseInfo',
+      this.$http.post('/user/getUserBaseInfoById',
              this.qs.stringify({
-                'token':sessionStorage.getItem("token")
+                'id':this.userId
              })
              )
              .then(function(res){

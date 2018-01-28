@@ -368,10 +368,10 @@
              })
       },
       handleClick(row){
-         this.$router.push('/personinfo');
-         this.addUserForm.agentCode = row.agentCode;
-         this.addUserForm.agentName = row.agentName;
-         this.dialogChooseAgent = false;
+         this.$router.push({ name: 'person', params: { userId: row.id }});
+         // this.addUserForm.agentCode = row.agentCode;
+         // this.addUserForm.agentName = row.agentName;
+         // this.dialogChooseAgent = false;
       }
     }
   }
