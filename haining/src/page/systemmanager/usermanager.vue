@@ -274,7 +274,7 @@
       },
       addUser(){
            for(var field in this.addUserForm){
-          if(this.addUserForm[field] == ""){
+          if(this.addUserForm[field] ===""){
             this.$message.error("必填字段不能为空");
             return;
           }
