@@ -420,11 +420,12 @@
 
   //表格高度控制
   .el-table td, .el-table th{
-    padding: 0px;
+    padding: 30px;
   }
   .el-table th{
     background-color: #D7D7D7;
     color: #333333;
+    font-size: 12px;
 
   }
   
