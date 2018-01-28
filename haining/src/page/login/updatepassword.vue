@@ -57,6 +57,8 @@
 		},
 		methods:{
 			submitForm(formName){
+							let me = this;
+
 				this.$refs[formName].validate((valid)=>{
 					if(valid) {
 						this.$http.post('/account/loginResetPwd',
@@ -69,7 +71,7 @@
 							var info = res['data'];
 				            var code = info['code'];
 				            if (code == 1) {
-				            	me.$message('修改成功');
+				            	me.$message.success('修改成功');
 				            } else {
 				            	let message = info['message'];
 				            	me.$messaage.error(messaage);
