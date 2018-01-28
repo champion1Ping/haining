@@ -48,7 +48,7 @@
     size="mini"
     :data="tableData"
     border
-    style="width: 100%;" header-align="center">
+    style="width: 100%;" height="412" header-align="center">
     <el-table-column prop="id" label="序号" align="center" width="80px">
            <el-input clearable v-model="id"></el-input>
     </el-table-column>

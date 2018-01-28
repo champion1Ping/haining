@@ -101,6 +101,9 @@ html, body{ margin:0; height:100%; }
       border-bottom-left-radius:0px; 
       border-left-width: 0px;
       height: 36px;
+    .el-button{
+    line-height:0.6
+    }
     
   }
   /*下拉框 + 日期选择框*/

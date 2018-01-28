@@ -28,7 +28,7 @@
     size="mini"
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
-    style="width: 100%" header-align="center">
+    style="width: 100%" height="412" header-align="center">
     <el-table-column prop="account" label="注册账号" align="center" width="120"></el-table-column>
     <el-table-column prop="realName" label="真实姓名" align="center" width="100"></el-table-column>
     <el-table-column prop="contactPhone" label="联系方式" align="center" width="120"></el-table-column>
@@ -39,7 +39,7 @@
     <el-table-column prop="sumMoney" label="入金金额" align="center" width="100"></el-table-column>
     <el-table-column prop="refereeQualification" label="推荐人资质" align="center" width="100"></el-table-column>
     <el-table-column prop="email" label="邮箱地址" align="center" width="160"></el-table-column>
-    <el-table-column prop="agentName" label="负责代理商" align="center" width="220"></el-table-column>
+    <el-table-column prop="agentName" label="负责代理商" align="center" width="210"></el-table-column>
     <el-table-column prop="directRecommendationAccount" label="直推人账号" align="center" width="100"></el-table-column>
     <el-table-column prop="indirectRecommendationAccount" label="间推人账号" align="center" width="100"></el-table-column>
   </el-table>
