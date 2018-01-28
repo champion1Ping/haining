@@ -193,23 +193,24 @@
     </div>
 	<div class="tbl" style="margin:10px;">
     <el-table
+    size="mini"
     :data="customerIncomeTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
-    <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="tradePlatform" label="交易平台" align="center" width="180"></el-table-column>
-    <el-table-column prop="tradeAccount" label="交易账户号" align="center" width="180"></el-table-column>
-    <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="180" :formatter="formatter1"></el-table-column>
-    <el-table-column prop="getMoneyDate" label="入金日期" align="center" width="180"></el-table-column>
-    <el-table-column prop="registerEmail" label="注册邮箱" align="center" width="180"></el-table-column>
-    <el-table-column prop="certificateTypeName" label="证件类型" align="center" width="180"></el-table-column>
+    <el-table-column prop="documentCode" label="档案编号" align="center" width="140"></el-table-column>
+    <el-table-column prop="tradePlatform" label="交易平台" align="center" width="90"></el-table-column>
+    <el-table-column prop="tradeAccount" label="交易账户号" align="center" width="100"></el-table-column>
+    <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="80" :formatter="formatter1"></el-table-column>
+    <el-table-column prop="getMoneyDate" label="入金日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="registerEmail" label="注册邮箱" align="center" width="120"></el-table-column>
+    <el-table-column prop="certificateTypeName" label="证件类型" align="center" width="90"></el-table-column>
     <el-table-column prop="certificateNumber" label="证件号" align="center" width="180"></el-table-column>
-    <el-table-column prop="contactPhone" label="联系电话" align="center" width="180"></el-table-column>
-    <el-table-column prop="contractDate" label="签约日期" align="center" width="180"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="180"></el-table-column>
-    <el-table-column prop="productRate" label="收益率($)" align="center" width="180"></el-table-column>
-    <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="180"></el-table-column>
-    <el-table-column prop="estimatedEarnings" label="预估收益" align="center" width="180"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系电话" align="center" width="120"></el-table-column>
+    <el-table-column prop="contractDate" label="签约日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="120"></el-table-column>
+    <el-table-column prop="productRate" label="收益率($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="120"></el-table-column>
+    <el-table-column prop="estimatedEarnings" label="预估收益" align="center" width="120"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"

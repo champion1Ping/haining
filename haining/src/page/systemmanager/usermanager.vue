@@ -181,6 +181,7 @@
     size="mini"
     :data="userTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
+    fixed
     style="width: 100%" header-align="center">
     <el-table-column prop="account" label="用户账号" align="center" width="140"></el-table-column>
     <el-table-column prop="userName" label="用户名称" align="center" width="140"></el-table-column>
