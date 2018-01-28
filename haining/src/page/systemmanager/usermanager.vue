@@ -178,6 +178,7 @@
     </div>
 	<div class="systemUserManager" style="margin:10px;">
     <el-table
+    size="mini"
     :data="userTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
@@ -192,8 +193,7 @@
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
     <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="180"></el-table-column>
     <el-table-column
-      fixed="right"
-      label="用户信息明细"
+      label="信息明细"
       alien="center"
       width="120px">
       <template slot-scope="scope">
