@@ -202,9 +202,10 @@
     size="mini"
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
-    style="width: 100%" header-align="center">
-    <el-table-column prop="documentCode" label="档案编号" align="center" width="180"></el-table-column>
+    style="width: 100%" height="412" header-align="center">
+    <el-table-column fixed prop="documentCode" label="档案编号" align="center" width="160"></el-table-column>
      <el-table-column
+      fixed
       label="操作"
       align="center"
       width="120px">

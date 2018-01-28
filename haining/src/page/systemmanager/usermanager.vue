@@ -182,7 +182,7 @@
     :data="userTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     fixed
-    style="width: 100%" header-align="center">
+    style="width: 100%" height="412" header-align="center">
     <el-table-column prop="account" label="用户账号" align="center" width="140"></el-table-column>
     <el-table-column prop="userName" label="用户名称" align="center" width="140"></el-table-column>
     <el-table-column prop="userTypeName" label="用户性质" align="center" width="120"></el-table-column>

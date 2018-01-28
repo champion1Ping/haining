@@ -75,7 +75,13 @@ html, body{ margin:0; height:100%; }
   
 }
   button.el-button.left.el-button--info.is-disabled{
+    border-top:2px;
+    border-top-left-radius:2px; 
+    border-bottom-left-radius:2px; 
+    border-left-width: 0px;
     color: #2a2626;
+    font-size: 12px;
+    height: 36px;
   } 
 
   .left{
@@ -94,6 +100,10 @@ html, body{ margin:0; height:100%; }
       border-top-left-radius:0px; 
       border-bottom-left-radius:0px; 
       border-left-width: 0px;
+      height: 36px;
+    .el-button{
+    line-height:0.6
+    }
     
   }
   /*下拉框 + 日期选择框*/
@@ -101,6 +111,7 @@ html, body{ margin:0; height:100%; }
       border-top-left-radius:0px; 
       border-bottom-left-radius:0px; 
       border-left-width: 0px;
+      height: 36px;
     
   }
   .el-input__prefix {

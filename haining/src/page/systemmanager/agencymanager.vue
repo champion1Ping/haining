@@ -182,7 +182,7 @@
     :data="agentData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     :header-row-class-name="headerRowClassName"
     border
-    style="width:100%;font-size: 12px;" header-align="center">
+    style="width:100%;font-size: 12px;" height="412" header-align="center">
     <el-table-column prop="agentCode" label="代理商编号"  align="center" width="90"></el-table-column>
     <el-table-column prop="agentName" label="代理商名称" align="center" width="228"></el-table-column>
     <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="160"></el-table-column>
@@ -381,6 +381,11 @@
     background-color:#f0f8eb;
   }
   
+  .el-table th{
+  background-color:#c8c9cc;
+  color:#333333;
+
+  }
   .btn{
     /*margin-top: 1px;*/
     background-color: #ffffff;
