@@ -65,7 +65,6 @@
 			}
 		},
 		created:function(){
-
 			this.id = sessionStorage.getItem("roleId");
 			console.log(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");
