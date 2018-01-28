@@ -102,7 +102,7 @@
   <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input clearable v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input clearable disabled v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>直推人</el-button><el-input clearable  v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
