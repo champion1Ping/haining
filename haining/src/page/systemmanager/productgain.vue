@@ -150,13 +150,13 @@
         this.$http.post('/product/addProduct',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
-                'productList':{
+                'productList':[{
                 'id':this.addProduct.id,
                 'productType':this.addProduct.productType,
                 'serviceTime':this.addProduct.serviceTime,
                 'monthRate':this.addProduct.monthRate,
                 'enableFlag':this.addProduct.enableFlag,
-                }
+                }]
                 
               }))
             .then(function(res){
