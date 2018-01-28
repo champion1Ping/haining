@@ -29,19 +29,19 @@
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
-    <el-table-column prop="account" label="注册账号" align="center" width="140"></el-table-column>
+    <el-table-column prop="account" label="注册账号" align="center" width="120"></el-table-column>
     <el-table-column prop="realName" label="真实姓名" align="center" width="100"></el-table-column>
-    <el-table-column prop="contactPhone" label="联系方式" align="center" width="140"></el-table-column>
-    <el-table-column prop="sexName" label="性别" align="center" width="90"></el-table-column>
-    <el-table-column prop="gmtCreate" label="注册日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系方式" align="center" width="120"></el-table-column>
+    <el-table-column prop="sexName" label="性别" align="center" width="100"></el-table-column>
+    <el-table-column prop="gmtCreate" label="注册日期" align="center" width="100"></el-table-column>
     <el-table-column prop="whetherRealName" label="是否实名" align="center" width="100"></el-table-column>
     <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="100"></el-table-column>
     <el-table-column prop="sumMoney" label="入金金额" align="center" width="100"></el-table-column>
     <el-table-column prop="refereeQualification" label="推荐人资质" align="center" width="100"></el-table-column>
-    <el-table-column prop="email" label="邮箱地址" align="center" width="120"></el-table-column>
-    <el-table-column prop="agentName" label="负责代理商" align="center" width="120"></el-table-column>
-    <el-table-column prop="directRecommendationAccount" label="直推人账号" align="center" width="140"></el-table-column>
-    <el-table-column prop="indirectRecommendationAccount" label="间推人账号" align="center" width="140"></el-table-column>
+    <el-table-column prop="email" label="邮箱地址" align="center" width="100"></el-table-column>
+    <el-table-column prop="agentName" label="负责代理商" align="center" width="220"></el-table-column>
+    <el-table-column prop="directRecommendationAccount" label="直推人账号" align="center" width="120"></el-table-column>
+    <el-table-column prop="indirectRecommendationAccount" label="间推人账号" align="center" width="120"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
