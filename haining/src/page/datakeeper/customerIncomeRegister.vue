@@ -202,7 +202,7 @@
     <el-table-column prop="tradeAccount" label="交易账户号" align="center" width="100"></el-table-column>
     <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="80" :formatter="formatter1"></el-table-column>
     <el-table-column prop="getMoneyDate" label="入金日期" align="center" width="120"></el-table-column>
-    <el-table-column prop="registerEmail" label="注册邮箱" align="center" width="120"></el-table-column>
+    <el-table-column prop="registerEmail" label="注册邮箱" align="center" width="160"></el-table-column>
     <el-table-column prop="certificateTypeName" label="证件类型" align="center" width="90"></el-table-column>
     <el-table-column prop="certificateNumber" label="证件号" align="center" width="180"></el-table-column>
     <el-table-column prop="contactPhone" label="联系电话" align="center" width="120"></el-table-column>
