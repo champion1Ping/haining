@@ -381,6 +381,11 @@
     background-color:#f0f8eb;
   }
   
+  .el-table th{
+  background-color:#c8c9cc;
+  color:#333333;
+
+  }
   .btn{
     /*margin-top: 1px;*/
     background-color: #ffffff;
