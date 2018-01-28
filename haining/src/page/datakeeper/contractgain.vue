@@ -415,6 +415,7 @@
       modify(){
           let me = this;
           let obj = new Object();
+          alert(this.updateContract.tradeStatus);
           obj.documentCode= this.updateContract.documentCode;
                   obj.id = this.updateContract.id;
                   obj.customerName=this.updateContract.customerName;

@@ -44,10 +44,10 @@ const xialakuang = {
     ],
     //交易状态
     dealStatus:[
-        {label:'正常',value:0},
-        {label:'结束',value:1},
-        {label:'提前终止',value:2},
-        {label:'未交易',value:3},
+        {label:'正常',value:1},
+        {label:'结束',value:2},
+        {label:'提前终止',value:3},
+        {label:'未交易',value:4},
 
     ],
     //投资金额
