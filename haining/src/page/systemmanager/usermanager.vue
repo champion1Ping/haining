@@ -340,6 +340,7 @@
           let me = this;
           this.$http.post('/user/getUserList',
           this.qs.stringify({
+                'token':sessionStorage.getItem('token'),
                 'account':this.userAccount,
                 'userName':this.userName,
                 'contactPhone':this.contactPhone,
