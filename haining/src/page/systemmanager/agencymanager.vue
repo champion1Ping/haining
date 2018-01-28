@@ -178,7 +178,7 @@
     </div>
 	<div class="tbl1" style="margin:10px;">
     <el-table
-    size="small"
+    size="mini"
     :data="agentData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     :header-row-class-name="headerRowClassName"
     border

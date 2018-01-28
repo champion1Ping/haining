@@ -45,6 +45,7 @@
     
 	<div class="product">
     <el-table
+    size="mini"
     :data="tableData"
     border
     style="width: 100%;" header-align="center">

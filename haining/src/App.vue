@@ -5,9 +5,9 @@
   <!-- <div style="position: relative;height: 60px;width: 100%;"></div> -->
   <el-main>
   <transition name="fade">
-     <!-- <keep-alive> -->
+     <keep-alive>
               <router-view class="view"></router-view>
-     <!-- </keep-alive>          -->
+     </keep-alive>         
   </transition>
 
 </el-main>

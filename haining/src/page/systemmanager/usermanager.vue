@@ -181,21 +181,22 @@
     size="mini"
     :data="userTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
+    fixed
     style="width: 100%" header-align="center">
-    <el-table-column prop="account" label="用户账号" align="center" width="180"></el-table-column>
-    <el-table-column prop="userName" label="用户名称" align="center" width="180"></el-table-column>
-    <el-table-column prop="userTypeName" label="用户性质" align="center" width="180"></el-table-column>
-    <el-table-column prop="agentName" label="代理商名称" align="center" width="180"></el-table-column>
-    <el-table-column prop="contactPhone" label="联系方式" align="center" width="180"></el-table-column>
+    <el-table-column prop="account" label="用户账号" align="center" width="140"></el-table-column>
+    <el-table-column prop="userName" label="用户名称" align="center" width="140"></el-table-column>
+    <el-table-column prop="userTypeName" label="用户性质" align="center" width="120"></el-table-column>
+    <el-table-column prop="agentName" label="代理商名称" align="center" width="230"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系方式" align="center" width="140"></el-table-column>
     <el-table-column prop="gmtCreate" label="创建时间" align="center" width="180"></el-table-column>
-    <el-table-column prop="whetherFreezeName" label="是否冻结" align="center" width="180"></el-table-column>
-    <el-table-column prop="freezeDate" label="冻结时间" align="center" width="180"></el-table-column>
-    <el-table-column prop="agentCode" label="代理商编号" align="center" width="180"></el-table-column>
-    <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="180"></el-table-column>
+    <el-table-column prop="whetherFreezeName" label="是否冻结" align="center" width="90"></el-table-column>
+    <el-table-column prop="freezeDate" label="冻结时间" align="center" width="140"></el-table-column>
+    <el-table-column prop="agentCode" label="代理商编号" align="center" width="100"></el-table-column>
+    <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="120"></el-table-column>
     <el-table-column
       label="信息明细"
-      align="center"
-      width="120px">
+      alien="center"
+      width="100px">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">明细</el-button>
       </template>
@@ -273,19 +274,15 @@
       },
       addUser(){
            for(var field in this.addUserForm){
-            if (field !="freezeDate" && field !="agentName" &&field !="agentCode") {
-              if(this.addUserForm[field] === ""){
-              this.$message.error("必填字段不能为空");
-              return;
-             }
-            }
-            
+          if(this.addUserForm[field] == ""){
+            this.$message.error("必填字段不能为空");
+            return;
+          }
         }
           this.dialogAddUser = true;
           var me = this;
           this.$http.post('/user/addUser',
           this.qs.stringify({
-                'token':sessionStorage.getItem("token"),
                 'account':this.addUserForm.userAccount,
                 'userName':this.addUserForm.userName,
                 'contactPhone':this.addUserForm.contactPhone,
@@ -298,17 +295,13 @@
              })
              )
              .then(function(res){
+              alert(JSON.stringify(res));
               var info = res['data'];
               var code = info['code'];
               var message = info['message'];
               if(code == 1){
-                  me.$message(message);
-                  for(var field in me.addUserForm){
-                    me.addUserForm[field] ="";
-                  }
+                  me.$message("添加成功");
                   me.dialogAddUser = false;
-              } else {
-                  me.$message.error(message);
               }
              })
              .catch(function(err){
@@ -347,7 +340,6 @@
           let me = this;
           this.$http.post('/user/getUserList',
           this.qs.stringify({
-                'token':sessionStorage.getItem("token"),
                 'account':this.userAccount,
                 'userName':this.userName,
                 'contactPhone':this.contactPhone,
@@ -377,10 +369,10 @@
              })
       },
       handleClick(row){
-         this.$router.push({ name: 'person', params: { userId: row.id }});
-         // this.addUserForm.agentCode = row.agentCode;
-         // this.addUserForm.agentName = row.agentName;
-         // this.dialogChooseAgent = false;
+         this.$router.push('/personinfo');
+         this.addUserForm.agentCode = row.agentCode;
+         this.addUserForm.agentName = row.agentName;
+         this.dialogChooseAgent = false;
       }
     }
   }
