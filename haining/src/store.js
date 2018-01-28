@@ -44,33 +44,33 @@ const xialakuang = {
     ],
     //交易状态
     dealStatus:[
-        {label:'正常',value:'0'},
-        {label:'结束',value:'1'},
-        {label:'提前终止',value:'2'},
-        {label:'未交易',value:'3'},
+        {label:'正常',value:0},
+        {label:'结束',value:1},
+        {label:'提前终止',value:2},
+        {label:'未交易',value:3},
 
     ],
     //投资金额
     investMoney:[
-        {label:'小于100000',value:'1'},
-        {label:'大于100000',value:'2'},
+        {label:'小于100000',value:1},
+        {label:'大于100000',value:2},
     ],
     sex:[
         {label:'男',value:1},
         {label:'女',value:2},
     ],
     certificateType:[
-        {label:'身份证',value:'1'},
-        {label:'护照',value:'2'},
-        {label:'港澳通行证',value:'3'},
-        {label:'其他',value:'4'},
+        {label:'身份证',value:1},
+        {label:'护照',value:2},
+        {label:'港澳通行证',value:3},
+        {label:'其他',value:4},
 
     ]
 }
 const usertype={
     usermanager:[
-      {label:'管理员',value:'3'},
-      {label:'代理商',value:'1'}
+      {label:'管理员',value:3},
+      {label:'代理商',value:1}
     ],
     notice:[
        {label:'全部', value:4},

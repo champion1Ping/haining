@@ -37,7 +37,7 @@
 			    <template slot="title" ><span style="font-size:14px;color:#333333">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
 
 
-			    <el-menu-item index="/personinfo" v-if="roleId==2 || id == 2">个人信息</el-menu-item>
+			    <el-menu-item index="/personinfo" v-if="(roleId==2 || id == 2)">个人信息</el-menu-item>
 			    <el-menu-item index="/updatepw" v-if="roleId  !==2 || id !==2">修改密码</el-menu-item>
 			    <el-menu-item index="/login" @click="loginout()">退出登录</el-menu-item>
 			  </el-submenu>
@@ -65,7 +65,9 @@
 			}
 		},
 		created:function(){
+
 			this.id = sessionStorage.getItem("roleId");
+			alert(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");
 			let me = this;
 				this.$http.post('/notice/getMyNoticeCount',

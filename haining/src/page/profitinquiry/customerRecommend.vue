@@ -95,7 +95,8 @@
           let me = this;
           this.$http.post('/user/getCustomerRecommandVOList',
           this.qs.stringify({
-                'token':this.$store.state.token,
+            'token':sessionStorage.getItem("token"),
+
                 'account':this.account,
                 'realName':this.realName,
                 'whetherGetMoney':this.wheatherGetMoney,

@@ -32,14 +32,13 @@
 
   <div slot="footer" class="dialog-footer">
     <el-button @click="addProductDialog = false">取 消</el-button>
-    <el-button type="primary" @click="submitForm('addProductForm')">确 定</el-button>
+    <el-button type="primary" @click="saveProduct()">确 定</el-button>
   </div>
 </el-dialog>
   <div class="btn">
 		<span style="color:#C9A44E;font-size:20px">产品收益维护&nbsp;&nbsp;&nbsp;
 		<el-button type="primary" @click="quit()">退出</el-button>
 		<el-button type="primary" @click="openAddDialog()">添加</el-button>
-		<el-button type="primary" @click="saveProduct()">保存</el-button>
 		</span>
     </div>
 
@@ -50,21 +49,24 @@
     :data="tableData"
     border
     style="width: 100%;" header-align="center">
-    <el-table-column prop="id" label="序号" align="center" width="180">
+    <el-table-column prop="id" label="序号" align="center" width="80px">
            <el-input clearable v-model="id"></el-input>
     </el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="180">
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="180px">
            <el-input clearable v-model="productTypeName" id="productTypeName"></el-input>
     </el-table-column>
-    <el-table-column prop="serviceTime" label="服务期限（月）" align="center" width="180">
+    <el-table-column prop="serviceTime" label="服务期限（月）" align="center" width="200px">
            <el-input clearable v-model="serviceTime"></el-input>
     </el-table-column>
-    <el-table-column prop="monthRate" label="月收益率" align="center" width="180">
+    <el-table-column prop="monthRate" label="月收益率" align="center" width="120px">
            <el-input clearable v-model="monthRate"></el-input>
     </el-table-column>
-    <el-table-column prop="enableFlag" label="操作" align="center" width="180">
+    <el-table-column prop="enableFlag" label="是否启用" align="center" width="150px" :formatter="formatter1">
+           <el-input clearable v-model="enableFlag" ></el-input>
+    </el-table-column>
+    <el-table-column prop="id" label="维护" align="center" width="180px">
            <template slot-scope="scope">
-        <el-button @click="handleClick(scope.row)" type="text" size="small">{{enableFlag==0 ? "启用":"停用" }}</el-button>
+        <el-button @click="handleClick(scope.row)" type="text" size="small">维护</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -94,13 +96,19 @@
       }
     },
     created:function(){
-      let me = this;
+     
+          this.getData();
+    },
+    
+    methods:{
+      getData(){
+       let me = this;
         this.$http.post('/product/getProductInfoList',
               this.qs.stringify({
-                'token':this.$store.state.token
+                'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
-              alert(JSON.stringify(res));
+              // alert(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
@@ -116,34 +124,51 @@
 
             })
     },
-    methods:{
+      formatter1(row,column,cellValue){
+          if (cellValue == 1) {
+            return "是";
+          } else {
+            return "否";
+          }
+      },
       openAddDialog(){
           this.addProductDialog = true;
       },
       quit(){
         this.$router.push('/notices');
       },
-      addProduct(){
-        
+      handleClick(row){
+        this.addProduct.num = row.id;
+        this.addProduct.productType = row.productTypeName;
+        this.addProduct.serviceTime = row.serviceTime;
+        this.addProduct.monthRate = row.monthRate;
+        this.addProduct.enableFlag = row.enableFlag;
+        this.addProductDialog = true;
       },
       saveProduct(){
-        let productTyeName = document.getElementById('productTypeName');
-        alert(productTypeName.value);
         let me = this;
-        let enableFlag = (this.start?1:0);
         this.$http.post('/product/addProduct',
               this.qs.stringify({
-                'id':'',
-                'productType':this.productType,
-                'serviceTime':this.serviceTime,
-                'monthRate':this.monthRate,
-                'enableFlag':this.enableFlag
+                'token':sessionStorage.getItem("token"),
+                'productList':{
+                'id':this.addProduct.id,
+                'productType':this.addProduct.productType,
+                'serviceTime':this.addProduct.serviceTime,
+                'monthRate':this.addProduct.monthRate,
+                'enableFlag':this.addProduct.enableFlag,
+                }
+                
               }))
             .then(function(res){
               var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
-                      me.$message('添加成功');
+                      me.$message('操作成功');
+                      //刷新
+                      me.getData();
+                      for(var field in me.addProduct){
+                         me.addProduct[field] ="";
+                      }
                     } else {
                        var message = info['message'];
                        me.$message(message);

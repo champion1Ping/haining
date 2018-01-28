@@ -190,23 +190,23 @@
         <el-col :span="12" style="padding:5px">
         直推客户信息
         <el-table
-        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        :data="derectCustomerReferInfoMationVOList"
         border
         style="width: 100%" header-align="center">
-        <el-table-column prop="account" label="序号" align="center" width="80"></el-table-column>
-        <el-table-column prop="realName" label="名称" align="center" width="80"></el-table-column>
-        <el-table-column prop="contactPhone" label="在线合同数" align="center" width="150px"></el-table-column>
+        <el-table-column prop="id" label="序号" align="center" width="80"></el-table-column>
+        <el-table-column prop="directRecommendationName" label="名称" align="center" width="80"></el-table-column>
+        <el-table-column prop="contractNum" label="在线合同数" align="center" width="150px"></el-table-column>
       </el-table>
         </el-col>
         <el-col :span="12" style="padding:5px;">
         间推客户信息
         <el-table
-        :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
+        :data="inDerectCustomerReferInfoMationVOList"
         border
         style="width: 100%" header-align="center">
-        <el-table-column prop="account" label="序号" align="center" width="80"></el-table-column>
-        <el-table-column prop="realName" label="名称" align="center" width="80"></el-table-column>
-        <el-table-column prop="contactPhone" label="在线合同数" align="center" width="150px"></el-table-column>
+        <el-table-column prop="id" label="序号" align="center" width="80"></el-table-column>
+        <el-table-column prop="indirectRecommendationName" label="名称" align="center" width="80"></el-table-column>
+        <el-table-column prop="contractNum" label="在线合同数" align="center" width="150px"></el-table-column>
       </el-table>
         </el-col>
         
@@ -220,7 +220,7 @@
   export default {
     data() {
       return {
-        tableData:[],
+        userId:"",
         credentialsFront:'',
         credentialsBack:'',
         liveAddressCredential:'',
@@ -231,6 +231,8 @@
         chargedMoney:'',
         directRecommendRate:'',
         indirectRecommendRate:'',
+        derectCustomerReferInfoMationVOList:[],
+        inDerectCustomerReferInfoMationVOList:[],
         certificateFrontData:{
           picType:'1',
             account:sessionStorage.getItem("account"),
@@ -270,14 +272,14 @@
       };
     },
     created:function(){
+      this.userId = this.$route.params.userId;
       var me = this;
-      this.$http.post('/user/getUserBaseInfo',
+      this.$http.post('/user/getUserBaseInfoById',
              this.qs.stringify({
-                'token':sessionStorage.getItem("token")
+                'id':this.userId
              })
              )
              .then(function(res){
-                alert(JSON.stringify(res));
                 var info = res['data'];
                 var code = info['code'];
                 var message = info['message'];
@@ -301,6 +303,16 @@
                 me.baseinfo.indirectRecommendAccount=data['indirectRecommendationAccount'];
                 me.realNameVerify.certificateType = data['certificateType'];
                 me.realNameVerify.certificateNumber=data['certificateNumber'];
+
+                //推荐信息
+                let myReferinfoMationVO = data['myReferinfoMationVO'];
+                this.vipStarLevel = myReferinfoMationVO['starDegree'];
+                this.chargedMoney = myReferinfoMationVO['sumMoney'];
+                this.directRecommendRate = myReferinfoMationVO['directRewardRate'];
+                this.indirectRecommendRate = myReferinfoMationVO['indirectRewardRate'];
+                this.derectCustomerReferInfoMationVOList = myReferinfoMationVO['derectCustomerReferInfoMationVOList'];
+                this.inDerectCustomerReferInfoMationVOList = myReferinfoMationVO['inDerectCustomerReferInfoMationVOList'];
+
              })
              .catch(function(err){
 
@@ -346,7 +358,7 @@
              })
              )
              .then(function(res){
-                alert(JSON.stringify(res));
+                // alert(JSON.stringify(res));
                 var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {

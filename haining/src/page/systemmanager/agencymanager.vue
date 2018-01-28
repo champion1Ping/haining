@@ -275,6 +275,8 @@
          let me = this;
          this.$http.post('/agent/getNextAgentCodeByProvinceId',
          this.qs.stringify({
+                      'token':sessionStorage.getItem("token"),
+
             'provinceId':this.addAgencyForm.province
          })
          )
@@ -295,6 +297,7 @@
         alert(this.agentCode+","+this.agentName);
         this.$http.post('/agent/getAgentList',
           this.qs.stringify({
+            'token':sessionStorage.getItem("token"),
             'agentCode':this.agentCode,
             'agentName':this.agentName,
             'legalRepresentative':this.legalRepresentative,
@@ -336,6 +339,8 @@
         alert(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
         this.$http.post('/agent/addAgentInfo',
           this.qs.stringify({
+                        'token':sessionStorage.getItem("token"),
+
             'agentCode':this.addAgencyForm.agencyCode,
             'agentName':this.addAgencyForm.agencyName,
             'unifiedSocialCreditCode':this.addAgencyForm.socialNum,
@@ -423,6 +428,13 @@
   .el-table td, .el-table th{
     padding: 30px;
   }
+  tr .header-row{
+  
+    background-color: #D7D7D7;
+    color: #333333;
+  }
+
+  //size默认的时候修改表头背景颜色
   .el-table th{
     background-color: #D7D7D7;
     color: #333333;
