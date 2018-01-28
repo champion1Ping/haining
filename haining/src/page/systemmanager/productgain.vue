@@ -6,7 +6,7 @@
     <div style="border:1px solid;border-radius:4px;">
     <el-form :model="form" style="padding:10px" :models="addProduct" ref="addProduct">
     <el-row>
-      <el-button type="info" style="margin-bottom:10px;" class="left" disabled>序号</el-button><el-input clearable  v-model="addProduct.num" class="right" style="width:200px"></el-input>
+      <el-button type="info" style="margin-bottom:10px;" class="left" disabled>序号</el-button><el-input clearable  v-model="addProduct.sequenceNumber" class="right" style="width:200px"></el-input>
     </el-row>
      <el-row> 
     <el-button type="info" style="margin-bottom:10px;" class="left" disabled>产品类型</el-button><el-input clearable   v-model="addProduct.productType" class="right" style="width:200px"></el-input>
@@ -49,8 +49,8 @@
     :data="tableData"
     border
     style="width: 100%;" height="412" header-align="center">
-    <el-table-column prop="id" label="序号" align="center" width="80px">
-           <el-input clearable v-model="id"></el-input>
+    <el-table-column prop="sequenceNumber" label="序号" align="center" width="80px">
+           <el-input clearable v-model="sequenceNumber"></el-input>
     </el-table-column>
     <el-table-column prop="productTypeName" label="产品类型" align="center" width="180px">
            <el-input clearable v-model="productTypeName" id="productTypeName"></el-input>
@@ -79,14 +79,17 @@
     data(){
       return{
          tableData:[],
+         operationType:'',
          id:'',
+         products:[],
          productTypeName:'',
          serviceTime:'',
          monthRate:'',
          enableFlag:'',
          addProductDialog:false,
         addProduct:{
-          num:'',
+          id:'',
+          sequenceNumber:'',
           productType:'',
           serviceTime:'',
           monthRate:'',
@@ -108,7 +111,7 @@
                 'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
-              // alert(JSON.stringify(res));
+                  console.log(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
@@ -133,37 +136,43 @@
       },
       openAddDialog(){
           this.addProductDialog = true;
+          this.operationType = 1;
       },
       quit(){
         this.$router.push('/notices');
       },
       handleClick(row){
-        this.addProduct.num = row.id;
+        this.addProduct.id = row.id;
+        this.addProduct.sequenceNumber = row.sequenceNumber;
         this.addProduct.productType = row.productTypeName;
         this.addProduct.serviceTime = row.serviceTime;
         this.addProduct.monthRate = row.monthRate;
         this.addProduct.enableFlag = row.enableFlag;
         this.addProductDialog = true;
+        this.operationType = 0;
       },
       saveProduct(){
         let me = this;
+        let pro = new Object();
+        pro.id = (this.operationType == 1 ? "": this.addProduct.id)
+        pro.sequenceNumber = this.addProduct.sequenceNumber;
+        pro.productTypeName = this.addProduct.productType;
+        pro.serviceTime = this.addProduct.serviceTime;
+        pro.monthRate = this.addProduct.monthRate;
+        pro.enableFlag = this.addProduct.enableFlag;
+        this.products.push(pro);
+        console.log(this.products);
         this.$http.post('/product/addProduct',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
-                'productList':[{
-                'id':this.addProduct.id,
-                'productType':this.addProduct.productType,
-                'serviceTime':this.addProduct.serviceTime,
-                'monthRate':this.addProduct.monthRate,
-                'enableFlag':this.addProduct.enableFlag,
-                }]
-                
+                'productList':JSON.stringify(this.products),
               }))
             .then(function(res){
               var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
                       me.$message('操作成功');
+                      me.products =[];
                       //刷新
                       me.getData();
                       for(var field in me.addProduct){

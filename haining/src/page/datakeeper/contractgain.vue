@@ -8,10 +8,10 @@
     <el-form :model="updateContract" style="padding:5px">
        <el-row>
   <el-col :span="6">
-    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input clearable disabled v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
+    <el-button type="info"  class="left" disabled>档案编号</el-button><el-input  disabled v-model="updateContract.documentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-        <el-button type="info" class="left" disabled>客户名称</el-button><el-input clearable  v-model="updateContract.customerName"class="right" style="width:177px"></el-input>
+        <el-button type="info" class="left" disabled>客户名称</el-button><el-input   v-model="updateContract.customerName"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>投资金额</el-button><el-input clearable disabled v-model="updateContract.investmentAmount"class="right" style="width:177px"></el-input>
@@ -24,7 +24,7 @@
 
 <el-row style="margin-top:10px">
     <el-col :span="6">
-    <el-button type="info"  class="left" disabled>产品类型</el-button><el-select @change="changeProductType()" clearable v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
+    <el-button type="info"  class="left" disabled>产品类型</el-button><el-select @change="changeProductType()"  v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -36,7 +36,6 @@
   <el-col :span="6">
         <el-button type="info" class="left" disabled>首交易日</el-button><el-date-picker
       v-model="updateContract.firstTradeDate"
-      @blur="firstTradeDateChanged()"
       type="date"
       class="right"
       value-format="yyyy-MM-dd"
@@ -69,16 +68,16 @@
 
   <el-row style="margin-top:10px">
     <el-col :span="6">
-      <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input clearable v-model="updateContract.productRate"class="right" style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>产品收益率</el-button><el-input disabled v-model="updateContract.productRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>客户收益额</el-button><el-input clearable v-model="updateContract.customerIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>客户收益额</el-button><el-input disabled v-model="updateContract.customerIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>直推收益率</el-button><el-input clearable  @change="directRateChanged()" v-model="updateContract.derectRecomandRate"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推收益率</el-button><el-input clearable   v-model="updateContract.derectRecomandRate"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>直推收益额</el-button><el-input clearable  disabled  v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>直推收益额</el-button><el-input   disabled  v-model="updateContract.derectIncome"class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
@@ -86,23 +85,23 @@
 <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>间推收益率</el-button><el-input @change="indirectRateChanged()" clearable v-model="updateContract.inderectRecomandRate" class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推收益率</el-button><el-input  clearable v-model="updateContract.inderectRecomandRate" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>间推收益额</el-button><el-input clearable  disabled v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>间推收益额</el-button><el-input   disabled v-model="updateContract.inderectIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left" disabled>代理商收益率</el-button><el-input @change="agentRateChanged()" clearable v-model="updateContract.agentRate"class="right"  style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商收益率</el-button><el-input  clearable v-model="updateContract.agentRate"class="right"  style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-      <el-button type="info"  class="left" disabled>代理商收益额</el-button><el-input clearable  disabled v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
+      <el-button type="info"  class="left" disabled>代理商收益额</el-button><el-input   disabled v-model="updateContract.agentIncome" class="right" style="width:177px"></el-input>
   </el-col>
   </el-row>
 
   <el-row style="margin-top:10px">
     
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>公司收益额</el-button><el-input clearable disabled v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>公司收益额</el-button><el-input  disabled v-model="updateContract.companyIncome"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>交易平台</el-button><el-input clearable  v-model="updateContract.tradePlatform"class="right" style="width:177px"></el-input>
@@ -266,7 +265,7 @@
         productType:'',
         dealStatus:'',
         productRate:'',
-
+        contracts:[],
         tempServiceDate:'',
         tempProductRate:'',
 
@@ -274,9 +273,11 @@
         tradeEndDateBegin:'',
         tradeEndDateEnd:'',
         updateContract:{
+          id:'',
           firstTradeDate:'',
           tradeEndDate:'',
           documentCode:'',
+          tradeStatus:'',
           customerName:'',
           tradePlatform:'',
           tradeAccount:'',
@@ -304,10 +305,85 @@
         }
       }
     },
+    watch:{
+        updateContract:{
+         handler:function(val,oldVal){
+         let index = this.updateContract.productType;
+         if(this.updateContract.firstTradeDate !="") {
+           //更新截止日期
+           let startDate = this.updateContract.firstTradeDate.split('-');
+           let year = startDate[0];
+           let month = parseInt(startDate[1]);
+           let day = startDate[2];
+           // console.log(year+","+month+","+day);
+           let addMonth = this.tempServiceDate;
+           let totalMonth = month + parseInt(addMonth);
+           let addYear = parseInt(totalMonth/12);
+           let newMonth = totalMonth - 12 * addYear;
+           let newYear = parseInt(year) + parseInt(addYear);
+           // console.log(newYear+","+newMonth+","+day);
+           this.updateContract.tradeEndDate = newYear +'-'+(newMonth<10?'0'+newMonth:newMonth)+'-'+day;
+
+
+
+         }
+         this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
+         this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
+         this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate) * 0.01;
+          let t1 = parseFloat(this.updateContract.customerIncome);
+          let t2 = parseFloat(this.updateContract.derectIncome);
+           let t3 = parseFloat(this.updateContract.inderectIncome);
+           let t4= parseFloat(this.updateContract.agentIncome);
+
+          let a = parseFloat(this.updateContract.investmentAmount);
+           let b = parseFloat(this.updateContract.contractIncome);
+          let d = parseInt(this.updateContract.derectRecomandRate) * 0.01;
+          let e = parseInt(this.updateContract.inderectRecomandRate) * 0.01;
+          let n = parseInt(this.tempServiceDate);
+          let f = parseInt(this.updateContract.agentRate)*0.01;
+          if (b-t1-a*d*n>=0){
+             t2=a*d*n
+          }else if (b-t1<=0){
+             t2 = 0;
+          }else {
+              t2=b-t1
+          }
+          // console.log(b+","+t1+","+a+","+d+","+n+","+t2);
+          this.updateContract.derectIncome = t2;
+
+          
+        if (b-t1-t2-a*e*n>=0) {
+           t3=a*e*n
+        }else if(b-t1-t2<=0) {
+          t3 = 0;
+        }else{
+          t3=b-t1-t2
+        }
+        // console.log(b+","+t1+","+t2 + "," + a+","+e+","+n+","+t3);
+        // console.log(this.updateContract.inderectIncome);
+        this.updateContract.inderectIncome = t3;
+
+        if(b-t1-t2-t3-a*f*n>=0) {
+          t4=a*f*n
+        } else if (b-t1-t2-t3<=0){
+          t4 = 0;
+        }else {
+          t4=b-t1-t2-t3
+        }
+       // console.log(b+","+t1+","+t2 + ","+t3+"," + a+","+f+","+n+","+t4);
+
+        this.updateContract.agentIncome = t4;
+        this.updateContract.companyIncome = b - t1 -t2 - t3 -t4;
+
+
+         },
+         deep:true//对象内部的属性监听，也叫深度监听
+      }
+    },
     created:function(){
        this.getContractDitrubuteIncomeList();
        let me = this;
-      this.$http.post('/product/getProductVOList',
+       this.$http.post('/product/getProductVOList',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token")
               }))
@@ -330,40 +406,46 @@
       },
       modify(){
           let me = this;
+          let obj = new Object();
+          obj.documentCode= this.updateContract.documentCode;
+                  obj.id = this.updateContract.id;
+                  obj.customerName=this.updateContract.customerName;
+                  obj.tradePlatform=this.updateContract.tradePlatform;
+                  obj.tradeAccount=this.updateContract.tradeAccount;
+                  obj.investmentAmount=this.updateContract.investmentAmount;
+                  obj.contractIncome=this.updateContract.contractIncome;
+                  obj.productType=this.updateContract.productType;
+                  obj.firstTradeDate=this.updateContract.firstTradeDate;
+                  obj.tradeEndDate=this.updateContract.tradeEndDate;
+                  obj.tradeStatus=this.updateContract.tradeStatus;
+                  obj.productRate=this.updateContract.productRate;
+                  obj.customerIncome=this.updateContract.customerIncome;
+                  obj.derectRecomandRate=this.updateContract.derectRecomandRate;
+                  obj.derectIncome=this.updateContract.derectIncome;
+                  obj.inderectIncome=this.updateContract.inderectIncome;
+                  obj.inderectRecomandRate=this.updateContract.inderectRecomandRate;
+                  obj.agentIncome=this.updateContract.agentIncome;
+                  obj.agentRate=this.updateContract.agentRate;
+                  obj.companyIncome=this.updateContract.companyIncome;
+          obj.documentCode = this.updateContract.documentCode;
+          this.contracts.push(obj);
       this.$http.post('/personDocument/updateContractDitrubuteIncome',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
-                'contractDitrubuteIncomeVOList':[{
-                  'documentCode':this.updateContract.documentCode,
-                  'customerName':this.updateContract.customerName,
-                  'tradePlatform':this.updateContract.tradePlatform,
-                  'tradeAccount':this.updateContract.tradeAccount,
-                  'investmentAmount':this.updateContract.investmentAmount,
-                  'contractIncome':this.updateContract.contractIncome,
-                  'productType':this.updateContract.productType,
-                  'firstTradeDate':this.updateContract.firstTradeDate,
-                  'tradeEndDate':this.updateContract.tradeEndDate,
-                  'tradeStatus':this.updateContract.tradeStatus,
-                  'productRate':this.updateContract.productRate,
-                  'customerIncome':this.updateContract.customerIncome,
-                  'derectRecomandRate':this.updateContract.derectRecomandRate,
-                  'derectIncome':this.updateContract.derectIncome,
-                  'inderectIncome':this.updateContract.inderectIncome,
-                  'inderectRecomandRate':this.updateContract.inderectRecomandRate,
-                  'agentIncome':this.updateContract.agentIncome,
-                  'agentRate':this.updateContract.agentRate,
-                  'companyIncome':this.updateContract.companyIncome
-
-                }]
+                'contractDitrubuteIncomeVOList':JSON.stringify(this.contracts),
+                
               }))
             .then(function(res){
-                  alert(JSON.stringify(res));
+                  // console.log(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
                   var data = info['data'];
                   if(code == 1){
                       me.$message.success(message);
+                      me.contracts = [];
+                      me.getContractDitrubuteIncomeList();
+                      me.updateContractDialog = false;
                   }else {
                       me.$message.error(message);
                   }
@@ -373,96 +455,7 @@
 
             });
       },
-      changeProductType(){
-         let index = this.updateContract.productType;
-         this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
-         this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
-         this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate);
-
-      },
-      
-      addmulMonth(dtstr,n){   // n个月后
-         var s=dtstr.split("-");
-         var yy=parseInt(s[0]); var mm=parseInt(s[1]-1);var dd=parseInt(s[2]);
-         var dt=new Date(yy,mm,dd);
-         dt.setMonth(dt.getMonth()+n);
-         if( (dt.getYear()*12+dt.getMonth()) > (yy*12+mm + n) )
-          {
-          dt=new Date(dt.getYear(),dt.getMonth(),0);
-          }
-         var year = dt.getYear();
-         var month = dt.getMonth()+1;
-         var days = dt.getDate();
-         var dd = year+"-"+month+"-"+days;
-         return dd;
-      },
-
-      firstTradeDateChanged(){
-        let startDate = this.updateContract.firstTradeDate;
-        
-        // this.updateContract.tradeEndDate = ;
-      },
-
-      directRateChanged(){
-          let b = parseFloat(this.updateContract.contractIncome);
-          let t1 = parseFloat(this.updateContract.customerIncome);
-          let a = parseFloat(this.updateContract.investmentAmount);
-          let d = parseInt(this.updateContract.derectRecomandRate);
-          let n = parseInt(this.tempServiceDate);
-          let t2;
-          if (b-t1-a*d*n>=0){
-             t2=a*d*n
-          }else if (b-t1<=0){
-             t2 = 0;
-          }else {
-              t2=b-t1
-          }
-          alert(b+","+t1+","+a+","+d+","+n+","+t2);
-          this.updateContract.derectIncome = t2;
-         
-      },
-      indirectRateChanged(){
-          let b = parseFloat(this.updateContract.contractIncome);
-          let t1 = parseFloat(this.updateContract.customerIncome);
-          let t2 = parseFloat(this.updateContract.derectIncome);
-          let a = parseFloat(this.updateContract.investmentAmount);
-          let e = parseInt(this.updateContract.inderectRecomandRate);
-          let n = parseInt(this.tempServiceDate);
-          let t3 = 0;
-        if (b-t1-t2-a*e*n>=0) {
-         t3=a*e*n
-        }else if(b-t1-t2<=0) {
-          t3 = 0;
-        }else{
-          t3=b-t1-t2
-        }
-        alert(b+","+t1+","+t2 + "," + a+","+e+","+n+","+t3);
-        alert(this.updateContract.inderectIncome);
-        this.updateContract.inderectIncome = t3;
-
-      },
-      agentRateChanged(){
-          let b = parseFloat(this.updateContract.contractIncome);
-          let t1 = parseFloat(this.updateContract.customerIncome);
-          let t2 = parseFloat(this.updateContract.derectIncome);
-          let t3 = parseFloat(this.updateContract.inderectIncome);
-          let a = parseFloat(this.updateContract.investmentAmount);
-          let f = parseInt(this.updateContract.agentRate);
-          let n = parseInt(this.tempServiceDate);
-          let t4 = 0;
-        if(b-t1-t2-t3-a*f*n>=0) {
-          t4=a*f*n
-        } else if (b-t1-t2-t3<=0){
-          t4 = 0;
-        }else {
-          t4=b-t1-t2-t3
-        }
-       alert(b+","+t1+","+t2 + ","+t3+"," + a+","+f+","+n+","+t4);
-
-        this.updateContract.agentIncome = t4;
-        this.updateContract.companyIncome = b - t1 -t2 - t3 -t4;
-
-      },
+     
       update(row){
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;
@@ -483,6 +476,9 @@
          this.updateContract.agentRate = row.agentRate;
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
+         this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];
+         this.updateContract.id = row.id;
+         // console.log(this.tempServiceDate);
          this.updateContractDialog = true;
       },
       formatJson(filterVal, jsonData) {
@@ -524,7 +520,7 @@
                 'tradeEndDateEnd':this.tradeEndDateEnd,
               }))
             .then(function(res){
-                    // alert(JSON.stringify(res));
+                    // console.log(JSON.stringify(res));
                     var info = res['data'];
                     var code = info['code'];
                     if(code == 1) {

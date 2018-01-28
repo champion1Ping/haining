@@ -204,7 +204,7 @@
 
               }))
             .then(function(response){
-                    alert(JSON.stringify(response));
+                    // console.log(JSON.stringify(response));
                     var info = response['data'];
                     var code = response['code'];
                     if (code == 1) {
@@ -234,7 +234,7 @@
                 'loginType':2
               }))
             .then(function(res){
-               alert(JSON.stringify(res));
+               // console.log(JSON.stringify(res));
                var info = res['data'];
                var code = info['code'];
                if (code == 1) {

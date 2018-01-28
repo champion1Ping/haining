@@ -294,7 +294,7 @@
       
       query(){
         var t = this;
-        alert(this.agentCode+","+this.agentName);
+        console.log(this.agentCode+","+this.agentName);
         this.$http.post('/agent/getAgentList',
           this.qs.stringify({
             'token':sessionStorage.getItem("token"),
@@ -310,7 +310,7 @@
             'pageSize':'100'
           }))
          .then(function(res){
-          alert(JSON.stringify(res));
+          console.log(JSON.stringify(res));
           var info = res['data'];
           var code = info['code'];
           var message = info['message'];
@@ -336,7 +336,7 @@
             return;
           }
         }
-        alert(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
+        console.log(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
         this.$http.post('/agent/addAgentInfo',
           this.qs.stringify({
                         'token':sessionStorage.getItem("token"),

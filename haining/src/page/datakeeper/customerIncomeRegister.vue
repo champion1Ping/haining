@@ -300,7 +300,7 @@
         
     },
     methods:{
-      
+
       showProductName(row,column,cellValue){
          return  this.productTypes[cellValue-1].productTypeName;
       },
@@ -326,7 +326,7 @@
           this.$message.error("投资金额必须为1000整数倍");
             return;
         }
-        alert(this.addDocumentForm.productType+","+this.addDocumentForm.productTypeName+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
+        console.log(this.addDocumentForm.productType+","+this.addDocumentForm.productTypeName+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
         this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
@@ -353,7 +353,7 @@
                 'maxIndex':this.$store.state.nextDocumentNum
               }))
             .then(function(res){
-              alert(JSON.stringify(res));
+              console.log(JSON.stringify(res));
               var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
@@ -410,7 +410,7 @@
                 'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
-                  // alert(JSON.stringify(res));
+                  // console.log(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
@@ -471,7 +471,7 @@
               }))
             .then(function(res){
               var info = res['data'];
-              // alert(JSON.stringify(res));
+              alert(JSON.stringify(res));
                     var code = info['code'];
                     if (code == 1) {
                       var data = info['data'];

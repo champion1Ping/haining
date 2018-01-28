@@ -67,7 +67,7 @@
 		created:function(){
 
 			this.id = sessionStorage.getItem("roleId");
-			alert(this.roleId+","+this.id);
+			console.log(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");
 			let me = this;
 				this.$http.post('/notice/getMyNoticeCount',
@@ -105,7 +105,7 @@
 
 					}
 				}
-				// alert(to);
+				// console.log(to);
 				
 				this.$router.push(to);
 			},

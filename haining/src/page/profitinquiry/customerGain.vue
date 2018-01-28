@@ -186,7 +186,7 @@
 
               }))
             .then(function(res){
-              alert(JSON.stringify(res));
+              console.log(JSON.stringify(res));
               var info = res['data'];
               var code = info['code'];
               var data = info['data'];

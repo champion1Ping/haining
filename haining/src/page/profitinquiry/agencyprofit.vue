@@ -145,7 +145,7 @@
                   var message = info['message'];
                   var data = info['data'];
                   me.productTypes = data;
-                  alert(JSON.stringify(me.productTypes));
+                  console.log(JSON.stringify(me.productTypes));
 
             })
             .catch(function(err){
@@ -183,7 +183,7 @@
 
               }))
             .then(function(res){
-              // alert(JSON.stringify(res));
+              // console.log(JSON.stringify(res));
               var info = res['data'];
               var code = info['code'];
               var data = info['data'];

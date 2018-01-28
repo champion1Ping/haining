@@ -101,7 +101,7 @@
 		             }, 1000);  
 		        this.$http.post('/account/sendMsg', qs.stringify({ 'phone': mobilePhone,'type':1}))
 		        .then(function(res){
-		            // alert(JSON.stringify(res));
+		            // console.log(JSON.stringify(res));
 		            var info = res['data'];
 		            var code = info['code'];
 		            

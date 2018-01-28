@@ -284,7 +284,7 @@
                 var code = info['code'];
                 var message = info['message'];
                 var data = info['data'];
-                alert(JSON.stringify(data));
+                console.log(JSON.stringify(data));
                 me.baseinfo.account = data['account'];
                 me.baseinfo.realName = data['realName'];
                 me.realNameVerify.realName = data['realName'];
@@ -321,10 +321,10 @@
     methods: {
       
       handleFrontSuccess(response, file, fileList){
-        alert(response);
+        console.log(response);
       },
       handleBackSuccess(response,file,fileList){
-        alert(JSON.stringify(response));
+        console.log(JSON.stringify(response));
         // this.backUploaded = false;
       },
       handleAddressSuccess(response, file, fileList){
@@ -339,7 +339,7 @@
       },
       
       updateUserBaseInfo(){
-        alert(this.baseinfo.sex);
+        console.log(this.baseinfo.sex);
           let sexId = this.baseinfo.sex==''
           this.$http.post('/user/updateUserBaseInfo',
              this.qs.stringify({
@@ -358,7 +358,7 @@
              })
              )
              .then(function(res){
-                // alert(JSON.stringify(res));
+                // console.log(JSON.stringify(res));
                 var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
