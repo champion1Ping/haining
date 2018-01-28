@@ -7,8 +7,9 @@
         	{{notice.noticeContent}}
         </el-row>
         <el-row>
+        	<el-col :span="18">&nbsp;&nbsp;</el-col>
+        	<el-col :span="6">{{notice.gmtCreate}}</el-col>
         	
-        	{{notice.gmtCreate}}
         </el-row>
         <el-row><hr/></el-row>
            
@@ -21,14 +22,7 @@
 		data(){
 			return {
 				notices:[
-				{
-					content:'aaaaa',
-					time:'2018-09-09'
-				},
-				{
-					content:'bbbbb',
-					time:'2018-09-10'
-				},
+				
 				]
 			}
 		},
@@ -84,6 +78,7 @@
 	    margin-bottom:'auto';
 	    margin-left: 25%;
 	    padding-left: 40px;
+	    padding-right: 40px;
 	    padding-top: 30px;
 	    padding-bottom: 40px;
 	}
