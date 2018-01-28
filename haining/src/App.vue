@@ -72,8 +72,15 @@ html, body{ margin:0; height:100%; }
     margin-right:100px;
     margin-left: 280px;*/
 
+
   
 }
+
+  .el-table th{
+  background-color:#c8c9cc;
+  color:#333333;
+
+  }
   button.el-button.left.el-button--info.is-disabled{
     border-top:2px;
     border-top-left-radius:2px; 
