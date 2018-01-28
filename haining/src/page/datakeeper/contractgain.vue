@@ -329,18 +329,25 @@
          }
          this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
          this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
-         this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate) * 0.01;
+         // this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate) * 0.01;
           let t1 = parseFloat(this.updateContract.customerIncome);
           let t2 = parseFloat(this.updateContract.derectIncome);
            let t3 = parseFloat(this.updateContract.inderectIncome);
            let t4= parseFloat(this.updateContract.agentIncome);
 
-          let a = parseFloat(this.updateContract.investmentAmount);
+          let a = parseFloat(this.updateContract.contractIncome);
            let b = parseFloat(this.updateContract.contractIncome);
+           let c = parseFloat(this.updateContract.productRate) * 0.01;
           let d = parseInt(this.updateContract.derectRecomandRate) * 0.01;
           let e = parseInt(this.updateContract.inderectRecomandRate) * 0.01;
           let n = parseInt(this.tempServiceDate);
           let f = parseInt(this.updateContract.agentRate)*0.01;
+          if(b - a * n *c > 0){
+              t1 = a*n*c;
+          }else {
+              t1 = b;
+          }
+          this.updateContract.customerIncome = t1;
           if (b-t1-a*d*n>=0){
              t2=a*d*n
           }else if (b-t1<=0){

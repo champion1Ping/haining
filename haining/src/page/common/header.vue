@@ -18,12 +18,12 @@
 			  <el-submenu index="2" v-if="this.$store.state.roleId !==1 || id !==1">
 			    <template slot="title"><span style="font-size:20px;color:#333333">数据登记</span></template>
 			          <el-menu-item index="/customer" v-if="this.$store.state.roleId !==1 || id !==1">客户入金登记表</el-menu-item>
-			    <el-menu-item index="/contractgain" v-if="this.$store.state.roleId==3 ||id !==3">合同收益分配表</el-menu-item>
+			    <el-menu-item index="/contractgain" v-if="this.$store.state.roleId==3 ||id ==3">合同收益分配表</el-menu-item>
 			  </el-submenu>
 			  <el-submenu index="3">
 			    <template slot="title"><span style="font-size:20px;color:#333333">收益查询</span></template>
 			    <el-menu-item index="/customerGain" style="text-align:center" v-if="this.$store.state.roleId !==1 || id !==1">客户收益表</el-menu-item>
-			    <el-menu-item index="/agencyprofit" v-if="this.$store.state.roleId!==2 || id !==2">代理商收益表</el-menu-item>
+			    <el-menu-item index="/agencyprofit" v-if="this.$store.state.roleId!=2 || id !=2">代理商收益表</el-menu-item>
 			    <el-menu-item index="/customerRecommend" v-if="this.$store.state.roleId==3 || id ==3">推荐客户表</el-menu-item>
 			  </el-submenu>
 		  </el-menu>
@@ -37,8 +37,8 @@
 			    <template slot="title" ><span style="font-size:14px;color:#333333">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
 
 
-			    <el-menu-item index="/personinfo" v-if="(roleId==2 || id == 2)">个人信息</el-menu-item>
-			    <el-menu-item index="/updatepw" v-if="roleId  !==2 || id !==2">修改密码</el-menu-item>
+			    <el-menu-item index="/personinfo" v-if="this.$store.state.roleId==2 || id == 2">个人信息</el-menu-item>
+			    <el-menu-item index="/updatepw" v-if="this.$store.state.roleId  !=2 || id !=2">修改密码</el-menu-item>
 			    <el-menu-item index="/login" @click="loginout()">退出登录</el-menu-item>
 			  </el-submenu>
 			  

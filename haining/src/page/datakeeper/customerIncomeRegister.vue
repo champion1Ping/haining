@@ -207,7 +207,7 @@
     <el-table-column prop="certificateNumber" label="证件号" align="center" width="180"></el-table-column>
     <el-table-column prop="contactPhone" label="联系电话" align="center" width="120"></el-table-column>
     <el-table-column prop="contractDate" label="签约日期" align="center" width="120"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="120" :formatter="showProductName"></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="120" ></el-table-column>
     <el-table-column prop="productRate" label="收益率($)" align="center" width="100"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="120"></el-table-column>
     <el-table-column prop="estimatedEarnings" label="预估收益" align="center" width="120"></el-table-column>
@@ -287,6 +287,7 @@
                 'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
+                  // alert(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
@@ -315,7 +316,7 @@
         //检验条件
         for(var field in this.addDocumentForm){
           if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId") {
-            if(this.addDocumentForm[field] == ""){
+            if(this.addDocumentForm[field] === ""){
             this.$message.error(field + "必填字段不能为空");
             return;
           }
@@ -326,6 +327,7 @@
           this.$message.error("投资金额必须为1000整数倍");
             return;
         }
+        let me = this;
         console.log(this.addDocumentForm.productType+","+this.addDocumentForm.productTypeName+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
         this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
@@ -356,11 +358,16 @@
               console.log(JSON.stringify(res));
               var info = res['data'];
                     var code = info['code'];
+                    var data = info['data'];
                     if (code == 1) {
                       me.$message.success('添加成功');
+                      me.getPersonDocumentList();
+                      me.dialogAddFile = false;
+                    }else {
+                      var message = info['message'];
+                      me.$message.error(message);
                     }
-                  var message = info['message'];
-                  var data = info['data'];
+                  
             })
             .catch(function(err){
 
@@ -471,7 +478,7 @@
               }))
             .then(function(res){
               var info = res['data'];
-              alert(JSON.stringify(res));
+              // alert(JSON.stringify(res));
                     var code = info['code'];
                     if (code == 1) {
                       var data = info['data'];

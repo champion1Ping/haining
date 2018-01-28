@@ -234,7 +234,7 @@
                 'loginType':2
               }))
             .then(function(res){
-               // console.log(JSON.stringify(res));
+               console.log(JSON.stringify(res));
                var info = res['data'];
                var code = info['code'];
                if (code == 1) {
@@ -255,11 +255,11 @@
                me.$store.commit('saveAgentCode',baseInfo['agentCode']);
                sessionStorage.setItem("agentCode",baseInfo['agentCode']);
                me.$store.commit('saveDirect',baseInfo['directRecommendationAccount']);
-               sessionStorage.setItem("directRecommendationAccount",baseInfo['directRecommendationAccount']);
+               sessionStorage.setItem("directRecommendationAccount",!baseInfo['directRecommendationAccount']?"":baseInfo['directRecommendationAccount']);
                me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccount']);
-               sessionStorage.setItem("indirectRecommendationAccount",baseInfo['indirectRecommendationAccount']);
-               sessionStorage.setItem("derectRecomandPersonId",baseInfo['derectRecomandPersonId']);
-               sessionStorage.setItem("inderectRecomandPersonId",baseInfo['inderectRecomandPersonId']);
+               sessionStorage.setItem("indirectRecommendationAccount",!baseInfo['indirectRecommendationAccount']?"":baseInfo['indirectRecommendationAccount']);
+               sessionStorage.setItem("derectRecomandPersonId",!baseInfo['derectRecomandPersonId']?"":baseInfo['derectRecomandPersonId']);
+               sessionStorage.setItem("inderectRecomandPersonId",!baseInfo['inderectRecomandPersonId']?"":baseInfo['inderectRecomandPersonId']);
                me.$store.commit('saveRealName',baseInfo['realName']);
                me.$router.push('/notices');
                } else {
