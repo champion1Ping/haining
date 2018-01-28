@@ -194,7 +194,7 @@
     <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="180"></el-table-column>
     <el-table-column
       label="信息明细"
-      alien="center"
+      align="center"
       width="120px">
       <template slot-scope="scope">
         <el-button @click="handleClick(scope.row)" type="text" size="small">明细</el-button>
