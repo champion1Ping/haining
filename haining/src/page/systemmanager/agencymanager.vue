@@ -178,19 +178,20 @@
     </div>
 	<div class="tbl1" style="margin:10px;">
     <el-table
+    size="small"
     :data="agentData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     :header-row-class-name="headerRowClassName"
     border
-    style="width:100%;" header-align="center">
-    <el-table-column prop="agentCode" label="代理商编号"  align="center" width="100"></el-table-column>
-    <el-table-column prop="agentName" label="代理商名称" align="center" width="220"></el-table-column>
-    <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="180"></el-table-column>
-    <el-table-column prop="legalRepresentative" label="法定代表人" align="center" width="100"></el-table-column>
-    <el-table-column prop="contactPhone" label="联系方式" align="center" width="120"></el-table-column>
-    <el-table-column prop="contractStartTime" label="签约开始日期" align="center" width="120"></el-table-column>
-    <el-table-column prop="contractEndTime" label="截止日期" align="center" width="120"></el-table-column>
-    <el-table-column prop="provinceName" label="省份" align="center" width="180"></el-table-column>
-    <el-table-column prop="businessAddress" label="营业地址" align="center" width="90"></el-table-column>
+    style="width:100%;font-size: 12px;" header-align="center">
+    <el-table-column prop="agentCode" label="代理商编号"  align="center" width="90"></el-table-column>
+    <el-table-column prop="agentName" label="代理商名称" align="center" width="228"></el-table-column>
+    <el-table-column prop="unifiedSocialCreditCode" label="统一社会信用代码" align="center" width="160"></el-table-column>
+    <el-table-column prop="legalRepresentative" label="法人" align="center" width="80"></el-table-column>
+    <el-table-column prop="contactPhone" label="联系方式" align="center" width="110"></el-table-column>
+    <el-table-column prop="contractStartTime" label="签约开始日期" align="center" width="110"></el-table-column>
+    <el-table-column prop="contractEndTime" label="截止日期" align="center" width="110"></el-table-column>
+    <el-table-column prop="provinceName" label="省份" align="center" width="90"></el-table-column>
+    <el-table-column prop="businessAddress" label="营业地址" align="center" width="280"></el-table-column>
     <el-table-column prop="bussinessStartTime" label="营业开始日期" align="center" width="120"></el-table-column>
     <el-table-column prop="bussinessEndTime" label="营业截止日期" align="center" width="120"></el-table-column>
   </el-table>
