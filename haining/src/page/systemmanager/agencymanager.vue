@@ -14,12 +14,12 @@
         <el-button type="info" class="left" disabled >代理商名称</el-button><el-input clearable class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-       <el-button type="info"  class="left" disabled>统一社会信用代码</el-button><el-input clearable  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>证件号码</el-button><el-input clearable  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
 <el-row style="margin-top:10px">
     <el-col :span="8">
-       <el-button type="info"  class="left" disabled>法定代表人</el-button><el-input clearable class="right" v-model="addAgencyForm.loyalPerson"style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>法人/自然人</el-button><el-input clearable class="right" v-model="addAgencyForm.loyalPerson"style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
        <el-button type="info"  class="left" disabled>联系方式</el-button><el-input clearable class="right" v-model="addAgencyForm.contact" style="width:180px"></el-input>
