@@ -30,7 +30,7 @@
 			let me = this;
 			this.$http.post('/sysNotice/getSysNoticeList',
 		         this.qs.stringify({
-		            'token':this.$store.state.token
+		            'token':sessionStorage.getItem("token")
 		         })
 		         )
 		         .then(function(res){

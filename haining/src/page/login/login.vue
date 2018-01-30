@@ -55,7 +55,7 @@
     <el-input v-model="accountReg.recommendPhoneNum" placeholder="请输入推荐人手机号码" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item prop="checked">
-  <el-checkbox v-model="accountReg.agreement">同意并接受《服务条款》</el-checkbox><el-button type="primary" @click="submitForm('accountReg')" style="width:100px">注册</el-button>
+  <el-checkbox v-model="accountReg.agreement"><el-button type="text" @click="detail()">同意并接受《服务条款》</el-button></el-checkbox><el-button type="primary" @click="submitForm('accountReg')" style="width:100px">注册</el-button>
   </el-form-item>
   
 </el-form>
@@ -132,6 +132,9 @@
       };
     },
     methods:{
+      detail(){
+          alert("show detial");
+      },
       phoneLogin(){
         this.$router.push('/phoneLogin');
       },

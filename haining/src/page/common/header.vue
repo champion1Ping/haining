@@ -23,7 +23,7 @@
 			  <el-submenu index="3">
 			    <template slot="title"><span style="font-size:20px;color:#333333">收益查询</span></template>
 			    <el-menu-item index="/customerGain" style="text-align:center" v-if="this.$store.state.roleId !==1 || id !==1">客户收益表</el-menu-item>
-			    <el-menu-item index="/agencyprofit" v-if="this.$store.state.roleId!=2 || id !=2">代理商收益表</el-menu-item>
+			    <el-menu-item index="/agencyprofit" v-if="this.$store.state.roleId!==2 ">代理商收益表</el-menu-item>
 			    <el-menu-item index="/customerRecommend" v-if="this.$store.state.roleId==3 || id ==3">推荐客户表</el-menu-item>
 			  </el-submenu>
 		  </el-menu>
@@ -58,10 +58,16 @@
 		data(){
 			return {
 				roleId:this.$store.state.roleId,
-				id:'',
+				id:sessionStorage.getItem("roleId"),
 				userName:sessionStorage.getItem("userName"),
 				isShow:false,
 				count:sessionStorage.getItem("noticesNum"),
+			}
+		},
+		watch:{
+			userName(val,oldVal){
+				
+				alert(val+","+oldVal);
 			}
 		},
 		created:function(){

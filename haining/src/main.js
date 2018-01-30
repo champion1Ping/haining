@@ -5,6 +5,9 @@ import routeConfig from './router-config'
 import store from './store.js'
 import axios from 'axios'
 import qs from 'qs'
+
+
+
 //加载路由中间件
 Vue.use(VueRouter)
 axios.defaults.baseURL = 'http://111.230.221.41:8080'

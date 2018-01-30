@@ -75,7 +75,7 @@
     </el-option>
   </el-select>
   </el-col> 
-  <el-col :span="16">
+  <el-col :span="8">
        <el-button type="info"  class="left" disabled>冻结日期</el-button><el-date-picker
       v-model="addUserForm.freezeDate"
       type="date"
@@ -85,6 +85,9 @@
       style="width:180px"
       >
     </el-date-picker>
+  </el-col>
+   <el-col :span="8">
+       <el-button type="info"  class="left" disabled>客户代理商</el-button><el-input clearable v-model="addUserForm.agentName" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
   
