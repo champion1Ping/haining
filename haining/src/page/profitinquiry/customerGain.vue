@@ -82,9 +82,9 @@
     <el-table-column prop="inderectRecomandPersonName" label="间推人" align="center" width="90"></el-table-column>
     <el-table-column prop="inderectRecomandRate" label="间推奖励率" align="center" width="90"></el-table-column>
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="90"></el-table-column>
-    <el-table-column prop="customerIncome" label="客户收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="derectIncome" label="直推人收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="inderectIncome" label="间推人收益($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="customerIncome" label="客户月收益($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="derectIncome" label="直推人月收益($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="inderectIncome" label="间推人月收益($)" align="center" width="100"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"

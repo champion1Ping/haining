@@ -89,7 +89,7 @@
        <el-button type="info"  class="left" disabled>投资金额</el-button><el-input clearable @change="caculateEarning()" v-model="addDocumentForm.investmentAmount" class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>预估收益</el-button><el-input clearable disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
+       <el-button type="info"  class="left" disabled>预估月收益</el-button><el-input clearable disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
       <el-button type="info"  class="left" disabled>联系方式</el-button><el-input clearable v-model="addDocumentForm.contactPhone"class="right"  style="width:177px"></el-input>
@@ -208,9 +208,9 @@
     <el-table-column prop="contactPhone" label="联系电话" align="center" width="120"></el-table-column>
     <el-table-column prop="contractDate" label="签约日期" align="center" width="120"></el-table-column>
     <el-table-column prop="productTypeName" label="产品类型" align="center" width="120" ></el-table-column>
-    <el-table-column prop="productRate" label="收益率($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="productRate" label="产品收益率($)" align="center" width="100"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="120"></el-table-column>
-    <el-table-column prop="estimatedEarnings" label="预估收益" align="center" width="120"></el-table-column>
+    <el-table-column prop="estimatedEarnings" label="预估月收益" align="center" width="120"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
