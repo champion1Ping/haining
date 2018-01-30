@@ -34,7 +34,7 @@ export default {
     }
   },
   created(){
-      this.$router.push('/login');
+      // this.$router.push('/login');
   },
   methods: {
     
