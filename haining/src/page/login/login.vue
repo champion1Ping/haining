@@ -133,7 +133,7 @@
     },
     methods:{
       detail(){
-          alert("show detial");
+          this.$router.push('/agreement');
       },
       phoneLogin(){
         this.$router.push('/phoneLogin');

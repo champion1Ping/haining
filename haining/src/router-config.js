@@ -30,6 +30,7 @@ import customerRecommend from './page/profitinquiry/customerRecommend.vue'
 import resetpw from './page/login/resetpassword.vue'
 import updatepw from './page/login/updatepassword.vue'
 import notices from './page/login/notices.vue'
+import agreement from './page/login/agreementArticle.vue'
 // import test from '/page/login/test.vue'
 export default [
       {path:'/login',component:login,meta:{  requiresAuth: false    }},
@@ -38,6 +39,9 @@ export default [
       {path:'/personinfo',component:personinfo,meta:{  requiresAuth: true    }},
       {path:'/contractgain',component:contractgain,meta:{  requiresAuth: true    }},
       {path:'/phoneLogin',component:phoneLogin,
+             meta:{  requiresAuth: false    } 
+      },
+      {path:'/agreement',component:agreement,
              meta:{  requiresAuth: false    } 
       },
       {path:'/systemNotice',component:systemNotice,meta:{  requiresAuth: true    }},
