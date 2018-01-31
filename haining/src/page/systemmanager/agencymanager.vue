@@ -260,11 +260,8 @@
         value1:''
       }
     },
-    route: {
-    canReuse: false,
-  },
+    
     created:function(){
-        alert("enter created");
         this.query();
     },
     methods:{
