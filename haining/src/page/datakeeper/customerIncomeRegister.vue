@@ -37,7 +37,7 @@
       v-model="addDocumentForm.getMoneyDate"
       type="date"
       class="right"
-      value-format="yyyyMMdd"
+      value-format="yyyy-MM-dd"
       style="width:177px"
       ></el-date-picker>
   </el-col>
@@ -60,7 +60,7 @@
       <el-button type="info"  class="left" disabled>签约日期</el-button><el-date-picker
       v-model="addDocumentForm.contractDate"
       type="date"
-      value-format="yyyyMMdd"
+      value-format="yyyy-MM-dd"
       class="right"
       style="width:177px"
       >
@@ -328,7 +328,7 @@
             return;
         }
         let me = this;
-        console.log(this.addDocumentForm.productType+","+this.addDocumentForm.productTypeName+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
+        alert(this.addDocumentForm.getMoneyDate+","+this.addDocumentForm.contractDate+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
         this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
@@ -386,7 +386,7 @@
            }
             if (this.addDocumentForm.productType != "") {
                 
-                this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate) * 0.01;
+                this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount)  * parseFloat(this.addDocumentForm.productRate) * 0.01;
 
             }
 
@@ -498,7 +498,9 @@
             })
       },
       generateDocumentCode(){
-          this.addDocumentForm.documentCode = sessionStorage.getItem("agentCode")+this.addDocumentForm.getMoneyDate + 
+          let moneyDate = this.addDocumentForm.getMoneyDate.split('-');
+          let formatDate = moneyDate[0].toString()+moneyDate[1].toString()+moneyDate[2].toString();
+          this.addDocumentForm.documentCode = sessionStorage.getItem("agentCode")+formatDate+ 
           this.$store.state.nextDocumentNum;
       },
       

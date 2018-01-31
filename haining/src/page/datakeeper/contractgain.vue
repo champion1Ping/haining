@@ -24,7 +24,7 @@
 
 <el-row style="margin-top:10px">
     <el-col :span="6">
-    <el-button type="info"  class="left" disabled>产品类型</el-button><el-select @change="changeProductType()"  v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
+    <el-button type="info"  class="left" disabled>产品类型</el-button><el-select  v-model="updateContract.productType" style="width:177px" class="right" placeholder="请选择">
     <el-option
       v-for="item in productTypes"
       :key="item.id"
@@ -43,8 +43,7 @@
       ></el-date-picker>
   </el-col>
   <el-col :span="6">
-       <el-button type="info"  class="left" disabled>期限截止日</el-button>
-    <el-date-picker
+       <el-button type="info"  class="left" disabled>期限截止日</el-button><el-date-picker
     disabled
       v-model="updateContract.tradeEndDate"
       type="date"
@@ -52,7 +51,7 @@
       value-format="yyyy-MM-dd"
       style="width:177px"
       ></el-date-picker>
-  </el-select>
+   
   </el-col>
    <el-col :span="6">
        <el-button type="info"  class="left" disabled>交易状态</el-button><el-select clearable v-model="updateContract.tradeStatus" style="width:180px" class="right">
@@ -297,9 +296,9 @@
           agentCode:'',
           derectRecomandRate:'',
           inderectRecomandRate:'',
-          agentRate:'',
+          agentRate:0.005,
           derectIncome:'',
-          inderectIncome:'',
+          inderectIncome:0.005,
           agentIncome:'',
           companyIncome:'',
           estimatedEarnings:'',
@@ -328,60 +327,67 @@
 
 
          }
-         this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
-         this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
+         if (this.productTypes != "") {
+              this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
+              this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
+         }
+         
+         this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate) * 0.01;
+         if (this.updateContract.investmentAmount !="" && this.updateContract.derectRecomandRate !="") {
+          this.updateContract.derectIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.updateContract.derectRecomandRate) * 0.01;
+         }
+         
+         this.updateContract.inderectIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.updateContract.inderectRecomandRate) * 0.01;;
+         this.updateContract.companyIncome = parseInt(this.updateContract.investmentAmount) * 0.02;
+         this.updateContract.agentIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.updateContract.agentRate) * 0.01;
          // this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate) * 0.01;
-          let t1 = parseFloat(this.updateContract.customerIncome);
-          let t2 = parseFloat(this.updateContract.derectIncome);
-           let t3 = parseFloat(this.updateContract.inderectIncome);
-           let t4= parseFloat(this.updateContract.agentIncome);
+        //   let t1 = parseFloat(this.updateContract.customerIncome);
+        //   let t2 = parseFloat(this.updateContract.derectIncome);
+        //    let t3 = parseFloat(this.updateContract.inderectIncome);
+        //    let t4= parseFloat(this.updateContract.agentIncome);
 
-          let a = parseFloat(this.updateContract.contractIncome);
-           let b = parseFloat(this.updateContract.contractIncome);
-           let c = parseFloat(this.updateContract.productRate) * 0.01;
-          let d = parseInt(this.updateContract.derectRecomandRate) * 0.01;
-          let e = parseInt(this.updateContract.inderectRecomandRate) * 0.01;
-          let n = parseInt(this.tempServiceDate);
-          let f = parseInt(this.updateContract.agentRate)*0.01;
-          if(b - a * n *c > 0){
-              t1 = a*n*c;
-          }else {
-              t1 = b;
-          }
-          this.updateContract.customerIncome = t1;
-          if (b-t1-a*d*n>=0){
-             t2=a*d*n
-          }else if (b-t1<=0){
-             t2 = 0;
-          }else {
-              t2=b-t1
-          }
-          // console.log(b+","+t1+","+a+","+d+","+n+","+t2);
-          this.updateContract.derectIncome = t2;
+        //   let a = parseFloat(this.updateContract.contractIncome);
+        //    let b = parseFloat(this.updateContract.contractIncome);
+        //    let c = parseFloat(this.updateContract.productRate) * 0.01;
+        //   let d = parseInt(this.updateContract.derectRecomandRate) * 0.01;
+        //   let e = parseInt(this.updateContract.inderectRecomandRate) * 0.01;
+        //   let n = parseInt(this.tempServiceDate);
+        //   let f = parseInt(this.updateContract.agentRate)*0.01;
+        //   if(b - a * n *c > 0){
+        //       t1 = a*n*c;
+        //   }else {
+        //       t1 = b;
+        //   }
+        //   this.updateContract.customerIncome = t1;
+        //   if (b-t1-a*d*n>=0){
+        //      t2=a*d*n
+        //   }else if (b-t1<=0){
+        //      t2 = 0;
+        //   }else {
+        //       t2=b-t1
+        //   }
+        //   this.updateContract.derectIncome = t2;
 
           
-        if (b-t1-t2-a*e*n>=0) {
-           t3=a*e*n
-        }else if(b-t1-t2<=0) {
-          t3 = 0;
-        }else{
-          t3=b-t1-t2
-        }
-        // console.log(b+","+t1+","+t2 + "," + a+","+e+","+n+","+t3);
-        // console.log(this.updateContract.inderectIncome);
-        this.updateContract.inderectIncome = t3;
+        // if (b-t1-t2-a*e*n>=0) {
+        //    t3=a*e*n
+        // }else if(b-t1-t2<=0) {
+        //   t3 = 0;
+        // }else{
+        //   t3=b-t1-t2
+        // }
+        // this.updateContract.inderectIncome = t3;
 
-        if(b-t1-t2-t3-a*f*n>=0) {
-          t4=a*f*n
-        } else if (b-t1-t2-t3<=0){
-          t4 = 0;
-        }else {
-          t4=b-t1-t2-t3
-        }
-       // console.log(b+","+t1+","+t2 + ","+t3+"," + a+","+f+","+n+","+t4);
+        // if(b-t1-t2-t3-a*f*n>=0) {
+        //   t4=a*f*n
+        // } else if (b-t1-t2-t3<=0){
+        //   t4 = 0;
+        // }else {
+        //   t4=b-t1-t2-t3
+        // }
 
-        this.updateContract.agentIncome = t4;
-        this.updateContract.companyIncome = b - t1 -t2 - t3 -t4;
+        // this.updateContract.agentIncome = t4;
+        // this.updateContract.companyIncome = b - t1 -t2 - t3 -t4;
 
 
          },
@@ -489,9 +495,9 @@
          this.updateContract.customerIncome = row.customerIncome;
          this.updateContract.derectRecomandRate = row.derectRecomandRate;
          this.updateContract.derectIncome = row.derectIncome;
-         this.updateContract.inderectRecomandRate = row.inderectRecomandRate;
+         this.updateContract.inderectRecomandRate = 0.005;//row.inderectRecomandRate;
          this.updateContract.inderectIncome = row.inderectIncome;
-         this.updateContract.agentRate = row.agentRate;
+         this.updateContract.agentRate = 0.005;//row.agentRate;
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
          this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];

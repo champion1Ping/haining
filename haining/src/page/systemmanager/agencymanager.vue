@@ -8,10 +8,10 @@
     <el-form :model="form" style="padding:10px" :models="addAgencyForm" ref="addAgencyForm">
        <el-row>
   <el-col :span="8">
-    <el-button type="info"  class="left" disabled >代理商编号</el-button><el-input clearable  :disabled="true" v-model="addAgencyForm.agencyCode" class="right" style="width:180px"></el-input>
+    <el-button type="info"  class="left" disabled >代理商编号</el-button><el-input   :disabled="true" v-model="addAgencyForm.agentCode" class="right" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
-        <el-button type="info" class="left" disabled >代理商名称</el-button><el-input clearable class="right" v-model="addAgencyForm.agencyName" style="width:180px"></el-input>
+        <el-button type="info" class="left" disabled >代理商名称</el-button><el-input clearable class="right" v-model="addAgencyForm.agentName" style="width:180px"></el-input>
   </el-col>
   <el-col :span="8">
        <el-button type="info"  class="left" disabled>证件号码</el-button><el-input clearable  v-model="addAgencyForm.socialNum" class="right" style="width:180px"></el-input>
@@ -194,6 +194,14 @@
     <el-table-column prop="businessAddress" label="营业地址" align="center" width="280"></el-table-column>
     <el-table-column prop="bussinessStartTime" label="营业开始日期" align="center" width="120"></el-table-column>
     <el-table-column prop="bussinessEndTime" label="营业截止日期" align="center" width="120"></el-table-column>
+    <el-table-column
+      label="操作"
+      align="center"
+      width="120px">
+      <template slot-scope="scope">
+        <el-button @click="updateAgency(scope.row)" type="text" size="small">修改</el-button>
+      </template>
+    </el-table-column>
   </el-table>
   <footer>
     <el-pagination
@@ -219,6 +227,7 @@
     data(){
 
       return{
+        addOrUpdate:0,//0-add 1-update
         total:0,
         currentPage:1,
         pageSize:100,
@@ -233,8 +242,8 @@
         contractEndTime:'',
         contractStartTime:'',
         addAgencyForm:{
-          agencyCode:'',
-          agencyName:'',
+          agentCode:'',
+          agentName:'',
           socialNum:'',
           loyalPerson:'',
           contact:'',
@@ -243,17 +252,40 @@
           bussinessStartTime:'',
           bussinessEndTime:'',
           signStartTime:'',
-          signEndTime:''
+          signEndTime:'',
+          id:'',
         },
         
         value:'',
         value1:''
       }
     },
+    route: {
+    canReuse: false,
+  },
     created:function(){
+        alert("enter created");
         this.query();
     },
     methods:{
+      updateAgency(row){
+          this.dialogAddAgency = true;
+          this.addOrUpdate = 1;
+          this.addAgencyForm.id = row.id;
+          // alert(this.addAgencyForm.id);
+          //赋值
+          this.addAgencyForm.agentCode = row.agentCode;
+          this.addAgencyForm.agentName = row.agentName;
+          this.addAgencyForm.socialNum = row.unifiedSocialCreditCode;
+          this.addAgencyForm.loyalPerson = row.legalRepresentative;
+          this.addAgencyForm.contact = row.contactPhone;
+          this.addAgencyForm.province = row.provinceId;
+          this.addAgencyForm.businessAddress = row.businessAddress;
+          this.addAgencyForm.businessStartTime = row.businessStartTime;
+          this.addAgencyForm.bussinessEndTime = row.bussinessEndTime;
+          this.addAgencyForm.signStartTime =row.contractStartTime;
+          this.addAgencyForm.signEndTime = row.contractEndTime;
+      },
       quit(){
         this.$router.push('/notices');
       },
@@ -269,6 +301,7 @@
       },
       addAgency(){
           //
+          this.addOrUpdate = 0;
           this.dialogAddAgency = true;
       },
       getMaxProvinceIndex(){
@@ -328,21 +361,23 @@
           obj = this.$store.state.xialakuang.shengfen.find((item)=>{
               return item.value === this.addAgencyForm.province;
           });
-          let provinceName = obj.label;
         var me = this;
+        let provinceName = obj.label;
         for(var field in this.addAgencyForm){
           if(this.addAgencyForm[field] == ""){
             this.$message.error("必填字段不能为空");
             return;
           }
         }
-        console.log(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
-        this.$http.post('/agent/addAgentInfo',
+        alert(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
+        let address = (this.addOrUpdate == 1 ? '/agent/updateAgentInfo' :'/agent/addAgentInfo');
+        alert(address);
+        this.$http.post(address,
           this.qs.stringify({
-                        'token':sessionStorage.getItem("token"),
-
-            'agentCode':this.addAgencyForm.agencyCode,
-            'agentName':this.addAgencyForm.agencyName,
+            'id':this.addAgencyForm.id,
+            'token':sessionStorage.getItem("token"),
+            'agentCode':this.addAgencyForm.agentCode,
+            'agentName':this.addAgencyForm.agentName,
             'unifiedSocialCreditCode':this.addAgencyForm.socialNum,
             'legalRepresentative':this.addAgencyForm.loyalPerson,
             'provinceId':this.addAgencyForm.province,
@@ -359,11 +394,12 @@
            var code = info['code'];
            var message =info['message'];
            if (code == 1) {
-              me.$message("添加成功");
+              me.$message.success(message);
+              me.query();
               //字段清空
-              me.$refs[me.addAgencyForm].resetFields();
+              me.dialogAddAgency = false;//关闭弹窗
            } else {
-              me.$message(message);
+              me.$message.error(message);
            }
 
         })

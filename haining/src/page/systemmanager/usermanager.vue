@@ -1,6 +1,6 @@
 <template>
 	<div class="usermanager">
-<el-dialog title="选择代理商" :visible.sync="dialogChooseAgent" width="75%">
+<el-dialog title="选择代理商" :visible.sync="dialogChooseAgent" width="70%">
   <el-form :model="chooseAgentForm">
       <el-button type="info"  class="left" disabled>代理商编码</el-button><el-input clearable v-model="chooseAgentForm.agentCode"class="right" style="width:180px"></el-input>
       <el-button type="info"  class="left" disabled>代理商名称</el-button><el-input clearable v-model="chooseAgentForm.agentName"class="right" style="width:180px"></el-input>
@@ -87,7 +87,7 @@
     </el-date-picker>
   </el-col>
    <el-col :span="8">
-       <el-button type="info"  class="left" disabled>客户代理商</el-button><el-input clearable v-model="addUserForm.agentName" class="right" style="width:180px"></el-input>
+       <el-button type="info"  class="left" disabled>客户代理商</el-button><el-input clearable v-model="addUserForm.customerAgent" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
   
@@ -259,6 +259,7 @@
           pass:'',
           checkpass:'',
           freezeDate:'',
+          customerAgent:'',
         }
       }
     },
@@ -277,15 +278,36 @@
       },
       addUser(){
            for(var field in this.addUserForm){
-            if(field !="freezeDate" && field !="agentName"&&field!="agentCode") {
-              if(this.addUserForm[field] ===""){
-              this.$message.error("必填字段不能为空");
-              return;
-            }
+            //根据不同的角色字段要求不一样
+            if(this.addUserForm.userType == 1){
+                //代理商
+                if(field !="freezeDate" && field!="customerAgent") {
+                  if(this.addUserForm[field] ===""){
+                  this.$message.error("必填字段不能为空");
+                  return;
+                }
+              }
+
+            } else if(this.addUserForm.userType ==2){
+                //客户
+                if(field !="freezeDate" && field !="agentName"&&field!="agentCode") {
+                  if(this.addUserForm[field] ===""){
+                  this.$message.error("必填字段不能为空");
+                  return;
+                }
+              }
+            }else {
+                if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&&field!="customerAgent") {
+                  if(this.addUserForm[field] ===""){
+                  this.$message.error("必填字段不能为空");
+                  return;
+                }
             }
             
+           } 
+            
         }
-          this.dialogAddUser = true;
+         
           var me = this;
           this.$http.post('/user/addUser',
           this.qs.stringify({
@@ -299,6 +321,7 @@
                 'agentName':this.addUserForm.agentName,
                 'agentCode':this.addUserForm.agentCode,
                 'pwd':this.addUserForm.checkpass,
+                'customerAgent':this.addUserForm.customerAgent,
              })
              )
              .then(function(res){
@@ -307,8 +330,11 @@
               var code = info['code'];
               var message = info['message'];
               if(code == 1){
-                  me.$message("添加成功");
+                  me.$message.success("添加成功");
+                  me.getUserList();
                   me.dialogAddUser = false;
+              } else {
+                me.$message.error(message);
               }
              })
              .catch(function(err){
@@ -324,8 +350,9 @@
         let me = this;
         this.$http.post('/agent/searchAgentList',
          this.qs.stringify({
-            'agentCode':'',
-            'agentName':'',
+            'token':sessionStorage.getItem('token'),
+            'agentCode':this.chooseAgentForm.agentCode,
+            'agentName':this.chooseAgentForm.agentName,
             'pageNum':'',
             'pageSize':''
 
@@ -333,7 +360,7 @@
          )
          .then(function(res){
             console.log(JSON.stringify(res));
-                var info = res['data'];
+              var info = res['data'];
               var code = info['code'];
               var message = info['message'];
               var data = info['data'];
@@ -377,10 +404,9 @@
              })
       },
       handleClick(row){
+         sessionStorage.setItem("personId",row.id);
          this.$router.push('/personinfo');
-         this.addUserForm.agentCode = row.agentCode;
-         this.addUserForm.agentName = row.agentName;
-         this.dialogChooseAgent = false;
+         
       }
     }
   }

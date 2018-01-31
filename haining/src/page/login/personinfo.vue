@@ -115,7 +115,7 @@
           <el-upload v-if="frontUploader"
   action="http://111.230.221.41:8080/user/uploadPic"
   list-type="picture-card"
-  limit="1"
+  limit=1
   :data="certificateFrontData"
   :on-preview="handlePictureCardPreview0"
   :on-success="handleFrontSuccess"
@@ -220,7 +220,7 @@
   export default {
     data() {
       return {
-        userId:"",
+        userId:sessionStorage.getItem('personId'),
         credentialsFront:'',
         credentialsBack:'',
         liveAddressCredential:'',
@@ -271,15 +271,23 @@
         
       };
     },
+    // watch:{
+    //   userId:function(val,oldVal){
+    //       alert(val+","+oldVal);
+    //   }
+    // },
     created:function(){
-      this.userId = this.$route.params.userId;
+      this.userId = sessionStorage.getItem('personId');
+      // alert(this.userId);
       var me = this;
       this.$http.post('/user/getUserBaseInfoById',
              this.qs.stringify({
+                 'token':sessionStorage.getItem('token'),
                 'id':this.userId
              })
              )
              .then(function(res){
+                // alert(JSON.stringify(res));
                 var info = res['data'];
                 var code = info['code'];
                 var message = info['message'];
@@ -318,6 +326,7 @@
 
              })
     },
+   
     methods: {
       
       handleFrontSuccess(response, file, fileList){

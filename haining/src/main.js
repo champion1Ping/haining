@@ -10,7 +10,7 @@ import qs from 'qs'
 
 //加载路由中间件
 Vue.use(VueRouter)
-axios.defaults.baseURL = 'http://111.230.221.41:8080'
+axios.defaults.baseURL = 'http://111.230.221.41:8087'
 Vue.prototype.$http = axios
 Vue.prototype.qs = qs
 //定义路由
