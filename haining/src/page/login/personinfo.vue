@@ -69,7 +69,7 @@
     </el-option>
         </el-select>
   	 	</el-form-item>
-  	 	<el-form-item label="负责代理商编号: ">
+  	 	<el-form-item label="客户代理商编号: ">
   	 		<el-input v-model="baseinfo.agentCode" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="间接推荐人账号: ">
