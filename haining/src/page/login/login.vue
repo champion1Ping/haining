@@ -40,7 +40,7 @@
     <template slot="append"><el-button type="primary" style="background:#0099FF; color:#FFF;width:130px" :disabled="isDisabled" @click.native="gainVerifyCode">{{buttonName}}</el-button></template>
     </el-input>
   </el-form-item>
-  <el-form-item label="代理商编号" required>
+  <el-form-item label="客户代理商编号" required>
     <el-input v-model="accountReg.agencyNo" placeholder="请输入代理商编号" style="width:280px"></el-input>
   </el-form-item>
   <el-form-item label="登陆密码设置">

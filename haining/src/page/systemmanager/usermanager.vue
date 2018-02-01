@@ -10,10 +10,9 @@
     :data="agentTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" header-align="center">
-    <el-table-column prop="agentCode" label="代理商编码" align="center" ></el-table-column>
-    <el-table-column prop="agentName" label="代理商名称" align="center"></el-table-column>
+    <el-table-column prop="agentCode" label="代理商编码" align="center" width="240" ></el-table-column>
+    <el-table-column prop="agentName" label="代理商名称" align="center" width="360"></el-table-column>
     <el-table-column
-      fixed="right"
       label="操作"
       width="100">
       <template slot-scope="scope">
@@ -194,7 +193,7 @@
     <el-table-column prop="gmtCreate" label="创建时间" align="center" width="180"></el-table-column>
     <el-table-column prop="whetherFreezeName" label="是否冻结" align="center" width="90"></el-table-column>
     <el-table-column prop="freezeDate" label="冻结时间" align="center" width="140"></el-table-column>
-    <el-table-column prop="agentCode" label="代理商编号" align="center" width="100"></el-table-column>
+    <el-table-column prop="agentCode" label="客户代理商" align="center" width="100"></el-table-column>
     <el-table-column prop="directRecommendPhoneNumber" label="直接推荐人号码" align="center" width="120"></el-table-column>
     <el-table-column
       label="信息明细"
