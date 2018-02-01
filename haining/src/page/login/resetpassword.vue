@@ -1,6 +1,7 @@
 
 <template>
 	<div class="resetpw">
+
 		<span style="color:#C9A44E;font-size:20px;">重置密码</span>
 		<el-form label-position="top" :model="resetForm" style="margin-top:20px" :rules="rules" ref="resetForm">
 			<el-form-item label="手机号码" style="padding:0 0 2" prop="phoneNumber">
@@ -19,7 +20,9 @@
 		     <el-input clearable v-model="resetForm.checkpass" type="password" placeholder="请确定密码" style="width:280px"></el-input>
 		  </el-form-item>
 		  <el-form-item>
-		    <el-button type="primary" @click="submitForm('resetForm')" style="width:280px">确认重置</el-button>
+		    <el-button type="primary" @click="submitForm('resetForm')" style="width:280px">确认重置</el-button><br/>
+		    		    <el-button type="primary" @click="backToLogin()" style="width:280px">返回登录注册</el-button>
+
 		  </el-form-item>
 		</el-form>
 
@@ -85,6 +88,9 @@
 			}
 		},
 		methods:{
+			backToLogin(){
+				window.history.go(-1);
+			},
 			gainVerifyCode(){
 				let mobilePhone = this.resetForm.phoneNumber;
 		        let me = this;  
