@@ -309,7 +309,26 @@
         updateContract:{
          handler:function(val,oldVal){
          let index = this.updateContract.productType;
-         if(this.updateContract.firstTradeDate !="") {
+
+          if (this.productTypes != "") {
+              this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
+              this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
+         }
+         
+         this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate) * 0.01;
+         if (this.updateContract.investmentAmount !="" && this.updateContract.derectRecomandRate !="" && !this.isNull(this.updateContract.derectRecomandRate)) {
+          this.updateContract.derectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.derectRecomandRate) * 0.01;
+         }
+         if (this.updateContract.investmentAmount !="" && this.updateContract.inderectRecomandRate !="" && !this.isNull(this.updateContract.inderectRecomandRate)) {
+             this.updateContract.inderectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.inderectRecomandRate) ;
+         }
+         if (this.updateContract.investmentAmount !="" && this.updateContract.agentRate !="" && !this.isNull(this.updateContract.agentRate)){
+              this.updateContract.agentIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.agentRate) ;
+
+         }
+         this.updateContract.companyIncome = parseInt(this.updateContract.investmentAmount) * 0.02;
+
+         if(this.updateContract.firstTradeDate !="" && !this.isNull(this.updateContract.firstTradeDate)) {
            //更新截止日期
            let startDate = this.updateContract.firstTradeDate.split('-');
            let year = startDate[0];
@@ -327,19 +346,7 @@
 
 
          }
-         if (this.productTypes != "") {
-              this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
-              this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
-         }
-         
-         this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate) * 0.01;
-         if (this.updateContract.investmentAmount !="" && this.updateContract.derectRecomandRate !="") {
-          this.updateContract.derectIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.updateContract.derectRecomandRate) * 0.01;
-         }
-         
-         this.updateContract.inderectIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.updateContract.inderectRecomandRate) * 0.01;;
-         this.updateContract.companyIncome = parseInt(this.updateContract.investmentAmount) * 0.02;
-         this.updateContract.agentIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.updateContract.agentRate) * 0.01;
+        
          // this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate) * 0.01;
         //   let t1 = parseFloat(this.updateContract.customerIncome);
         //   let t2 = parseFloat(this.updateContract.derectIncome);
@@ -421,7 +428,12 @@
             
     },
     methods:{
-
+      isNull(exp){
+        if (!exp && typeof exp != "undefined" && exp != 0){
+          return true;
+        }
+        return false;
+      },
       // showProductName(row,column,cellValue){
         
       //    return  this.productTypes[cellValue-1].productTypeName;
@@ -430,7 +442,6 @@
       modify(){
           let me = this;
           let obj = new Object();
-          alert(this.updateContract.tradeStatus);
           obj.documentCode= this.updateContract.documentCode;
                   obj.id = this.updateContract.id;
                   obj.customerName=this.updateContract.customerName;
