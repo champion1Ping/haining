@@ -296,7 +296,7 @@
           agentCode:'',
           derectRecomandRate:'',
           inderectRecomandRate:'',
-          agentRate:0.005,
+          agentRate:0.02,
           derectIncome:'',
           inderectIncome:0.005,
           agentIncome:'',
@@ -492,6 +492,11 @@
       },
      
       update(row){
+      if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
+           this.updateContract.inderectRecomandRate = 0;
+      }else {
+           this.updateContract.inderectRecomandRate = 0.02;
+      }
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;
          this.updateContract.tradePlatform = row.tradePlatform;
@@ -506,9 +511,10 @@
          this.updateContract.customerIncome = row.customerIncome;
          this.updateContract.derectRecomandRate = row.derectRecomandRate;
          this.updateContract.derectIncome = row.derectIncome;
-         this.updateContract.inderectRecomandRate = 0.005;//row.inderectRecomandRate;
+         
+         
          this.updateContract.inderectIncome = row.inderectIncome;
-         this.updateContract.agentRate = 0.005;//row.agentRate;
+         this.updateContract.agentRate = 0.02;//row.agentRate;
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
          this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];
