@@ -227,11 +227,11 @@
     <el-table-column prop="inderectRecomandRate" label="间推收益率" align="center" width="90"></el-table-column>
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="100"></el-table-column>
     <el-table-column prop="agentRate" label="代理收益率" align="center" width="90"></el-table-column>
-    <el-table-column prop="customerIncome" label="客户月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="derectIncome" label="直推人月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="inderectIncome" label="间推人月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="agentIncome" label="代理商月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="companyIncome" label="公司月收益($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="customerIncome" label="客户月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="derectIncome" label="直推人月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="inderectIncome" label="间推人月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="agentIncome" label="代理商月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="companyIncome" label="公司月收益" align="center" width="100"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
