@@ -11,13 +11,13 @@
   	<el-col :span="12">
   	 <el-form :model="baseinfo" label-position="left" ref="baseinfo" label-width="120px" class="demo-ruleForm">
   	 	<el-form-item label="注册账号:">
-  	 		<el-input v-model="baseinfo.account" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.account" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="联系方式:">
-  	 		<el-input v-model="baseinfo.phoneNumber" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.phoneNumber" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item> 
   	 	<el-form-item label="是否入金:">
-  	 		<el-select  v-model="baseinfo.ifCharged"  style="width:200px">
+  	 		<el-select  v-model="baseinfo.ifCharged" :disabled="show" style="width:200px">
           <el-option
             v-for="item in this.$store.state.xialakuang.yesorno"
             :key="item.value"
@@ -27,7 +27,7 @@
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="推荐人资质:">
-  	 		<el-select  v-model="baseinfo.recommendPersonQualification"  style="width:200px">
+  	 		<el-select  v-model="baseinfo.recommendPersonQualification" :disabled="show" style="width:200px">
           <el-option
             v-for="item in this.$store.state.xialakuang.yesorno"
             :key="item.value"
@@ -37,20 +37,20 @@
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="我的邮箱:">
-  	 		<el-input v-model="baseinfo.email" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.email" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="直接推荐人账号:">
-  	 		<el-input v-model="baseinfo.directRecommendationAccount" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.directRecommendationAccount" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 </el-form>
   	 </el-col>
   	 <el-col :span="12">
   	 	<el-form :model="baseinfo" ref="baseinfo" label-position="left" label-width="120px" class="demo-ruleForm">
   	 	<el-form-item label="真实姓名: ">
-  	 		<el-input v-model="baseinfo.realName" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.realName" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="性别: ">
-  	 		<el-select  v-model="baseinfo.sex"  style="width:200px">
+  	 		<el-select  v-model="baseinfo.sex" :disabled="show" style="width:200px">
           <el-option
             v-for="item in this.$store.state.xialakuang.sex"
             :key="item.value"
@@ -60,7 +60,7 @@
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="是否实名: ">
-  	 		<el-select  v-model="baseinfo.nameVerified"  style="width:200px">
+  	 		<el-select  v-model="baseinfo.nameVerified" :disabled="show" style="width:200px">
           <el-option
             v-for="item in this.$store.state.xialakuang.yesorno"
             :key="item.value"
@@ -70,10 +70,10 @@
         </el-select>
   	 	</el-form-item>
   	 	<el-form-item label="客户代理商编号: ">
-  	 		<el-input v-model="baseinfo.agentCode" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.agentCode" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="间接推荐人账号: ">
-  	 		<el-input v-model="baseinfo.indirectRecommendAccount" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.indirectRecommendAccount" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 </el-form>
   	 </el-col>
@@ -90,20 +90,20 @@
       <el-row>
       	<el-form model="realNameVerify" :rules="rules" ref="realNameVerify" label-width="120px" label-position="left" class="demo-ruleForm">
       		<el-form-item label="真实姓名:">
-  	 		<el-input v-model="realNameVerify.realName" style="width:200px"></el-input>
+  	 		<el-input v-model="realNameVerify.realName" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
       <!-- <el-form-item> -->
 
       <el-form :inline="true" label-width="120px"  model="realNameVerify">
       <el-form-item label="证件类型:">
-        <el-select  v-model="realNameVerify.certificateType"  style="width:200px">
+        <el-select  v-model="realNameVerify.certificateType" :disabled="show" style="width:200px">
           <el-option label="身份证" value="1"></el-option>
           <el-option label="护照" value="2"></el-option>
         </el-select>
 
       </el-form-item>
        <el-form-item label="证件号码:">
-        <el-input v-model="realNameVerify.certificateNumber" style="width:200px"></el-input>
+        <el-input v-model="realNameVerify.certificateNumber" :disabled="show" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
         <!-- </el-form-item> -->
@@ -168,19 +168,19 @@
       <el-form label-position="left">
         <el-form :inline="true" label-width="120px"  >
       <el-form-item label="我的会员星级:">
-       <el-input v-model="vipStarLevel" style="width:200px"></el-input>
+       <el-input v-model="vipStarLevel"  :disabled="show" style="width:200px"></el-input>
       </el-form-item>
        <el-form-item label="我的入金金额:">
-        <el-input v-model="chargedMoney" style="width:200px"></el-input>
+        <el-input v-model="chargedMoney" :disabled="show" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
 
         <el-form :inline="true" label-width="120px"  >
       <el-form-item label="我的直推奖利率:">
-       <el-input v-model="directRecommendRate" style="width:200px"></el-input>
+       <el-input v-model="directRecommendRate" :disabled="show" style="width:200px"></el-input>
       </el-form-item>
        <el-form-item label="我的间推奖利率:">
-        <el-input v-model="indirectRecommendRate" style="width:200px"></el-input>
+        <el-input v-model="indirectRecommendRate" :disabled="show" style="width:200px"></el-input>
         </el-form-item>
         </el-form>
       </el-form>
@@ -220,6 +220,7 @@
   export default {
     data() {
       return {
+        show:false,
         userId:sessionStorage.getItem('personId'),
         credentialsFront:'',
         credentialsBack:'',
@@ -278,6 +279,9 @@
     // },
     created:function(){
       this.userId = sessionStorage.getItem('personId');
+      if (sessionStorage.getItem('roleId') == 2){
+        this.show = true;
+      }
       // alert(this.userId);
       var me = this;
       this.$http.post('/user/getUserBaseInfoById',
