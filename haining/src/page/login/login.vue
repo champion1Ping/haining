@@ -288,8 +288,8 @@
     background-color:#FFFFFF;
     margin-top: 0px;
     /*margin-bottom: 10px;*/
-    margin-right:360px;
-    margin-left: 360px;
+    margin-right:20%;
+    margin-left: 20%;
     padding-left: 40px;
     padding-top: 10px;
   }

@@ -7,7 +7,7 @@
         </el-col>
         <el-col :span="14">
         <div v-if="this.$store.state.roleId > 0 || id > 0 ">
-          <el-menu :default-active="activeIndex"  class="el-menu-demo" mode="horizontal" @select="handleSelect">
+          <el-menu  class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1" v-if="this.$store.state.roleId==3 ||id ==3">
 			    <template slot="title"><span style="font-size:20px;color:#333333;">系统管理</span></template>
 			    <el-menu-item index="/systemNotice">系统公告发布</el-menu-item>
@@ -31,7 +31,7 @@
         </el-col>
         <el-col :span="2" v-if="this.$store.state.roleId > 0||id > 0">
         	
-        	<el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+        	<el-menu  class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
 
 			    <template slot="title" ><span style="font-size:14px;color:#333333">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
@@ -71,6 +71,7 @@
 			}
 		},
 		created:function(){
+			
 			this.id = sessionStorage.getItem("roleId");
 			console.log(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");

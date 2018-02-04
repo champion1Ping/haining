@@ -306,7 +306,8 @@
            } 
             
         }
-         
+         let agentCode = (this.addUserForm.userType ==2) ? this.addUserForm.customerAgent : this.addUserForm.agentCode;
+         // alert(agentCode);
           var me = this;
           this.$http.post('/user/addUser',
           this.qs.stringify({
@@ -318,7 +319,7 @@
                 'whetherFreeze':this.addUserForm.ifFrozen,
                 'freezeDate':this.addUserForm.freezeDate,
                 'agentName':this.addUserForm.agentName,
-                'agentCode':this.addUserForm.agentCode,
+                'agentCode':agentCode,
                 'pwd':this.addUserForm.checkpass,
                 'customerAgent':this.addUserForm.customerAgent,
              })
