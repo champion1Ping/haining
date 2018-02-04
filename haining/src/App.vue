@@ -102,7 +102,7 @@ html, body{ margin:0; height:100%; }
     background-color: #E6E6E6; 
 
   }
-   /*输入框*/
+  
   .right > .el-input__inner{
       border-top-left-radius:0px; 
       border-bottom-left-radius:0px; 

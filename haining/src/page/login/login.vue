@@ -286,10 +286,12 @@
 <style>
   .login{
     background-color:#FFFFFF;
+    width:768px;
+    margin-left: 20%;
     margin-top: 0px;
     /*margin-bottom: 10px;*/
-    margin-right:20%;
-    margin-left: 20%;
+   /* margin-right:20%;
+    margin-left: 20%;*/
     padding-left: 40px;
     padding-top: 10px;
   }

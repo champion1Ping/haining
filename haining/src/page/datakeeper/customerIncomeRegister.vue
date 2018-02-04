@@ -523,28 +523,7 @@
   }
   
   /*输入框*/
-  .right > .el-input__inner{
-      border-top-left-radius:0px; 
-      border-bottom-left-radius:0px; 
-      border-left-width: 0px;
-    
-  }
-  /*下拉框 + 日期选择框*/
-  .right > .el-input > .el-input__inner{
-      border-top-left-radius:0px; 
-      border-bottom-left-radius:0px; 
-      border-left-width: 0px;
-    
-  }
-  /*日期框icon右移*/
-  .el-input__prefix {
-    left: 155px;
-    -webkit-transition: all .3s;
-    transition: all .3s;
-}
-  /*.el-input__prefix{
-      right:0px;
-  }  */
+
 
 
 </style>
