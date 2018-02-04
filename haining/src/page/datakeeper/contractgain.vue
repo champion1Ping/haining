@@ -227,11 +227,11 @@
     <el-table-column prop="inderectRecomandRate" label="间推收益率" align="center" width="90"></el-table-column>
     <el-table-column prop="agentCode" label="代理商编号" align="center" width="100"></el-table-column>
     <el-table-column prop="agentRate" label="代理收益率" align="center" width="90"></el-table-column>
-    <el-table-column prop="customerIncome" label="客户月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="derectIncome" label="直推人月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="inderectIncome" label="间推人月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="agentIncome" label="代理商月收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="companyIncome" label="公司月收益($)" align="center" width="100"></el-table-column>
+    <el-table-column prop="customerIncome" label="客户月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="derectIncome" label="直推人月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="inderectIncome" label="间推人月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="agentIncome" label="代理商月收益" align="center" width="100"></el-table-column>
+    <el-table-column prop="companyIncome" label="公司月收益" align="center" width="100"></el-table-column>
   </el-table>
   <el-pagination
       @size-change="handleSizeChange"
@@ -296,7 +296,7 @@
           agentCode:'',
           derectRecomandRate:'',
           inderectRecomandRate:'',
-          agentRate:0.005,
+          agentRate:0.02,
           derectIncome:'',
           inderectIncome:0.005,
           agentIncome:'',
@@ -492,6 +492,11 @@
       },
      
       update(row){
+      if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
+           this.updateContract.inderectRecomandRate = 0;
+      }else {
+           this.updateContract.inderectRecomandRate = 0.02;
+      }
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;
          this.updateContract.tradePlatform = row.tradePlatform;
@@ -506,9 +511,10 @@
          this.updateContract.customerIncome = row.customerIncome;
          this.updateContract.derectRecomandRate = row.derectRecomandRate;
          this.updateContract.derectIncome = row.derectIncome;
-         this.updateContract.inderectRecomandRate = 0.005;//row.inderectRecomandRate;
+         
+         
          this.updateContract.inderectIncome = row.inderectIncome;
-         this.updateContract.agentRate = 0.005;//row.agentRate;
+         this.updateContract.agentRate = 0.02;//row.agentRate;
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
          this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];
