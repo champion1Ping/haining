@@ -248,10 +248,11 @@
                let sysUserRoleList = data['sysUserRoleList'];
                let id = sysUserRoleList[0]['id'];
                let userId=sysUserRoleList[0]['userId'];
+             
                let roleId = sysUserRoleList[0]['roleId'];
                sessionStorage.setItem('roleId',roleId);
                me.$store.commit('saveRoleId', roleId);
-               
+               me.$store.commit('saveUserId', userId);
                let baseInfo = data['userBaseInfoVO'];
                sessionStorage.setItem("account",baseInfo['account']);
                sessionStorage.setItem("userName",baseInfo['realName']);

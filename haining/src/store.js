@@ -126,6 +126,9 @@ const mutations = {
     },
     saveNoticesCount(state,count){
       state.noticeCount = count;
+    },
+    saveUserId(state,userId){
+      state.userid = userId;
     }
 }
 

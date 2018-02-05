@@ -284,15 +284,16 @@
     //   }
     // },
     created:function(){
-      alert(this.$http.defaults.baseURL);
+  
       this.userId = sessionStorage.getItem('personId');
+      
       if (sessionStorage.getItem('roleId') == 2){
         this.show = true;
       }
       var me = this;
       this.$http.post('/user/getUserBaseInfoById',
              this.qs.stringify({
-                 'token':sessionStorage.getItem('token'),
+                'token':sessionStorage.getItem('token'),
                 'id':this.userId
              })
              )
@@ -358,11 +359,11 @@
       },
       
       updateUserBaseInfo(){
-        console.log(this.baseinfo.sex);
-          let sexId = this.baseinfo.sex==''
+          let me = this;
           this.$http.post('/user/updateUserBaseInfo',
              this.qs.stringify({
-                'token':this.$store.state.token,
+                'token':sessionStorage.getItem('token'),
+                'userId':sessionStorage.getItem('personId'),
                 'account':this.baseinfo.account,
                 'realName':this.baseinfo.realName,
                 'sex':this.baseinfo.sex,
@@ -377,14 +378,14 @@
              })
              )
              .then(function(res){
-                // console.log(JSON.stringify(res));
+                
                 var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
-                      me.$message('更新成功');
+                      me.$message.success('更新成功');
                     } else {
                       var message = info['message'];
-                      $.message(message);
+                      me.$message.error(message);
                     }
                   
              })

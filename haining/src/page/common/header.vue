@@ -39,7 +39,7 @@
 
 			    <el-menu-item index="/personinfo" v-if="this.$store.state.roleId==2 ">个人信息</el-menu-item>
 			    <el-menu-item index="/updatepw" v-if="this.$store.state.roleId  !=2 ">修改密码</el-menu-item>
-			    <el-menu-item index="/login" @click="loginout()">退出登录</el-menu-item>
+			    <el-menu-item index="/login" >退出登录</el-menu-item>
 			  </el-submenu>
 			  
 		  </el-menu>
@@ -113,20 +113,22 @@
 					}
 				}
 				// console.log(to);
-				
+				if (to=="/personinfo") {
+				   sessionStorage.setItem("personId",this.$store.state.userid);
+				}
+				if (to=="/loginout") {
+					this.id =0;
+					sessionStorage.removeItem("token");
+					sessionStorage.removeItem("roleId");
+					sessionStorage.removeItem("userName");
+					this.$store.commit('saveRoleId', 0);
+				}
 				this.$router.push(to);
 			},
 			getNotice(){
 				this.$router.push('/notices');
 			},
-			loginout(){
-				//清除登录相关信息
-				this.id =0;
-				sessionStorage.removeItem("token");
-				sessionStorage.removeItem("roleId");
-				sessionStorage.removeItem("userName");
-				this.$store.commit('saveRoleId', 0);
-			}
+			
 		}
 		
 	}
