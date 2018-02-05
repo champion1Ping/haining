@@ -153,6 +153,10 @@
       },
       saveProduct(){
         let me = this;
+        if (this.addProduct.productType == "") {
+            this.$message.error("产品类型不能为空");
+            return;
+        }
         let pro = new Object();
         pro.id = (this.operationType == 1 ? "": this.addProduct.id)
         pro.sequenceNumber = this.addProduct.sequenceNumber;
