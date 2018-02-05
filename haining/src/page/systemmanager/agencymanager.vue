@@ -392,6 +392,9 @@
               me.$message.success(message);
               me.query();
               //字段清空
+              for(var field in me.addAgencyForm){
+                me.addAgencyForm[field] = "";
+              }
               me.dialogAddAgency = false;//关闭弹窗
            } else {
               me.$message.error(message);

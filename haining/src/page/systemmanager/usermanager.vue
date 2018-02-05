@@ -332,6 +332,9 @@
               if(code == 1){
                   me.$message.success("添加成功");
                   me.getUserList();
+                  for(var field in me.addUserForm) {
+                    me.addUserForm[field] ="";
+                  }
                   me.dialogAddUser = false;
               } else {
                 me.$message.error(message);

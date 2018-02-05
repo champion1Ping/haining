@@ -361,11 +361,10 @@
                     var data = info['data'];
                     if (code == 1) {
                       me.$message.success('添加成功');
-                      me.getPersonDocumentList();
+                      me.searchRecords();
                       //清空数据
                       for(var field in me.addDocumentForm){
                         me.addDocumentForm[field] = "";
-                      
                       }
                       me.dialogAddFile = false;
                     }else {
