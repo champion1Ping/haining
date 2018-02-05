@@ -315,7 +315,7 @@
             var code = info['code'];
             var message = info['message'];
             var data = info['data'];
-            me.addAgencyForm.agencyCode = data;
+            me.addAgencyForm.agentCode = data;
          })
          .catch(function(err){
 

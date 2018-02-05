@@ -113,7 +113,7 @@
         <el-col :span="8">
           <div>证件正面照</div>
           <el-upload v-if="frontUploader"
-  action="http://111.230.221.41:8080/user/uploadPic"
+  :action="action"
   list-type="picture-card"
   limit=1
   :data="certificateFrontData"
@@ -129,8 +129,9 @@
         <el-col :span="8">
           <div>证件反面照</div>
            <el-upload v-if="backUploaded"
-  action="http://111.230.221.41:8080/user/uploadPic"
+  :action="action"
   :data="certificateBackData"
+  limit=1
   list-type="picture-card"
   :on-preview="handlePictureCardPreview1"
   :on-success="handleBackSuccess"
@@ -145,7 +146,8 @@
           <div>居住地址证明</div>
            <el-upload v-if="liveAddressUploaded"
            :data="liveAddressData"
-  action="http://111.230.221.41:8080/user/uploadPic"
+  :action="action"
+  limit=1
   list-type="picture-card"
   :on-success="handleAddressSuccess"
   :on-preview="handlePictureCardPreview2"
@@ -220,6 +222,7 @@
   export default {
     data() {
       return {
+        action:this.$http.defaults.baseURL+"/user/uploadPic",
         show:false,
         userId:sessionStorage.getItem('personId'),
         credentialsFront:'',
@@ -237,16 +240,19 @@
         certificateFrontData:{
           picType:'1',
             account:sessionStorage.getItem("account"),
+            token:sessionStorage.getItem('token'),
             file:""
         },
         certificateBackData:{
             picType:'2',
             account:sessionStorage.getItem("account"),
+            token:sessionStorage.getItem('token'),
             file:""
         },
         liveAddressData:{
             picType:'3',
             account:sessionStorage.getItem("account"),
+            token:sessionStorage.getItem('token'),
             file:""
         },
         baseinfo:{
@@ -278,11 +284,11 @@
     //   }
     // },
     created:function(){
+      alert(this.$http.defaults.baseURL);
       this.userId = sessionStorage.getItem('personId');
       if (sessionStorage.getItem('roleId') == 2){
         this.show = true;
       }
-      // alert(this.userId);
       var me = this;
       this.$http.post('/user/getUserBaseInfoById',
              this.qs.stringify({
@@ -291,7 +297,7 @@
              })
              )
              .then(function(res){
-                // alert(JSON.stringify(res));
+                console.info(JSON.stringify(res));
                 var info = res['data'];
                 var code = info['code'];
                 var message = info['message'];
@@ -334,10 +340,10 @@
     methods: {
       
       handleFrontSuccess(response, file, fileList){
-        console.log(response);
+        alert(JSON.stringify(response));
       },
       handleBackSuccess(response,file,fileList){
-        console.log(JSON.stringify(response));
+        alert(JSON.stringify(response));
         // this.backUploaded = false;
       },
       handleAddressSuccess(response, file, fileList){
