@@ -361,7 +361,7 @@
         var me = this;
         let provinceName = obj.label;
         for(var field in this.addAgencyForm){
-          if(this.addAgencyForm[field] == ""){
+          if(this.addAgencyForm[field] == "" && field !="id"){
             this.$message.error("必填字段不能为空");
             return;
           }
