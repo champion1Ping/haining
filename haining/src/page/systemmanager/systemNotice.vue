@@ -73,9 +73,9 @@
 							var info = res['data'];
 				            var code = info['code'];
 				            if (code == 1) {
-				            	me.$message('发布成功');
-				            	this.toType = "";
-				            	this.noticeContent = "";
+				            	me.$message.success('发布成功');
+				            	me.toType = "";
+				            	me.noticeContent = "";
 				            } else {
 				            	var message = info['message'];
 				            	me.$message.error(message);
