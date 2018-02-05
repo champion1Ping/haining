@@ -319,9 +319,9 @@
               this.updateContract.productRate =obj.monthRate;
          }
          
-         this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate) * 0.01;
+         this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate);
          if (this.updateContract.investmentAmount !="" && this.updateContract.derectRecomandRate !="" && !this.isNull(this.updateContract.derectRecomandRate)) {
-          this.updateContract.derectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.derectRecomandRate) * 0.01;
+          this.updateContract.derectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.derectRecomandRate);
          }
          if (this.updateContract.investmentAmount !="" && this.updateContract.inderectRecomandRate !="" && !this.isNull(this.updateContract.inderectRecomandRate)) {
              this.updateContract.inderectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.inderectRecomandRate) ;
@@ -504,7 +504,7 @@
       if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
            this.updateContract.inderectRecomandRate = 0;
       }else {
-           this.updateContract.inderectRecomandRate = 0.02;
+           this.updateContract.inderectRecomandRate = 0.005;
       }
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;
