@@ -234,7 +234,7 @@
     data(){
       return{
         customerIncomeTable:[],
-
+        
         currentPage:1,
         pageSize:100,
         dialogAddFile:false,
@@ -287,7 +287,7 @@
                 'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
-                  // alert(JSON.stringify(res));
+                  //alert(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
@@ -328,7 +328,7 @@
             return;
         }
         let me = this;
-        alert(this.addDocumentForm.getMoneyDate+","+this.addDocumentForm.contractDate+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
+        //alert(this.addDocumentForm.getMoneyDate+","+this.addDocumentForm.contractDate+","+this.addDocumentForm.derectRecomandPersonId+","+this.addDocumentForm.inderectRecomandPersonId);
         this.$http.post('/personDocument/addpersonDocument',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
@@ -402,9 +402,13 @@
       },
       productChanged(){
          let index = this.addDocumentForm.productType;
-         this.addDocumentForm.serviceDate = this.productTypes[index-1]['serviceTime'];
-         this.addDocumentForm.productRate = this.productTypes[index-1]['monthRate'];
-         this.addDocumentForm.productTypeName=this.productTypes[index-1]['productTypeName'];
+         let obj = {};
+          obj = this.productTypes.find((item)=>{
+              return item.id === index;
+          });
+         this.addDocumentForm.serviceDate = obj.serviceTime;
+         this.addDocumentForm.productRate = obj.monthRate;
+         this.addDocumentForm.productTypeName=obj.productTypeName;
          if (this.addDocumentForm.investmentAmount !="") {
           this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate);
          }
