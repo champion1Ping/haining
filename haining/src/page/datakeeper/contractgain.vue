@@ -311,8 +311,12 @@
          let index = this.updateContract.productType;
 
           if (this.productTypes != "") {
-              this.tempServiceDate = this.productTypes[index-1]['serviceTime'];
-              this.updateContract.productRate = this.productTypes[index-1]['monthRate'];
+               let obj = {};
+              obj = this.productTypes.find((item)=>{
+                  return item.id === index;
+              });
+              this.tempServiceDate = obj.serviceTime;
+              this.updateContract.productRate =obj.monthRate;
          }
          
          this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate) * 0.01;
@@ -492,6 +496,7 @@
       },
      
       update(row){
+      this.updateContractDialog = true;
       if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
            this.updateContract.inderectRecomandRate = 0;
       }else {
@@ -520,7 +525,7 @@
          this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];
          this.updateContract.id = row.id;
          // console.log(this.tempServiceDate);
-         this.updateContractDialog = true;
+         
       },
       formatJson(filterVal, jsonData) {
 　　　　　　return jsonData.map(v => filterVal.map(j => v[j]))
