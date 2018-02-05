@@ -216,8 +216,8 @@
     <el-table-column prop="tradeAccount" label="交易账户号" align="center" width="90"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="100"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益($)" align="center" width="100"></el-table-column>
-    <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="100"></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80" ></el-table-column>
+    <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="100" ></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80" <!-- :formatter="showProductName" -->></el-table-column>
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="100"></el-table-column>
     <el-table-column prop="tradeStatus" label="交易状态" align="center" width="90"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="90"></el-table-column>
@@ -439,9 +439,12 @@
         return false;
       },
       // showProductName(row,column,cellValue){
-        
-      //    return  this.productTypes[cellValue-1].productTypeName;
-        
+      //       let obj = {};
+      //     obj = this.productTypes.find((item)=>{
+      //         return item.value ==cellValue;
+      //     }); 
+
+      //     return obj.productTypeName;     
       // },
       modify(){
           let me = this;
@@ -466,7 +469,7 @@
                   obj.agentIncome=this.updateContract.agentIncome;
                   obj.agentRate=this.updateContract.agentRate;
                   obj.companyIncome=this.updateContract.companyIncome;
-          obj.documentCode = this.updateContract.documentCode;
+                  obj.documentCode = this.updateContract.documentCode;
           this.contracts.push(obj);
       this.$http.post('/personDocument/updateContractDitrubuteIncome',
               this.qs.stringify({
@@ -496,6 +499,7 @@
       },
      
       update(row){
+        this.updateContract.id = row.id;
       this.updateContractDialog = true;
       if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
            this.updateContract.inderectRecomandRate = 0;
@@ -523,7 +527,8 @@
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
          this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];
-         this.updateContract.id = row.id;
+         
+
          // console.log(this.tempServiceDate);
          
       },
@@ -554,6 +559,7 @@
         this.$http.post('/personDocument/getContractDitrubuteIncomeList',
               this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
+                // 'userId':'',
                 'pageNum':'',
                 'pageSize':'',
                 'documentCode':this.documentCode,
@@ -566,7 +572,7 @@
                 'tradeEndDateEnd':this.tradeEndDateEnd,
               }))
             .then(function(res){
-                    // console.log(JSON.stringify(res));
+                    console.log(JSON.stringify(res));
                     var info = res['data'];
                     var code = info['code'];
                     if(code == 1) {

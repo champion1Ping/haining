@@ -366,9 +366,7 @@
             return;
           }
         }
-        alert(this.addAgencyForm.bussinessStartTime+","+this.addAgencyForm.bussinessEndTime);
         let address = (this.addOrUpdate == 1 ? '/agent/updateAgentInfo' :'/agent/addAgentInfo');
-        alert(address);
         this.$http.post(address,
           this.qs.stringify({
             'id':this.addAgencyForm.id,

@@ -109,12 +109,13 @@
         <!-- </el-form-item> -->
       	</el-form>
       </el-row>
-      <el-row>
-        <el-col :span="8">
+      <el-row v-if="uploadAllow">
+        <el-col :span="8" >
           <div>证件正面照</div>
           <el-upload v-if="frontUploader"
   :action="action"
   list-type="picture-card"
+  accept=”jpeg,png,gif“
   limit=1
   :data="certificateFrontData"
   :on-preview="handlePictureCardPreview0"
@@ -122,9 +123,9 @@
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog :visible.sync="dialogVisible" size="tiny">
-  <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+<!-- <el-dialog :visible.sync="dialogVisible" size="tiny"> -->
+
+<!-- </el-dialog> -->
         </el-col>
         <el-col :span="8">
           <div>证件反面照</div>
@@ -138,9 +139,8 @@
   :on-remove="handleRemove">
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog :visible.sync="dialogVisible" size="tiny">
-  <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+<!-- <el-dialog :visible.sync="dialogVisible" size="tiny"> -->
+<!-- </el-dialog> -->
         </el-col>
         <el-col :span="8">
           <div>居住地址证明</div>
@@ -155,10 +155,15 @@
 
   <i class="el-icon-plus"></i>
 </el-upload>
-<el-dialog :visible.sync="dialogVisible" size="tiny">
-  <img width="100%" :src="dialogImageUrl" alt="">
-</el-dialog>
+<!-- <el-dialog :visible.sync="dialogVisible" size="tiny"> -->
+ 
+<!-- </el-dialog> -->
         </el-col>
+      </el-row>
+      <el-row :gutter="1">
+       <el-col :span="8"> <div>证件反面照</div><img width="100%" :src="frontImgSrc" alt=""></el-col>
+        <el-col :span="8"><div>证件反面照</div><img width="100%" :src="backImgSrc" alt=""></el-col>
+        <el-col :span="8"> <div>居住地址证明</div><img width="100%" :src="addRessImgSrc" alt=""></el-col>
       </el-row>
       </div>
 
@@ -222,6 +227,7 @@
   export default {
     data() {
       return {
+        uploadAllow:true,
         action:this.$http.defaults.baseURL+"/user/uploadPic",
         show:false,
         userId:sessionStorage.getItem('personId'),
@@ -284,11 +290,17 @@
     //   }
     // },
     created:function(){
-  
+  //roleId 1-代理商 2-客户 3-管理员
       this.userId = sessionStorage.getItem('personId');
       
       if (sessionStorage.getItem('roleId') == 2){
         this.show = true;
+        if (this.baseinfo.recommendPersonQualification ==1) {
+          //有推荐人资质，不允许上传
+          this.uploadAllow = false;
+        }
+      } else {
+        this.uploadAllow = false;
       }
       var me = this;
       this.$http.post('/user/getUserBaseInfoById',
@@ -298,7 +310,7 @@
              })
              )
              .then(function(res){
-                console.info(JSON.stringify(res));
+                // alert(JSON.stringify(res));
                 var info = res['data'];
                 var code = info['code'];
                 var message = info['message'];
@@ -322,7 +334,9 @@
                 me.baseinfo.indirectRecommendAccount=data['indirectRecommendationAccount'];
                 me.realNameVerify.certificateType = data['certificateType'];
                 me.realNameVerify.certificateNumber=data['certificateNumber'];
-
+                me.frontImgSrc = data['certificateFront'];
+                me.backImgSrc = data['certificateBack'];
+                me.addRessImgSrc = data['addressPic'];
                 //推荐信息
                 let myReferinfoMationVO = data['myReferinfoMationVO'];
                 this.vipStarLevel = myReferinfoMationVO['starDegree'];
@@ -341,10 +355,10 @@
     methods: {
       
       handleFrontSuccess(response, file, fileList){
-        alert(JSON.stringify(response));
+        // alert(JSON.stringify(response));
       },
       handleBackSuccess(response,file,fileList){
-        alert(JSON.stringify(response));
+        // alert(JSON.stringify(response));
         // this.backUploaded = false;
       },
       handleAddressSuccess(response, file, fileList){
