@@ -97,8 +97,12 @@
       <el-form :inline="true" label-width="120px"  model="realNameVerify">
       <el-form-item label="证件类型:">
         <el-select  v-model="realNameVerify.certificateType" :disabled="show" style="width:200px">
-          <el-option label="身份证" value="1"></el-option>
-          <el-option label="护照" value="2"></el-option>
+         <el-option
+            v-for="item in this.$store.state.xialakuang.certificateType"
+            :key="item.value"
+            :label="item.label"
+            :value="item.value">
+          </el-option>
         </el-select>
 
       </el-form-item>

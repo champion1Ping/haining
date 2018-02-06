@@ -192,8 +192,8 @@
     <el-table-column prop="contractEndTime" label="截止日期" align="center" width="110"></el-table-column>
     <el-table-column prop="provinceName" label="省份" align="center" width="90"></el-table-column>
     <el-table-column prop="businessAddress" label="营业地址" align="center" width="280"></el-table-column>
-    <el-table-column prop="bussinessStartTime" label="营业开始日期" align="center" width="120"></el-table-column>
-    <el-table-column prop="bussinessEndTime" label="营业截止日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="businessStartTime" label="营业开始日期" align="center" width="120"></el-table-column>
+    <el-table-column prop="businessEndTime" label="营业截止日期" align="center" width="120"></el-table-column>
     <el-table-column
       label="操作"
       align="center"

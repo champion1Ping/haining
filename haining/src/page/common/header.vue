@@ -34,7 +34,7 @@
         	<el-menu  class="el-menu-demo" mode="horizontal" @select="handleSelect">
 			  <el-submenu index="1">
 
-			    <template slot="title" ><span style="font-size:14px;color:#333333">{{this.$store.state.realName?this.$store.state.realName:userName}}</span></template>
+			    <template slot="title" ><span style="font-size:14px;color:#333333">{{this.$store.state.realName}}</span></template>
 
 
 			    <el-menu-item index="/personinfo" v-if="this.$store.state.roleId==2 ">个人信息</el-menu-item>
@@ -71,9 +71,10 @@
 			}
 		},
 		created:function(){
-			alert("header"); 
+			
 			this.id = sessionStorage.getItem("roleId");
 			this.$store.commit('saveRoleId', this.id);
+			this.$store.commit('saveRealName',this.userName);
 			console.log(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");
 			let me = this;
