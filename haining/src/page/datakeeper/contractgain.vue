@@ -458,6 +458,12 @@
                   obj.investmentAmount=this.updateContract.investmentAmount;
                   obj.contractIncome=this.updateContract.contractIncome;
                   obj.productType=this.updateContract.productType;
+                  let pro = {};
+                  pro = this.productTypes.find((item)=>{
+                      return item.id ==this.updateContract.productType;
+                  }); 
+         
+                  obj.productTypeName = pro.productTypeName;
                   obj.firstTradeDate=this.updateContract.firstTradeDate;
                   obj.tradeEndDate=this.updateContract.tradeEndDate;
                   obj.tradeStatus=this.updateContract.tradeStatus;
@@ -503,9 +509,9 @@
         this.updateContract.id = row.id;
       this.updateContractDialog = true;
       if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
-           this.updateContract.inderectRecomandRate = 0;
-      }else {
            this.updateContract.inderectRecomandRate = 0.005;
+      }else {
+           this.updateContract.inderectRecomandRate = 0;
       }
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;

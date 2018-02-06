@@ -117,8 +117,9 @@
 				if (to=="/personinfo") {
 				   sessionStorage.setItem("personId",this.$store.state.userid);
 				}
-				if (to=="/loginout") {
+				if (to=="/login") {
 					this.id =0;
+					this.$store.commit('saveRoleId', 0);
 					sessionStorage.removeItem("account");
 					sessionStorage.removeItem("token");
 					sessionStorage.removeItem("roleId");
@@ -129,7 +130,7 @@
 					sessionStorage.removeItem('indirectRecommendationAccount');
 					sessionStorage.removeItem('derectRecomandPersonId');
 					sessionStorage.removeItem('inderectRecomandPersonId');
-					this.$store.commit('saveRoleId', 0);
+					
 				}
 				this.$router.push(to);
 			},

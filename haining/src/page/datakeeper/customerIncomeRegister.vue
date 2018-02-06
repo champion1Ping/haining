@@ -306,7 +306,7 @@
       //   // return cellValue + typeof(cellValue);
       //    let obj = {};
       //     obj = this.productTypes.find((item)=>{
-      //         return item.productId ==cellValue;
+      //         return item.id ==cellValue;
       //     }); 
       //    return  obj.productTypeName;
       // },
