@@ -278,8 +278,8 @@
           this.addAgencyForm.contact = row.contactPhone;
           this.addAgencyForm.province = row.provinceId;
           this.addAgencyForm.businessAddress = row.businessAddress;
-          this.addAgencyForm.businessStartTime = row.businessStartTime;
-          this.addAgencyForm.bussinessEndTime = row.bussinessEndTime;
+          this.addAgencyForm.bussinessStartTime = row.businessStartTime;
+          this.addAgencyForm.bussinessEndTime = row.businessEndTime;
           this.addAgencyForm.signStartTime =row.contractStartTime;
           this.addAgencyForm.signEndTime = row.contractEndTime;
       },
