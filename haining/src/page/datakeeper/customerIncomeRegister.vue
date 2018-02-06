@@ -409,7 +409,8 @@
          this.addDocumentForm.productRate = obj.monthRate;
          this.addDocumentForm.productTypeName=obj.productTypeName;
          if (this.addDocumentForm.investmentAmount !="") {
-          this.addDocumentForm.estimatedEarnings = parseInt(this.addDocumentForm.investmentAmount) * parseInt(this.addDocumentForm.serviceDate) * parseFloat(this.addDocumentForm.productRate);
+          let gain = parseInt(this.addDocumentForm.investmentAmount) * parseFloat(this.addDocumentForm.productRate) * 0.01;
+          this.addDocumentForm.estimatedEarnings = gain.toFixed(2);
          }
       },
       addDangAn(){
