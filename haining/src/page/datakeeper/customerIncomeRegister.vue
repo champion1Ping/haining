@@ -197,7 +197,7 @@
     :data="customerIncomeTable.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%" height="412" header-align="center">
-    <el-table-column prop="documentCode" label="档案编号" align="center" width="140"></el-table-column>
+    <el-table-column prop="documentCode" label="档案编号" align="center" width="150"></el-table-column>
     <el-table-column prop="tradePlatform" label="交易平台" align="center" width="90"></el-table-column>
     <el-table-column prop="tradeAccount" label="交易账户号" align="center" width="100"></el-table-column>
     <el-table-column prop="wheatherGetMoney" label="是否入金" align="center" width="80" :formatter="formatter1"></el-table-column>
