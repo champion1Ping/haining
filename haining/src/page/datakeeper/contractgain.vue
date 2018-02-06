@@ -217,7 +217,8 @@
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="100"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益($)" align="center" width="100"></el-table-column>
     <el-table-column prop="firstTradeDate" label="首交易日" align="center" width="100" ></el-table-column>
-    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80" <!-- :formatter="showProductName" -->></el-table-column>
+    <el-table-column prop="productTypeName" label="产品类型" align="center" width="80"  ></el-table-column>
+    <!-- <el-table-column prop="productTypeName" label="产品类型" align="center" width="80"></el-table-column> -->
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="100"></el-table-column>
     <el-table-column prop="tradeStatus" label="交易状态" align="center" width="90"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="90"></el-table-column>
@@ -438,14 +439,13 @@
         }
         return false;
       },
-      // showProductName(row,column,cellValue){
-      //       let obj = {};
-      //     obj = this.productTypes.find((item)=>{
-      //         return item.value ==cellValue;
-      //     }); 
-
-      //     return obj.productTypeName;     
-      // },
+      showProductName(row,column,cellValue){
+            let obj = {};
+          obj = this.productTypes.find((item)=>{
+              return item.value ==cellValue;
+          }); 
+          return obj.productTypeName;     
+      },
       modify(){
           let me = this;
           let obj = new Object();
@@ -478,7 +478,7 @@
                 
               }))
             .then(function(res){
-                  // console.log(JSON.stringify(res));
+                  console.log(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
@@ -512,7 +512,7 @@
          this.updateContract.tradeAccount = row.tradeAccount;
          this.updateContract.investmentAmount = row.investmentAmount;
          this.updateContract.contractIncome = row.contractIncome;
-         this.updateContract.productType = parseInt(row.productTypeName);
+         this.updateContract.productType = row.productTypeId;
          this.updateContract.firstTradeDate = row.firstTradeDate;
          this.updateContract.tradeEndDate = row.tradeEndDate;
          this.updateContract.tradeStatus = row.tradeStatus;
@@ -526,7 +526,12 @@
          this.updateContract.agentRate = 0.02;//row.agentRate;
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
-         this.tempServiceDate = this.productTypes[this.updateContract.productType-1]['serviceTime'];
+          let obj = {};
+          obj = this.productTypes.find((item)=>{
+              return item.productId ==this.updateContract.productType;
+          }); 
+          
+         this.tempServiceDate = obj.serviceTime;
          
 
          // console.log(this.tempServiceDate);

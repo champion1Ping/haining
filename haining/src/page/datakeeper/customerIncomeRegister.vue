@@ -280,7 +280,7 @@
       }
     },
     created:function(){
-      this.searchRecords();
+      
       let me = this;
       this.$http.post('/product/getProductVOList',
               this.qs.stringify({
@@ -293,6 +293,7 @@
                   var message = info['message'];
                   var data = info['data'];
                   me.productTypes = data;
+                  me.searchRecords();
 
             })
             .catch(function(err){
@@ -301,10 +302,14 @@
         
     },
     methods:{
-
-      showProductName(row,column,cellValue){
-         return  this.productTypes[cellValue-1].productTypeName;
-      },
+      // showProductName(row,column,cellValue){
+      //   // return cellValue + typeof(cellValue);
+      //    let obj = {};
+      //     obj = this.productTypes.find((item)=>{
+      //         return item.productId ==cellValue;
+      //     }); 
+      //    return  obj.productTypeName;
+      // },
       formatter1(row,columb,cellValue){
           if (cellValue == 1) {
             return "是";
@@ -341,7 +346,7 @@
                 'certificateType':this.addDocumentForm.certificateType,
                 'certificateNumber':this.addDocumentForm.certificateNumber,
                 'contractDate':this.addDocumentForm.contractDate,
-                'productTypeName':this.addDocumentForm.productType,
+                'productTypeName':this.addDocumentForm.productTypeName,
                 'productRate':this.addDocumentForm.productRate,
                 'serviceDate':this.addDocumentForm.serviceDate,
                 'investmentAmount':this.addDocumentForm.investmentAmount,
@@ -426,7 +431,7 @@
                 'token':sessionStorage.getItem("token")
               }))
             .then(function(res){
-                  // console.log(JSON.stringify(res));
+                  console.log(JSON.stringify(res));
                   var info = res['data'];
                   var code = info['code'];
                   var message = info['message'];
