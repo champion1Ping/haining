@@ -73,7 +73,7 @@
   	 		<el-input v-model="baseinfo.agentCode" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 	<el-form-item label="间接推荐人账号: ">
-  	 		<el-input v-model="baseinfo.indirectRecommendAccount" :disabled="show" style="width:200px"></el-input>
+  	 		<el-input v-model="baseinfo.indirectRecommendationAccount" :disabled="show" style="width:200px"></el-input>
   	 	</el-form-item>
   	 </el-form>
   	 </el-col>
@@ -84,7 +84,7 @@
       <el-row>
       	<el-col :span="12"><div><h3>实名验证</h3></div></el-col>
   	<el-col :span="12" align="right">
-  	<el-button type="primary">申请推荐人</el-button>
+  	<el-button type="primary" @click="verifyName()">申请推荐人</el-button>
  	 </el-col>
       </el-row>
       <el-row>
@@ -335,7 +335,7 @@
                 me.baseinfo.nameVerified=data['whetherRealName'];
                 me.baseinfo.directRecommendationAccount=data['directRecommendationAccount'];
                 me.baseinfo.agentCode = data['agentCode'];
-                me.baseinfo.indirectRecommendAccount=data['indirectRecommendationAccount'];
+                me.baseinfo.indirectRecommendationAccount=data['indirectRecommendationAccount'];
                 me.realNameVerify.certificateType = data['certificateType'];
                 me.realNameVerify.certificateNumber=data['certificateNumber'];
                 me.frontImgSrc = data['certificateFront'];
@@ -357,6 +357,34 @@
     },
    
     methods: {
+      verifyName(){
+          let me = this;
+          this.$http.post('/user/checkRealName',
+             this.qs.stringify({
+                'token':sessionStorage.getItem('token'),
+                'account':this.baseinfo.account,
+                'realName':this.realNameVerify.realName,
+                'certificateType':this.realNameVerify.certificateType,
+                'certificateNumber':this.realNameVerify.certificateNumber,
+                
+             })
+             )
+             .then(function(res){
+                var info = res['data'];
+                    var code = info['code'];
+                    var message = info['message'];
+                    if (code == 1) {
+                      me.$message.success(message);
+                    } else {
+                      
+                      me.$message.error(message);
+                    }
+                  
+             })
+             .catch(function(err){
+
+             })
+      },
       
       handleFrontSuccess(response, file, fileList){
         // alert(JSON.stringify(response));
@@ -396,7 +424,7 @@
              })
              )
              .then(function(res){
-                
+                console.log(JSON.stringify(res));
                 var info = res['data'];
                     var code = info['code'];
                     if (code == 1) {
