@@ -83,7 +83,7 @@
     :data="tableData.slice((currentPage-1)*pageSize,currentPage*pageSize)"
     border
     style="width: 100%"  height="412" header-align="center">
-    <el-table-column prop="documentCode" label="档案编号" align="center" width="140px"></el-table-column>
+    <el-table-column prop="documentCode" label="档案编号" align="center" width="150px"></el-table-column>
     <el-table-column prop="customerName" label="客户名称" align="center" width="100px"></el-table-column>
     <el-table-column prop="investmentAmount" label="投资金额($)" align="center" width="100"></el-table-column>
     <el-table-column prop="contractIncome" label="合同收益($)" align="center" width="100"></el-table-column>
