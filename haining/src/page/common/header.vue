@@ -119,9 +119,16 @@
 				}
 				if (to=="/loginout") {
 					this.id =0;
+					sessionStorage.removeItem("account");
 					sessionStorage.removeItem("token");
 					sessionStorage.removeItem("roleId");
 					sessionStorage.removeItem("userName");
+					sessionStorage.removeItem('noticesNum');
+					sessionStorage.removeItem('agentCode');
+					sessionStorage.removeItem('directRecommendationAccount');
+					sessionStorage.removeItem('indirectRecommendationAccount');
+					sessionStorage.removeItem('derectRecomandPersonId');
+					sessionStorage.removeItem('inderectRecomandPersonId');
 					this.$store.commit('saveRoleId', 0);
 				}
 				this.$router.push(to);
