@@ -220,7 +220,7 @@
     <el-table-column prop="productTypeName" label="产品类型" align="center" width="80"  ></el-table-column>
     <!-- <el-table-column prop="productTypeName" label="产品类型" align="center" width="80"></el-table-column> -->
     <el-table-column prop="tradeEndDate" label="截止日期" align="center" width="100"></el-table-column>
-    <el-table-column prop="tradeStatus" label="交易状态" align="center" width="90" :formatter="showStatusName"></el-table-column>
+    <el-table-column prop="tradeStatusName" label="交易状态" align="center" width="90"></el-table-column>
     <el-table-column prop="productRate" label="产品收益率" align="center" width="90"></el-table-column>
     <el-table-column prop="derectRecomandPersonName" label="直推人" align="center" width="90"></el-table-column>
     <el-table-column prop="derectRecomandRate" label="直推收益率" align="center" width="90"></el-table-column>
@@ -439,13 +439,13 @@
         }
         return false;
       },
-      showStatusName(row,column,cellValue){
-          let obj = {};
-          obj = this.$store.xialakuang.tradeStatus.find((item)=>{
-              return item.value ==cellValue;
-          }); 
-          return obj.label;  
-      },
+      // showStatusName(row,column,cellValue){
+      //     let obj = {};
+      //     obj = this.$store.xialakuang.tradeStatus.find((item)=>{
+      //         return item.value ==cellValue;
+      //     }); 
+      //     return obj.label;  
+      // },
       
       modify(){
           let me = this;
