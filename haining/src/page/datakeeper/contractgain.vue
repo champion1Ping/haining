@@ -351,7 +351,7 @@
 
          }
         
-         // this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseInt(this.tempServiceDate) * parseFloat(this.updateContract.productRate) * 0.01;
+         // this.updateContract.customerIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate) * 0.01;
         //   let t1 = parseFloat(this.updateContract.customerIncome);
         //   let t2 = parseFloat(this.updateContract.derectIncome);
         //    let t3 = parseFloat(this.updateContract.inderectIncome);
