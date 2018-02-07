@@ -296,7 +296,7 @@
 
             } else if(this.addUserForm.userType ==2){
                 //客户
-                if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&& field!="refereePhone") {
+                if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&& field!="refereePhone"&& field!="customerAgent") {
                   if(this.addUserForm[field] ===""){
                   this.$message.error("必填字段不能为空");
                   return;
