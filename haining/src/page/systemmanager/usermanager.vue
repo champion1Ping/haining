@@ -287,7 +287,7 @@
             //根据不同的角色字段要求不一样
             if(this.addUserForm.userType == 1){
                 //代理商
-                if(field !="freezeDate" && field!="customerAgent") {
+                if(field !="freezeDate" && field!="customerAgent" && field!="refereePhone") {
                   if(this.addUserForm[field] ===""){
                   this.$message.error("必填字段不能为空");
                   return;
@@ -296,14 +296,14 @@
 
             } else if(this.addUserForm.userType ==2){
                 //客户
-                if(field !="freezeDate" && field !="agentName"&&field!="agentCode") {
+                if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&& field!="refereePhone") {
                   if(this.addUserForm[field] ===""){
                   this.$message.error("必填字段不能为空");
                   return;
                 }
               }
             }else {
-                if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&&field!="customerAgent") {
+                if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&&field!="customerAgent"&& field!="refereePhone") {
                   if(this.addUserForm[field] ===""){
                   this.$message.error("必填字段不能为空");
                   return;
