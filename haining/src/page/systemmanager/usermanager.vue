@@ -89,6 +89,12 @@
        <el-button type="info"  class="left" disabled>客户代理商</el-button><el-input clearable v-model="addUserForm.customerAgent" class="right" style="width:180px"></el-input>
   </el-col>
   </el-row>
+
+  <el-row style="margin-top:10px">
+    <el-col :span="8">
+       <el-button type="info"  class="left" disabled>推荐人手机号</el-button><el-input clearable v-model="addUserForm.refereePhone" class="right" style="width:180px"></el-input>
+  </el-col>
+  </el-row>
   
  </el-form>
     </div>
@@ -259,6 +265,7 @@
           checkpass:'',
           freezeDate:'',
           customerAgent:'',
+          refereePhone:'',
         }
       }
     },
@@ -322,6 +329,7 @@
                 'agentCode':agentCode,
                 'pwd':this.addUserForm.checkpass,
                 'customerAgent':this.addUserForm.customerAgent,
+                'refereePhone':this.addUserForm.refereePhone,
              })
              )
              .then(function(res){
@@ -337,6 +345,7 @@
                   }
                   me.dialogAddUser = false;
               } else {
+                me.addUserForm.refereePhone="";
                 me.$message.error(message);
               }
              })
