@@ -189,6 +189,10 @@
             return;
           }
         }
+        if (this.accountReg.agencyNo =="") {
+           this.$message.error("代理商编号不能为空");
+            return;
+        }
         if(!this.accountReg.agreement){
             this.$message("请勾选同意协议!!!");
             return;
