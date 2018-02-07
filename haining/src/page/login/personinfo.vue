@@ -343,12 +343,12 @@
                 me.addRessImgSrc = data['addressPic'];
                 //推荐信息
                 let myReferinfoMationVO = data['myReferinfoMationVO'];
-                this.vipStarLevel = myReferinfoMationVO['starDegree'];
-                this.chargedMoney = myReferinfoMationVO['sumMoney'];
-                this.directRecommendRate = myReferinfoMationVO['directRewardRate'];
-                this.indirectRecommendRate = myReferinfoMationVO['indirectRewardRate'];
-                this.derectCustomerReferInfoMationVOList = myReferinfoMationVO['derectCustomerReferInfoMationVOList'];
-                this.inDerectCustomerReferInfoMationVOList = myReferinfoMationVO['inDerectCustomerReferInfoMationVOList'];
+                me.vipStarLevel = myReferinfoMationVO['starDegree'];
+                me.chargedMoney = myReferinfoMationVO['sumMoney'];
+                me.directRecommendRate = myReferinfoMationVO['directRewardRate'];
+                me.indirectRecommendRate = myReferinfoMationVO['indirectRewardRate'];
+                me.derectCustomerReferInfoMationVOList = data['derectCustomerReferInfoMationVOList'];
+                me.inDerectCustomerReferInfoMationVOList = data['inDerectCustomerReferInfoMationVOList'];
 
              })
              .catch(function(err){
