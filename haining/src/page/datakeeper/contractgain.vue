@@ -457,7 +457,7 @@
                   obj.tradeAccount=this.updateContract.tradeAccount;
                   obj.investmentAmount=this.updateContract.investmentAmount;
                   obj.contractIncome=this.updateContract.contractIncome;
-                  obj.productType=this.updateContract.productType;
+                  obj.productTypeId=this.updateContract.productType;
                   let pro = {};
                   pro = this.productTypes.find((item)=>{
                       return item.id ==this.updateContract.productType;
@@ -513,6 +513,7 @@
       }else {
            this.updateContract.inderectRecomandRate = 0;
       }
+
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;
          this.updateContract.tradePlatform = row.tradePlatform;
