@@ -22,7 +22,7 @@
   </el-table>
 </el-dialog>
 <!-- 用户添加弹出框开始 -->
-  <el-dialog title="用户添加" :visible.sync="dialogAddUser" width="80%">
+  <el-dialog :title="title" :visible.sync="dialogAddUser" width="80%">
     <div>用户信息</div>
     <div style="border:1px solid;border-radius:4px;">
                 
@@ -98,6 +98,7 @@
   
  </el-form>
     </div>
+    <div v-if="this.title=='用户添加'">
     <div style="margin-top:10px;">密码信息</div>
     <div style="border:1px solid;border-radius:4px;">
     <el-row style="margin-top:10px;padding:10px;">
@@ -109,9 +110,9 @@
   </el-col> 
   </el-row>
     </div>
-
+    </div>
   <div slot="footer" class="dialog-footer">
-    <el-button type="primary" @click="addUser()">保存</el-button>
+    <el-button type="primary" @click="addUser()">{{btnName}}</el-button>
   </div>
 </el-dialog>
 <!-- 弹出框结束-->
@@ -120,7 +121,7 @@
 		<span style="color:#C9A44E;font-size:20px">
 		用户管理&nbsp;&nbsp;&nbsp;
 		<el-button type="primary" @click="quit()">退出</el-button>
-		<el-button type="primary" @click="dialogAddUser = true">添加</el-button>
+		<el-button type="primary" @click="openAddDialog()">添加</el-button>
 		<el-button type="primary" @click="getUserList">查询</el-button>
 		</span>
     </div>
@@ -191,7 +192,12 @@
     border
     fixed
     style="width: 100%" height="412" header-align="center">
-    <el-table-column prop="account" label="用户账号" align="center" width="140"></el-table-column>
+    <el-table-column label="用户账号" align="center" width="140">
+      <template slot-scope="scope">
+        <el-button type="text" @click="updateUserInfo(scope.row)">{{scope.row.account}}</el-button>
+      </template>
+
+    </el-table-column>
     <el-table-column prop="userName" label="用户名称" align="center" width="140"></el-table-column>
     <el-table-column prop="userTypeName" label="用户性质" align="center" width="120"></el-table-column>
     <el-table-column prop="agentName" label="代理商名称" align="center" width="230"></el-table-column>
@@ -232,6 +238,8 @@
 
     data(){
       return{
+        btnName:'保存',
+        title:"用户添加",
         userTable:[],
         agentTable:[],
         chooseAgentForm:{
@@ -254,6 +262,7 @@
         createTimeFrom:'',
         createTimeTo:'',
         addUserForm:{
+          id:'',
           userAccount:'',
           userName:'',
           contactPhone:'',
@@ -273,6 +282,30 @@
       this.getUserList();
     },
     methods:{
+      openAddDialog(){
+          this.title = "用户添加";
+          this.btnName = "添加";
+          this.dialogAddUser = true;
+      },
+      updateUserInfo(row){
+        this.addUserForm.id = row.id;
+        this.addUserForm.userAccount = row.account;
+        this.addUserForm.userName = row.userName;
+        this.addUserForm.contactPhone = row.contactPhone;
+        this.addUserForm.userType = row.userType;
+        this.addUserForm.agentCode = row.agentCode;
+        this.addUserForm.agentName = row.agentName;
+        this.addUserForm.ifFrozen = row.whetherFreeze;
+        this.addUserForm.freezeDate = row.freezeDate;
+        this.addUserForm.customerAgent = row.customerAgent;
+        this.addUserForm.refereePhone =row.directRecommendationAccount;
+        
+          this.title = "修改用户";
+          this.btnName = "修改";
+          this.dialogAddUser = true;
+
+
+      },
       quit(){
         this.$router.push('/notices');
       },
@@ -283,7 +316,8 @@
         this.currentPage= page;
       },
       addUser(){
-           for(var field in this.addUserForm){
+        if(this.btnName == '添加') {
+            for(var field in this.addUserForm){
             //根据不同的角色字段要求不一样
             if(this.addUserForm.userType == 1){
                 //代理商
@@ -312,12 +346,15 @@
             
            } 
             
+           }
         }
+           
          let agentCode = (this.addUserForm.userType ==2) ? this.addUserForm.customerAgent : this.addUserForm.agentCode;
          // alert(agentCode);
           var me = this;
-          this.$http.post('/user/addUser',
-          this.qs.stringify({
+          if (this.btnName=="添加") {
+            this.$http.post('/user/addUser',
+            this.qs.stringify({
                 'token':sessionStorage.getItem("token"),
                 'account':this.addUserForm.userAccount,
                 'userName':this.addUserForm.userName,
@@ -352,6 +389,47 @@
              .catch(function(err){
 
              })
+          } else {
+            this.$http.post('/user/adminUpdateUserBaseInfo',
+          this.qs.stringify({
+                'token':sessionStorage.getItem("token"),
+                'id':this.addUserForm.id,
+                'account':this.addUserForm.userAccount,
+                'userName':this.addUserForm.userName,
+                'contactPhone':this.addUserForm.contactPhone,
+                'userType':this.addUserForm.userType,
+                'whetherFreeze':this.addUserForm.ifFrozen,
+                'freezeDate':this.addUserForm.freezeDate,
+                'agentName':this.addUserForm.agentName,
+                'agentCode':agentCode,
+                //'pwd':this.addUserForm.checkpass,
+                'customerAgent':this.addUserForm.customerAgent,
+                'directRecommendationAccount':this.addUserForm.refereePhone,
+             })
+             )
+             .then(function(res){
+              console.log(JSON.stringify(res));
+              var info = res['data'];
+              var code = info['code'];
+              var message = info['message'];
+              if(code == 1){
+                  me.$message.success("修改成功");
+                  me.getUserList();
+                  for(var field in me.addUserForm) {
+                    me.addUserForm[field] ="";
+                  }
+                  me.dialogAddUser = false;
+              } else {
+                me.addUserForm.refereePhone="";
+                me.$message.error(message);
+              }
+             })
+             .catch(function(err){
+
+             })
+          }
+
+          
       },
       chooseAgent(event){
          this.dialogChooseAgent = true;
