@@ -332,7 +332,7 @@
                 //客户
                 if(field !="freezeDate" && field !="agentName"&&field!="agentCode"&& field!="refereePhone"&& field!="customerAgent"&&field !="id") {
                   if(this.addUserForm[field] ===""){
-                  this.$message.error(field + "必填字段不能为空");
+                  this.$message.error("必填字段不能为空");
                   return;
                 }
               }
@@ -382,7 +382,6 @@
                   }
                   me.dialogAddUser = false;
               } else {
-                me.addUserForm.refereePhone="";
                 me.$message.error(message);
               }
              })
