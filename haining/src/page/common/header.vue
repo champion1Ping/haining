@@ -78,7 +78,7 @@
 			console.log(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");
 			let me = this;
-				this.$http.post('/notice/getMyNoticeCount',
+				this.$http.post('/notice/getNoticeList',
 							this.qs.stringify({
 								'token':sessionStorage.getItem("token")
 							}))
