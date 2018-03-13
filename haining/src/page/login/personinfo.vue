@@ -405,6 +405,12 @@
       },
       
       updateUserBaseInfo(){
+          if (this.baseinfo.directRecommendationAccount == this.baseinfo.indirectRecommendationAccount
+            || this.baseinfo.account == this.baseinfo.directRecommendationAccount
+            || this.baseinfo.account == this.baseinfo.indirectRecommendationAccount) {
+              this.$message.error("账号/直推人/间推人不能相同");
+            return;
+          }
           let me = this;
           this.$http.post('/user/updateUserBaseInfo',
              this.qs.stringify({
