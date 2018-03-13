@@ -78,11 +78,12 @@
 			console.log(this.roleId+","+this.id);
 			this.userName = sessionStorage.getItem("userName");
 			let me = this;
-				this.$http.post('/notice/getNoticeList',
+				this.$http.post('/notice/getMyNoticeCount',
 							this.qs.stringify({
 								'token':sessionStorage.getItem("token")
 							}))
 						.then(function(res){
+						
 							var info = res['data'];
 				            var code = info['code'];
 				            if (code == 1) {

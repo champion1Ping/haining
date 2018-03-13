@@ -206,7 +206,7 @@
     <el-table-column prop="whetherFreezeName" label="是否冻结" align="center" width="90"></el-table-column>
     <el-table-column prop="freezeDate" label="冻结时间" align="center" width="140"></el-table-column>
     <el-table-column prop="agentCode" label="客户代理商" align="center" width="100"></el-table-column>
-    <el-table-column prop="directRecommendationAccount" label="直接推荐人账号" align="center" width="120"></el-table-column>
+    <el-table-column prop="directRecommendationAccount" label="直接推荐人姓名" align="center" width="120"></el-table-column>
     <el-table-column
       label="信息明细"
       alien="center"

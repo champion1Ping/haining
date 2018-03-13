@@ -103,7 +103,7 @@ html, body{ margin:0; height:100%; }
 
   }
   
-  .right > .el-input__inner{
+  /*.right > .el-input__inner{
       border-top-left-radius:0px; 
       border-bottom-left-radius:0px; 
       border-left-width: 0px;
@@ -112,15 +112,15 @@ html, body{ margin:0; height:100%; }
     line-height:0.6
     }
     
-  }
+  }*/
   /*下拉框 + 日期选择框*/
-  .right > .el-input > .el-input__inner{
+ /* .right > .el-input > .el-input__inner{
       border-top-left-radius:0px; 
       border-bottom-left-radius:0px; 
       border-left-width: 0px;
       height: 36px;
     
-  }
+  }*/
   .el-input__prefix {
     left: 155px;
     -webkit-transition: all .3s;

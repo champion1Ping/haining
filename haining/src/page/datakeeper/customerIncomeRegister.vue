@@ -91,22 +91,17 @@
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>预估月收益</el-button><el-input clearable disabled v-model="addDocumentForm.estimatedEarnings"class="right" style="width:177px"></el-input>
   </el-col>
-  <el-col :span="6">
-      <el-button type="info"  class="left" disabled>联系方式</el-button><el-input clearable v-model="addDocumentForm.contactPhone"class="right"  style="width:177px"></el-input>
-  </el-col>
-  <el-col :span="6">
-      <el-button type="info"  class="left" disabled>注册邮箱号</el-button><el-input clearable v-model="addDocumentForm.registerEmail" class="right" style="width:177px"></el-input>
-  </el-col>
-  </el-row>
-
-  <el-row style="margin-top:10px">
-    
-  <el-col :span="6">
+   <el-col :span="6">
        <el-button type="info"  class="left" disabled>代理商编号</el-button><el-input clearable disabled v-model="addDocumentForm.agentCode"class="right" style="width:177px"></el-input>
   </el-col>
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>直推人账号</el-button><el-input clearable  v-model="addDocumentForm.derectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
+  </el-row>
+
+  <el-row style="margin-top:10px">
+    
+ 
   <el-col :span="6">
        <el-button type="info"  class="left" disabled>间推人账号</el-button><el-input clearable  v-model="addDocumentForm.inderectRecomandPersonId"class="right" style="width:177px"></el-input>
   </el-col>
@@ -318,6 +313,7 @@
           }
       },
       addPersonDocument(){
+        
         //检验条件
         for(var field in this.addDocumentForm){
           if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId") {
@@ -419,7 +415,8 @@
          }
       },
       addDangAn(){
-
+          this.addDocumentForm.certificateType = this.$store.state.certificateType;
+        this.addDocumentForm.certificateNumber = this.$store.state.certificateNumber;
           this.dialogAddFile = true;
           this.addDocumentForm.agentCode = sessionStorage.getItem("agentCode");
         this.addDocumentForm.inderectRecomandPersonId = sessionStorage.getItem("indirectRecommendationAccount");

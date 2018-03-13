@@ -99,7 +99,10 @@ const state = {
     directRecommendationAccount:'',
     indirectRecommendationAccount:'',
     usertype:usertype,
-    noticeCount:''
+    noticeCount:'',
+    certificateType:'',
+    certificateNumber:'',
+
     
 }
 const mutations = {
@@ -129,6 +132,12 @@ const mutations = {
     },
     saveUserId(state,userId){
       state.userid = userId;
+    },
+    saveCertificateType(state,cType){
+      state.certificateType = cType;
+    },
+    saveCertificateNum(state,cNum){
+      state.certificateNumber = cNum;
     }
 }
 

@@ -242,6 +242,7 @@
               }))
             .then(function(res){
                // console.log(JSON.stringify(res));
+              // alert(JSON.stringify(res));
                var info = res['data'];
                var code = info['code'];
                if (code == 1) {
@@ -252,12 +253,17 @@
                let sysUserRoleList = data['sysUserRoleList'];
                let id = sysUserRoleList[0]['id'];
                let userId=sysUserRoleList[0]['userId'];
-             
+
                let roleId = sysUserRoleList[0]['roleId'];
                sessionStorage.setItem('roleId',roleId);
                me.$store.commit('saveRoleId', roleId);
                me.$store.commit('saveUserId', userId);
                let baseInfo = data['userBaseInfoVO'];
+               let certificateType = baseInfo['certificateType'];
+                let certificateNum = baseInfo['certificateNumber'];
+                alert(certificateType+","+certificateNum);
+                me.$store.commit('saveCertificateType',certificateType);
+                me.$store.commit('saveCertificateNum',certificateNum);
                sessionStorage.setItem("account",baseInfo['account']);
                sessionStorage.setItem("userName",baseInfo['realName']);
                me.$store.commit('saveAgentCode',baseInfo['agentCode']);
