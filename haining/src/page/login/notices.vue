@@ -28,7 +28,7 @@
 		},
 		created:function(){
 			let me = this;
-			this.$http.post('/sysNotice/getSysNoticeList',
+			this.$http.post('/sysNotice/getNoticeList',
 		         this.qs.stringify({
 		            'token':sessionStorage.getItem("token")
 		         })
