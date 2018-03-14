@@ -322,13 +322,13 @@
          
          this.updateContract.coustomerName = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.productRate);
          if (this.updateContract.investmentAmount !="" && this.updateContract.derectRecomandRate !="" && !this.isNull(this.updateContract.derectRecomandRate)) {
-          this.updateContract.derectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.derectRecomandRate);
+          this.updateContract.derectIncome = (parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.derectRecomandRate)).toFixed(2);
          }
          if (this.updateContract.investmentAmount !="" && this.updateContract.inderectRecomandRate !="" && !this.isNull(this.updateContract.inderectRecomandRate)) {
-             this.updateContract.inderectIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.inderectRecomandRate) ;
+             this.updateContract.inderectIncome = (parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.inderectRecomandRate)).toFixed(2) ;
          }
          if (this.updateContract.investmentAmount !="" && this.updateContract.agentRate !="" && !this.isNull(this.updateContract.agentRate)){
-              this.updateContract.agentIncome = parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.agentRate) ;
+              this.updateContract.agentIncome = (parseInt(this.updateContract.investmentAmount) * parseFloat(this.updateContract.agentRate)).toFixed(2) ;
 
          }
          this.updateContract.companyIncome = parseInt(this.updateContract.investmentAmount) * 0.02;
