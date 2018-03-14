@@ -316,9 +316,9 @@
         
         //检验条件
         for(var field in this.addDocumentForm){
-          if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId") {
+          if (field !="derectRecomandPersonId" && field !="inderectRecomandPersonId" && field !="contactPhone" &&field !="registerEmail") {
             if(this.addDocumentForm[field] === ""){
-            this.$message.error(field + "必填字段不能为空");
+            this.$message.error("必填字段不能为空");
             return;
           }
           }
