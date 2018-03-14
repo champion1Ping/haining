@@ -108,14 +108,42 @@ import {isvalidPhone} from '../common/utils.js'
                     'loginType':'1'
                     }))
                 .then(function(res){
-                    var info = res['data'];
-                    var code = info['code'];
-                    if (code == 1) {
-                       this.$router.push('/notices');
-                    } else {
-                      let message = info['message'];
-                      me.$message(message);
-                    }
+                   var info = res['data'];
+                 var code = info['code'];
+                 if (code == 1) {
+                  var data = info['data'];
+                 let token = data['token'];
+                 sessionStorage.setItem('token', token);//token保存
+                 me.$store.commit('saveToken', token);
+                 let sysUserRoleList = data['sysUserRoleList'];
+                 let id = sysUserRoleList[0]['id'];
+                 let userId=sysUserRoleList[0]['userId'];
+
+                 let roleId = sysUserRoleList[0]['roleId'];
+                 sessionStorage.setItem('roleId',roleId);
+                 me.$store.commit('saveRoleId', roleId);
+                 me.$store.commit('saveUserId', userId);
+                 let baseInfo = data['userBaseInfoVO'];
+                 let certificateType = baseInfo['certificateType'];
+                  let certificateNum = baseInfo['certificateNumber'];
+                  //alert(certificateType+","+certificateNum);
+                  me.$store.commit('saveCertificateType',certificateType);
+                  me.$store.commit('saveCertificateNum',certificateNum);
+                 sessionStorage.setItem("account",baseInfo['account']);
+                 sessionStorage.setItem("userName",baseInfo['realName']);
+                 sessionStorage.setItem("agentCode",baseInfo['agentCode']);
+                 me.$store.commit('saveDirect',baseInfo['directRecommendationAccount']);
+                 sessionStorage.setItem("directRecommendationAccount",!baseInfo['directRecommendationAccount']?"":baseInfo['directRecommendationAccount']);
+                 me.$store.commit('saveInDirect',baseInfo['indirectRecommendationAccount']);
+                 sessionStorage.setItem("indirectRecommendationAccount",!baseInfo['indirectRecommendationAccount']?"":baseInfo['indirectRecommendationAccount']);
+                 sessionStorage.setItem("derectRecomandPersonId",!baseInfo['derectRecomandPersonId']?"":baseInfo['derectRecomandPersonId']);
+                 sessionStorage.setItem("inderectRecomandPersonId",!baseInfo['inderectRecomandPersonId']?"":baseInfo['inderectRecomandPersonId']);
+                 me.$store.commit('saveRealName',baseInfo['realName']);
+                 me.$router.push('/notices');
+                 } else {
+                  var message = info['message'];
+                  me.$message(message);
+                 }  
                   
                  
                 })

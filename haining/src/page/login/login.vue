@@ -261,7 +261,7 @@
                let baseInfo = data['userBaseInfoVO'];
                let certificateType = baseInfo['certificateType'];
                 let certificateNum = baseInfo['certificateNumber'];
-                alert(certificateType+","+certificateNum);
+                //alert(certificateType+","+certificateNum);
                 me.$store.commit('saveCertificateType',certificateType);
                 me.$store.commit('saveCertificateNum',certificateNum);
                sessionStorage.setItem("account",baseInfo['account']);
