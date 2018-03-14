@@ -507,13 +507,13 @@
      
       update(row){
         this.updateContract.id = row.id;
-      this.updateContractDialog = true;
-      if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
-           this.updateContract.inderectRecomandRate = 0.005;
-      }else {
-           this.updateContract.inderectRecomandRate = 0;
-      }
-
+       this.updateContractDialog = true;
+      // if (row.inderectRecomandPersonName !="" && !this.isNull(row.inderectRecomandPersonName)) {
+      //      this.updateContract.inderectRecomandRate = 0.005;
+      // }else {
+      //      this.updateContract.inderectRecomandRate = 0;
+      // }
+        this.updateContract.inderectRecomandRate = row.inderectRecomandRate;
          this.updateContract.documentCode = row.documentCode;
          this.updateContract.customerName = row.customerName;
          this.updateContract.tradePlatform = row.tradePlatform;
@@ -531,7 +531,7 @@
          
          
          this.updateContract.inderectIncome = row.inderectIncome;
-         this.updateContract.agentRate = 0.02;//row.agentRate;
+         this.updateContract.agentRate = row.agentRate;//row.agentRate 0.02;
          this.updateContract.agentIncome = row.agentIncome;
          this.updateContract.companyIncome = row.companyIncome;
           let obj = {};
